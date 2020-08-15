@@ -15,7 +15,7 @@ jobs:
       - APP_DEBUG: true
       - APP_ENV: testing
       - APP_KEY: base64:kaQ1+E5/Q3tJUmc1u9VY11cw10h4fPOsAuv2pwdoqmQ=
-      - DB_CONNECTION: circleci
+      - DB_CONNECTION: circle_test
       - MYSQL_ALLOW_EMPTY_PASSWORD: true
 
       # Specify service dependencies here if necessary
