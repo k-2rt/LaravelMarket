@@ -8,14 +8,15 @@ jobs:
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.3-node-browsers
-      - image: circleci/mysql:5.7
-        command: mysqld --default-authentication-plugin=mysql_native_password
+      - image: circleci/mysql:5.7.28
+        # command: mysqld --default-authentication-plugin=mysql_native_password
 
     environment:
       - APP_DEBUG: true
       - APP_ENV: testing
-      - APP_KEY: base64:YlIJx6uH3OUb3hxN+PAiJKlC+EGZ2KYi8VHxsfdJpLk=
+      - APP_KEY: base64:kaQ1+E5/Q3tJUmc1u9VY11cw10h4fPOsAuv2pwdoqmQ=
       - DB_CONNECTION: circleci
+      - MYSQL_ALLOW_EMPTY_PASSWORD: true
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
