@@ -27,9 +27,7 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function Logout() {
-        // Auth::logout();
-
+    public function logout() {
         Auth::logout();
         $notification = array(
             'message' => 'ログアウトしました',
