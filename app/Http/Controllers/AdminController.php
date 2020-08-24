@@ -14,14 +14,30 @@ class AdminController extends Controller
         $this->middleware('auth:admin');
     }
 
+    /**
+     * Show admin home view
+     *
+     * @return void
+     */
     public function index() {
         return view('admin.home');
     }
 
+    /**
+     * Show change pass form view
+     *
+     * @return void
+     */
     public function showChangePasswordForm() {
         return view('admin.auth.password_change');
     }
 
+    /**
+     * Change admin user pass
+     *
+     * @param Request $request
+     * @return void
+     */
     public function changePassword(Request $request) {
         $password = Auth::user()->password;
         $oldpass = $request->oldpassword;
@@ -66,6 +82,6 @@ class AdminController extends Controller
             'alert-type' => 'success'
         );
 
-        return Redirect()->route('admin.login')->with($notification);
+        return redirect()->route('admin.login')->with($notification);
     }
 }

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function() {
-    return view('welcome');
+    return view('pages.index');
 });
 
 Auth::routes();
@@ -35,12 +35,17 @@ Route::get('admin/logout', 'AdminController@logout')->name('admin.logout');
 
 // Password Reset Routes
 Route::get('admin/password/change','AdminController@showChangePasswordForm')->name('admin.password.change');
-// Route::get('admin/Change/Password','AdminController@ChangePassword')->name('admin.password.change');
 Route::post('admin/password/change','AdminController@changePassword')->name('admin.password.change');
-
 
 
 Route::get('admin/password/reset', 'Admin\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
 // Route::post('admin-password/email', 'Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
 // Route::get('admin/reset/password/{token}', 'Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
 // Route::post('admin/update/reset', 'Admin\ResetPasswordController@reset')->name('admin.reset.update');
+
+// Admin categories
+Route::get('admin/categories', 'Admin\Category\CategoryController@category')->name('categories');
+Route::post('admin/store/category', 'Admin\Category\CategoryController@storeCategory')->name('store.category');
+Route::get('delete/category/{id}', 'Admin\Category\CategoryController@deleteCategory')->name('delete.category');
+Route::get('edit/category/{id}', 'Admin\Category\CategoryController@editCategory')->name('edit.category');
+Route::post('update/category/{id}', 'Admin\Category\CategoryController@updateCategory')->name('update.category');

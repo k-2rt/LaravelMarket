@@ -12043,10 +12043,15 @@ textarea.parsley-success:focus {
 }
 .sl-logo > a {
   color: #fff;
+  font-size: 1.0rem;
 }
 .sl-logo > a i {
   color: #5B93D3;
   margin-right: 2px;
+}
+.sl-logo > a img {
+  width: 100px;
+  height: 100px;
 }
 
 .input-group-search {
