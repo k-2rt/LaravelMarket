@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Admin\Category;
-// use DB;
 
 class CategoryController extends Controller
 {
@@ -49,7 +48,7 @@ class CategoryController extends Controller
     /**
      * Delete category
      *
-     * @param [type] $id
+     * @param String $id
      * @return void
      */
     public function deleteCategory($id) {
@@ -66,11 +65,12 @@ class CategoryController extends Controller
     /**
      * Show edit category view
      *
-     * @param [type] $id
+     * @param String $id
      * @return void
      */
     public function editCategory($id) {
         $category = Category::find($id);
+
         return view('admin.category.edit_category', compact('category'));
     }
 
@@ -78,7 +78,7 @@ class CategoryController extends Controller
      * Update category
      *
      * @param Request $request
-     * @param [type] $id
+     * @param String $id
      * @return void
      */
     public function updateCategory(Request $request, $id) {

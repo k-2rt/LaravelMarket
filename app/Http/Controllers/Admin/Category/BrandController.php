@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin\Category;
 
@@ -63,7 +62,7 @@ class BrandController extends Controller
     /**
      * Delete brand
      *
-     * @param [type] $id
+     * @param String $id
      * @return void
      */
     public function deleteBrand($id) {
@@ -82,7 +81,7 @@ class BrandController extends Controller
     /**
      * Show edit view
      *
-     * @param [type] $id
+     * @param String $id
      * @return void
      */
     public function editBrand($id) {

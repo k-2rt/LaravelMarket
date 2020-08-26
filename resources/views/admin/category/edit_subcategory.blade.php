@@ -9,9 +9,8 @@
     </div>
 
     <div class="card pd-20 pd-sm-40">
-      <h6 class="card-body-title">ブランド 更新</h6>
+      <h6 class="card-body-title">サブカテゴリー 更新</h6>
       <div class="table-wrapper">
-
         @if ($errors->any())
           <div class="alert alert-danger">
               <ul>
@@ -22,24 +21,22 @@
           </div>
         @endif
 
-        <form action="{{ route('update.brand', ['id' => $brand->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('update.subcategory', ['id' => $subcategory->id]) }}" method="POST">
           @csrf
-
           <div class="modal-body pd-20">
             <div class="form-group">
-              <label for="brand_name">ブランド名</label>
-              <input type="text" class="form-control" id="brand_name" aria-describedby="emailHelp" value="{{ $brand->brand_name }}" name="brand_name">
+              <label for="subcategory_name">サブカテゴリー名</label>
+              <input type="text" class="form-control" id="subcateogry_name" aria-describedby="emailHelp" value="{{ $subcategory->subcategory_name }}" name="subcategory_name">
             </div>
 
             <div class="form-group">
-              <label for="brand_name">ブランドロゴ</label>
-              <input type="file" class="form-control" id="brand_logo" aria-describedby="emailHelp"  name="brand_logo">
-            </div>
-
-            <div class="form-group">
-              <label for="brand_name">現在のブランドロゴ</label>
-              <img src="{{ URL::to($brand->brand_logo) }}" alt="" height="70px" width="80px">
-              <input type="hidden" name="old_logo" value="{{ $brand->brand_logo }}">
+              <label for="category_id">カテゴリー名</label>
+              <select class="form-control" name="category_id">
+                <option value="">--</option>
+                @foreach($categories as $category)
+                  <option value="{{ $category->id }}" {{ $category->id === $subcategory->category_id ? "selected" : "" }}>{{ $category->category_name }}</option>
+                @endforeach
+              </select>
             </div>
 
             <div class="modal-footer">

@@ -6,19 +6,19 @@
   <div class="sl-pagebody">
     <div class="sl-page-title">
       <h5>編集画面</h5>
-    </div><!-- sl-page-title -->
+    </div>
 
     <div class="card pd-20 pd-sm-40">
       <h6 class="card-body-title">カテゴリー 更新</h6>
       <div class="table-wrapper">
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
         @endif
 
         <form action="{{ route('update.category', ['id' => $category->id]) }}" method="POST">
@@ -34,9 +34,9 @@
             </div>
           </div>
         </form>
-      </div><!-- table-wrapper -->
-    </div><!-- card -->
-  </div><!-- sl-mainpanel -->
+      </div>
+    </div>
+  </div>
 </div>
 
 @endsection
