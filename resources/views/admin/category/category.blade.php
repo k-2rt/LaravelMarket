@@ -5,14 +5,10 @@
 <div class="sl-mainpanel">
 
   <div class="sl-pagebody">
-    <div class="sl-page-title">
-      <h5>カテゴリー テーブル</h5>
-    </div>
-
     <div class="card pd-20 pd-sm-40">
       <h6 class="card-body-title">
         カテゴリー 一覧
-        <a href="#" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">カテゴリーを追加</a>
+        <a href="#" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">新規作成</a>
       </h6>
 
       <div class="table-wrapper">
@@ -21,8 +17,7 @@
             <tr>
               <th class="wd-15p">ID</th>
               <th class="wd-15p">カテゴリー名</th>
-              <th class="wd-20p">アクション</a>
-              </th>
+              <th class="wd-20p">アクション</th>
             </tr>
           </thead>
           <tbody>
@@ -42,11 +37,12 @@
     </div>
   </div>
 
+  <!-- modal form -->
   <div id="modaldemo3" class="modal fade">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content tx-size-sm">
         <div class="modal-header pd-x-20">
-          <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">カテゴリー作成</h6>
+          <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"></h6>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

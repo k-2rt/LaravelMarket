@@ -5,7 +5,7 @@
 <div class="sl-mainpanel">
   <div class="sl-pagebody">
     <div class="card pd-20 pd-sm-40">
-      <h6 class="card-body-title">サブカテゴリー 更新</h6>
+      <h6 class="card-body-title">クーポン 更新</h6>
       <div class="table-wrapper">
         @if ($errors->any())
           <div class="alert alert-danger">
@@ -17,20 +17,20 @@
           </div>
         @endif
 
-        <form action="{{ route('update.subcategory', ['id' => $subcategory->id]) }}" method="POST">
+        <form action="{{ route('update.coupon', ['id' => $coupon->id]) }}" method="POST">
           @csrf
           <div class="modal-body pd-20">
             <div class="form-group">
-              <label for="subcategory_name">サブカテゴリー名</label>
-              <input type="text" class="form-control" id="subcateogry_name" aria-describedby="emailHelp" value="{{ $subcategory->subcategory_name }}" name="subcategory_name">
+              <label for="coupon">コード</label>
+              <input type="text" class="form-control" id="coupon" aria-describedby="emailHelp" value="{{ $coupon->coupon }}" name="coupon">
             </div>
 
             <div class="form-group">
-              <label for="category_id">カテゴリー名</label>
-              <select class="form-control" name="category_id">
+              <label for="discount">割引率</label>
+              <select class="form-control" name="discount">
                 <option value="">--</option>
-                @foreach($categories as $category)
-                  <option value="{{ $category->id }}" {{ $category->id === $subcategory->category_id ? "selected" : "" }}>{{ $category->category_name }}</option>
+                @foreach($discount_percent as $percent)
+                  <option value="{{ $percent }}" {{ $percent === $coupon->discount ? "selected" : "" }}>{{ $percent }}</option>
                 @endforeach
               </select>
             </div>
