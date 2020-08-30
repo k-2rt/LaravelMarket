@@ -3,10 +3,11 @@
 @section('admin_content')
 
 <div class="sl-mainpanel">
+
   <div class="sl-pagebody">
     <div class="card pd-20 pd-sm-40">
       <h6 class="card-body-title">
-        サブカテゴリー 一覧
+        クーポン 一覧
         <a href="#" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">新規作成</a>
       </h6>
 
@@ -15,20 +16,20 @@
           <thead>
             <tr>
               <th class="wd-15p">ID</th>
-              <th class="wd-15p">サブカテゴリー名</th>
-              <th class="wd-15p">カテゴリー名</th>
+              <th class="wd-15p">コード</th>
+              <th class="wd-20p">割引率</th>
               <th class="wd-20p">アクション</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($sub_categories as $key => $sub_category)
+            @foreach($coupons as $key => $coupon)
               <tr>
                 <td>{{ $key + 1 }}</td>
-                <td>{{ $sub_category->subcategory_name }}</td>
-                <td>{{ $sub_category->category_name }}</td>
+                <td>{{ $coupon->coupon }}</td>
+                <td>{{ $coupon->discount }} %</td>
                 <td>
-                  <a href="{{ route('edit.subcategory', ['id' => $sub_category->id]) }}" class="btn btn-sm btn-info">編集</a>
-                  <a href="{{ route('delete.subcategory', ['id' => $sub_category->id]) }}" class="btn btn-sm btn-danger" id="delete">削除</a>
+                  <a href="{{ route('edit.coupon', ['id' => $coupon->id]) }}" class="btn btn-sm btn-info">編集</a>
+                  <a href="{{ route('delete.coupon', ['id' => $coupon->id]) }}" class="btn btn-sm btn-danger" id="delete">削除</a>
                 </td>
               </tr>
             @endforeach
@@ -37,6 +38,7 @@
       </div>
     </div>
   </div>
+
   <!-- modal form -->
   <div id="modaldemo3" class="modal fade">
     <div class="modal-dialog modal-lg" role="document">
@@ -58,20 +60,21 @@
           </div>
         @endif
 
-        <form action="{{ route('store.subcategory') }}" method="POST">
+        <form action="{{ route('store.coupon') }}" method="POST">
           @csrf
+
           <div class="modal-body pd-20">
             <div class="form-group">
-              <label for="subcategory_name">サブカテゴリー名</label>
-              <input type="text" class="form-control" id="subcategory_name" aria-describedby="emailHelp" placeholder="サブカテゴリー" name="subcategory_name">
+              <label for="coupon">コード</label>
+              <input type="text" class="form-control" id="coupon" aria-describedby="emailHelp" placeholder="クーポン" name="coupon">
             </div>
 
             <div class="form-group">
-              <label for="category_id">カテゴリー名</label>
-              <select class="form-control" name="category_id">
+              <label for="discount">割引率（％）</label>
+              <select class="form-control" name="discount">
                 <option value="">--</option>
-                @foreach($categories as $category)
-                  <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                @foreach($discount_percent as $percent)
+                  <option value="{{ $percent }}">{{ $percent }}</option>
                 @endforeach
               </select>
             </div>
@@ -86,5 +89,6 @@
     </div>
   </div>
 </div>
+
 
 @endsection

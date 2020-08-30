@@ -3,17 +3,11 @@
 @section('admin_content')
 
 <div class="sl-mainpanel">
-
   <div class="sl-pagebody">
-    <div class="sl-page-title">
-      <h5>ブランド テーブル</h5>
-
-    </div><!-- sl-page-title -->
-
     <div class="card pd-20 pd-sm-40">
       <h6 class="card-body-title">
         ブランド 一覧
-        <a href="#" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">ブランドを追加</a>
+        <a href="#" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">新規作成</a>
       </h6>
 
       <div class="table-wrapper">
@@ -23,8 +17,7 @@
               <th class="wd-15p">ID</th>
               <th class="wd-15p">ブランド名</th>
               <th class="wd-15p">ブランドロゴ</th>
-              <th class="wd-20p">アクション</a>
-              </th>
+              <th class="wd-20p">アクション</th>
             </tr>
           </thead>
           <tbody>
@@ -41,18 +34,16 @@
             @endforeach
           </tbody>
         </table>
-      </div><!-- table-wrapper -->
-    </div><!-- card -->
-  </div><!-- sl-mainpanel -->
-<!-- ########## END: MAIN PANEL ########## -->
+      </div>
+    </div>
+  </div>
 
-
-  <!-- LARGE MODAL -->
+  <!-- modal form -->
   <div id="modaldemo3" class="modal fade">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content tx-size-sm">
         <div class="modal-header pd-x-20">
-          <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ブランド作成</h6>
+          <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"></h6>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -88,9 +79,8 @@
             </div>
           </div>
         </form>
-
-      </div><!-- modal-dialog -->
-    </div><!-- modal -->
+      </div>
+    </div>
   </div>
 </div>
 

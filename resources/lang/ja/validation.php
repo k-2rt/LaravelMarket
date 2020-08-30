@@ -158,6 +158,10 @@ return [
         'email' => 'メールアドレス',
         'password' => 'パスワード',
         'category_name' => 'カテゴリー名',
+        'brand_name' => 'ブランド名',
+        'brand_logo' => 'ブランドロゴ',
+        'coupon' => 'コード',
+        'discount' => '割引率',
     ],
 
 ];

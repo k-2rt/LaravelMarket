@@ -92,7 +92,7 @@ class BrandController extends Controller
 
     public function updateBrand(Request $request, $id) {
         $request->validate([
-            'brand_name'  => 'required|max:55',
+            'brand_name' => 'required|max:55',
         ]);
 
         $brand = Brand::find($id);
@@ -101,7 +101,9 @@ class BrandController extends Controller
         $old_logo = $request->old_logo;
 
         if ($brand_image) {
-            unlink($old_logo);
+            if ($old_logo) {
+                unlink($old_logo);
+            }
 
             $create_date = date('Ymd');
             $image_full_name = $create_date . '_' . strtolower($brand_image->getClientOriginalName());

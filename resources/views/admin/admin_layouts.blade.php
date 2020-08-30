@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -70,49 +70,35 @@
           <a href="#" class="sl-menu-link">
             <div class="sl-menu-item">
               <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-              <span class="menu-item-label">Category</span>
+              <span class="menu-item-label">カテゴリー</span>
               <i class="menu-item-arrow fa fa-angle-down"></i>
             </div><!-- menu-item -->
           </a><!-- sl-menu-link -->
           <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{ route('categories') }}" class="nav-link">Category</a></li>
-            <li class="nav-item"><a href="{{ route('subcategories') }}" class="nav-link">Sub Category</a></li>
-            <li class="nav-item"><a href="{{ route('brands') }}" class="nav-link">Brand</a></li>
+            <li class="nav-item"><a href="{{ route('categories') }}" class="nav-link">メインカテゴリー</a></li>
+            <li class="nav-item"><a href="{{ route('subcategories') }}" class="nav-link">サブカテゴリー</a></li>
+            <li class="nav-item"><a href="{{ route('brands') }}" class="nav-link">ブランド</a></li>
           </ul>
           <a href="#" class="sl-menu-link">
             <div class="sl-menu-item">
               <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
-              <span class="menu-item-label">Forms</span>
+              <span class="menu-item-label">クーポン</span>
               <i class="menu-item-arrow fa fa-angle-down"></i>
             </div><!-- menu-item -->
           </a><!-- sl-menu-link -->
           <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="form-elements.html" class="nav-link">Form Elements</a></li>
-            <li class="nav-item"><a href="form-layouts.html" class="nav-link">Form Layouts</a></li>
-            <li class="nav-item"><a href="form-validation.html" class="nav-link">Form Validation</a></li>
-            <li class="nav-item"><a href="form-wizards.html" class="nav-link">Form Wizards</a></li>
-            <li class="nav-item"><a href="form-editor-text.html" class="nav-link">Text Editor</a></li>
+            <li class="nav-item"><a href="{{ route('admin.coupon') }}" class="nav-link">クーポン</a></li>
           </ul>
           <a href="#" class="sl-menu-link">
             <div class="sl-menu-item">
               <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-              <span class="menu-item-label">UI Elements</span>
+              <span class="menu-item-label">その他</span>
               <i class="menu-item-arrow fa fa-angle-down"></i>
             </div><!-- menu-item -->
           </a><!-- sl-menu-link -->
           <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="accordion.html" class="nav-link">Accordion</a></li>
-            <li class="nav-item"><a href="alerts.html" class="nav-link">Alerts</a></li>
-            <li class="nav-item"><a href="buttons.html" class="nav-link">Buttons</a></li>
-            <li class="nav-item"><a href="cards.html" class="nav-link">Cards</a></li>
-            <li class="nav-item"><a href="icons.html" class="nav-link">Icons</a></li>
-            <li class="nav-item"><a href="modal.html" class="nav-link">Modal</a></li>
-            <li class="nav-item"><a href="navigation.html" class="nav-link">Navigation</a></li>
-            <li class="nav-item"><a href="pagination.html" class="nav-link">Pagination</a></li>
-            <li class="nav-item"><a href="popups.html" class="nav-link">Tooltip &amp; Popover</a></li>
-            <li class="nav-item"><a href="progress.html" class="nav-link">Progress</a></li>
-            <li class="nav-item"><a href="spinners.html" class="nav-link">Spinners</a></li>
-            <li class="nav-item"><a href="typography.html" class="nav-link">Typography</a></li>
+            <li class="nav-item"><a href="{{ route('admin.newsletter') }}" class="nav-link">ニュース</a></li>
+
           </ul>
           <a href="#" class="sl-menu-link">
             <div class="sl-menu-item">
@@ -408,7 +394,7 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-  <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js') }}"></script>
 
     <script>
 

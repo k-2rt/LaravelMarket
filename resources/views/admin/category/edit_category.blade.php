@@ -4,20 +4,16 @@
 
 <div class="sl-mainpanel">
   <div class="sl-pagebody">
-    <div class="sl-page-title">
-      <h5>編集画面</h5>
-    </div>
-
     <div class="card pd-20 pd-sm-40">
       <h6 class="card-body-title">カテゴリー 更新</h6>
       <div class="table-wrapper">
         @if ($errors->any())
           <div class="alert alert-danger">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
+            <ul>
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
           </div>
         @endif
 
