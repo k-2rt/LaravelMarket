@@ -3019,6 +3019,9 @@ tbody.collapse.show {
 .custom-file-control:lang(en):empty::after {
   content: "Choose file...";
 }
+.custom-file-control:lang(ja):empty::after {
+  content: "選択してください";
+}
 .custom-file-control::before {
   position: absolute;
   top: -1px;
@@ -3036,6 +3039,9 @@ tbody.collapse.show {
 }
 .custom-file-control:lang(en)::before {
   content: "Browse";
+}
+.custom-file-control:lang(ja)::before {
+  content: "参照する";
 }
 
 .nav {
