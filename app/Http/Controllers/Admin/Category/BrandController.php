@@ -115,7 +115,7 @@ class BrandController extends Controller
         $brand->update();
 
         $notification = array(
-            'message' => 'ブランドを更新しました。',
+            'message' => 'ブランドを更新しました',
             'alert-type' => 'success'
         );
 

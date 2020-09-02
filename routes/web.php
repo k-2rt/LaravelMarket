@@ -64,12 +64,29 @@ Route::get('delete/subcategory/{id}', 'Admin\Category\SubCategoryController@dele
 Route::get('edit/subcategory/{id}', 'Admin\Category\SubCategoryController@editSubcategory')->name('edit.subcategory');
 Route::post('update/subcategory/{id}', 'Admin\Category\SubCategoryController@updateSubcategory')->name('update.subcategory');
 
-// Coupons
+// Admin  Coupons
 Route::get('admin/coupon', 'Admin\Coupon\CouponController@coupon')->name('admin.coupon');
 Route::post('admin/store/coupon', 'Admin\Coupon\CouponController@storeCoupon')->name('store.coupon');
 Route::get('delete/coupon/{id}', 'Admin\Coupon\CouponController@deleteCoupon')->name('delete.coupon');
 Route::get('edit/coupon/{id}', 'Admin\Coupon\CouponController@editCoupon')->name('edit.coupon');
 Route::post('update/coupon/{id}', 'Admin\Coupon\CouponController@updateCoupon')->name('update.coupon');
+
+// Admin Products
+Route::get('admin/product/index', 'Admin\ProductController@index')->name('index.product');
+Route::get('admin/product/create', 'Admin\ProductController@create')->name('create.product');
+Route::post('admin/product/store', 'Admin\ProductController@store')->name('store.product');
+// For show sub categories with ajax
+Route::get('get/subcategory/{category_id}', 'Admin\ProductController@getSubcategories');
+
+Route::get('inactive/product/{id}', 'Admin\ProductController@inactive')->name('inactive.product');
+Route::get('active/product/{id}', 'Admin\ProductController@active')->name('active.product');
+Route::get('delete/product/{id}', 'Admin\ProductController@deleteProduct')->name('delete.product');
+Route::get('show/product/{id}', 'Admin\ProductController@showProduct')->name('show.product');
+Route::get('edit/product/{id}', 'Admin\ProductController@editProduct')->name('edit.product');
+Route::post('update/product/{id}', 'Admin\ProductController@updateProduct')->name('update.product');
+Route::post('update/product/image/{id}', 'Admin\ProductController@updateProductImage')->name('update.product_images');
+
+
 
 // Newsletters
 Route::get('admin/newsletter', 'Admin\Others\NewsletterController@newsletter')->name('admin.newsletter');

@@ -3,9 +3,14 @@
 @section('admin_content')
 
 <div class="sl-mainpanel">
+  <nav class="breadcrumb sl-breadcrumb">
+    <a class="breadcrumb-item" href="#">カテゴリー</a>
+    <a class="breadcrumb-item" href="{{ route('categories') }}">メイン 一覧</a>
+    <span class="breadcrumb-item active">編集</span>
+  </nav>
+
   <div class="sl-pagebody">
     <div class="card pd-20 pd-sm-40">
-      <h6 class="card-body-title">カテゴリー 更新</h6>
       <div class="table-wrapper">
         @if ($errors->any())
           <div class="alert alert-danger">

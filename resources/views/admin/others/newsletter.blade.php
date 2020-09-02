@@ -3,10 +3,14 @@
 @section('admin_content')
 
 <div class="sl-mainpanel">
+  <nav class="breadcrumb sl-breadcrumb">
+    <a class="breadcrumb-item" href="#">その他</a>
+    <span class="breadcrumb-item active">ニュース 一覧</span>
+  </nav>
+
   <div class="sl-pagebody">
     <div class="card pd-20 pd-sm-40">
       <h6 class="card-body-title">
-        ニュースレター 一覧
         <a href="#" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">全削除</a>
       </h6>
 
