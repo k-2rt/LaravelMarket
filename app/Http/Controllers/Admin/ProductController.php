@@ -9,7 +9,6 @@ use App\Model\Admin\Brand;
 use App\Model\Admin\Subcategory;
 use App\Model\Admin\Product;
 use Image;
-use DB;
 
 class ProductController extends Controller
 {
@@ -74,18 +73,22 @@ class ProductController extends Controller
         $image_two = $request->image_two;
         $image_three = $request->image_three;
 
-        if ($image_one && $image_two && $image_three) {
-            $image_one_name = hexdec(uniqid()) . '_' . $image_one->getClientOriginalName();
-            Image::make($image_one)->resize(300, 300)->save('public/media/product/' . $image_one_name);
-            $product->image_one = 'public/media/product/' . $image_one_name;
+        if ($image_one) {
+            $image_one_name = uniqid() . '_' . $image_one->getClientOriginalName();
+            Image::make($image_one)->resize(300, 300)->save('public/product/' . $image_one_name);
+            $product->image_one = 'public/product/' . $image_one_name;
+        }
 
-            $image_two_name = hexdec(uniqid()) . '_' . $image_two->getClientOriginalName();
-            Image::make($image_two)->resize(300, 300)->save('public/media/product/' . $image_two_name);
-            $product->image_two = 'public/media/product/' . $image_two_name;
+        if ($image_two) {
+            $image_two_name = uniqid() . '_' . $image_two->getClientOriginalName();
+            Image::make($image_two)->resize(300, 300)->save('public/product/' . $image_two_name);
+            $product->image_two = 'public/product/' . $image_two_name;
+        }
 
-            $image_three_name = hexdec(uniqid()) . '_' . $image_three->getClientOriginalName();
-            Image::make($image_three)->resize(300, 300)->save('public/media/product/' . $image_three_name);
-            $product->image_three = 'public/media/product/' . $image_three_name;
+        if ($image_three) {
+            $image_three_name = uniqid() . '_' . $image_three->getClientOriginalName();
+            Image::make($image_three)->resize(300, 300)->save('public/product/' . $image_three_name);
+            $product->image_three = 'public/product/' . $image_three_name;
         }
 
         $product->save();
@@ -95,7 +98,7 @@ class ProductController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->back()->with($notification);
+        return redirect()->route('index.product')->with($notification);
     }
 
     /**
@@ -208,7 +211,13 @@ class ProductController extends Controller
         return redirect()->route('index.product')->with($notification);
     }
 
-
+    /**
+     * Update product images
+     *
+     * @param Request $request
+     * @param String $id
+     * @return void
+     */
     public function updateProductImage(Request $request, $id) {
         $product = Product::find($id);
 
@@ -226,7 +235,7 @@ class ProductController extends Controller
 
             $create_date = date('Ymd');
             $image_full_name = $create_date . '_' . strtolower($image_one->getClientOriginalName());
-            $upload_path = 'public/media/product/';
+            $upload_path = 'public/product/';
             $image_one->move($upload_path, $image_full_name);
             $product->image_one = $upload_path . $image_full_name;
         }
@@ -238,7 +247,7 @@ class ProductController extends Controller
 
             $create_date = date('Ymd');
             $image_full_name = $create_date . '_' . strtolower($image_two->getClientOriginalName());
-            $upload_path = 'public/media/product/';
+            $upload_path = 'public/product/';
             $image_two->move($upload_path, $image_full_name);
             $product->image_two = $upload_path . $image_full_name;
         }
@@ -250,7 +259,7 @@ class ProductController extends Controller
 
             $create_date = date('Ymd');
             $image_full_name = $create_date . '_' . strtolower($image_three->getClientOriginalName());
-            $upload_path = 'public/media/product/';
+            $upload_path = 'public/product/';
             $image_three->move($upload_path, $image_full_name);
             $product->image_three = $upload_path . $image_full_name;
         }

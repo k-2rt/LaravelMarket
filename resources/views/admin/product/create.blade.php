@@ -14,28 +14,35 @@
         <a href="{{ route('index.product') }}" class="btn btn-success btn-sm pull-right">商品一覧</a>
         </h6>
 
-      <form action="{{ route('store.product') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('store.product') }}" method="POST" enctype="multipart/form-data">
           @csrf
 
           <div class="form-layout">
             <div class="row mg-b-25">
-              <div class="col-lg-4">
+              <div class="col-lg-6">
                 <div class="form-group">
                   <label class="form-control-label">商品名: <span class="tx-danger">*</span></label>
                   <input class="form-control" type="text" name="product_name"  placeholder="商品名を入力してください">
                 </div>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-6">
                 <div class="form-group">
                   <label class="form-control-label">商品コード: <span class="tx-danger">*</span></label>
                   <input class="form-control" type="text"  name="product_code" placeholder="商品コードを入力してください">
                 </div>
               </div>
 
-              <div class="col-lg-4">
+              <div class="col-lg-6">
                 <div class="form-group">
                   <label class="form-control-label">個数: <span class="tx-danger">*</span></label>
                   <input class="form-control" type="text" name="product_quantity"  placeholder="個数を入力してください">
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label">販売価格: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text" name="selling_price" placeholder="販売価格">
                 </div>
               </div>
 
@@ -92,8 +99,8 @@
 
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label class="form-control-label">販売価格: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="selling_price" placeholder="販売価格">
+                  <label class="form-control-label">割引価格:</label>
+                  <input class="form-control" type="text" name="discount_price" placeholder="割引価格を入力してください">
                 </div>
               </div>
 
@@ -106,14 +113,14 @@
 
               <div class="col-lg-12">
                 <div class="form-group">
-                  <label class="form-control-label">ビデオ Link: <span class="tx-danger">*</span></label>
-                  <input class="form-control" name="video_link" placeholder="ビデオ Link">
+                  <label class="form-control-label">ビデオ URL:</label>
+                  <input class="form-control" name="video_link" placeholder="URL">
                 </div>
               </div>
 
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label class="form-control-label">画像１(サムネイル): <span class="tx-danger">*</span></label><br />
+                  <label class="form-control-label">画像１(メイン): <span class="tx-danger">*</span></label><br />
                   <label class="custom-file">
                     <input type="file" class="custom-file-input" name="image_one" onchange="readURL(this);" required="">
                     <span class="custom-file-control"></span>
@@ -124,9 +131,9 @@
 
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label class="form-control-label">画像２: <span class="tx-danger">*</span></label><br/>
+                  <label class="form-control-label">画像２:</label><br/>
                   <label class="custom-file">
-                    <input type="file" class="custom-file-input" name="image_two" onchange="readURL(this);" required="">
+                    <input type="file" class="custom-file-input" name="image_two" onchange="readURL(this);">
                     <span class="custom-file-control"></span>
                   </label><br />
                   <img src="#" id="image_two" alt="">
@@ -135,9 +142,9 @@
 
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label class="form-control-label">画像３: <span class="tx-danger">*</span></label><br/>
+                  <label class="form-control-label">画像３:</label><br/>
                   <label class="custom-file">
-                    <input type="file" class="custom-file-input" name="image_three" onchange="readURL(this);" required="">
+                    <input type="file" class="custom-file-input" name="image_three" onchange="readURL(this);">
                     <span class="custom-file-control"></span>
                   </label><br />
                   <img src="#" id="image_three" alt="">
@@ -150,43 +157,43 @@
             <div class="row">
               <div class="col-lg-4">
                 <label class="ckbox">
-                  <input type="checkbox" name="main_slider" value="1">
-                  <span>Main Slider</span>
-                </label>
-              </div>
-
-              <div class="col-lg-4">
-                <label class="ckbox">
-                  <input type="checkbox" name="hot_deal" value="1">
-                  <span>Hot Deal</span>
-                </label>
-              </div>
-
-              <div class="col-lg-4">
-                <label class="ckbox">
-                  <input type="checkbox" name="best_rated" value="1">
-                  <span>Best Rated</span>
+                  <input type="checkbox" name="hot_new" value="1">
+                  <span>新入荷</span>
                 </label>
               </div>
 
               <div class="col-lg-4">
                 <label class="ckbox">
                   <input type="checkbox" name="trend" value="1">
-                  <span>トレンド商品</span>
+                  <span>トレンド</span>
+                </label>
+              </div>
+
+              <div class="col-lg-4">
+                <label class="ckbox">
+                  <input type="checkbox" name="best_rated" value="1">
+                  <span>最高評価</span>
+                </label>
+              </div>
+
+              <div class="col-lg-4">
+                <label class="ckbox">
+                  <input type="checkbox" name="hot_deal" value="1">
+                  <span>お買い得</span>
+                </label>
+              </div>
+
+              <div class="col-lg-4">
+                <label class="ckbox">
+                  <input type="checkbox" name="main_slider" value="1">
+                  <span>メイン スライダー</span>
                 </label>
               </div>
 
               <div class="col-lg-4">
                 <label class="ckbox">
                   <input type="checkbox" name="mid_slider" value="1">
-                  <span>Mid Slider</span>
-                </label>
-              </div>
-
-              <div class="col-lg-4">
-                <label class="ckbox">
-                  <input type="checkbox" name="hot_new" value="1">
-                  <span>Hot New</span>
+                  <span>ミドル スライダー</span>
                 </label>
               </div>
             </div>
@@ -194,13 +201,11 @@
             <br/>
 
             <div class="form-layout-footer">
-              <button class="btn btn-info mg-r-5">Submit Form</button>
-              <button class="btn btn-secondary">Cancel</button>
+              <button class="btn btn-info mg-r-5">追加する</button>
             </div><!-- form-layout-footer -->
           </div><!-- form-layout -->
-        </div><!-- card -->
-      </form>
-
+        </form>
+      </div>
     </div>
   </div><!-- sl-mainpanel -->
   <!-- ########## END: MAIN PANEL ########## -->
@@ -222,7 +227,7 @@
             dataType:"json",
             success:function(data) {
               $.each(data, function(key, value){
-                $('select[name="subcategory_id"]').append('<option value="'+ value.id + '">' + value.subcategory_name + '</option>');
+                $('select[name="subcategory_id"]').append('<option value="' + value.id + '">' + value.subcategory_name + '</option>');
               });
             },
           });

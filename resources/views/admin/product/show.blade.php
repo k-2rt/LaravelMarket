@@ -11,7 +11,7 @@
 
     <div class="sl-pagebody">
       <div class="card pd-20 pd-sm-40">
-        <h6 class="card-body-title">商品詳細</h6>
+        <h6 class="card-body-title">商品詳細</h6><br />
 
         <div class="form-layout">
           <div class="row mg-b-25">
@@ -87,7 +87,7 @@
 
             <div class="col-lg-12">
               <div class="form-group">
-                <label class="form-control-label">ビデオ Link: <span class="tx-danger">*</span></label><br>
+                <label class="form-control-label">ビデオ URL:</label><br>
                 <strong>{{ $product->video_link }}</strong>
               </div>
             </div>
@@ -101,14 +101,14 @@
 
             <div class="col-lg-4">
               <div class="form-group">
-                <label class="form-control-label">画像２: <span class="tx-danger">*</span></label><br/>
+                <label class="form-control-label">画像２:</label><br/>
                 <img src="{{ URL::to( $product->image_two) }}" height="80px;" width="80px;" alt="">
               </div>
             </div>
 
             <div class="col-lg-4">
               <div class="form-group">
-                <label class="form-control-label">画像３: <span class="tx-danger">*</span></label><br/>
+                <label class="form-control-label">画像３:</label><br/>
                 <img src="{{ URL::to( $product->image_three) }}" height="80px;" width="80px;" alt="">
               </div>
             </div>
@@ -118,30 +118,12 @@
           <br>
           <div class="row">
             <div class="col-lg-4">
-              @if ($product->main_slider == 1)
+              @if ($product->hot_new == 1)
                 <span class="badge badge-success">有効</span>
               @else
                 <span class="badge badge-danger">無効</span>
               @endif
-              <span>Main Slider</span>
-            </div>
-
-            <div class="col-lg-4">
-              @if ($product->hot_deal == 1)
-                <span class="badge badge-success">有効</span>
-              @else
-                <span class="badge badge-danger">無効</span>
-              @endif
-              <span>Hot Deal</span>
-            </div>
-
-            <div class="col-lg-4">
-              @if ($product->best_rated == 1)
-                <span class="badge badge-success">有効</span>
-              @else
-                <span class="badge badge-danger">無効</span>
-              @endif
-              <span>Best Rated</span>
+              <span>新入荷</span>
             </div>
 
             <div class="col-lg-4">
@@ -150,7 +132,34 @@
               @else
                 <span class="badge badge-danger">無効</span>
               @endif
-              <span>トレンド商品</span>
+              <span>トレンド</span>
+            </div>
+
+            <div class="col-lg-4">
+              @if ($product->best_rated == 1)
+                <span class="badge badge-success">有効</span>
+              @else
+                <span class="badge badge-danger">無効</span>
+              @endif
+              <span>最高評価</span>
+            </div>
+
+            <div class="col-lg-4">
+              @if ($product->hot_deal == 1)
+                <span class="badge badge-success">有効</span>
+              @else
+                <span class="badge badge-danger">無効</span>
+              @endif
+              <span>お買い得</span>
+            </div>
+
+            <div class="col-lg-4">
+              @if ($product->main_slider == 1)
+                <span class="badge badge-success">有効</span>
+              @else
+                <span class="badge badge-danger">無効</span>
+              @endif
+              <span>メイン スライダー</span>
             </div>
 
             <div class="col-lg-4">
@@ -159,16 +168,7 @@
               @else
                 <span class="badge badge-danger">無効</span>
               @endif
-              <span>Mid Slider</span>
-            </div>
-
-            <div class="col-lg-4">
-              @if ($product->hot_new == 1)
-                <span class="badge badge-success">有効</span>
-              @else
-                <span class="badge badge-danger">無効</span>
-              @endif
-              <span>Hot New</span>
+              <span>ミドル スライダー</span>
             </div>
           </div>
         </div><!-- form-layout -->

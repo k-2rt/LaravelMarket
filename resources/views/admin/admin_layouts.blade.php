@@ -28,7 +28,7 @@
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
 
-    <title>北欧、暮らしてみたいな</title>
+    <title>日本、暮らしの道具店</title>
 
     <!-- vendor css -->
     <link href="{{ asset('/backend/lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
@@ -57,7 +57,7 @@
     @else
 
       <!-- ########## START: LEFT PANEL ########## -->
-      <div class="sl-logo"><a href="">北欧、暮らしてみたいな</a></div>
+      <div class="sl-logo"><a href="">日本、暮らしの道具店</a></div>
       <div class="sl-sideleft">
         <div class="sl-sideleft-menu">
           <a href="{{ url('admin/home') }}" class="sl-menu-link active">
@@ -99,6 +99,20 @@
             <li class="nav-item"><a href="{{ route('create.product') }}" class="nav-link">商品追加</a></li>
             <li class="nav-item"><a href="{{ route('index.product') }}" class="nav-link">商品一覧</a></li>
           </ul>
+
+          <a href="#" class="sl-menu-link">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
+              <span class="menu-item-label">ブログ</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div>
+          </a>
+          <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('index.blog.category') }}" class="nav-link">カテゴリー</a></li>
+          <li class="nav-item"><a href="{{ route('create.blog.post') }}" class="nav-link">投稿</a></li>
+            <li class="nav-item"><a href="{{ route('index.blog.post') }}" class="nav-link">投稿一覧</a></li>
+          </ul>
+
           <a href="#" class="sl-menu-link">
             <div class="sl-menu-item">
               <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
@@ -328,9 +342,9 @@
         $('#datatable1').DataTable({
           responsive: true,
           language: {
-            searchPlaceholder: 'Search...',
+            searchPlaceholder: '検索',
             sSearch: '',
-            lengthMenu: '_MENU_ items/page',
+            lengthMenu: '_MENU_',
           }
         });
 
@@ -369,7 +383,12 @@
         $('#summernote').summernote({
           height: 150,
           tooltip: false
-        })
+        });
+
+        $('#summernote2').summernote({
+          height: 150,
+          tooltip: false
+        });
       });
     </script>
 
