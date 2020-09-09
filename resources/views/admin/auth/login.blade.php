@@ -6,7 +6,7 @@
 
     <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white">
       <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">Laravel <span class="tx-info tx-normal">Market</span></div>
-      <div class="tx-center mg-b-60">北欧、暮らしたい</div>
+      <div class="tx-center mg-b-60">日本、暮らしの道具店</div>
 
       <form action="{{ route('admin.login') }}" method="POST">
         @csrf
@@ -32,7 +32,7 @@
           @enderror
 
 
-          <a href="{{ route('admin.password.request') }}" class="tx-info tx-12 d-block mg-t-10">パスワードを忘れた方へ</a>
+          <a href="{{ route('admin.password.change') }}" class="tx-info tx-12 d-block mg-t-10">パスワードを忘れた方へ</a>
         </div><!-- form-group -->
         <button type="submit" class="btn btn-info btn-block">Sign In</button>
 

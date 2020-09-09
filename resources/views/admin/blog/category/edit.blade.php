@@ -4,8 +4,8 @@
 
 <div class="sl-mainpanel">
   <nav class="breadcrumb sl-breadcrumb">
-    <a class="breadcrumb-item" href="#">カテゴリー</a>
-    <a class="breadcrumb-item" href="{{ route('categories') }}">メイン 一覧</a>
+    <a class="breadcrumb-item" href="#">ブログ</a>
+    <a class="breadcrumb-item" href="{{ route('index.blog.category') }}">カテゴリー 一覧</a>
     <span class="breadcrumb-item active">編集</span>
   </nav>
 
@@ -22,12 +22,17 @@
           </div>
         @endif
 
-        <form action="{{ route('update.category', ['id' => $category->id]) }}" method="POST">
+        <form action="{{ route('update.blog.category', ['id' => $blog_category->id]) }}" method="POST">
           @csrf
           <div class="modal-body pd-20">
             <div class="form-group">
-              <label for="category_name">カテゴリー名</label>
-              <input type="text" class="form-control" id="category_name" aria-describedby="emailHelp" value="{{ $category->category_name }}" name="category_name">
+              <label for="category_name_en">カテゴリー名(English)</label>
+              <input type="text" class="form-control" id="category_name_en" aria-describedby="emailHelp" value="{{ $blog_category->category_name_en }}" name="category_name_en">
+            </div>
+
+            <div class="form-group">
+              <label for="category_name_ja">カテゴリー名(Japanese)</label>
+              <input type="text" class="form-control" id="category_name_ja" aria-describedby="emailHelp" value="{{ $blog_category->category_name_ja }}" name="category_name_ja">
             </div>
 
             <div class="modal-footer">

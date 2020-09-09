@@ -42,11 +42,9 @@ class BrandController extends Controller
         $brand_image = $request->file('brand_logo');
 
         if ($brand_image) {
-            $create_date = date('Ymd');
-            $image_full_name = $create_date . '_' . strtolower($brand_image->getClientOriginalName());
-            $upload_path = 'public/media/brand/';
-            $brand_image->move($upload_path, $image_full_name);
-            $brand->brand_logo = $upload_path . $image_full_name;
+            $temp_path = $brand_image->store('public/brand');
+            $read_temp_path = str_replace('public/', 'storage/', $temp_path);
+            $brand->brand_logo = $read_temp_path;
         }
 
         $brand->save();
@@ -107,9 +105,11 @@ class BrandController extends Controller
 
             $create_date = date('Ymd');
             $image_full_name = $create_date . '_' . strtolower($brand_image->getClientOriginalName());
-            $upload_path = 'public/media/brand/';
+            $upload_path = 'public/brand/';
             $brand_image->move($upload_path, $image_full_name);
             $brand->brand_logo = $upload_path . $image_full_name;
+        } else {
+            $brand->brand_logo = $old_logo;
         }
 
         $brand->update();
