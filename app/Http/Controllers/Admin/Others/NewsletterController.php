@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Others;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\Admin\Newsletter;
+use App\Models\Admin\Newsletter;
 
 class NewsletterController extends Controller
 {

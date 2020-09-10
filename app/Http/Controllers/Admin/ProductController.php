@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\Admin\Category;
-use App\Model\Admin\Brand;
-use App\Model\Admin\Subcategory;
-use App\Model\Admin\Product;
+use App\Models\Admin\Category;
+use App\Models\Admin\Brand;
+use App\Models\Admin\Subcategory;
+use App\Models\Admin\Product;
 use Image;
 
 class ProductController extends Controller
