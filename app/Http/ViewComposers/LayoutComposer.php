@@ -3,9 +3,9 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
-use App\Model\Admin\Category;
-use App\Model\Admin\SubCategory;
-use App\Model\Admin\Product;
+use App\Models\Admin\Category;
+use App\Models\Admin\SubCategory;
+use App\Models\Admin\Product;
 
 /**
  * Class LayoutComposer
@@ -29,11 +29,7 @@ class LayoutComposer
      */
     public function compose(View $view)
     {
-        $main_slider = $this->product->select('products.*', 'brands.brand_name')
-                                     ->join('brands', 'products.brand_id', '=', 'brands.id')
-                                     ->where('main_slider', 1)
-                                     ->orderBy('id',  'DESC')
-                                     ->first();
+        $main_slider = $this->product->getFirstMainSliderProduct();
 
         $view->with([
             'categories' => $this->category->all(),

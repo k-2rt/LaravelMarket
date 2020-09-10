@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Coupon;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\Admin\Coupon;
+use App\Models\Admin\Coupon;
 
 class CouponController extends Controller
 {

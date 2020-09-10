@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Model\Admin;
+namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Newsletter extends Model
 {
     protected $fillable = [
-        'brand_name', 'brand_logo'
+        'email',
     ];
 }

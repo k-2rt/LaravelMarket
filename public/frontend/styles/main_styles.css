@@ -1962,10 +1962,10 @@ select option
 }
 .product_new
 {
-	display: none;
+	/* display: none; */
 	background: #0e8ce4;
-	visibility: hidden;
-	opacity: 0;
+	/* visibility: hidden; */
+	/* opacity: 0; */
 }
 .product_discount
 {
