@@ -158,9 +158,17 @@
 
               <div class="col-lg-4">
                 <label class="ckbox">
+                  <input type="hidden" name="buyone_getone" value="0">
+                  <input type="checkbox" name="buyone_getone" value="1" {{ $product->buyone_getone == 1 ? 'checked' : '' }}>
+                  <span>Buy one Get one</span>
+                </label>
+              </div>
+
+              <div class="col-lg-4">
+                <label class="ckbox">
                   <input type="hidden" name="main_slider" value="0">
                   <input type="checkbox" name="main_slider" value="1" {{ $product->main_slider == 1 ? 'checked' : '' }}>
-                  <span>メイン スライダー</span>
+                  <span>メインスライダーに表示</span>
                 </label>
               </div>
 
@@ -168,7 +176,7 @@
                 <label class="ckbox">
                   <input type="hidden" name="mid_slider" value="0">
                   <input type="checkbox" name="mid_slider" value="1" {{ $product->mid_slider == 1 ? 'checked' : '' }}>
-                  <span>ミドル スライダー</span>
+                  <span>ミドルスライダーに表示</span>
                 </label>
               </div>
             </div>

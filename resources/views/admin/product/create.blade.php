@@ -185,15 +185,22 @@
 
               <div class="col-lg-4">
                 <label class="ckbox">
+                  <input type="checkbox" name="buyone_getone" value="1">
+                  <span>Buy one Get one</span>
+                </label>
+              </div>
+
+              <div class="col-lg-4">
+                <label class="ckbox">
                   <input type="checkbox" name="main_slider" value="1">
-                  <span>メイン スライダー</span>
+                  <span>メインスライダーに表示</span>
                 </label>
               </div>
 
               <div class="col-lg-4">
                 <label class="ckbox">
                   <input type="checkbox" name="mid_slider" value="1">
-                  <span>ミドル スライダー</span>
+                  <span>ミドルスライダーに表示</span>
                 </label>
               </div>
             </div>
