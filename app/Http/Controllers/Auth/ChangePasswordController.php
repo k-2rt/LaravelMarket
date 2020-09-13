@@ -20,21 +20,37 @@ class ChangePasswordController extends Controller
     }
 
     public function changePassword(Request $request) {
-        $this->validate($request, [
-            'oldpassword' =>  'required',
-            'password' =>  'required|confirmed',
-        ]);
+        $password = Auth::user()->password;
+        $old_pass = $request->old_password;
+        $new_pass = $request->password;
+        $confirm_pass = $request->password_confirmation;
 
-        $hashedPassword = Auth::user()->password;
-        if (Hash::check($request->oldpassword, $hashedPassword)) {
-            $user = User::find(Auth::id());
-            $user->password = Hash::make($request->password);
-            $user->save();
-            Auth::logout();
+        if (Hash::check($old_pass, $password)) {
+            if ($new_pass === $confirm_pass) {
+                $user = User::find(Auth::id());
+                $user->password = Hash::make($request->password);
+                $user->save();
+                Auth::logout();
 
-            return redirect()->route('login')->with('successMsg', "パスワードは変更されました。");
+                $notification = array(
+                    'message' => 'パスワードは変更されました',
+                    'alert-type' => 'success'
+                );
+
+                return redirect()->route('login')->with($notification);
+            }
+
+            $notification = array(
+                'errMessage' => '新しいパスワードと確認用を一致させて下さい',
+            );
+
+            return redirect()->back()->with($notification);
         } else {
-            return redirect()->back()->with('errorMsg', "正しいパスワードを入力して下さい。");
+            $notification = array(
+                'errMessage' => '正しいパスワードを入力して下さい',
+            );
+
+            return redirect()->back()->with($notification);
         }
     }
 }

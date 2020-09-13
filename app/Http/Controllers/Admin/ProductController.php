@@ -64,6 +64,7 @@ class ProductController extends Controller
 
         $request->main_slider = $request->main_slider ?? "0";
         $request->hot_deal = $request->hot_deal ?? "0";
+        $request->buyone_getone = $request->buyone_getone ?? "0";
         $request->best_rated = $request->best_rated ?? "0";
         $request->trend = $request->trend ?? "0";
         $request->mid_slider = $request->mid_slider ?? "0";

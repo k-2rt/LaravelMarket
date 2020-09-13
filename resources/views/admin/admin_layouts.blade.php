@@ -27,7 +27,7 @@
     <!-- Meta -->
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
-
+    <link rel="icon" href="{{ asset('/panel/assets/images/favicon.png') }}">
     <title>日本、暮らしの道具店</title>
 
     <!-- vendor css -->

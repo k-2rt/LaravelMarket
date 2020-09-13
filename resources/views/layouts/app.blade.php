@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<link rel="icon" href="{{ asset('/panel/assets/images/favicon.png') }}">
 <title>日本、暮らしの道具店</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,20 +45,28 @@
 											<li><a href="#">Japanese</a></li>
 										</ul>
 									</li>
-									<li>
-										<a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
-										<ul>
-											<li><a href="#">EUR Euro</a></li>
-											<li><a href="#">GBP British Pound</a></li>
-											<li><a href="#">JPY Japanese Yen</a></li>
-										</ul>
-									</li>
 								</ul>
 							</div>
 							<div class="top_bar_user">
-								<div class="user_icon"><img src="{{ asset('/frontend/images/user.svg') }}" alt=""></div>
-							<div><a href="{{ route('register') }}">新規登録</a></div>
-								<div><a href="{{ route('login') }}">ログイン</a></div>
+								@guest
+
+									<div><a href="{{ route('login') }}"><div class="user_icon"><img src="{{ asset('/frontend/images/user.svg') }}" alt=""></div> 新規登録/ログイン</a></div>
+
+								@else
+
+									<ul class="standard_dropdown top_bar_dropdown">
+										<li>
+										<a href="{{ route('home') }}"><div class="user_icon"><img src="{{ asset('/frontend/images/user.svg') }}" alt=""></div>プロフィール<i class="fas fa-chevron-down"></i></a>
+											<ul>
+												<li><a href="#">ほしい物リスト</a></li>
+												<li><a href="#">チェック</a></li>
+												<li><a href="#">その他</a></li>
+											</ul>
+										</li>
+									</ul>
+
+								@endguest
+
 							</div>
 						</div>
 					</div>
@@ -225,9 +234,9 @@
 
 					<div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
 						<div class="copyright_content"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</div>
+							Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</div>
 						<div class="logos ml-sm-auto">
 							<ul class="logos_list">
 								<li><a href="#"><img src="{{ asset('/frontend/images/logos_1.png') }}" alt=""></a></li>

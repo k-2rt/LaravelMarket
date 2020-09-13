@@ -2,82 +2,82 @@
 
 @section('content')
 
-@if (session('successMsg'))
-    <div class="alert alert-success" role="alert">
-        {{ session('successMsg') }}
-    </div>
-@endif
+<link rel="stylesheet" type="text/css" href="{{ asset('/frontend/styles/contact_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('/frontend/styles/contact_responsive.css') }}">
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">会員ログイン</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+<div class="contact_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 offset-lg-1 login_form">
+                <div class="contact_form_container">
+                    <div class="contact_form_title">会員ログイン</div>
+                    <form action="{{ route('login') }}" id="contact_form" method="POST">
                         @csrf
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">メールアドレス or 電話番号</label>
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  aria-describedby="emailHelp" required="">
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
+                        <div class="form-group">
+                            <label for="password">パスワード</label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}"  aria-describedby="emailHelp" required="">
 
-                            <div class="col-md-6">
-
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
-                            </div>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <div class="contact_form_button">
+                            <button type="submit" class="btn btn-warning  text-white font-weight-bold btn-lg">会員ログイン</button>
+                        </div>
+                    </form><br>
+                    <a href="{{ route('password.request') }}">パスワードをお忘れの方はこちらへ</a><br /><br />
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fab fa-facebook-square"></i> Facebook でログイン</button><br>
+                    <button type="submit" class="btn btn-danger btn-block"><i class="fab fa-google"></i> Google でログイン</button>
+                </div>
+            </div>
 
-                                    <label class="form-check-label" for="remember">
-                                        ログイン情報を保存する
-                                    </label>
-                                </div>
-                            </div>
+            <div class="col-lg-5 offset-lg-1 login_form">
+                <div class="contact_form_container">
+                    <div class="contact_form_title">新規会員登録</div>
+                    <form action="{{ route('register') }}" id="contact_form" method="POST">
+                    @csrf
+                        <div class="form-group">
+                            <label for="name">フルネーム</label>
+                            <input type="text" class="form-control" placeholder="フルネームを入力してください"  name="name" required="">
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        パスワードを忘れた方はこちらへ
-                                    </a>
-                                @endif
-                            </div>
+                        <div class="form-group">
+                            <label for="phone">電話番号</label>
+                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  placeholder="電話番号を入力してください"  required="">
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-8 offset-md-4">
-                                <a class="registration" href="{{ route('register') }}">新規会員登録</a><br>
-                            </div>
+                        <div class="form-group">
+                            <label for="email">メールアドレス</label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  aria-describedby="emailHelp" placeholder="メールアドレスを入力してください " required="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">パスワード</label>
+                            <input type="password" class="form-control" placeholder="パスワードを入力してください"  name="password" required="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password_confirmation">確認用パスワード</label>
+                            <input type="password" class="form-control" placeholder="確認用パスワードを入力してください"  name="password_confirmation" required="">
+                        </div>
+
+                        <div class="contact_form_button">
+                            <button type="submit" class="btn btn-warning text-white font-weight-bold btn-lg">会員登録</button>
                         </div>
                     </form>
                 </div>
