@@ -2803,7 +2803,7 @@ select option
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(203, 225, 238, 0.3);
+	background: #f7f7f7;
 }
 .trends_background
 {
@@ -2852,6 +2852,7 @@ select option
 	text-align: center;
 	cursor: pointer;
 	margin-right: 16px;
+	background-color: #fff;
 }
 .trends_nav:last-child
 {
@@ -2903,7 +2904,7 @@ select option
 }
 .trends_name
 {
-	float: left;
+	/* float: left; */
 }
 .trends_name a
 {
@@ -2991,7 +2992,7 @@ select option
 }
 .trends_mark
 {
-	display: none;
+	/* display: none; */
 	width: 36px;
 	height: 36px;
 	font-size: 10px;

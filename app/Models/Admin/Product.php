@@ -38,7 +38,7 @@ class Product extends Model
      * @return Object
      */
     public function getFirstMainSliderProduct() {
-        return Product::select('products.*', 'brands.brand_name')
+        return $this->select('products.*', 'brands.brand_name')
                     ->join('brands', 'products.brand_id', '=', 'brands.id')
                     ->where('main_slider', 1)
                     ->orderBy('id',  'DESC')
@@ -51,7 +51,7 @@ class Product extends Model
      * @return Object
      */
     public function getActiveProducts() {
-        return Product::where('status', 1)
+        return $this->where('status', 1)
                     ->orderBy('id', 'DESC')
                     ->limit(8)
                     ->get();
@@ -63,7 +63,7 @@ class Product extends Model
      * @return Object
      */
     public function getTrendProducts() {
-        return Product::where('status', 1)
+        return $this->where('status', 1)
                     ->where('trend', 1)
                     ->orderBy('id', 'DESC')
                     ->limit(8)
@@ -76,7 +76,7 @@ class Product extends Model
      * @return Object
      */
     public function getBestRatedProducts() {
-        return Product::where('status', 1)
+        return $this->where('status', 1)
                     ->where('best_rated', 1)
                     ->orderBy('id', 'DESC')
                     ->limit(8)
@@ -94,12 +94,12 @@ class Product extends Model
     }
 
     /**
-     * Get hot deal products
+     * Get hot deal products with brand name
      *
      * @return Object
      */
     public function getHotDealProducts() {
-        return Product::select('products.*', 'brands.brand_name')
+        return $this->select('products.*', 'brands.brand_name')
                     ->where('hot_deal', 1)
                     ->join('brands', 'products.brand_id', 'brands.id')
                     ->orderBy('id', 'DESC')
@@ -107,13 +107,32 @@ class Product extends Model
                     ->get();
     }
 
+    /**
+     * Get products to show at middle slider with category & brand name
+     *
+     * @return Object
+     */
     public function getMiddleSliderProducts() {
-        return Product::select('products.*', 'categories.category_name', 'brands.brand_name')
+        return $this->select('products.*', 'categories.category_name', 'brands.brand_name')
                     ->join('categories', 'products.category_id', 'categories.id')
                     ->join('brands', 'products.brand_id', 'brands.id')
                     ->where('products.mid_slider', 1)
                     ->orderBy('id', 'DESC')
                     ->limit(3)
                     ->get();
+    }
+
+    /**
+     * Get products by category id
+     *
+     * @param String $id
+     * @return Object
+     */
+    public function getProductsByCategoryId($id) {
+        return $this->where('category_id', $id)->where('status', 1)->limit(10)->orderBy('id', 'DESC')->get();
+    }
+
+    public function getBuyoneGetoneProducts() {
+        return  $this->select('products.*', 'brands.brand_name')->join('brands', 'products.brand_id', 'brands.id')->where('status', 1)->where('buyone_getone', 1)->orderBy('id', 'DESC')->limit(6)->get();
     }
 }

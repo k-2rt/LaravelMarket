@@ -100,3 +100,10 @@ Route::post('store/blog/post', 'Admin\PostController@storeBlogPost')->name('stor
 Route::get('delete/post/{id}', 'Admin\PostController@deletePost')->name('delete.post');
 Route::get('edit/post/{id}', 'Admin\PostController@editPost')->name('edit.post');
 Route::post('update/post/{id}', 'Admin\PostController@updatePost')->name('update.post');
+
+// Add Wish List Route
+Route::get('add/wishlist/{id}', 'WishListController@addWishList');
+
+// Add Cart Route
+Route::get('add/cart/{id}', 'CartController@addProductToCart');
+Route::get('check/cart', 'CartController@checkCart');

@@ -15,9 +15,9 @@
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputEmail1">メールアドレス or 電話番号</label>
-                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  aria-describedby="emailHelp" required="">
+                            <input type="text" class="form-control @error('login_email') is-invalid @enderror" name="email"  aria-describedby="emailHelp" required="">
 
-                            @error('email')
+                            @error('login_email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -27,9 +27,9 @@
 
                         <div class="form-group">
                             <label for="password">パスワード</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}"  aria-describedby="emailHelp" required="">
+                            <input type="password" class="form-control @error('login_password') is-invalid @enderror" name="password" value="{{ old('login_password') }}"  aria-describedby="emailHelp" required="">
 
-                            @error('email')
+                            @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="contact_form_button">
-                            <button type="submit" class="btn btn-warning  text-white font-weight-bold btn-lg">会員ログイン</button>
+                            <button type="submit" class="btn btn-warning  text-white font-weight-bold btn-lg">ログイン</button>
                         </div>
                     </form><br>
                     <a href="{{ route('password.request') }}">パスワードをお忘れの方はこちらへ</a><br /><br />
@@ -63,7 +63,7 @@
 
                         <div class="form-group">
                             <label for="email">メールアドレス</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  aria-describedby="emailHelp" placeholder="メールアドレスを入力してください " required="">
+                            <input type="email" class="form-control" name="email"   aria-describedby="emailHelp" placeholder="メールアドレスを入力してください " required="">
                         </div>
 
                         <div class="form-group">
