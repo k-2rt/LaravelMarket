@@ -61,6 +61,9 @@ class BrandsTableSeeder extends Seeder
             [
                 'brand_name' => 'たち吉',
             ],
+            [
+                'brand_name' => '土屋鞄',
+            ],
 
         ]);
     }
