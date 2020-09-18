@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function() {
-    return view('pages.index');
+    return view('main.index');
 });
 
 Auth::routes(['verify' => true]);
@@ -101,9 +101,17 @@ Route::get('delete/post/{id}', 'Admin\PostController@deletePost')->name('delete.
 Route::get('edit/post/{id}', 'Admin\PostController@editPost')->name('edit.post');
 Route::post('update/post/{id}', 'Admin\PostController@updatePost')->name('update.post');
 
-// Add Wish List Route
+// Wish List Route
 Route::get('add/wishlist/{id}', 'WishListController@addWishList');
 
-// Add Cart Route
+// Cart Route
 Route::get('add/cart/{id}', 'CartController@addProductToCart');
 Route::get('check/cart', 'CartController@checkCart');
+Route::get('show/cart', 'CartController@showCart')->name('show.cart');
+Route::get('remove/cart/item/{rowId}', 'CartController@removeCartItem')->name('remove.cart.item');
+Route::post('update/cart/item', 'CartController@updateCartItem')->name('update.cart.item');
+Route::get('cart/product/view/{id}', 'CartController@viewProduct')->name('view.product');
+Route::post('insert/into/cart', 'CartController@addCartFromModal')->name('insert.into.cart');
+
+Route::get('product/details/{id}/{product_name}', 'ProductController@showProductDetails')->name('product.detail');
+Route::post('add/product/cart/{id}', 'ProductController@addProductToCart')->name('add..product.cart');

@@ -39,18 +39,18 @@ class MainComposer
         $second_arraival_products = $this->product->getProductsByCategoryId($second_category->id);
         $buyone_getone_products = $this->product->getBuyoneGetoneProducts();
 
-        $view->with([
-            'active_products' => $active_products,
-            'trend_products' => $trend_products,
-            'best_rated_products' => $best_rated_products,
-            'hot_deal_products' => $hot_deal_products,
-            'categories' => $categories,
-            'mid_slider_products' => $mid_slider_products,
-            'first_category' => $first_category,
-            'new_arraival_products' => $new_arraival_products,
-            'second_category' => $second_category,
-            'second_arraival_products' => $second_arraival_products,
-            'buyone_getone_products' => $buyone_getone_products,
-        ]);
+        $view->with(compact([
+            'active_products',
+            'trend_products',
+            'best_rated_products',
+            'hot_deal_products',
+            'categories',
+            'mid_slider_products',
+            'first_category',
+            'new_arraival_products',
+            'second_category',
+            'second_arraival_products',
+            'buyone_getone_products',
+        ]));
     }
 }

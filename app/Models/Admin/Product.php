@@ -135,4 +135,46 @@ class Product extends Model
     public function getBuyoneGetoneProducts() {
         return  $this->select('products.*', 'brands.brand_name')->join('brands', 'products.brand_id', 'brands.id')->where('status', 1)->where('buyone_getone', 1)->orderBy('id', 'DESC')->limit(6)->get();
     }
+
+    /**
+     * Get info of a product to show modal view
+     *
+     * @param String $id
+     * @return void
+     */
+    public function getProductToDisplayInfo($id) {
+        return $this->select('products.*', 'categories.category_name', 'subcategories.subcategory_name', 'brands.brand_name')
+                    ->join('categories', 'products.category_id', 'categories.id')
+                    ->join('subcategories', 'products.subcategory_id', 'subcategories.id')
+                    ->join('brands', 'products.brand_id', 'brands.id')
+                    ->where('products.id', $id)
+                    ->first();
+    }
+
+    /**
+     * Configure to save product info to cart
+     *
+     * @param String $id
+     * @return void
+     */
+    public function configureProductInfo($id) {
+        $product = $this->where('id', $id)->first();
+
+        $data = array();
+        $data['id'] = $product->id;
+        $data['name'] = $product->product_name;
+        $data['qty'] = 1;
+        $data['weight'] = 1;
+        $data['options']['image'] = $product->image_one;
+        $data['options']['color'] = '';
+        $data['options']['size'] = '';
+
+        if ($product->discount_price === NULL) {
+            $data['price'] = $product->selling_price;
+        } else {
+            $data['price'] = $product->discount_price;
+        }
+
+        return $data;
+    }
 }
