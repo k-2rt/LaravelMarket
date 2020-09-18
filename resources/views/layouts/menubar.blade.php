@@ -204,9 +204,9 @@
         <h1 class="banner_text">{{ $main_slider->product_name }}</h1>
         <div class="banner_price">
           @if($main_slider->discount_price === NULL)
-            <h2>￥{{ number_format($main_slider->selling_price) }}</h2>
+            <h2>{{ number_format($main_slider->selling_price) }}円</h2>
           @else
-            <span>￥{{ number_format($main_slider->selling_price) }}</span>￥{{ number_format($main_slider->discount_price) }}
+            <span>{{ number_format($main_slider->selling_price) }}円</span>{{ number_format($main_slider->discount_price) }}円
           @endif
 
         </div>

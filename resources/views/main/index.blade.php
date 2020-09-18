@@ -4,7 +4,7 @@
 
 @include('layouts.menubar')
 
-<div class="characteristics">
+  <div class="characteristics">
 		<div class="container">
 			<div class="row">
 
@@ -84,7 +84,7 @@
 											<div class="deals_item_category"><a href="#">{{ $hot_deal->brand_name }}</a></div>
 
 												@if($hot_deal->discount_price !== NULL)
-													<div class="deals_item_price_a ml-auto">￥{{ number_format($hot_deal->selling_price) }}</div>
+													<div class="deals_item_price_a ml-auto">{{ number_format($hot_deal->selling_price) }}円</div>
 												@endif
 
 											</div>
@@ -92,9 +92,9 @@
 											<div class="deals_item_name">{{ $hot_deal->product_name }}</div>
 
 											@if($hot_deal->discount_price === NULL)
-												<div class="deals_item_price ml-auto">￥{{ number_format($hot_deal->selling_price) }}</div>
+												<div class="deals_item_price ml-auto">{{ number_format($hot_deal->selling_price) }}円</div>
 											@else
-												<div class="deals_item_price ml-auto">￥{{ number_format($hot_deal->discount_price) }}</div>
+												<div class="deals_item_price ml-auto">{{ number_format($hot_deal->discount_price) }}円</div>
 											@endif
 
 											</div>
@@ -156,38 +156,39 @@
 								<div class="featured_slider slider">
 
 									<!-- Slider Item -->
-									@foreach($active_products as $active_product)
+									@foreach($active_products as $product)
 										<div class="featured_slider_item">
 											<div class="border_active"></div>
 											<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-												<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($active_product->image_one) }}" alt="" height="120px" width="100px"></div>
+												<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" height="120px" width="100px"></div>
 												<div class="product_content">
-													@if($active_product->discount_price === NULL)
-														<div class="product_price discount">￥{{ number_format($active_product->selling_price) }}</div>
+													@if($product->discount_price === NULL)
+														<div class="product_price discount">{{ number_format($product->selling_price) }}円</div>
 													@else
-														<div class="product_price discount">￥{{ number_format($active_product->discount_price) }}<span>￥{{ number_format($active_product->selling_price) }}</span></div>
+														<div class="product_price discount">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
 													@endif
-													<div class="product_name"><div><a href="product.html">{{ $active_product->product_name }}</a></div></div>
+														<div class="product_name"><div><a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}">{{ $product->product_name }}</a></div></div>
+
 													<div class="product_extras">
-														<div class="product_color">
-															<input type="radio" checked name="product_color" style="background:#b19c83">
-															<input type="radio" name="product_color" style="background:#000000">
-															<input type="radio" name="product_color" style="background:#999999">
-														</div>
-														<button class="product_cart_button addcart" data-id="{{ $active_product->id }}">カートに入れる</button>
+													<button id="{{ $product->id }}" class="product_cart_button addcart" data-toggle="modal" data-target="#cart_modal" onClick="productView(this.id);">カートに入れる</button>
 													</div>
 												</div>
+{{--
+													<div class="product_extras">
+														<button class="product_cart_button addcart" data-id="{{ $product->id }}">カートに入れる</button>
+													</div>
+												</div> --}}
 
 												@auth
-														<div class="product_fav addWishList" data-id="{{ $active_product->id }}"><i class="fas fa-heart"></i></div>
+														<div class="product_fav addWishList" data-id="{{ $product->id }}"><i class="fas fa-heart"></i></div>
 												@endauth
 
 												<ul class="product_marks">
-													@if($active_product->discount_price === NULL)
+													@if($product->discount_price === NULL)
 														<li class="product_mark product_new">NEW</li>
 													@else
 														<li class="product_mark product_discount">
-															{{ $active_product->caluculateDiscountPercent() }}%
+															{{ $product->caluculateDiscountPercent() }}%
 														</li>
 													@endif
 												</ul>
@@ -266,7 +267,7 @@
 											<div class="banner_2_title">{{ $mid_slider->product_name }}</div>
 											<div class="banner_2_text">
 												<h4>{{ $mid_slider->brand_name }}</h4><br />
-												<h2>￥{{ number_format($mid_slider->selling_price) }}</h2>
+												<h2>{{ number_format($mid_slider->selling_price) }}円</h2>
 											</div>
 											<div class="rating_r rating_r_4 banner_2_rating"><i></i><i></i><i></i><i></i><i></i></div>
 											<div class="button banner_2_button"><a href="#">Explore</a></div>
@@ -316,9 +317,9 @@
 													<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" height="120px" width="100px"></div>
 													<div class="product_content">
 														@if($product->discount_price === NULL)
-															<div class="product_price discount">￥{{ number_format($product->selling_price) }}</div>
+															<div class="product_price discount">{{ number_format($product->selling_price) }}円</div>
 														@else
-															<div class="product_price discount">￥{{ number_format($product->discount_price) }}<span>￥{{ number_format($product->selling_price) }}</span></div>
+															<div class="product_price discount">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
 														@endif
 														<div class="product_name"><div><a href="product.html">{{ $product->product_name }}</a></div></div>
 														<div class="product_extras">
@@ -386,9 +387,9 @@
 													<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" height="120px" width="100px"></div>
 													<div class="product_content">
 														@if($product->discount_price === NULL)
-															<div class="product_price discount">￥{{ number_format($product->selling_price) }}</div>
+															<div class="product_price discount">{{ number_format($product->selling_price) }}円</div>
 														@else
-															<div class="product_price discount">￥{{ number_format($product->discount_price) }}<span>￥{{ number_format($product->selling_price) }}</span></div>
+															<div class="product_price discount">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
 														@endif
 														<div class="product_name"><div><a href="product.html">{{ $product->product_name }}</a></div></div>
 														<div class="product_extras">
@@ -1216,9 +1217,9 @@
 												<div class="trends_name"><a href="product.html">{{ $product->product_name }}</a></div>
 
 												@if($product->discount_price === NULL)
-													<div class="product_price discount">￥{{ number_format($product->selling_price) }}</div>
+													<div class="product_price discount">{{ number_format($product->selling_price) }}円</div>
 												@else
-													<div class="product_price discount">￥{{ number_format($product->discount_price) }}<span>￥{{ number_format($product->selling_price) }}</span></div>
+													<div class="product_price discount">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
 												@endif
 
 												<a href="" class="btn btn-primary btn-sm font-weight-bold" style="margin-top: 5px;">カートに入れる</a>
@@ -1534,6 +1535,76 @@
 		</div>
 	</div>
 
+
+	<!-- Modal -->
+	<div class="modal fade" id="cart_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<form action="{{ route('insert.into.cart') }}" method="POST">
+				@csrf
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">商品プレビュー</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="card">
+									<img src="" alt="" id="view_product_image"  height="200px">
+									<div class="card-body">
+										<h5 class="card-title text-center" id="view_product_name">商品名</h5>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<ul class="list-group">
+									<li class="list-group-item">商品コード：<span id="view_product_code"></span></li>
+									<li class="list-group-item">カテゴリー：<span id="view_product_category"></span></li>
+									<li class="list-group-item">サブカテゴリー：<span id="view_product_subcategory"></span></li>
+									<li class="list-group-item">ブランド：<span id="view_product_brand"></span></li>
+									<li class="list-group-item">在庫：<span class="badge view-stock" id="view_product_stock">あり</span></li>
+								</ul>
+							</div>
+
+							<div class="col-md-4">
+								<input type="hidden" name="product_id" id="product_id" value="">
+
+								<div class="form-group">
+									<label for="">カラー</label>
+									<select name="color" id="color" class="form-control">
+
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label for="">サイズ</label>
+									<select name="size" id="size" class="form-control">
+
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label for="">数量</label>
+									<input type="number" class="form-control" name="qty" value="1">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+						<button type="submit" class="btn btn-primary">カートに入れる</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
 	<script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
@@ -1572,38 +1643,65 @@
 				}
 			});
 
-			$('.addcart').on('click', function() {
-				var id = $(this).data('id');
-				if (id) {
-					$.ajax({
-						url: " {{ url('/add/cart/') }}/" + id,
-						type: "GET",
-						dataType: "JSON",
-						success: function(data) {
-							const Toast = Swal.mixin({
-								toast: true,
-								position: 'top-end',
-								showConfirmButton: false,
-								timer: 3000,
-								timerProgressBar: true,
-								onOpen: (toast) => {
-									toast.addEventListener('mouseenter', Swal.stopTimer)
-									toast.addEventListener('mouseleave', Swal.resumeTimer)
-								}
-							});
+			// $('.addcart').on('click', function() {
+			// 	var id = $(this).data('id');
+			// 	if (id) {
+			// 		$.ajax({
+			// 			url: " {{ url('/add/cart/') }}/" + id,
+			// 			type: "GET",
+			// 			dataType: "JSON",
+			// 			success: function(data) {
+			// 				const Toast = Swal.mixin({
+			// 					toast: true,
+			// 					position: 'top-end',
+			// 					showConfirmButton: false,
+			// 					timer: 3000,
+			// 					timerProgressBar: true,
+			// 					onOpen: (toast) => {
+			// 						toast.addEventListener('mouseenter', Swal.stopTimer)
+			// 						toast.addEventListener('mouseleave', Swal.resumeTimer)
+			// 					}
+			// 				});
 
-							Toast.fire({
-								icon: data.type,
-								title: data.message
-							});
-						},
-					});
-				} else {
-					alert('danger');
-				}
-			});
+			// 				Toast.fire({
+			// 					icon: data.type,
+			// 					title: data.message
+			// 				});
+			// 			},
+			// 		});
+			// 	} else {
+			// 		alert('danger');
+			// 	}
+			// });
 
 		});
+
+		function productView(id) {
+			$.ajax({
+				url: "{{ url('/cart/product/view') }}/" + id,
+				type: "GET",
+				dataType: "json",
+				success: function(data) {
+					$('#view_product_name').text(data.product.product_name);
+					$('#view_product_code').text(data.product.product_code);
+					$('#view_product_category').text(data.product.category_name);
+					$('#view_product_subcategory').text(data.product.subcategory_name);
+					$('#view_product_brand').text(data.product.brand_name);
+					$('#view_product_image').attr('src', data.product.image_one);
+					$('#product_id').val(data.product.id);
+
+					$('select[name="color"]').empty();
+					$.each(data.colors, function(key, value) {
+						$('select[name="color"]').append('<option value="' + value + '">' + value + '</option>');
+					});
+
+					$('select[name="size"]').empty();
+					$.each(data.sizes, function(key, value) {
+						$('select[name="size"]').append('<option value="' + value + '">' + value + '</option>');
+					});
+				}
+			});
+		}
 	</script>
 
 @endsection
