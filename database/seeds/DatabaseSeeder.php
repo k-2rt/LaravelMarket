@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             SubCategoriesTableSeeder::class,
             BrandsTableSeeder::class,
             ProductsTableSeeder::class,
+            CouponsTableSeeder::class,
+            OrderSettingsTableSeeder::class,
         ]);
     }
 }

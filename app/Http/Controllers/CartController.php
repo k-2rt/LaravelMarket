@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin\Product;
+use App\Models\Admin\Coupon;
 use Cart;
 use Auth;
+use Session;
 
 class CartController extends Controller
 {
     protected $product;
+    protected $coupon;
 
-    public function __construct(Product $product) {
+    public function __construct(Product $product, Coupon $coupon) {
         $this->product = $product;
+        $this->coupon = $coupon;
     }
 
     /**
@@ -139,6 +143,71 @@ class CartController extends Controller
                 'alert-type' => 'warning'
             );
         }
+
+        return redirect()->back()->with($notification);
+    }
+
+    /**
+     * Check out product
+     *
+     * @return void
+     */
+    public function checkoutProduct() {
+        if (Auth::check()) {
+            $cart = Cart::content();
+
+            return view('main.checkout', compact('cart'));
+        } else {
+            $notification = array(
+                'message' => 'ログインをして下さい',
+                'alert-type' => 'warning'
+            );
+
+            return redirect()->route('login')->with($notification);
+        }
+    }
+
+    /**
+     * Show wish lists
+     *
+     * @return void
+     */
+    public function showWishlists() {
+        $products = $this->product->getProductsWithWishLists(Auth::id());
+
+        return view('main.wishlist', compact('products'));
+    }
+
+    public function applyCoupon(Request $request) {
+        $coupon = $this->coupon->where('coupon', $request->coupon)->first();
+
+        if ($coupon) {
+            Session::put('coupon', [
+                'name' => $coupon->coupon,
+                'discount' => $coupon->discount,
+                'balance' => Cart::Subtotal() - $coupon->discount,
+            ]);
+
+            $notification = array(
+                'message' => 'クーポンを適用しました',
+                'alert-type' => 'success'
+            );
+        } else {
+            $notification = array(
+                'message' => 'クーポンは見つかりません',
+                'alert-type' => 'error'
+            );
+        }
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function removeCoupon() {
+        Session::forget('coupon');
+        $notification = array(
+            'message' => 'クーポンを削除しました',
+            'alert-type' => 'success',
+        );
 
         return redirect()->back()->with($notification);
     }
