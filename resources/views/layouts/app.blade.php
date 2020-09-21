@@ -58,8 +58,8 @@
 										<li>
 										<a href="{{ route('home') }}"><div class="user_icon"><img src="{{ asset('/frontend/images/user.svg') }}" alt=""></div>プロフィール<i class="fas fa-chevron-down"></i></a>
 											<ul>
-												<li><a href="#">ほしい物リスト</a></li>
-												<li><a href="#">チェック</a></li>
+												<li><a href="{{ route('user.wishlist') }}">ほしい物リスト</a></li>
+												<li><a href="{{ route('checkout.product') }}">購入する</a></li>
 												<li><a href="#">その他</a></li>
 											</ul>
 										</li>
@@ -112,38 +112,33 @@
 						</div>
 					</div>
 
-					<!-- Wishlist -->
-					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
-						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
-							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
-
-								@guest
-
-								@else
+					@auth
+						<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+							<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+								<!-- Wishlist -->
+								<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 									<div class="wishlist_icon"><img src="{{ asset('/frontend/images/heart.png') }}" alt=""></div>
 									<div class="wishlist_content">
-										<div class="wishlist_text"><a href="#">Wishlist</a></div>
+										<div class="wishlist_text"><a href="{{ route('user.wishlist') }}">ほしい物リスト</a></div>
 									<div class="wishlist_count">{{ $wish_lists->count() }}</div>
 									</div>
-								@endguest
-
-							</div>
-
-							<!-- Cart -->
-							<div class="cart">
-								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
-									<div class="cart_icon">
-										<img src="{{ asset('/frontend/images/cart.png') }}" alt="">
-                  <div class="cart_count"><span>{{  Cart::count() }}</span></div>
-									</div>
-									<div class="cart_content">
-                  <div class="cart_text"><a href="{{ route('show.cart') }}">カート</a></div>
-                  <div class="cart_price">{{ Cart::subtotal() }}円</div>
+								</div>
+								<!-- Cart -->
+								<div class="cart">
+									<div class="cart_container d-flex flex-row align-items-center justify-content-end">
+										<div class="cart_icon">
+											<img src="{{ asset('/frontend/images/cart.png') }}" alt="">
+										<div class="cart_count"><span>{{  Cart::count() }}</span></div>
+										</div>
+										<div class="cart_content">
+										<div class="cart_text"><a href="{{ route('show.cart') }}">カート</a></div>
+										<div class="cart_price">{{ Cart::subtotal() }}円</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					@endauth
 				</div>
 			</div>
 		</div>

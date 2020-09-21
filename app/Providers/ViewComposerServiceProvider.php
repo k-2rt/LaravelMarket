@@ -26,7 +26,8 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         View::composers([
             'App\Http\ViewComposers\LayoutComposer' => ['layouts.menubar', 'layouts.app'],
-            'App\Http\ViewComposers\MainComposer' => 'main.index',
+            'App\Http\ViewComposers\Main\MainComposer' => 'main.index',
+            'App\Http\ViewComposers\Main\CheckoutComposer' => 'main.checkout',
         ]);
     }
 }

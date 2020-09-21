@@ -140,7 +140,7 @@ class Product extends Model
      * Get info of a product to show modal view
      *
      * @param String $id
-     * @return void
+     * @return Object
      */
     public function getProductToDisplayInfo($id) {
         return $this->select('products.*', 'categories.category_name', 'subcategories.subcategory_name', 'brands.brand_name')
@@ -155,7 +155,7 @@ class Product extends Model
      * Configure to save product info to cart
      *
      * @param String $id
-     * @return void
+     * @return Array
      */
     public function configureProductInfo($id) {
         $product = $this->where('id', $id)->first();
@@ -176,5 +176,17 @@ class Product extends Model
         }
 
         return $data;
+    }
+
+    /**
+     * Get products with wish lists
+     *
+     * @return Object
+     */
+    public function getProductsWithWishLists($user_id) {
+        return $this->select('products.*', 'wish_lists.user_id')
+                    ->join('wish_lists', 'products.id', 'wish_lists.product_id')
+                    ->where('wish_lists.user_id', $user_id)
+                    ->get();
     }
 }

@@ -112,6 +112,11 @@ Route::get('remove/cart/item/{rowId}', 'CartController@removeCartItem')->name('r
 Route::post('update/cart/item', 'CartController@updateCartItem')->name('update.cart.item');
 Route::get('cart/product/view/{id}', 'CartController@viewProduct')->name('view.product');
 Route::post('insert/into/cart', 'CartController@addCartFromModal')->name('insert.into.cart');
+Route::get('product/checkout', 'CartController@checkoutProduct')->name('checkout.product');
+Route::get('user/wishlist', 'CartController@showWishlists')->name('user.wishlist');
+
+Route::post('apply/coupon', 'CartController@applyCoupon')->name('apply.coupon');
+Route::get('remove/coupon', 'CartController@removeCoupon')->name('remove.coupon');
 
 Route::get('product/details/{id}/{product_name}', 'ProductController@showProductDetails')->name('product.detail');
 Route::post('add/product/cart/{id}', 'ProductController@addProductToCart')->name('add..product.cart');

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\ViewComposers;
+namespace App\Http\ViewComposers\Main;
 
 use Illuminate\View\View;
 use App\Models\Admin\Product;
 use App\Models\Admin\Category;
 
 /**
- * Class LayoutComposer
- * @package App\Http\ViewComposers
+ * Class MainComposer
+ * @package App\Http\Main\ViewComposers
  */
 class MainComposer
 {

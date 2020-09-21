@@ -56,13 +56,12 @@
                       </div>
                     </div>
 
-
                     <div class="cart_item_quantity cart_info_col">
                       <div class="cart_item_title">削除</div>
-                      <div class="cart_item_text"><a href="{{ route('remove.cart.item', ['rowId' => $item->rowId]) }}" class="btn btn-sm btn-secondary button-circle">X</a></div>
-
+                      <div class="cart_item_text">
+                        <a href="{{ route('remove.cart.item', ['rowId' => $item->rowId]) }}" class="btn btn-sm btn-secondary button-circle">X</a>
+                      </div>
                     </div>
-
                   </div>
                 </li>
 
@@ -71,23 +70,50 @@
           </div>
 
           <!-- Order Total -->
-          <div class="order_total">
-            <div class="order_total_content text-md-right">
-              <div class="order_total_title">商品合計(税込)</div>
-            <div class="order_total_amount">{{ Cart::total() }}円</div>
-            </div>
+          <div class="order_total_content" style="padding: 30px 0;">
+            <h5 style="margin-left: 15px;">クーポンの適用</h5>
+            <form action="{{ route('apply.coupon') }}" method="POST">
+            @csrf
+              <div class="form-group col-lg-4">
+                <input type="text" name="coupon" class="coupon-form" required="" placeholder="">
+                <button type="submit" class="btn btn-danger ml-2">適用</button>
+              </div>
+            </form>
+
+            <ul class="list-group col-lg-4" style="float: right;">
+              <li class="list-group-item">商品合計<span style="float: right;">{{ number_format(Cart::Subtotal()) }}円</span></li>
+
+              @if (Session::has('coupon'))
+                <li class="list-group-item">クーポン ({{ Session::get('coupon')['name'] }})：
+                <a href="{{ route('remove.coupon') }}" class="btn btn-secondary btn-sm button-circle">X</a>
+                  <span style="float: right;">-{{ number_format(Session::get('coupon')['discount']) }}円</span>
+                </li>
+              @else
+                <li class="list-group-item">クーポン：
+                  <span style="float: right;">なし</span>
+                </li>
+              @endif
+
+              <li class="list-group-item">送料<span style="float: right;">{{ number_format($shipping_fee) }}円</span></li>
+
+              @if (Session::has('coupon'))
+                <li class="list-group-item">注文合計<span style="float: right;">{{ number_format(Session::get('coupon')['balance'] + $shipping_fee) }}円</span></li>
+              @else
+                <li class="list-group-item">注文合計<span style="float: right;">{{ number_format(Cart::Subtotal() + $shipping_fee) }}円</span></li>
+              @endif
+
+            </ul>
           </div>
 
-          <div class="cart_buttons">
-            <button type="button" class="button cart_button_clear">キャンセル</button>
-            <a href="{{ route('checkout.product') }}" class="button cart_button_checkout">購入する</a>
-          </div>
         </div>
       </div>
     </div>
+
+    <div class="cart_buttons">
+      <button type="button" class="button cart_button_clear">キャンセル</button>
+      <a href="{{ route('checkout.product') }}" class="button cart_button_checkout">購入する</a>
+    </div>
   </div>
 </div>
-
-{{-- <script src="{{ asset('/frontend/js/cart_custom.js') }}"></script> --}}
 
 @endsection
