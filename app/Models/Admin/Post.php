@@ -14,4 +14,15 @@ class Post extends Model
         'details_ja',
         'post_image',
     ];
+
+    /**
+     * Get posts with post categories
+     *
+     * @return Object
+     */
+    public function getPostsWithPostCategories() {
+        return $this->select('posts.*', 'post_categories.category_name_en', 'post_categories.category_name_ja')
+                    ->join('post_categories', 'posts.category_id', 'post_categories.id')
+                    ->get();
+    }
 }

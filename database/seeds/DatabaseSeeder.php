@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             ProductsTableSeeder::class,
             CouponsTableSeeder::class,
             OrderSettingsTableSeeder::class,
+            PostCategoriesTableSeeder::class,
+            PostsTableSeeder::class,
         ]);
     }
 }

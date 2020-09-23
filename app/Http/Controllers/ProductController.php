@@ -18,13 +18,12 @@ class ProductController extends Controller
     /**
      * Show details of a product
      *
-     * @param [type] $id
-     * @param [type] $product_name
+     * @param String $id
+     * @param String $product_name
      * @return void
      */
     public function showProductDetails($id, $product_name) {
         $product = $this->product->getProductToDisplayInfo($id);
-
         $colors = explode(',', $product->product_color);
         $sizes = explode(',', $product->product_size);
 
@@ -58,5 +57,31 @@ class ProductController extends Controller
         }
 
         return redirect()->back()->with($notification);
+    }
+
+    /**
+     * Show product lists
+     *
+     * @param String $id
+     * @return void
+     */
+    public function showProductList($id) {
+        $products = $this->product->getPaginateProducts($id);
+        $brands = $this->product->getBrandsBySubCategoryId($id);
+
+        return view('main.product_list', compact('products', 'brands'));
+    }
+
+    /**
+     * Show category lists
+     *
+     * @param String $id
+     * @return void
+     */
+    public function showCategoryList($id) {
+        $products = $this->product->getPaginateCategories($id);
+        $brands = $this->product->getBrandsByCategoryId($id);
+
+        return view('main.category_list', compact('products', 'brands'));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Admin\Brand;
 
 class Product extends Model
 {
@@ -129,11 +130,20 @@ class Product extends Model
      * @return Object
      */
     public function getProductsByCategoryId($id) {
-        return $this->where('category_id', $id)->where('status', 1)->limit(10)->orderBy('id', 'DESC')->get();
+        return $this->where('category_id', $id)
+                    ->where('status', 1)
+                    ->limit(10)
+                    ->orderBy('id', 'DESC')
+                    ->get();
     }
 
     public function getBuyoneGetoneProducts() {
-        return  $this->select('products.*', 'brands.brand_name')->join('brands', 'products.brand_id', 'brands.id')->where('status', 1)->where('buyone_getone', 1)->orderBy('id', 'DESC')->limit(6)->get();
+        return  $this->select('products.*', 'brands.brand_name')
+                     ->join('brands', 'products.brand_id', 'brands.id')
+                     ->where('status', 1)->where('buyone_getone', 1)
+                     ->orderBy('id', 'DESC')
+                     ->limit(6)
+                     ->get();
     }
 
     /**
@@ -188,5 +198,57 @@ class Product extends Model
                     ->join('wish_lists', 'products.id', 'wish_lists.product_id')
                     ->where('wish_lists.user_id', $user_id)
                     ->get();
+    }
+
+    /**
+     * Get paginate categories
+     *
+     * @param String $id
+     * @return Object
+     */
+    public function getPaginateCategories($id) {
+        return $this->where('category_id', $id)->paginate(5);
+    }
+
+    /**
+     * Get paginate products
+     *
+     * @param String $id
+     * @return Object
+     */
+    public function getPaginateProducts($id) {
+        return $this->where('subcategory_id', $id)->paginate(1);
+    }
+
+    /**
+     * Get brands by category id
+     *
+     * @param String $id
+     * @return Array
+     */
+    public function getBrandsByCategoryId($id) {
+        $brnad_ids = $this->select('brand_id')->where('category_id', $id)->groupBy('brand_id')->get();
+        $brands = [];
+        foreach ($brnad_ids as $brand) {
+            $brands[] = Brand::where('id', $brand->brand_id)->first();
+        }
+
+        return $brands;
+    }
+
+    /**
+     * Get brands by sub category id
+     *
+     * @param String $id
+     * @return Array
+     */
+    public function getBrandsBySubCategoryId($id) {
+        $brnad_ids = $this->select('brand_id')->where('subcategory_id', $id)->groupBy('brand_id')->get();
+        $brands = [];
+        foreach ($brnad_ids as $brand) {
+            $brands[] = Brand::where('id', $brand->brand_id)->first();
+        }
+
+        return $brands;
     }
 }

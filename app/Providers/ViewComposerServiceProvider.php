@@ -25,9 +25,12 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composers([
-            'App\Http\ViewComposers\LayoutComposer' => ['layouts.menubar', 'layouts.app'],
+            'App\Http\ViewComposers\Layouts\LayoutComposer' => ['layouts.menubar', 'layouts.app'],
+            'App\Http\ViewComposers\Layouts\AppComposer' => 'layouts.app',
+            'App\Http\ViewComposers\Layouts\SliderComposer' => 'layouts.slider',
             'App\Http\ViewComposers\Main\MainComposer' => 'main.index',
             'App\Http\ViewComposers\Main\CheckoutComposer' => 'main.checkout',
+            'App\Http\ViewComposers\Main\ProductListComposer' => ['main.product_list', 'main.category_list'],
         ]);
     }
 }

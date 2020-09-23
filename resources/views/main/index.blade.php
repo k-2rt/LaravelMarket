@@ -3,6 +3,7 @@
 @section('content')
 
 @include('layouts.menubar')
+@include('layouts.slider')
 
   <div class="characteristics">
 		<div class="container">
@@ -146,7 +147,6 @@
 							<div class="tabs">
 								<ul class="clearfix">
 									<li class="active">おすすめ</li>
-
 								</ul>
 								<div class="tabs_line"><span></span></div>
 							</div>
@@ -163,11 +163,11 @@
 												<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" height="120px" width="100px"></div>
 												<div class="product_content">
 													@if($product->discount_price === NULL)
-														<div class="product_price discount">{{ number_format($product->selling_price) }}円</div>
+														<div class="product_price">{{ number_format($product->selling_price) }}円</div>
 													@else
-														<div class="product_price discount">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
+														<div class="product_price">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
 													@endif
-														<div class="product_name"><div><a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}">{{ $product->product_name }}</a></div></div>
+													<div class="product_name"><div><a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}">{{ $product->product_name }}</a></div></div>
 
 													<div class="product_extras">
 													<button id="{{ $product->id }}" class="product_cart_button addcart" data-toggle="modal" data-target="#cart_modal" onClick="productView(this.id);">カートに入れる</button>
