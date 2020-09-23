@@ -72,7 +72,7 @@
               </div>
             </div>
             <div class="form-layout-footer">
-              <button class="btn btn-info mg-r-5" type="submit">Submit Form</button>
+              <button class="btn btn-info mg-r-5" type="submit">投稿する</button>
             </div>
           </div>
         </form>

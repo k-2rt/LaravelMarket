@@ -935,10 +935,6 @@ select option
     -o-transition: opacity 0.3s ease;
     transition: all 0.3s ease;
 }
-.cat_menu_container > ul
-{
-	padding-top: 13px;
-}
 .cat_menu_container:hover .cat_menu
 {
 	visibility: visible;
@@ -1432,7 +1428,7 @@ select option
 {
 	color: #df3b3b;
 }
-.product_price span
+/* .product_price span
 {
 	position: relative;
 	font-size: 12px;
@@ -1450,7 +1446,7 @@ select option
 	height: 1px;
 	background: #8d8d8d;
 	content: '';
-}
+} */
 .product_name
 {
 	margin-top: 4px;
@@ -1560,10 +1556,7 @@ select option
 }
 .product_discount
 {
-	display: none;
 	background: #df3b3b;
-	visibility: hidden;
-	opacity: 0;
 }
 .product_item.is_new .product_new,
 .product_item.discount .product_discount

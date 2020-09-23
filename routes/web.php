@@ -119,4 +119,20 @@ Route::post('apply/coupon', 'CartController@applyCoupon')->name('apply.coupon');
 Route::get('remove/coupon', 'CartController@removeCoupon')->name('remove.coupon');
 
 Route::get('product/details/{id}/{product_name}', 'ProductController@showProductDetails')->name('product.detail');
-Route::post('add/product/cart/{id}', 'ProductController@addProductToCart')->name('add..product.cart');
+Route::post('add/product/cart/{id}', 'ProductController@addProductToCart')->name('add.product.cart');
+// Products Details Page
+Route::get('show/product/list/{id}', 'ProductController@showProductList')->name('show.product.list');
+
+Route::get('show/category/list/{id}', 'ProductController@showCategoryList')->name('show.category.list');
+
+// Blog Post Route
+Route::get('index/article', 'ArticleController@showArticles')->name('index.article');
+Route::get('show/article/{id}', 'ArticleController@showArticleDetail')->name('show.article');
+
+// Change Language
+Route::get('language/japanese', 'ArticleController@changeJapaneseNotation')->name('language.japanese');
+Route::get('language/english', 'ArticleController@changeEnglishNotation')->name('language.english');
+
+// Payment Products
+Route::get('payment/page', 'PaymentController@showPaymentPage')->name('payment.page');
+Route::post('process/payment', 'PaymentController@processPayment')->name('process.payment');

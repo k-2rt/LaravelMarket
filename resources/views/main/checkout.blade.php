@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('layouts.menubar')
 
 <link rel="stylesheet" type="text/css" href="{{ asset('/frontend/styles/cart_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/frontend/styles/cart_responsive.css') }}">
@@ -18,7 +19,7 @@
 
               @foreach ($cart as $item)
                 <li class="cart_item clearfix">
-                <div class="cart_item_image text-center"><img src="{{ asset( $item->options->image  ) }}" alt="" height="115px" width="115px"></div>
+                  <div class="cart_item_image text-center"><img src="{{ asset( $item->options->image  ) }}" alt="" height="115px" width="115px"></div>
                   <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                     <div class="cart_item_name cart_info_col">
                       <div class="cart_item_title">商品名</div>
@@ -111,7 +112,7 @@
 
     <div class="cart_buttons">
       <button type="button" class="button cart_button_clear">キャンセル</button>
-      <a href="{{ route('checkout.product') }}" class="button cart_button_checkout">購入する</a>
+      <a href="{{ route('payment.page') }}" class="button cart_button_checkout">ご購入手続きへ</a>
     </div>
   </div>
 </div>

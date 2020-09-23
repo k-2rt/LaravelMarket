@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\ViewComposers;
+namespace App\Http\ViewComposers\Layouts;
 
 use Illuminate\View\View;
 use App\Models\Admin\Category;
@@ -11,7 +11,7 @@ use Auth;
 
 /**
  * Class LayoutComposer
- * @package App\Http\ViewComposers
+ * @package App\Http\ViewComposers\Layouts
  */
 class LayoutComposer
 {

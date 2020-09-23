@@ -178,6 +178,12 @@ class CartController extends Controller
         return view('main.wishlist', compact('products'));
     }
 
+    /**
+     * Apply coupon
+     *
+     * @param Request $request
+     * @return void
+     */
     public function applyCoupon(Request $request) {
         $coupon = $this->coupon->where('coupon', $request->coupon)->first();
 
@@ -202,6 +208,11 @@ class CartController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    /**
+     * Remove coupon
+     *
+     * @return void
+     */
     public function removeCoupon() {
         Session::forget('coupon');
         $notification = array(

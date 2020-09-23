@@ -10,18 +10,18 @@
           <div class="cat_menu_container">
             <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
               <div class="cat_burger"><span></span><span></span><span></span></div>
-              <div class="cat_menu_text">categories</div>
+              <div class="cat_menu_text">カテゴリー</div>
             </div>
 
             <ul class="cat_menu">
               @foreach($categories as $category)
                 <li class="hassubs">
-                <a href="#">{{ $category->category_name }}<i class="fas fa-chevron-right"></i></a>
+                <a href="{{ route('show.category.list', ['id' => $category->id]) }}">{{ $category->category_name }}<i class="fas fa-chevron-right"></i></a>
                   <ul>
                     @foreach($sub_categories as $sub_category)
                       @if($category->id === $sub_category->category_id)
                         <li class="hassubs">
-                        <a href="#">{{ $sub_category->subcategory_name }}<i class="fas fa-chevron-right"></i></a>
+                        <a href="{{ route('show.product.list', ['id' => $sub_category->id]) }}">{{ $sub_category->subcategory_name }}<i class="fas fa-chevron-right"></i></a>
                         </li>
                       @endif
                     @endforeach
@@ -29,8 +29,6 @@
                 </li>
               @endforeach
             </ul>
-
-
           </div>
 
           <!-- Main Nav Menu -->
@@ -75,14 +73,14 @@
                 <ul>
                   <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
                   <li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
-                  <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
+                  <li><a href="{{ route('index.article') }}">記事<i class="fas fa-chevron-down"></i></a></li>
                   <li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
                   <li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
                   <li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
                   <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
                 </ul>
               </li>
-              <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
+              <li><a href="{{ route('index.article') }}">記事<i class="fas fa-chevron-down"></i></a></li>
               <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
             </ul>
           </div>
@@ -176,7 +174,7 @@
                 <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
               </ul>
             </li>
-            <li class="page_menu_item"><a href="blog.html">blog<i class="fa fa-angle-down"></i></a></li>
+          <li class="page_menu_item"><a href="{{ route('index.article') }}">記事<i class="fa fa-angle-down"></i></a></li>
             <li class="page_menu_item"><a href="contact.html">contact<i class="fa fa-angle-down"></i></a></li>
           </ul>
 
@@ -191,29 +189,3 @@
 </div>
 
 </header>
-
-<!-- Banner -->
-
-<div class="banner">
-  <div class="banner_background" style="background-image:url(frontend/images/banner_background.jpg)"></div>
-  <div class="container fill_height">
-    <div class="row fill_height">
-      <div class="banner_product_image"><img src="{{ asset($main_slider->image_one) }}" alt="" height="400px"></div>
-      <div class="col-lg-5 offset-lg-4 fill_height">
-        <div class="banner_content">
-        <h1 class="banner_text">{{ $main_slider->product_name }}</h1>
-        <div class="banner_price">
-          @if($main_slider->discount_price === NULL)
-            <h2>{{ number_format($main_slider->selling_price) }}円</h2>
-          @else
-            <span>{{ number_format($main_slider->selling_price) }}円</span>{{ number_format($main_slider->discount_price) }}円
-          @endif
-
-        </div>
-        <div class="banner_product_name">{{ $main_slider->brand_name }}</div>
-          <div class="button banner_button"><a href="#">Shop Now</a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
