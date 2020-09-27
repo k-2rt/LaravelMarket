@@ -15,34 +15,29 @@
           <div class="contact_form_title">送付先住所</div>
         <form action="{{ route('process.payment') }}" id="contact_form" method="POST">
           @csrf
-            <div class="form-group">
-              <label for="name">フルネーム<span class="tx-danger">*</span></label>
-              <input type="text" class="form-control" placeholder="フルネームを入力してください"  name="name" required="">
-            </div>
 
             <div class="form-group">
-              <label for="phone">電話番号<span class="tx-danger">*</span></label>
-              <input type="text" class="form-control" placeholder="電話番号を入力してください"  name="phone" required="">
-            </div>
-
-            <div class="form-group">
-              <label for="email">メールアドレス<span class="tx-danger">*</span></label>
-              <input type="email" class="form-control" placeholder="メールアドレスを入力してください"  name="email" required="">
+              <label for="zip_code">住所<span class="tx-danger">*</span></label>
+              <input type="text" class="form-address" placeholder="1112222"  name="zip_code" required="">
             </div>
 
             <div class="form-group">
               <label for="prefecture">都道府県<span class="tx-danger">*</span></label>
-              <input type="text" class="form-control" placeholder="住所を入力してください"  name="prefecture" required="">
+              <select name="prefecture" id="" class="form-address" >
+                @foreach ($prefs as $index => $name)
+                  <option value="{{ $index }}">{{ $name }}</option>
+                @endforeach
+              </select>
             </div>
 
             <div class="form-group">
-              <label for="address">市区町村番地<span class="tx-danger">*</span></label>
-              <input type="text" class="form-control" placeholder="市区町村番地を入力してください"  name="address" required="">
+              <label for="address1">住所１<span class="tx-danger">*</span></label>
+              <input type="text" class="form-control" placeholder="市区町村番地"  name="address1" required="">
             </div>
 
             <div class="form-group">
-              <label for="building">建物名</label>
-              <input type="text" class="form-control" placeholder="建物名を入力してください"  name="building">
+              <label for="address2">住所２</label>
+              <input type="text" class="form-control" placeholder="建物名"  name="address2">
             </div>
 
             <div class="contact_form_title_next">お支払い方法</div>
@@ -50,7 +45,8 @@
             <div class="form-group">
               <ul class="logos_list">
                 <li>
-                <input type="radio" name="payment" value="stripe"><img src="{{ asset('/frontend/images/mastercard.png') }}" alt="" width="100px;" height="60px;">
+                  <input type="radio" name="payment" value="stripe">
+                  <img src="{{ asset('/frontend/images/mastercard.png') }}" alt="" width="100px;" height="60px;">
                 </li>
 
                 <li>

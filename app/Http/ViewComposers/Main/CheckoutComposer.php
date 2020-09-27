@@ -7,7 +7,7 @@ use App\Models\OrderSetting;
 
 /**
  * Class CheckoutComposer
- * @package App\Http\Main\ViewComposers
+ * @package App\Http\ViewComposers\Main
  */
 class CheckoutComposer
 {
@@ -23,8 +23,7 @@ class CheckoutComposer
      */
     public function compose(View $view)
     {
-        $setting = $this->order_setting->first();
-        $shipping_fee = $setting->shipping_fee;
+        $shipping_fee = $this->order_setting->first()->shipping_fee;
 
         $view->with(compact([
             'shipping_fee',

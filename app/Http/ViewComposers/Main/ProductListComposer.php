@@ -7,7 +7,7 @@ use App\Models\Admin\Category;
 
 /**
  * Class ProductListComposer
- * @package App\Http\Main\ViewComposers
+ * @package App\Http\ViewComposers\Main
  */
 class ProductListComposer
 {

@@ -8,7 +8,7 @@ use App\Models\Admin\Category;
 
 /**
  * Class MainComposer
- * @package App\Http\Main\ViewComposers
+ * @package App\Http\ViewComposers\Main
  */
 class MainComposer
 {

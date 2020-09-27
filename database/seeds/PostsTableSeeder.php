@@ -19,7 +19,7 @@ class PostsTableSeeder extends Seeder
                 'category_id' => 1,
                 'post_title_en' => 'Test',
                 'post_title_ja' => 'テスト',
-                'post_image' => 'test',
+                'post_image' => NULL,
                 'details_en' => 'Test Test',
                 'details_ja' => 'テスト テスト',
                 'created_at' => $now,

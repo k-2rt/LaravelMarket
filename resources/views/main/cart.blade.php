@@ -75,7 +75,7 @@
           <div class="order_total">
             <div class="order_total_content text-md-right">
               <div class="order_total_title">商品合計(税込)</div>
-            <div class="order_total_amount">{{ Cart::total() }}円</div>
+            <div class="order_total_amount">{{ number_format(Cart::total()) }}円</div>
             </div>
           </div>
 

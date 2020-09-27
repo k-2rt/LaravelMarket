@@ -110,7 +110,6 @@ Route::get('check/cart', 'CartController@checkCart');
 Route::get('show/cart', 'CartController@showCart')->name('show.cart');
 Route::get('remove/cart/item/{rowId}', 'CartController@removeCartItem')->name('remove.cart.item');
 Route::post('update/cart/item', 'CartController@updateCartItem')->name('update.cart.item');
-Route::get('cart/product/view/{id}', 'CartController@viewProduct')->name('view.product');
 Route::post('insert/into/cart', 'CartController@addCartFromModal')->name('insert.into.cart');
 Route::get('product/checkout', 'CartController@checkoutProduct')->name('checkout.product');
 Route::get('user/wishlist', 'CartController@showWishlists')->name('user.wishlist');
@@ -136,3 +135,7 @@ Route::get('language/english', 'ArticleController@changeEnglishNotation')->name(
 // Payment Products
 Route::get('payment/page', 'PaymentController@showPaymentPage')->name('payment.page');
 Route::post('process/payment', 'PaymentController@processPayment')->name('process.payment');
+Route::post('payment/stripe', 'PaymentController@payByStripe')->name('payment.stripe');
+
+Route::post('update/shipping/address', 'AddressController@updateShippingAddress')->name('update.shipping.address');
+Route::get('show/address/page', 'AddressController@showAddressPage')->name('show.address.page');

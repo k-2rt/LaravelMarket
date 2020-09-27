@@ -170,14 +170,11 @@
 													<div class="product_name"><div><a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}">{{ $product->product_name }}</a></div></div>
 
 													<div class="product_extras">
-													<button id="{{ $product->id }}" class="product_cart_button addcart" data-toggle="modal" data-target="#cart_modal" onClick="productView(this.id);">カートに入れる</button>
+														<a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}">
+															<button class="product_cart_button">購入画面へ</button>
+														</a>
 													</div>
 												</div>
-{{--
-													<div class="product_extras">
-														<button class="product_cart_button addcart" data-id="{{ $product->id }}">カートに入れる</button>
-													</div>
-												</div> --}}
 
 												@auth
 														<div class="product_fav addWishList" data-id="{{ $product->id }}"><i class="fas fa-heart"></i></div>
@@ -328,7 +325,9 @@
 																<input type="radio" name="product_color" style="background:#000000">
 																<input type="radio" name="product_color" style="background:#999999">
 															</div>
-															<button class="product_cart_button">カートに入れる</button>
+															<a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}">
+																<button class="product_cart_button">購入画面へ</button>
+															</a>
 														</div>
 													</div>
 
@@ -398,7 +397,9 @@
 																<input type="radio" name="product_color" style="background:#000000">
 																<input type="radio" name="product_color" style="background:#999999">
 															</div>
-															<button class="product_cart_button">カートに入れる</button>
+															<a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}">
+																<button class="product_cart_button">購入画面へ</button>
+															</a>
 														</div>
 													</div>
 
@@ -1604,7 +1605,6 @@
 		</div>
 	</div>
 
-
 	<script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
@@ -1642,66 +1642,7 @@
 					alert('danger');
 				}
 			});
-
-			// $('.addcart').on('click', function() {
-			// 	var id = $(this).data('id');
-			// 	if (id) {
-			// 		$.ajax({
-			// 			url: " {{ url('/add/cart/') }}/" + id,
-			// 			type: "GET",
-			// 			dataType: "JSON",
-			// 			success: function(data) {
-			// 				const Toast = Swal.mixin({
-			// 					toast: true,
-			// 					position: 'top-end',
-			// 					showConfirmButton: false,
-			// 					timer: 3000,
-			// 					timerProgressBar: true,
-			// 					onOpen: (toast) => {
-			// 						toast.addEventListener('mouseenter', Swal.stopTimer)
-			// 						toast.addEventListener('mouseleave', Swal.resumeTimer)
-			// 					}
-			// 				});
-
-			// 				Toast.fire({
-			// 					icon: data.type,
-			// 					title: data.message
-			// 				});
-			// 			},
-			// 		});
-			// 	} else {
-			// 		alert('danger');
-			// 	}
-			// });
-
 		});
-
-		function productView(id) {
-			$.ajax({
-				url: "{{ url('/cart/product/view') }}/" + id,
-				type: "GET",
-				dataType: "json",
-				success: function(data) {
-					$('#view_product_name').text(data.product.product_name);
-					$('#view_product_code').text(data.product.product_code);
-					$('#view_product_category').text(data.product.category_name);
-					$('#view_product_subcategory').text(data.product.subcategory_name);
-					$('#view_product_brand').text(data.product.brand_name);
-					$('#view_product_image').attr('src', data.product.image_one);
-					$('#product_id').val(data.product.id);
-
-					$('select[name="color"]').empty();
-					$.each(data.colors, function(key, value) {
-						$('select[name="color"]').append('<option value="' + value + '">' + value + '</option>');
-					});
-
-					$('select[name="size"]').empty();
-					$.each(data.sizes, function(key, value) {
-						$('select[name="size"]').append('<option value="' + value + '">' + value + '</option>');
-					});
-				}
-			});
-		}
 	</script>
 
 @endsection
