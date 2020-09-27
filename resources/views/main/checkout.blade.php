@@ -98,14 +98,13 @@
               <li class="list-group-item">送料<span style="float: right;">{{ number_format($shipping_fee) }}円</span></li>
 
               @if (Session::has('coupon'))
-                <li class="list-group-item">注文合計<span style="float: right;">{{ number_format(Session::get('coupon')['balance'] + $shipping_fee) }}円</span></li>
+                <li class="list-group-item">注文合計<span style="float: right;">{{ number_format(Cart::Subtotal() - Session::get('coupon')['discount'] + $shipping_fee) }}円</span></li>
               @else
                 <li class="list-group-item">注文合計<span style="float: right;">{{ number_format(Cart::Subtotal() + $shipping_fee) }}円</span></li>
               @endif
 
             </ul>
           </div>
-
         </div>
       </div>
     </div>

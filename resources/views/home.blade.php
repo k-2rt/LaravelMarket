@@ -51,7 +51,7 @@
 
                     <ul class="list-group list-group-flush">
                     <li class="list-group-item"><a href="{{ route('password.change') }}">パスワードの変更</a></li>
-                    <li class="list-group-item">line one</li>
+                    <li class="list-group-item"><a href="{{ route('show.address.page') }}">住所の設定</a></li>
                     <li class="list-group-item">line one</li>
                     </ul>
 

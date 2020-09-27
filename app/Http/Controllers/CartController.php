@@ -100,25 +100,6 @@ class CartController extends Controller
     }
 
     /**
-     * Show product modal view
-     *
-     * @param String $id
-     * @return JSON
-     */
-    public function viewProduct($id) {
-        $product = $this->product->getProductToDisplayInfo($id);
-
-        $colors = explode(',', $product->product_color);
-        $sizes = explode(',', $product->product_size);
-
-        return response()->json(array(
-            'product' => $product,
-            'colors' => $colors,
-            'sizes' => $sizes,
-        ));
-    }
-
-    /**
      * Add item to cart from modal view
      *
      * @param Request $request
@@ -191,7 +172,6 @@ class CartController extends Controller
             Session::put('coupon', [
                 'name' => $coupon->coupon,
                 'discount' => $coupon->discount,
-                'balance' => Cart::Subtotal() - $coupon->discount,
             ]);
 
             $notification = array(

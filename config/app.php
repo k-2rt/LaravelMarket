@@ -27,6 +27,8 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+    'stripe_api' => env('STRIPE_API_KEY'),
+    'stripe_secret' => env('STRIPE_SECRET_KEY'),
 
     /*
     |--------------------------------------------------------------------------
