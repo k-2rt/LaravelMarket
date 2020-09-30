@@ -33,6 +33,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\Main\ProductListComposer' => ['main.product_list', 'main.category_list'],
             'App\Http\ViewComposers\Main\StripeComposer' => 'main.payment.stripe',
             'App\Http\ViewComposers\Auth\LoginComposer' => 'auth.login',
+            'App\Http\ViewComposers\HomeComposer' => 'home',
         ]);
     }
 }

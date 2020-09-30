@@ -3666,7 +3666,7 @@ tbody.collapse.show {
 
 .badge {
   display: inline-block;
-  padding: 0.25em 0.4em;
+  padding: 5px;
   font-size: 75%;
   font-weight: bold;
   line-height: 1;
@@ -3732,7 +3732,7 @@ tbody.collapse.show {
 }
 
 .badge-warning {
-  color: #111;
+  color: #fff;
   background-color: #F49917;
 }
 .badge-warning[href]:focus, .badge-warning[href]:hover {

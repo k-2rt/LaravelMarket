@@ -139,3 +139,15 @@ Route::post('payment/stripe', 'PaymentController@payByStripe')->name('payment.st
 
 Route::post('update/shipping/address', 'AddressController@updateShippingAddress')->name('update.shipping.address');
 Route::get('show/address/page', 'AddressController@showAddressPage')->name('show.address.page');
+
+// Admin Order Route
+Route::get('admin/pending/order', 'Admin\OrderController@showPendingOrderLists')->name('admin.pending.order');
+Route::get('admin/accepted/payment', 'Admin\OrderController@showAcceptedOrderLists')->name('admin.accepted.payment');
+Route::get('admin/cancel/order', 'Admin\OrderController@showCancelOrderLists')->name('admin.cancel.order');
+Route::get('admin/process/order', 'Admin\OrderController@showProcessOrderLists')->name('admin.process.order');
+Route::get('admin/delivered/order', 'Admin\OrderController@showDeliveredOrderLists')->name('admin.delivered.order');
+Route::get('admin/order/details/{id}', 'Admin\OrderController@showOrderDetails')->name('admin.order.details');
+Route::get('admin/accept/payment/{id}', 'Admin\OrderController@acceptPayment')->name('admin.accept.payment');
+Route::get('admin/cancel/payment/{id}', 'Admin\OrderController@cancelPayment')->name('admin.cancel.payment');
+Route::get('admin/update/process/order/{id}', 'Admin\OrderController@updateProcessOrder')->name('admin.update.process.order');
+Route::get('admin/delivery/done/{id}', 'Admin\OrderController@updateDeliveryOrder')->name('admin.delivery.done');

@@ -88,6 +88,23 @@
           <ul class="sl-menu-sub nav flex-column">
             <li class="nav-item"><a href="{{ route('admin.coupon') }}" class="nav-link">一覧</a></li>
           </ul>
+
+          <a href="#" class="sl-menu-link">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
+              <span class="menu-item-label">注文</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div>
+          </a>
+
+          <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{ route('admin.pending.order') }}" class="nav-link">承認待ち</a></li>
+            <li class="nav-item"><a href="{{ route('admin.accepted.payment') }}" class="nav-link">支払い完了</a></li>
+            <li class="nav-item"><a href="{{ route('admin.process.order') }}" class="nav-link">配達中</a></li>
+            <li class="nav-item"><a href="{{ route('admin.delivered.order') }}" class="nav-link">配達済み</a></li>
+            <li class="nav-item"><a href="{{ route('admin.cancel.order') }}" class="nav-link">キャンセル</a></li>
+          </ul>
+
           <a href="#" class="sl-menu-link">
             <div class="sl-menu-item">
               <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
