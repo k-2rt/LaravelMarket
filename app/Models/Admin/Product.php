@@ -33,6 +33,11 @@ class Product extends Model
         'discount_price',
     ];
 
+    public function order_details()
+    {
+        return $this->hasMany('App\Models\OrderDetail');
+    }
+
     /**
      * Get a latest product that main slider status is 1
      *

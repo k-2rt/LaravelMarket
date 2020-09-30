@@ -87,7 +87,7 @@
               @if (Session::has('coupon'))
                 <li class="list-group-item">クーポン ({{ Session::get('coupon')['name'] }})：
                 <a href="{{ route('remove.coupon') }}" class="btn btn-secondary btn-sm button-circle">X</a>
-                  <span style="float: right;">-{{ number_format(Session::get('coupon')['discount']) }}円</span>
+                  <span style="float: right;">- {{ number_format(Session::get('coupon')['discount']) }}円</span>
                 </li>
               @else
                 <li class="list-group-item">クーポン：

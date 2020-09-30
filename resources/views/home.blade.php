@@ -8,33 +8,29 @@
             <div class="col-8 card">
                 <table class="table table-response">
                     <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Body</th>
-                    </tr>
+                        <tr >
+                            <th scope="col" style="vertical-align: middle;">支払い方法</th>
+                            <th scope="col" style="vertical-align: middle;">支払いID</th>
+                            <th scope="col" style="vertical-align: middle;">料金</th>
+                            <th scope="col" style="vertical-align: middle;">注文日</th>
+                            <th scope="col" style="vertical-align: middle;">ステータス<br />コード</th>
+                            <th scope="col" style="vertical-align: middle;">アクション</th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td scope="col">1</td>
-                        <td scope="col">Mark 1</td>
-                        <td scope="col">Mark 2</td>
-                        <td scope="col">Mark 3</td>
-                    </tr>
-                    <tr>
-                        <td scope="col">1</td>
-                        <td scope="col">Mark 1</td>
-                        <td scope="col">Mark 2</td>
-                        <td scope="col">Mark 3</td>
-                    </tr>
-                    <tr>
-                        <td scope="col">1</td>
-                        <td scope="col">Mark 1</td>
-                        <td scope="col">Mark 2</td>
-                        <td scope="col">Mark 3</td>
-                    </tr>
+                        @foreach ($orders as $order)
+                            <tr>
+                                <td scope="col">{{ $order->payment_type }}</td>
+                                <td scope="col">{{ $order->payment_id }}</td>
+                                <td scope="col">{{ $order->total_delimiter }}円</td>
+                                <td scope="col">{{ $order->order_date }}</td>
+                                <td scope="col">{{ $order->status_code }}</td>
+                                <td scope="col">
+                                    <a href="" class="btn btn-info">詳細</a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

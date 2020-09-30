@@ -77,7 +77,7 @@ class PaymentController extends Controller
             'discount' => $discount,
             'shipping_fee' => $request->shipping_fee,
             'payment_type' => $request->payment_type,
-            'order_date' => date('Y/m/d H:i:s'),
+            'order_date' => date('Y/m/d'),
             'subtotal' => Cart::subtotal(),
         ]);
 

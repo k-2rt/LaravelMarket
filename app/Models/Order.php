@@ -20,11 +20,28 @@ class Order extends Model
         'order_date',
     ];
 
-    public function order_details() {
+    public function order_details()
+    {
         return $this->hasMany('App\Models\OrderDetail');
     }
 
-    public function shipping() {
+    public function shipping()
+    {
         return $this->hasMany('App\Models\Shipping');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Delimiter price with comma
+     *
+     * @return String
+     */
+    public function getTotalDelimiterAttribute(): String
+    {
+        return number_format($this->total);
     }
 }
