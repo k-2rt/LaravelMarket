@@ -37,6 +37,7 @@
 						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('/frontend/images/phone.png') }}" alt=""></div>+38 068 005 3570</div>
 						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('/frontend/images/mail.png') }}" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
 						<div class="top_bar_content ml-auto">
+
 							<div class="top_bar_menu">
 								<ul class="standard_dropdown top_bar_dropdown">
 									<li>
@@ -49,6 +50,8 @@
 									</li>
 								</ul>
 							</div>
+
+
 							<div class="top_bar_user">
 								@guest
 
@@ -62,6 +65,7 @@
 											<ul>
 												<li><a href="{{ route('user.wishlist') }}">ほしい物リスト</a></li>
 												<li><a href="{{ route('checkout.product') }}">購入する</a></li>
+												<li><a href="{{ route('order_history.lists') }}">注文履歴</a></li>
 												<li><a href="#">その他</a></li>
 											</ul>
 										</li>
@@ -133,7 +137,7 @@
 									</div>
 									<div class="cart_content">
 										<div class="cart_text"><a href="{{ route('show.cart') }}">カート</a></div>
-										<div class="cart_price">{{ Cart::subtotal() }}円</div>
+										<div class="cart_price">{{ number_format(Cart::subtotal()) }}円</div>
 									</div>
 								</div>
 							</div>

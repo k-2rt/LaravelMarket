@@ -139,6 +139,7 @@
           </a>
           <ul class="sl-menu-sub nav flex-column">
             <li class="nav-item"><a href="{{ route('admin.newsletter') }}" class="nav-link">ニュース</a></li>
+            <li class="nav-item"><a href="{{ route('admin.seo') }}" class="nav-link">SEO 設定</a></li>
           </ul>
         </div>
 
@@ -161,8 +162,8 @@
               </a>
               <div class="dropdown-menu dropdown-menu-header wd-200">
                 <ul class="list-unstyled user-profile-nav">
-                  <li><a href=""><i class="icon ion-ios-person-outline"></i> Edit Profile</a></li>
-                  <li><a href="{{ route('admin.password.change') }}"><i class="icon ion-ios-gear-outline"></i> Settings</a></li>
+                  <li><a href=""><i class="icon ion-ios-person-outline"></i>プロフィール</a></li>
+                  <li><a href="{{ route('admin.password.change') }}"><i class="icon ion-ios-gear-outline"></i>パスワード変更</a></li>
                   <li><a href="{{ route('admin.logout') }}"><i class="icon ion-power"></i> ログアウト</a></li>
                 </ul>
               </div><!-- dropdown-menu -->

@@ -13,10 +13,12 @@ class Order extends Model
         'balance_transaction',
         'stripe_order_id',
         'shipping_fee',
+        'coupon_id',
         'discount',
         'total',
         'subtotal',
         'status',
+        'status_code',
         'order_date',
     ];
 
@@ -30,18 +32,43 @@ class Order extends Model
         return $this->hasMany('App\Models\Shipping');
     }
 
+    public function coupon()
+    {
+        return $this->belongsTo('App\Models\Admin\Coupon');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
     }
 
     /**
-     * Delimiter price with comma
+     * Delimiter sub total price with comma
+     *
+     * @return String
+     */
+    public function getSubTotalDelimiterAttribute(): String
+    {
+        return number_format($this->subtotal);
+    }
+
+    /**
+     * Delimiter total price with comma
      *
      * @return String
      */
     public function getTotalDelimiterAttribute(): String
     {
         return number_format($this->total);
+    }
+
+    /**
+     * Delimiter discount price with comma
+     *
+     * @return String
+     */
+    public function getDiscountDelimiterAttribute(): String
+    {
+        return number_format($this->discount);
     }
 }

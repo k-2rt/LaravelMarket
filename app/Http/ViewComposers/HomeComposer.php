@@ -23,7 +23,7 @@ class HomeComposer
      */
     public function compose(View $view)
     {
-        $orders = $this->order_repo->getOrdersByUserId();
+        $orders = $this->order_repo->getCurrentUserOrders();
 
         $view->with(compact([
             'orders',

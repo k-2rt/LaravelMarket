@@ -9,4 +9,9 @@ class Coupon extends Model
     protected $fillable = [
         'coupon', 'discount',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order');
+    }
 }

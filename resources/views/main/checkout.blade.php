@@ -71,48 +71,53 @@
           </div>
 
           <!-- Order Total -->
-          <div class="order_total_content" style="padding: 30px 0;">
-            <h5 style="margin-left: 15px;">クーポンの適用</h5>
-            <form action="{{ route('apply.coupon') }}" method="POST">
-            @csrf
-              <div class="form-group col-lg-4">
-                <input type="text" name="coupon" class="coupon-form" required="" placeholder="">
-                <button type="submit" class="btn btn-danger ml-2">適用</button>
-              </div>
-            </form>
+          @if ($cart->isNotEmpty())
+            <div class="order_total_content" style="padding: 30px 0;">
+              <h5 style="margin-left: 15px;">クーポンの適用</h5>
+              <form action="{{ route('apply.coupon') }}" method="POST">
+              @csrf
+                <div class="form-group col-lg-4">
+                  <input type="text" name="coupon" class="coupon-form" required="" placeholder="">
+                  <button type="submit" class="btn btn-danger ml-2">適用</button>
+                </div>
+              </form>
 
-            <ul class="list-group col-lg-4" style="float: right;">
-              <li class="list-group-item">商品合計<span style="float: right;">{{ number_format(Cart::Subtotal()) }}円</span></li>
+              <ul class="list-group col-lg-4" style="float: right;">
+                <li class="list-group-item">商品合計<span style="float: right;">{{ number_format(Cart::Subtotal()) }}円</span></li>
 
-              @if (Session::has('coupon'))
-                <li class="list-group-item">クーポン ({{ Session::get('coupon')['name'] }})：
-                <a href="{{ route('remove.coupon') }}" class="btn btn-secondary btn-sm button-circle">X</a>
-                  <span style="float: right;">- {{ number_format(Session::get('coupon')['discount']) }}円</span>
-                </li>
-              @else
-                <li class="list-group-item">クーポン：
-                  <span style="float: right;">なし</span>
-                </li>
-              @endif
+                @if (Session::has('coupon'))
+                  <li class="list-group-item">クーポン ({{ Session::get('coupon')['name'] }})：
+                  <a href="{{ route('remove.coupon') }}" class="btn btn-secondary btn-sm button-circle">X</a>
+                    <span style="float: right;">- {{ number_format(Session::get('coupon')['discount']) }}円</span>
+                  </li>
+                @else
+                  <li class="list-group-item">クーポン：
+                    <span style="float: right;">なし</span>
+                  </li>
+                @endif
 
-              <li class="list-group-item">送料<span style="float: right;">{{ number_format($shipping_fee) }}円</span></li>
+                <li class="list-group-item">送料<span style="float: right;">{{ number_format($shipping_fee) }}円</span></li>
 
-              @if (Session::has('coupon'))
-                <li class="list-group-item">注文合計<span style="float: right;">{{ number_format(Cart::Subtotal() - Session::get('coupon')['discount'] + $shipping_fee) }}円</span></li>
-              @else
-                <li class="list-group-item">注文合計<span style="float: right;">{{ number_format(Cart::Subtotal() + $shipping_fee) }}円</span></li>
-              @endif
+                @if (Session::has('coupon'))
+                  <li class="list-group-item">注文合計<span style="float: right;">{{ number_format(Cart::Subtotal() - Session::get('coupon')['discount'] + $shipping_fee) }}円</span></li>
+                @else
+                  <li class="list-group-item">注文合計<span style="float: right;">{{ number_format(Cart::Subtotal() + $shipping_fee) }}円</span></li>
+                @endif
 
-            </ul>
-          </div>
+              </ul>
+            </div>
+          @endif
+
         </div>
       </div>
     </div>
 
-    <div class="cart_buttons">
-      <button type="button" class="button cart_button_clear">キャンセル</button>
-      <a href="{{ route('payment.page') }}" class="button cart_button_checkout">ご購入手続きへ</a>
-    </div>
+    @if ($cart->isNotEmpty())
+      <div class="cart_buttons">
+        <button type="button" class="button cart_button_clear">キャンセル</button>
+        <a href="{{ route('payment.page') }}" class="button cart_button_checkout">ご購入手続きへ</a>
+      </div>
+    @endif
   </div>
 </div>
 
