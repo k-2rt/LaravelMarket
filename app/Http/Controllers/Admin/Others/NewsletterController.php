@@ -18,7 +18,8 @@ class NewsletterController extends Controller
      *
      * @return void
      */
-    public function newsletter() {
+    public function newsletter()
+    {
         $newsletters = Newsletter::all();
 
         return view('admin.others.newsletter', compact('newsletters'));
@@ -29,7 +30,8 @@ class NewsletterController extends Controller
      *
      * @return void
      */
-    public function storeNewsletter(Request $request) {
+    public function storeNewsletter(Request $request)
+    {
         $request->validate([
             'email' => 'required|unique:newsletters|max:55',
         ]);
@@ -50,7 +52,8 @@ class NewsletterController extends Controller
      * @param String $id
      * @return void
      */
-    public function deleteNewsletter($id) {
+    public function deleteNewsletter($id)
+    {
         Newsletter::find($id)->delete();
 
         $notification = array(

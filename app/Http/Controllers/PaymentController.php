@@ -42,13 +42,15 @@ class PaymentController extends Controller
     }
 
     public function payByStripe(Request $request) {
+        $discount = "";
+        $coupon_id = NULL;
 
         if (Session::has('coupon')) {
             $discount = Session::get('coupon')['discount'];
+            $coupon_id = Session::get('coupon')['id'];
             $total = Cart::Subtotal() - $discount + $request->shipping_fee;
         } else {
             $total = Cart::subtotal() + $request->shipping_fee;
-            $discount = "";
         }
 
         $stripe_secret = config('app.stripe_secret');
@@ -74,9 +76,11 @@ class PaymentController extends Controller
             'balance_transaction' => $charge->balance_transaction,
             'stripe_order_id' => $charge->metadata->order_id,
             'total' => $charge->amount,
+            'coupon_id' => $coupon_id,
             'discount' => $discount,
             'shipping_fee' => $request->shipping_fee,
             'payment_type' => $request->payment_type,
+            'status_code' => mt_rand(100000, 999999),
             'order_date' => date('Y/m/d'),
             'subtotal' => Cart::subtotal(),
         ]);

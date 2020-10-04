@@ -9,12 +9,12 @@
                 <table class="table table-response">
                     <thead>
                         <tr >
-                            <th scope="col" style="vertical-align: middle;">支払い方法</th>
-                            <th scope="col" style="vertical-align: middle;">支払いID</th>
-                            <th scope="col" style="vertical-align: middle;">料金</th>
-                            <th scope="col" style="vertical-align: middle;">注文日</th>
-                            <th scope="col" style="vertical-align: middle;">ステータス<br />コード</th>
-                            <th scope="col" style="vertical-align: middle;">アクション</th>
+                            <th scope="col">支払い方法</th>
+                            <th scope="col">支払いID</th>
+                            <th scope="col">料金</th>
+                            <th scope="col">注文日</th>
+                            <th scope="col">ステータスコード</th>
+                            <th scope="col">アクション</th>
                         </tr>
                     </thead>
 

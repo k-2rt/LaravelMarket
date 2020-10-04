@@ -151,3 +151,12 @@ Route::get('admin/accept/payment/{id}', 'Admin\OrderController@acceptPayment')->
 Route::get('admin/cancel/payment/{id}', 'Admin\OrderController@cancelPayment')->name('admin.cancel.payment');
 Route::get('admin/update/process/order/{id}', 'Admin\OrderController@updateProcessOrder')->name('admin.update.process.order');
 Route::get('admin/delivery/done/{id}', 'Admin\OrderController@updateDeliveryOrder')->name('admin.delivery.done');
+
+// SEO Setting Route
+Route::get('admin/seo', 'Admin\Others\SEOController@seo')->name('admin.seo');
+Route::post('admin/update/seo', 'Admin\Others\SEOController@updateSEO')->name('update.seo');
+
+// Track Order Route
+Route::get('track/order', 'OrderController@aaa')->name('track.order');
+Route::get('order_history/lists', 'ProfileController@showOrderHistoryLists')->name('order_history.lists');
+Route::get('tracking/order/{id}', 'ProfileController@showTrackingOrder')->name('tracking.order');

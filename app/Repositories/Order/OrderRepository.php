@@ -18,13 +18,23 @@ class OrderRepository implements OrderRepositoryInterface
     }
 
     /**
-     * Get latest orders only 10 by user id
+     * Get latest current user orders only 10
      *
      * @return Object
      */
-    public function getOrdersByUserId(): Object
+    public function getCurrentUserOrders(): Object
     {
-        return $this->order->where('user_id', Auth::id())->orderBy('id', 'DESC')->limit(10)->get();
+        return $this->order->with('order_details')->where('user_id', Auth::id())->orderBy('id', 'DESC')->limit(10)->get();
+    }
+
+    /**
+     * Find an order with coupon by order id
+     *
+     * @return Object
+     */
+    public function findOrderWithCoupon($id): Object
+    {
+        return $this->order->with('coupon')->find($id);
     }
 
     /**

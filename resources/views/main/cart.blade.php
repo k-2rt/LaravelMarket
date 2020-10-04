@@ -79,10 +79,12 @@
             </div>
           </div>
 
-          <div class="cart_buttons">
-            <button type="button" class="button cart_button_clear">キャンセル</button>
-            <a href="{{ route('checkout.product') }}" class="button cart_button_checkout">購入画面へ</a>
-          </div>
+          @if ($cart->isNotEmpty())
+            <div class="cart_buttons">
+              <button type="button" class="button cart_button_clear">キャンセル</button>
+              <a href="{{ route('checkout.product') }}" class="button cart_button_checkout">購入画面へ</a>
+            </div>
+          @endif
         </div>
       </div>
     </div>

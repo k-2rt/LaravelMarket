@@ -5,11 +5,18 @@ namespace App\Repositories\Order;
 interface OrderRepositoryInterface
 {
     /**
-     * Get latest orders only 10 by user id
+     * Get latest current user orders only 10
      *
      * @return Object
      */
-    public function getOrdersByUserId();
+    public function getCurrentUserOrders();
+
+    /**
+     * Find an order with coupon by order id
+     *
+     * @return Object
+     */
+    public function findOrderWithCoupon($id);
 
     /**
      * Get orders that status is 0

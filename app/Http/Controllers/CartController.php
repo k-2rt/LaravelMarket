@@ -170,6 +170,7 @@ class CartController extends Controller
 
         if ($coupon) {
             Session::put('coupon', [
+                'id' => $coupon->id,
                 'name' => $coupon->coupon,
                 'discount' => $coupon->discount,
             ]);
