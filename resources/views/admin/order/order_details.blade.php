@@ -44,7 +44,7 @@
                     <th>注文状況:</th>
                     <th>
                       @if ($order->status === '0')
-                        <span class="badge badge-warning">保留中</span>
+                        <span class="badge badge-warning">承認待ち</span>
                       @elseif ($order->status === '1')
                         <span class="badge badge-info">支払い完了</span>
                       @elseif ($order->status === '2')

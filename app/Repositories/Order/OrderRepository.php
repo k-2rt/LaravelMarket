@@ -4,6 +4,7 @@ namespace App\Repositories\Order;
 
 use App\Models\Order;
 use Auth;
+use Carbon\Carbon;
 
 class OrderRepository implements OrderRepositoryInterface
 {
@@ -15,6 +16,29 @@ class OrderRepository implements OrderRepositoryInterface
     public function __construct(Order $order)
     {
         $this->order = $order;
+    }
+
+    /**
+     * Get all orders
+     *
+     * @return Object
+     */
+    public function getAll(): Object
+    {
+        return $this->order->all();
+    }
+
+    /**
+     * Get orders of this month
+     *
+     * @return Object
+     */
+    public function getThisMonth(): Object
+    {
+        $date = Carbon::now()->format('Y/m');
+
+        return $this->order->where('order_date', 'LIKE', $date . '%')
+                           ->get();
     }
 
     /**
@@ -88,7 +112,7 @@ class OrderRepository implements OrderRepositoryInterface
     }
 
     /**
-     * Get a order with user info by order id
+     * Get an order with user info by order id
      *
      * @param String $id
      * @return Order
@@ -99,6 +123,119 @@ class OrderRepository implements OrderRepositoryInterface
                            ->with('shipping')
                            ->where('id', '=', $id)
                            ->first();
+    }
+
+    /**
+     * Get today's pendding orders
+     *
+     * @return Object
+     */
+    public function getTodaysOrders(): Object
+    {
+        return $this->order->where('status', '=', 0)
+                           ->where('order_date', '=', Date('Y/m/d'))
+                           ->get();
+    }
+
+    /**
+     * Get today's delivered orders
+     *
+     * @return Object
+     */
+    public function getTodaysDeliveredOrders(): Object
+    {
+        return $this->order->where('status', '=', 3)
+                           ->where('order_date', '=', Date('Y/m/d'))
+                           ->get();
+    }
+
+    /**
+     * Get delivered orders of this month
+     *
+     * @return Object
+     */
+    public function getDeliveredOrdersOfThisMonth(): Object
+    {
+        $date = Carbon::now()->format('Y/m');
+
+        return $this->order->where('status', '=', 3)
+                           ->where('order_date', 'LIKE', $date . '%')
+                           ->get();
+    }
+
+    /**
+     * Search orders
+     *
+     * @param Array $keywords
+     * @return Object
+     */
+    public function searchOrders($keywords): Object
+    {
+        $query = $this->order;
+        $order_date_from = str_replace('-', '/', $keywords['order_date_from']);
+        $order_date_to = str_replace('-', '/', $keywords['order_date_to']);
+        $subtotal = $keywords['subtotal'];
+        $total = $keywords['total'];
+
+        if (!empty($order_date_from) && !empty($order_date_to)) {
+            $query = $query->whereBetween('order_date', [$order_date_from, $order_date_to]);
+        } else if (!empty($order_date_from)) {
+            $query = $query->where('order_date', '>=', $order_date_from);
+        } else if (!empty($order_date_to)) {
+            $query = $query->where('order_date', '<=', $order_date_to);
+        }
+
+        if (!empty($keywords['transaction'])) {
+            $query = $query->where('balance_transaction', '=', $keywords['transaction']);
+        }
+
+        if (!empty($keywords['payment'])) {
+            $query = $query->whereIn('payment_type', $keywords['payment']);
+        }
+
+        if (!empty($keywords['status'])) {
+            $query = $query->whereIn('status', $keywords['status']);
+        }
+
+        if (!empty($subtotal)) {
+            $query = $this->searchPrice($query, $subtotal, 'subtotal');
+        }
+
+        if (!empty($total)) {
+            $query = $this->searchPrice($query, $total, 'total');
+        }
+
+        return $query->get();
+    }
+
+    /**
+     * Search price by foreach
+     *
+     * @param Object $query
+     * @param Array $data
+     * @param String $db_name
+     * @return Object
+     */
+    public function searchPrice($query, $data, $db_name): Object
+    {
+        return $query->where(function($query) use ($data, $db_name) {
+            foreach ($data as $price) {
+                switch ($price) {
+                    case 'max2000':
+                        $query = $query->where($db_name, '<=', 2000);
+                        break;
+                    case 'max5000':
+                        $query = $query->orWhereBetween($db_name, [2000, 5000]);
+                        break;
+                    case 'max10000':
+                        $query = $query->orWhereBetween($db_name, [5000, 10000]);
+                        break;
+                    case 'over10000':
+                        $query = $query->orWhere($db_name, '>=', 10000);
+                        break;
+                }
+            }
+        });
     }
 
     /**

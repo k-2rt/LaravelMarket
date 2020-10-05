@@ -4,8 +4,8 @@
 
   <div class="sl-mainpanel">
     <nav class="breadcrumb sl-breadcrumb">
-      <a class="breadcrumb-item" href="#">注文</a>
-      <span class="breadcrumb-item active">詳細一覧</span>
+      <a class="breadcrumb-item" href="#">報告</a>
+      <span class="breadcrumb-item active">注文一覧（本日）</span>
     </nav>
     <div class="sl-pagebody">
       <div class="card pd-20 pd-sm-40">
@@ -28,9 +28,9 @@
                 <tr>
                   <td>{{ $order->balance_transaction }}</td>
                   <td>{{ $order->payment_type }}</td>
-                  <td>{{ number_format($order->subtotal) }}円</td>
-                  <td>{{ number_format($order->shipping_fee) }}円</td>
-                  <td>{{ number_format($order->total) }}円</td>
+                  <td>{{ $order->sub_total_delimiter }}円</td>
+                  <td>{{ $order->shipping_fee }}円</td>
+                  <td>{{ $order->total_delimiter }}円</td>
                   <td>{{ $order->order_date }}</td>
 
                   <td>
