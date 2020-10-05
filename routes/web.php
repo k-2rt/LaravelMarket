@@ -160,3 +160,11 @@ Route::post('admin/update/seo', 'Admin\Others\SEOController@updateSEO')->name('u
 Route::get('track/order', 'OrderController@aaa')->name('track.order');
 Route::get('order_history/lists', 'ProfileController@showOrderHistoryLists')->name('order_history.lists');
 Route::get('tracking/order/{id}', 'ProfileController@showTrackingOrder')->name('tracking.order');
+
+// Order Report Route
+Route::middleware('auth:admin')->group(function() {
+    Route::get('admin/report/today/order', 'Admin\ReportController@showTodayOrder')->name('report.today.order');
+    Route::get('admin/report/delivered/order', 'Admin\ReportController@showTodaysDeliveredOrder')->name('report.delivered.order');
+    Route::get('admin/report/month/order', 'Admin\ReportController@showOrdersOfThisMonth')->name('report.month.order');
+    Route::get('admin/search/orders', 'Admin\ReportController@searchOrders')->name('search.report');
+});

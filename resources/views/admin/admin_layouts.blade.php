@@ -120,7 +120,7 @@
           <a href="#" class="sl-menu-link">
             <div class="sl-menu-item">
               <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
-              <span class="menu-item-label">ブログ</span>
+              <span class="menu-item-label">記事</span>
               <i class="menu-item-arrow fa fa-angle-down"></i>
             </div>
           </a>
@@ -141,6 +141,21 @@
             <li class="nav-item"><a href="{{ route('admin.newsletter') }}" class="nav-link">ニュース</a></li>
             <li class="nav-item"><a href="{{ route('admin.seo') }}" class="nav-link">SEO 設定</a></li>
           </ul>
+
+          <a href="#" class="sl-menu-link">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+              <span class="menu-item-label">報告</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div>
+          </a>
+          <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{ route('report.today.order') }}" class="nav-link">注文一覧（本日）</a></li>
+            <li class="nav-item"><a href="{{ route('report.delivered.order') }}" class="nav-link">配達済み一覧（本日）</a></li>
+            <li class="nav-item"><a href="{{ route('report.month.order') }}" class="nav-link">配達済み一覧（今月）</a></li>
+            <li class="nav-item"><a href="{{ route('search.report') }}" class="nav-link">詳細検索</a></li>
+          </ul>
+
         </div>
 
         <br>
@@ -462,6 +477,8 @@
           });
         });
     </script>
+
+
 
   </body>
 </html>

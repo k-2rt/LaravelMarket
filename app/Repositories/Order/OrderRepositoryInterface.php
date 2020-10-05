@@ -5,6 +5,20 @@ namespace App\Repositories\Order;
 interface OrderRepositoryInterface
 {
     /**
+     * Get all orders
+     *
+     * @return Object
+     */
+    public function getAll();
+
+    /**
+     * Get orders of this month
+     *
+     * @return Object
+     */
+    public function getThisMonth();
+
+    /**
      * Get latest current user orders only 10
      *
      * @return Object
@@ -59,6 +73,35 @@ interface OrderRepositoryInterface
      * @return Object
      */
     public function getOrderByOrderId($id);
+
+    /**
+     * Get today's pendding orders
+     *
+     * @return Object
+     */
+    public function getTodaysOrders();
+
+    /**
+     * Get today's delivered orders
+     *
+     * @return Object
+     */
+    public function getTodaysDeliveredOrders();
+
+    /**
+     * Get delivered orders of this month
+     *
+     * @return Object
+     */
+    public function getDeliveredOrdersOfThisMonth();
+
+    /**
+     * Search orders
+     *
+     * @param Request $request
+     * @return Object
+     */
+    public function searchOrders($request);
 
     /**
      * Change status to 1

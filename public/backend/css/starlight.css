@@ -11223,6 +11223,7 @@ textarea.parsley-success:focus {
 }
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
   margin-top: -3px;
+  margin-left: 2px;
 }
 .select2-container--default .select2-selection--multiple {
   background-color: #fff;
@@ -56739,4 +56740,25 @@ a.hover-white-8:hover, a.hover-white-8:focus {
 
 .mx-wd-1350 {
   max-width: 1350px;
+}
+
+.form-date {
+  width: 170px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  color: #495057;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.search-ckbox {
+  font-weight: normal;
+  position: relative;
+  margin-right: 10px;
+  line-height: 18px;
 }
