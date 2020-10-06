@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models\Admin;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +16,10 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone'
+        'name', 'kana', 'email', 'password',
+        'phone', 'category', 'coupon', 'product',
+        'article', 'other', 'order', 'report', 'return',
+        'role', 'contact', 'comment', 'setting', 'type'
     ];
 
     /**

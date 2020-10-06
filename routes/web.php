@@ -161,10 +161,18 @@ Route::get('track/order', 'OrderController@aaa')->name('track.order');
 Route::get('order_history/lists', 'ProfileController@showOrderHistoryLists')->name('order_history.lists');
 Route::get('tracking/order/{id}', 'ProfileController@showTrackingOrder')->name('tracking.order');
 
-// Order Report Route
 Route::middleware('auth:admin')->group(function() {
+    // Order Report Route
     Route::get('admin/report/today/order', 'Admin\ReportController@showTodayOrder')->name('report.today.order');
     Route::get('admin/report/delivered/order', 'Admin\ReportController@showTodaysDeliveredOrder')->name('report.delivered.order');
     Route::get('admin/report/month/order', 'Admin\ReportController@showOrdersOfThisMonth')->name('report.month.order');
     Route::get('admin/search/orders', 'Admin\ReportController@searchOrders')->name('search.report');
+
+    // Admin User Route
+    Route::get('admin/user/lists', 'Admin\UserRoleController@showUserRoleLists')->name('admin.user.lists');
+    Route::get('admin/delete/{id}', 'Admin\UserRoleController@deleteAdminUser')->name('delete.admin');
+    Route::get('admin/edit/{id}', 'Admin\UserRoleController@editAdminUser')->name('edit.admin');
+    Route::get('admin/create', 'Admin\UserRoleController@createAdminUser')->name('admin.create.user');
+    Route::post('admin/store', 'Admin\UserRoleController@storeAdminUser')->name('store.admin.user');
+    Route::post('admin/update/{id}', 'Admin\UserRoleController@updateAdminUser')->name('update.admin.user');
 });

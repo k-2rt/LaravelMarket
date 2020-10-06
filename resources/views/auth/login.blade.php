@@ -51,12 +51,12 @@
                     @csrf
                         <div class="form-group">
                             <label for="name">お名前</label>
-                            <input type="text" class="form-control" placeholder="例）山田太郎"  name="name" required="">
+                            <input type="text" class="form-control" placeholder="例）山田太郎" name="name" required="">
                         </div>
 
                         <div class="form-group">
-                            <label for="kana"">フリガナ</label>
-                            <input type="text" class="form-control" placeholder="例）ヤマダタロウ"  name="kana" required="" onBlur="$(this).val(hiraToKana($(this).val()));">
+                            <label for="kana">フリガナ</label>
+                            <input type="text" class="form-control" placeholder="例）ヤマダタロウ" name="kana" required="" onBlur="$(this).val(hiraToKana($(this).val()));">
                         </div>
 
                         <div class="form-group">
