@@ -175,4 +175,9 @@ Route::middleware('auth:admin')->group(function() {
     Route::get('admin/create', 'Admin\UserRoleController@createAdminUser')->name('admin.create.user');
     Route::post('admin/store', 'Admin\UserRoleController@storeAdminUser')->name('store.admin.user');
     Route::post('admin/update/{id}', 'Admin\UserRoleController@updateAdminUser')->name('update.admin.user');
+
+    // Admin Site Route
+    Route::get('admin/site/setting', 'Admin\SiteSettingController@showSiteSetting')->name('admin.site.setting');
+    Route::post('admin/site/setting/{id}', 'Admin\SiteSettingController@updateSiteSetting')->name('update.site.setting');
+
 });
