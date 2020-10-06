@@ -19,6 +19,19 @@ class AdminsTableSeeder extends Seeder
             'phone' => '09012345678',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin1234'),
+            'category' => "1",
+            'coupon' => "1",
+            'product' => "1",
+            'article' => "1",
+            'order' => "1",
+            'other' => "1",
+            'report' => "1",
+            'return' => "1",
+            'role' => "1",
+            'contact' => "1",
+            'comment' => "1",
+            'setting' => "1",
+            'type' => '2',
         ]);
     }
 }
