@@ -102,6 +102,16 @@ class OrderRepository implements OrderRepositoryInterface
     }
 
     /**
+     * Get orders of current user that status is 3
+     *
+     * @return Object
+     */
+    public function getDeliveredOrdersOfAuth(): Object
+    {
+        return $this->order->where('user_id', Auth::id())->where('status', '=', '3')->orderBy('id', 'DESC')->limit(5)->get();
+    }
+
+    /**
      * Get orders that status is 4
      *
      * @return Object
@@ -160,6 +170,28 @@ class OrderRepository implements OrderRepositoryInterface
 
         return $this->order->where('status', '=', 3)
                            ->where('order_date', 'LIKE', $date . '%')
+                           ->get();
+    }
+
+    /**
+     * Get orders that return status is 1
+     *
+     * @return Object
+     */
+    public function getReturnStatusRequest(): Object
+    {
+        return $this->order->where('return_status', '=', '1')
+                           ->get();
+    }
+
+    /**
+     * Get orders that return status is 2
+     *
+     * @return Object
+     */
+    public function getApprovedReturnRequest(): Object
+    {
+        return $this->order->where('return_status', '=', '2')
                            ->get();
     }
 
@@ -280,5 +312,27 @@ class OrderRepository implements OrderRepositoryInterface
     public function changeCancelStatus($id): Bool
     {
         return $this->order->where('id', '=', $id)->update(['status' => '4']);
+    }
+
+    /**
+     * Change return status to 1
+     *
+     * @param String $id
+     * @return Bool
+     */
+    public function changeWorkingReturnStatus($id): Bool
+    {
+        return $this->order->where('id', '=', $id)->update(['return_status' => '1']);
+    }
+
+    /**
+     * Change return status to 2
+     *
+     * @param String $id
+     * @return Bool
+     */
+    public function updateReturnRequest($id): Bool
+    {
+        return $this->order->where('id', '=', $id)->update(['return_status' => '2']);
     }
 }

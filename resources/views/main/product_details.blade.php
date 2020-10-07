@@ -86,7 +86,11 @@
               <div class="button_container">
                 <button type="submit" class="button cart_button">カートに入れる</button>
                 <div class="product_fav"><i class="fas fa-heart"></i></div>
-              </div>
+              </div><br /><br />
+
+              <!-- Go to www.addthis.com/dashboard to customize your tools -->
+              <div class="addthis_inline_share_toolbox"></div>
+
             </form>
           </div>
         </div>
@@ -123,13 +127,21 @@
         </ul>
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><br />{!! $product->product_details !!}</div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"><br />{{ $product->video_link }}</div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"><br /></div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"><br />{{ $product->video_link }}</div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"><br />
+          <div class="fb-comments" data-href="{{ Request::url() }}" data-numposts="5" data-width=""></div>
+          </div>
         </div>
-
       </div>
     </div>
   </div>
 </div>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v8.0" nonce="KTfXE5tJ"></script>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f7dde425645ff14"></script>
+
 
 @endsection

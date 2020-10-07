@@ -269,7 +269,9 @@
 <script src="{{ asset('/frontend/js/custom.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <script src="{{ asset('/frontend/js/product_custom.js') }}"></script>
 
@@ -295,5 +297,26 @@
     }
 	@endif
 </script>
+
+<script>
+	$(document).on("click", "#return", function(e){
+			e.preventDefault();
+			var link = $(this).attr("href");
+			swal({
+				title: "本当に返品しますか？",
+				icon: "warning",
+				buttons: ["いいえ", 'はい'],
+				dangerMode: true,
+			})
+			.then((willDelete) => {
+				if (willDelete) {
+							window.location.href = link;
+				} else {
+					swal("キャンセルしました。");
+				}
+			});
+		});
+</script>
+
 </body>
 </html>

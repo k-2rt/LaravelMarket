@@ -161,6 +161,11 @@ Route::get('track/order', 'OrderController@aaa')->name('track.order');
 Route::get('order_history/lists', 'ProfileController@showOrderHistoryLists')->name('order_history.lists');
 Route::get('tracking/order/{id}', 'ProfileController@showTrackingOrder')->name('tracking.order');
 
+// Return Order Route
+Route::get('success/order/lists', 'ProfileController@showSuccessLists')->name('success.order.lists');
+
+Route::get('request/return/order/{id}', 'ProfileController@requestReturnOrder')->name('request.return.order');
+
 Route::middleware('auth:admin')->group(function() {
     // Order Report Route
     Route::get('admin/report/today/order', 'Admin\ReportController@showTodayOrder')->name('report.today.order');
@@ -179,5 +184,11 @@ Route::middleware('auth:admin')->group(function() {
     // Admin Site Route
     Route::get('admin/site/setting', 'Admin\SiteSettingController@showSiteSetting')->name('admin.site.setting');
     Route::post('admin/site/setting/{id}', 'Admin\SiteSettingController@updateSiteSetting')->name('update.site.setting');
+
+    Route::get('admin/request/return', 'Admin\ReturnController@showReturnRequest')->name('admin.request.return');
+
+    Route::get('admin/approve/request/{id}', 'Admin\ReturnController@approveRequest')->name('admin.approve.request');
+    Route::get('admin/return/lists', 'Admin\ReturnController@showReturnedLists')->name('admin.returned.lists');
+
 
 });
