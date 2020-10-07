@@ -28,4 +28,23 @@ class ProfileController extends Controller
 
         return view('main.profile.tracking', compact('order'));
     }
+
+    public function showSuccessLists()
+    {
+        $orders = $this->order_repo->getDeliveredOrdersOfAuth();
+
+        return view('main.profile.return_order', compact('orders'));
+    }
+
+    public function requestReturnOrder($id)
+    {
+        $this->order_repo->changeWorkingReturnStatus($id);
+
+        $notification = array(
+            'message' => '返品を申請しました',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
 }

@@ -61,6 +61,13 @@ interface OrderRepositoryInterface
     public function getDeliveredOrders();
 
     /**
+     * Get orders of current user that status is 3
+     *
+     * @return Object
+     */
+    public function getDeliveredOrdersOfAuth();
+
+    /**
      * Get orders that status is 4
      *
      * @return Object
@@ -94,6 +101,20 @@ interface OrderRepositoryInterface
      * @return Object
      */
     public function getDeliveredOrdersOfThisMonth();
+
+    /**
+     * Get orders that return status is 1
+     *
+     * @return Object
+     */
+    public function getReturnStatusRequest();
+
+    /**
+     * Get orders that return status is 2
+     *
+     * @return Object
+     */
+    public function getApprovedReturnRequest();
 
     /**
      * Search orders
@@ -134,4 +155,20 @@ interface OrderRepositoryInterface
      * @return Bool
      */
     public function changeCancelStatus($id);
+
+    /**
+     * Change return status to 1
+     *
+     * @param String $id
+     * @return Bool
+     */
+    public function changeWorkingReturnStatus($id);
+
+    /**
+     * Change return status to 2
+     *
+     * @param String $id
+     * @return Bool
+     */
+    public function updateReturnRequest($id);
 }

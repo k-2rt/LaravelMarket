@@ -190,13 +190,13 @@
             <a href="#" class="sl-menu-link">
               <div class="sl-menu-item">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-                <span class="menu-item-label">リクエスト管理</span>
+                <span class="menu-item-label">返品管理</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
               </div>
             </a>
             <ul class="sl-menu-sub nav flex-column">
-              <li class="nav-item"><a href="" class="nav-link">Return request</a></li>
-              <li class="nav-item"><a href="" class="nav-link">All request</a></li>
+              <li class="nav-item"><a href="{{ route('admin.request.return') }}" class="nav-link">返品申請</a></li>
+              <li class="nav-item"><a href="{{ route('admin.returned.lists') }}" class="nav-link">返品完了</a></li>
             </ul>
           @endif
 
@@ -560,9 +560,25 @@
             }
           });
         });
+
+        $(document).on("click", "#approve", function(e){
+          e.preventDefault();
+          var link = $(this).attr("href");
+          swal({
+            title: "本当に承認しますか？",
+            icon: "warning",
+            buttons: ["いいえ", 'はい'],
+            dangerMode: false,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                  window.location.href = link;
+            } else {
+              swal("キャンセルしました。");
+            }
+          });
+        });
     </script>
-
-
 
   </body>
 </html>
