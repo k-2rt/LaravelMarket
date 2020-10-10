@@ -132,6 +132,11 @@ Route::get('success/order/lists', 'ProfileController@showSuccessLists')->name('s
 
 Route::get('request/return/order/{id}', 'ProfileController@requestReturnOrder')->name('request.return.order');
 
+Route::get('contact/page', 'ContactController@showContactPage')->name('contact.page');
+Route::post('contact/form', 'ContactController@sendContactMessage')->name('contact.form');
+
+Route::post('search/product', 'ProductController@searchProduct')->name('search.product');
+
 Route::middleware('auth:admin')->group(function() {
     Route::get('admin/home', 'AdminController@index');
     Route::get('admin/logout', 'AdminController@logout')->name('admin.logout');
@@ -189,5 +194,7 @@ Route::middleware('auth:admin')->group(function() {
 
     Route::get('admin/approve/request/{id}', 'Admin\ReturnController@approveRequest')->name('admin.approve.request');
     Route::get('admin/return/lists', 'Admin\ReturnController@showReturnedLists')->name('admin.returned.lists');
+
+    Route::get('admin/message/lists', 'ContactController@showMessageLists')->name('admin.message.lists');
 
 });

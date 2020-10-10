@@ -210,8 +210,7 @@
               </div>
             </a>
             <ul class="sl-menu-sub nav flex-column">
-              <li class="nav-item"><a href="" class="nav-link">New Message</a></li>
-              <li class="nav-item"><a href="" class="nav-link">All Message</a></li>
+            <li class="nav-item"><a href="{{ route('admin.message.lists') }}" class="nav-link">メッセージ一覧</a></li>
             </ul>
           @endif
 

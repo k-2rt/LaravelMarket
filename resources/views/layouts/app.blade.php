@@ -98,8 +98,9 @@
 						<div class="header_search">
 							<div class="header_search_content">
 								<div class="header_search_form_container">
-									<form action="#" class="header_search_form clearfix">
-										<input type="search" required="required" class="header_search_input" placeholder="Search for products...">
+								<form action="{{ route('search.product') }}" class="header_search_form clearfix" method="POST">
+										@csrf
+										<input type="search" required="required" class="header_search_input" placeholder="商品を検索" name="search">
 										<div class="custom_dropdown">
 											<div class="custom_dropdown_list">
 												<span class="custom_dropdown_placeholder clc">All Categories</span>
@@ -111,7 +112,7 @@
 												</ul>
 											</div>
 										</div>
-										<button type="submit" class="header_search_button trans_300" value="Submit"><img src="{{ asset('/frontend/images/search.png') }}" alt=""></button>
+										<button type="submit" class="header_search_button trans_300" value=""><img src="{{ asset('/frontend/images/search.png') }}" alt=""></button>
 									</form>
 								</div>
 							</div>
