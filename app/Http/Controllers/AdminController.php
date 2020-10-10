@@ -6,12 +6,25 @@ use App\Models\Admin\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Repositories\Order\OrderRepositoryInterface as OrderRepo;
+use App\Models\Admin\Product;
+use App\Models\Admin\Brand;
+use App\User;
+
 
 class AdminController extends Controller
 {
-    public function __construct()
+    protected $product;
+    protected $brand;
+    protected $user;
+    protected $order_repo;
+
+    public function __construct(OrderRepo $order_repo, Product $product, Brand $brand, User $user)
     {
-        $this->middleware('auth:admin');
+        $this->product = $product;
+        $this->brand = $brand;
+        $this->user = $user;
+        $this->order_repo = $order_repo;
     }
 
     /**
@@ -20,7 +33,16 @@ class AdminController extends Controller
      * @return void
      */
     public function index() {
-        return view('admin.home');
+        $today_total = $this->order_repo->calculateTodaysOrderTotal();
+        $month_total = $this->order_repo->calculateMonthOrderTotal();
+        $year_total = $this->order_repo->calculateYearOrderTotal();
+        $delevered = $this->order_repo->calculateOrderTotalOfTodaysDelivered();
+        $return = $this->order_repo->calculateReturnOrder();
+        $prodcut_count = $this->product->countAllProducts();
+        $brand_count = $this->brand->countAllBrands();
+        $user_count = $this->user->countAllUsers();
+
+        return view('admin.home', compact('today_total', 'month_total', 'year_total', 'delevered', 'return', 'prodcut_count', 'brand_count', 'user_count'));
     }
 
     /**

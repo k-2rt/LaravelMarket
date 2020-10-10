@@ -38,6 +38,16 @@ class Product extends Model
         return $this->hasMany('App\Models\OrderDetail');
     }
 
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Admin\Category');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo('App\Models\Admin\Brand');
+    }
+
     /**
      * Get a latest product that main slider status is 1
      *
@@ -256,4 +266,10 @@ class Product extends Model
 
         return $brands;
     }
+
+    public function countAllProducts()
+    {
+        return $this->all()->count();
+    }
+
 }

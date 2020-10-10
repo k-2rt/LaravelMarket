@@ -25,15 +25,8 @@ Route::post('password/change', 'Auth\ChangePasswordController@changePassword')->
 Route::get('user/logout', 'HomeController@logout')->name('user.logout');
 
 // Admin Route
-Route::get('admin/home', 'AdminController@index');
 Route::get('admin', 'Admin\LoginController@showLoginForm')->name('admin.login');
 Route::post('admin', 'Admin\LoginController@login');
-Route::get('admin/logout', 'AdminController@logout')->name('admin.logout');
-
-// Password Reset Routes
-Route::get('admin/password/change','AdminController@showChangePasswordForm')->name('admin.password.change');
-Route::post('admin/password/change','AdminController@changePassword')->name('admin.password.change');
-
 
 // Route::get('admin/password/reset', 'Admin\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
 // Route::post('admin-password/email', 'Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
@@ -67,20 +60,6 @@ Route::post('admin/store/coupon', 'Admin\Coupon\CouponController@storeCoupon')->
 Route::get('delete/coupon/{id}', 'Admin\Coupon\CouponController@deleteCoupon')->name('delete.coupon');
 Route::get('edit/coupon/{id}', 'Admin\Coupon\CouponController@editCoupon')->name('edit.coupon');
 Route::post('update/coupon/{id}', 'Admin\Coupon\CouponController@updateCoupon')->name('update.coupon');
-
-// Admin Products
-Route::get('admin/product/index', 'Admin\ProductController@index')->name('index.product');
-Route::get('admin/product/create', 'Admin\ProductController@create')->name('create.product');
-Route::post('admin/product/store', 'Admin\ProductController@store')->name('store.product');
-Route::get('inactive/product/{id}', 'Admin\ProductController@inactive')->name('inactive.product');
-Route::get('active/product/{id}', 'Admin\ProductController@active')->name('active.product');
-Route::get('delete/product/{id}', 'Admin\ProductController@deleteProduct')->name('delete.product');
-Route::get('show/product/{id}', 'Admin\ProductController@showProduct')->name('show.product');
-Route::get('edit/product/{id}', 'Admin\ProductController@editProduct')->name('edit.product');
-Route::post('update/product/{id}', 'Admin\ProductController@updateProduct')->name('update.product');
-Route::post('update/product/image/{id}', 'Admin\ProductController@updateProductImage')->name('update.product_images');
-// For show sub categories with Ajax
-Route::get('get/subcategory/{category_id}', 'Admin\ProductController@getSubcategories');
 
 // Newsletters
 Route::get('admin/newsletter', 'Admin\Others\NewsletterController@newsletter')->name('admin.newsletter');
@@ -140,24 +119,11 @@ Route::post('payment/stripe', 'PaymentController@payByStripe')->name('payment.st
 Route::post('update/shipping/address', 'AddressController@updateShippingAddress')->name('update.shipping.address');
 Route::get('show/address/page', 'AddressController@showAddressPage')->name('show.address.page');
 
-// Admin Order Route
-Route::get('admin/pending/order', 'Admin\OrderController@showPendingOrderLists')->name('admin.pending.order');
-Route::get('admin/accepted/payment', 'Admin\OrderController@showAcceptedOrderLists')->name('admin.accepted.payment');
-Route::get('admin/cancel/order', 'Admin\OrderController@showCancelOrderLists')->name('admin.cancel.order');
-Route::get('admin/process/order', 'Admin\OrderController@showProcessOrderLists')->name('admin.process.order');
-Route::get('admin/delivered/order', 'Admin\OrderController@showDeliveredOrderLists')->name('admin.delivered.order');
-Route::get('admin/order/details/{id}', 'Admin\OrderController@showOrderDetails')->name('admin.order.details');
-Route::get('admin/accept/payment/{id}', 'Admin\OrderController@acceptPayment')->name('admin.accept.payment');
-Route::get('admin/cancel/payment/{id}', 'Admin\OrderController@cancelPayment')->name('admin.cancel.payment');
-Route::get('admin/update/process/order/{id}', 'Admin\OrderController@updateProcessOrder')->name('admin.update.process.order');
-Route::get('admin/delivery/done/{id}', 'Admin\OrderController@updateDeliveryOrder')->name('admin.delivery.done');
-
 // SEO Setting Route
 Route::get('admin/seo', 'Admin\Others\SEOController@seo')->name('admin.seo');
 Route::post('admin/update/seo', 'Admin\Others\SEOController@updateSEO')->name('update.seo');
 
 // Track Order Route
-Route::get('track/order', 'OrderController@aaa')->name('track.order');
 Route::get('order_history/lists', 'ProfileController@showOrderHistoryLists')->name('order_history.lists');
 Route::get('tracking/order/{id}', 'ProfileController@showTrackingOrder')->name('tracking.order');
 
@@ -167,6 +133,40 @@ Route::get('success/order/lists', 'ProfileController@showSuccessLists')->name('s
 Route::get('request/return/order/{id}', 'ProfileController@requestReturnOrder')->name('request.return.order');
 
 Route::middleware('auth:admin')->group(function() {
+    Route::get('admin/home', 'AdminController@index');
+    Route::get('admin/logout', 'AdminController@logout')->name('admin.logout');
+    // Password Reset Routes
+    Route::get('admin/password/change','AdminController@showChangePasswordForm')->name('admin.password.change');
+    Route::post('admin/password/change','AdminController@changePassword')->name('admin.password.change');
+
+    // Admin Products
+    Route::get('admin/product/index', 'Admin\ProductController@index')->name('index.product');
+    Route::get('admin/product/create', 'Admin\ProductController@create')->name('create.product');
+    Route::post('admin/product/store', 'Admin\ProductController@store')->name('store.product');
+    Route::get('inactive/product/{id}', 'Admin\ProductController@inactive')->name('inactive.product');
+    Route::get('active/product/{id}', 'Admin\ProductController@active')->name('active.product');
+    Route::get('delete/product/{id}', 'Admin\ProductController@deleteProduct')->name('delete.product');
+    Route::get('show/product/{id}', 'Admin\ProductController@showProduct')->name('show.product');
+    Route::get('edit/product/{id}', 'Admin\ProductController@editProduct')->name('edit.product');
+    Route::post('update/product/{id}', 'Admin\ProductController@updateProduct')->name('update.product');
+    Route::post('update/product/image/{id}', 'Admin\ProductController@updateProductImage')->name('update.product_images');
+    // For show sub categories with Ajax
+    Route::get('get/subcategory/{category_id}', 'Admin\ProductController@getSubcategories');
+
+    Route::get('admin/product/stock', 'Admin\ProductController@showProductStock')->name('admin.product.stock');
+
+    // Admin Order Route
+    Route::get('admin/pending/order', 'Admin\OrderController@showPendingOrderLists')->name('admin.pending.order');
+    Route::get('admin/accepted/payment', 'Admin\OrderController@showAcceptedOrderLists')->name('admin.accepted.payment');
+    Route::get('admin/cancel/order', 'Admin\OrderController@showCancelOrderLists')->name('admin.cancel.order');
+    Route::get('admin/process/order', 'Admin\OrderController@showProcessOrderLists')->name('admin.process.order');
+    Route::get('admin/delivered/order', 'Admin\OrderController@showDeliveredOrderLists')->name('admin.delivered.order');
+    Route::get('admin/order/details/{id}', 'Admin\OrderController@showOrderDetails')->name('admin.order.details');
+    Route::get('admin/accept/payment/{id}', 'Admin\OrderController@acceptPayment')->name('admin.accept.payment');
+    Route::get('admin/cancel/payment/{id}', 'Admin\OrderController@cancelPayment')->name('admin.cancel.payment');
+    Route::get('admin/update/process/order/{id}', 'Admin\OrderController@updateProcessOrder')->name('admin.update.process.order');
+    Route::get('admin/delivery/done/{id}', 'Admin\OrderController@updateDeliveryOrder')->name('admin.delivery.done');
+
     // Order Report Route
     Route::get('admin/report/today/order', 'Admin\ReportController@showTodayOrder')->name('report.today.order');
     Route::get('admin/report/delivered/order', 'Admin\ReportController@showTodaysDeliveredOrder')->name('report.delivered.order');
@@ -189,6 +189,5 @@ Route::middleware('auth:admin')->group(function() {
 
     Route::get('admin/approve/request/{id}', 'Admin\ReturnController@approveRequest')->name('admin.approve.request');
     Route::get('admin/return/lists', 'Admin\ReturnController@showReturnedLists')->name('admin.returned.lists');
-
 
 });

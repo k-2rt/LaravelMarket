@@ -27,6 +27,7 @@ class AddColumnsAdminsTable extends Migration
             $table->string('comment')->nullable()->default('0')->after('contact');
             $table->string('setting')->nullable()->default('0')->after('comment');
             $table->string('type')->nullable()->default('0')->after('setting');
+            $table->string('stock')->nullable()->default('0')->after('type');
         });
     }
 
@@ -51,6 +52,7 @@ class AddColumnsAdminsTable extends Migration
             $table->dropColumn('comment');
             $table->dropColumn('setting');
             $table->dropColumn('type');
+            $table->dropColumn('stock');
         });
     }
 }

@@ -95,6 +95,7 @@ class UserRoleController extends Controller
             'contact' => $request->contact ?? "0",
             'comment' => $request->comment ?? "0",
             'setting' => $request->setting ?? "0",
+            'stock' => $request->stock ?? "0",
             'type' => '2',
         ]);
 
@@ -103,7 +104,7 @@ class UserRoleController extends Controller
             'alert-type' => 'success'
         );
 
-        return  view('admin.role.user_lists')->with($notification);
+        return  redirect()->route('admin.user.lists')->with($notification);
     }
 
     /**
@@ -132,6 +133,7 @@ class UserRoleController extends Controller
             'contact' => $request->contact ?? "0",
             'comment' => $request->comment ?? "0",
             'setting' => $request->setting ?? "0",
+            'stock' => $request->stock ?? "0",
         ]);
 
         $notification = array(

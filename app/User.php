@@ -42,4 +42,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function orders() {
         return $this->hasMany('App\Models\Order');
     }
+
+    public function countAllUsers()
+    {
+        return $this->all()->count();
+    }
 }

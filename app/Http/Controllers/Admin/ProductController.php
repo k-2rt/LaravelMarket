@@ -9,19 +9,19 @@ use App\Models\Admin\Brand;
 use App\Models\Admin\Subcategory;
 use App\Models\Admin\Product;
 use Image;
+use App\Repositories\Product\ProductRepositoryInterface as ProductRepo;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    protected $product_repo;
+
+    public function __construct(ProductRepo $product_repo)
     {
-        $this->middleware('auth:admin');
+        $this->product_repo = $product_repo;
     }
 
     public function index() {
-        $products = Product::select('products.*', 'categories.category_name', 'brands.brand_name')
-                        ->join('categories', 'products.category_id', '=', 'categories.id')
-                        ->join('brands', 'products.brand_id', '=', 'brands.id')
-                        ->get();
+        $products = $this->product_repo->fetchProductsWithCategoryAndBrand();
 
         return view('admin.product.index', compact('products'));
     }
@@ -273,6 +273,18 @@ class ProductController extends Controller
         );
 
         return redirect()->route('index.product')->with($notification);
+    }
+
+    /**
+     * Show product stock page
+     *
+     * @return void
+     */
+    public function showProductStock()
+    {
+        $products = $this->product_repo->fetchProductsWithCategoryAndBrand();
+
+        return  view('admin.product.stock', compact('products'));
     }
 
 }

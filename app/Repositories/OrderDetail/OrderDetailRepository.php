@@ -17,9 +17,19 @@ class OrderDetailRepository implements OrderDetailRepositoryInterface
     }
 
     /**
-     * Get order detail info by order id
+     * Get order details by order id
      *
-     * @return object
+     * @return Object
+     */
+    public function getOrderDetailsByOrderId($id): Object
+    {
+        return $this->order_detail->where('order_id', $id)->get();
+    }
+
+    /**
+     * Get order details with product_code & product name by order id
+     *
+     * @return Object
      */
     public function getOrderDetailInfoByOrderId($id): Object
     {

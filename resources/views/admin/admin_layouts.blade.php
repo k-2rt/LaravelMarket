@@ -123,6 +123,7 @@
             <ul class="sl-menu-sub nav flex-column">
               <li class="nav-item"><a href="{{ route('create.product') }}" class="nav-link">商品追加</a></li>
               <li class="nav-item"><a href="{{ route('index.product') }}" class="nav-link">商品一覧</a></li>
+              <li class="nav-item"><a href="{{ route('admin.product.stock') }}" class="nav-link">商品在庫</a></li>
             </ul>
           @endif
 

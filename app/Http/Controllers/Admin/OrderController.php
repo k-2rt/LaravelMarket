@@ -7,19 +7,21 @@ use Illuminate\Http\Request;
 use App\Repositories\Order\OrderRepositoryInterface as OrderRepo;
 use App\Repositories\Shipping\ShippingRepositoryInterface as ShipRepo;
 use App\Repositories\OrderDetail\OrderDetailRepositoryInterface as OrderDetailRepo;
+use App\Repositories\Product\ProductRepositoryInterface as ProductRepo;
 
 class OrderController extends Controller
 {
     protected $order_repo;
     protected $ship_repo;
     protected $order_detail_repo;
+    protected $product_repo;
 
-    public function __construct(OrderRepo $order_repo, ShipRepo $ship_repo, OrderDetailRepo $order_detail_repo)
+    public function __construct(OrderRepo $order_repo, ShipRepo $ship_repo, OrderDetailRepo $order_detail_repo, ProductRepo $product_repo)
     {
-        $this->middleware('auth:admin');
         $this->order_repo = $order_repo;
         $this->ship_repo = $ship_repo;
         $this->order_detail_repo = $order_detail_repo;
+        $this->product_repo = $product_repo;
     }
 
     /**
@@ -134,6 +136,7 @@ class OrderController extends Controller
 
     /**
      * Change status to 3
+     * Decrement order quantity
      *
      * @param String $id
      * @return Array
@@ -141,6 +144,11 @@ class OrderController extends Controller
     public function updateDeliveryOrder($id)
     {
         $this->order_repo->changeDeliveryStatus($id);
+        $products = $this->order_detail_repo->getOrderDetailsByOrderId($id);
+
+        foreach ($products as $item) {
+            $this->product_repo->decrementProductQuantity($item);
+        }
 
         $notification = array(
             'message' => '配達済みにしました',
