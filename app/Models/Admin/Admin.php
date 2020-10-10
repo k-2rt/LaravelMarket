@@ -19,7 +19,7 @@ class Admin extends Authenticatable
         'name', 'kana', 'email', 'password',
         'phone', 'category', 'coupon', 'product',
         'article', 'other', 'order', 'report', 'return',
-        'role', 'contact', 'comment', 'setting', 'type'
+        'role', 'contact', 'comment', 'setting', 'stock', 'type'
     ];
 
     /**

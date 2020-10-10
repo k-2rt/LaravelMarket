@@ -109,14 +109,14 @@
               <div class="col-lg-4">
                 <label class="ckbox">
                   <input type="checkbox" name="role" value="1">
-                  <span>Role</span>
+                  <span>ユーザー管理</span>
                 </label>
               </div>
 
               <div class="col-lg-4">
                 <label class="ckbox">
                   <input type="checkbox" name="return" value="1">
-                  <span>Return</span>
+                  <span>返品管理</span>
                 </label>
               </div>
 
@@ -130,14 +130,21 @@
               <div class="col-lg-4">
                 <label class="ckbox">
                   <input type="checkbox" name="comment" value="1">
-                  <span>Comment</span>
+                  <span>コメント管理</span>
                 </label>
               </div>
 
               <div class="col-lg-4">
                 <label class="ckbox">
                   <input type="checkbox" name="setting" value="1">
-                  <span>Setting</span>
+                  <span>サイト管理</span>
+                </label>
+              </div>
+
+              <div class="col-lg-4">
+                <label class="ckbox">
+                  <input type="checkbox" name="stock" value="1">
+                  <span>在庫管理</span>
                 </label>
               </div>
 

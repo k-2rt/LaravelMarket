@@ -81,7 +81,7 @@
                 </ul>
               </li>
               <li><a href="{{ route('index.article') }}">記事<i class="fas fa-chevron-down"></i></a></li>
-              <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+            <li><a href="{{ route('contact.page') }}">お問い合わせ<i class="fas fa-chevron-down"></i></a></li>
             </ul>
           </div>
 

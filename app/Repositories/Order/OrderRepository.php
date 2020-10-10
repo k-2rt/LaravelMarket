@@ -196,6 +196,76 @@ class OrderRepository implements OrderRepositoryInterface
     }
 
     /**
+     * Calculate today's orders total
+     *
+     * @return String
+     */
+    public function calculateTodaysOrderTotal(): String
+    {
+        $today = Carbon::now()->format('Y/m/d');
+        $total = $this->order->where('order_date', '=', $today)
+                             ->sum('total');
+
+        return number_format($total);
+    }
+
+    /**
+     * Calculate order total of this month
+     *
+     * @return String
+     */
+    public function calculateMonthOrderTotal(): String
+    {
+        $month = Carbon::now()->format('Y/m');
+        $total = $this->order->where('order_date', 'LIKE', $month . '%')
+                             ->sum('total');
+
+        return number_format($total);
+    }
+
+    /**
+     * Calculate order total of this year
+     *
+     * @return String
+     */
+    public function calculateYearOrderTotal(): String
+    {
+        $year = Carbon::now()->format('Y');
+        $total = $this->order->where('order_date', 'LIKE', $year . '%')
+                             ->sum('total');
+
+        return number_format($total);
+    }
+
+    /**
+     * Calculate order total of today's delivered
+     *
+     * @return String
+     */
+    public function calculateOrderTotalOfTodaysDelivered(): String
+    {
+        $today = Carbon::now()->format('Y/m/d');
+        $total = $this->order->where('status', '=', 3)
+                             ->where('order_date', '=', $today)
+                             ->sum('total');
+
+        return number_format($total);
+    }
+
+    /**
+     * Calculate return order total
+     *
+     * @return String
+     */
+    public function calculateReturnOrder(): String
+    {
+        $total = $this->order->where('return_status', '=', 2)
+                             ->sum('total');
+
+        return number_format($total);
+    }
+
+    /**
      * Search orders
      *
      * @param Array $keywords

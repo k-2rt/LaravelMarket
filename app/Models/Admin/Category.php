@@ -10,6 +10,11 @@ class Category extends Model
         'category_name'
     ];
 
+    public function products()
+    {
+        return $this->hasMany('App\Models\Admin\Product');
+    }
+
     /**
      * Get all products
      *

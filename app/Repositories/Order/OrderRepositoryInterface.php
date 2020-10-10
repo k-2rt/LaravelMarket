@@ -117,6 +117,41 @@ interface OrderRepositoryInterface
     public function getApprovedReturnRequest();
 
     /**
+     * Calculate today's orders total
+     *
+     * @return String
+     */
+    public function calculateTodaysOrderTotal();
+
+    /**
+     * Calculate order total of this month
+     *
+     * @return String
+     */
+    public function calculateMonthOrderTotal();
+
+    /**
+     * Calculate order total of this year
+     *
+     * @return String
+     */
+    public function calculateYearOrderTotal();
+
+    /**
+     * Calculate order total of today's delivered
+     *
+     * @return String
+     */
+    public function calculateOrderTotalOfTodaysDelivered();
+
+    /**
+     * Calculate return order total
+     *
+     * @return String
+     */
+    public function calculateReturnOrder();
+
+    /**
      * Search orders
      *
      * @param Request $request

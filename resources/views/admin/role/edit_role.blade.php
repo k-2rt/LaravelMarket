@@ -105,14 +105,14 @@
               <div class="col-lg-4">
                 <label class="ckbox">
                   <input type="checkbox" name="role" value="1" {{ $user->role === '1' ? 'checked' : '' }}>
-                  <span>Role</span>
+                  <span>ユーザー管理</span>
                 </label>
               </div>
 
               <div class="col-lg-4">
                 <label class="ckbox">
                   <input type="checkbox" name="return" value="1" {{ $user->return === '1' ? 'checked' : '' }}>
-                  <span>Return</span>
+                  <span>返品管理</span>
                 </label>
               </div>
 
@@ -126,16 +126,24 @@
               <div class="col-lg-4">
                 <label class="ckbox">
                   <input type="checkbox" name="comment" value="1" {{ $user->comment === '1' ? 'checked' : '' }}>
-                  <span>Comment</span>
+                  <span>コメント管理</span>
                 </label>
               </div>
 
               <div class="col-lg-4">
                 <label class="ckbox">
                   <input type="checkbox" name="setting" value="1" {{ $user->setting === '1' ? 'checked' : '' }}>
-                  <span>Setting</span>
+                  <span>サイト管理</span>
                 </label>
               </div>
+
+              <div class="col-lg-4">
+                <label class="ckbox">
+                  <input type="checkbox" name="stock" value="1" {{ $user->stock === '1' ? 'checked' : '' }}>
+                  <span>在庫管理</span>
+                </label>
+              </div>
+
             </div>
             <br/>
             <br/>

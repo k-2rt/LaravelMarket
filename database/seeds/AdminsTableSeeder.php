@@ -31,7 +31,8 @@ class AdminsTableSeeder extends Seeder
             'contact' => "1",
             'comment' => "1",
             'setting' => "1",
-            'type' => '2',
+            'type' => '1',
+            'stock' => '1',
         ]);
     }
 }
