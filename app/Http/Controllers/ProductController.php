@@ -4,15 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin\Product;
+use App\Repositories\Product\ProductRepositoryInterface as ProductRepo;
 use Cart;
 use Auth;
+use App\Models\Admin\Category;
 
 class ProductController extends Controller
 {
     protected $product;
+    protected $product_repo;
+    protected $category;
 
-    public function __construct(Product $product) {
+    public function __construct(Product $product, ProductRepo $product_repo, Category $category) {
         $this->product = $product;
+        $this->product_repo = $product_repo;
+        $this->category = $category;
     }
 
     /**
@@ -83,5 +89,14 @@ class ProductController extends Controller
         $brands = $this->product->getBrandsByCategoryId($id);
 
         return view('main.category_list', compact('products', 'brands'));
+    }
+
+    public function searchProduct(Request $request)
+    {
+        $products = $this->product_repo->searchProductsByKeyword($request->search);
+        $items = $this->product_repo->searchProdcutBrandsByKeyword($request->search);
+        $categories = $this->category->getAllCategories();
+
+        return view('main.search', compact('products', 'categories', 'items'));
     }
 }

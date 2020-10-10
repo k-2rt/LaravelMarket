@@ -51,9 +51,9 @@
         <!-- Shop Content -->
         <div class="shop_content">
           <div class="shop_bar clearfix">
-            <div class="shop_product_count"><span>186</span> products found</div>
+          <div class="shop_product_count"><span>{{ $products->count() }}</span> 件 該当する商品</div>
             <div class="shop_sorting">
-              <span>Sort by:</span>
+              <span>並び替え：</span>
               <ul>
                 <li>
                   <span class="sorting_text">highest rated<i class="fas fa-chevron-down"></span></i>

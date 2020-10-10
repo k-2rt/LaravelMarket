@@ -16,7 +16,7 @@
         <!-- Shop Sidebar -->
         <div class="shop_sidebar">
           <div class="sidebar_section">
-            <div class="sidebar_title">カテゴリー</div>
+            <div class="sidebar_title">該当する商品一覧</div>
             <ul class="sidebar_categories">
 
               @foreach ($categories as $category)
@@ -38,11 +38,9 @@
           <div class="sidebar_section">
             <div class="sidebar_subtitle brands_subtitle">ブランド</div>
             <ul class="brands_list">
-              @foreach ($brands as $brand)
-                <li class="brand"><a href="#">{{ $brand->brand_name }}</a></li>
+              @foreach ($items as $item)
+                <li class="brand"><a href="#">{{ $item->brand->brand_name }}</a></li>
               @endforeach
-
-
             </ul>
           </div>
         </div>
@@ -76,7 +74,7 @@
               <!-- Product Item -->
               <div class="product_item is_new">
                 <div class="product_border"></div>
-              <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" width="100px" height="100px"></div>
+                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" width="100px" height="100px"></div>
                 <div class="product_content">
 
                   @if($product->discount_price === NULL)

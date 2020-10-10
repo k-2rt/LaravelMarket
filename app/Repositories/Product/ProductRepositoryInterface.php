@@ -18,4 +18,20 @@ interface ProductRepositoryInterface
      * @return void
      */
     public function decrementProductQuantity($item);
+
+    /**
+     * Search products by keyword
+     *
+     * @param String $keyword
+     * @return Object
+     */
+    public function searchProductsByKeyword($keyword);
+
+    /**
+     * Get Brands of search product
+     *
+     * @param String $keyword
+     * @return Object
+     */
+    public function searchProdcutBrandsByKeyword($keyword);
 }
