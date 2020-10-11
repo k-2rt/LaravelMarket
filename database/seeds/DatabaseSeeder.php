@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             OrderSettingsTableSeeder::class,
             PostCategoriesTableSeeder::class,
             PostsTableSeeder::class,
+            SiteSettingTableSeeder::class,
         ]);
     }
 }

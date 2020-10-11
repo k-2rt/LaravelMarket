@@ -41,8 +41,8 @@
                         </div>
                     </form><br>
                     <a href="{{ route('password.request') }}">パスワードをお忘れの方はこちらへ</a><br /><br />
-                    <button type="submit" class="btn btn-primary btn-block"><i class="fab fa-facebook-square"></i> Facebook でログイン</button><br>
-                    <button type="submit" class="btn btn-danger btn-block"><i class="fab fa-google"></i> Google でログイン</button>
+                    <a href="{{ url('/login/redirect/facebook') }}" class="btn btn-primary btn-block"><i class="fab fa-facebook-square"></i> Facebook でログイン</a><br>
+                    <a href="{{ url('/login/redirect/google') }}" class="btn btn-danger btn-block"><i class="fab fa-google"></i> Google でログイン</a>
                 </div>
 
                 <div class="contact_form_container login_form">
