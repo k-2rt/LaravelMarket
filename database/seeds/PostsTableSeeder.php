@@ -16,7 +16,7 @@ class PostsTableSeeder extends Seeder
 
         DB::table('posts')->insert([
             [
-                'category_id' => 1,
+                'post_category_id' => 1,
                 'post_title_en' => 'Test',
                 'post_title_ja' => 'テスト',
                 'post_image' => NULL,

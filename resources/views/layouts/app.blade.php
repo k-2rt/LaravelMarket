@@ -34,8 +34,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col d-flex flex-row">
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('/frontend/images/phone.png') }}" alt=""></div>{{ $setting->phone_one }}</div>
-					<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('/frontend/images/mail.png') }}" alt=""></div><a href="mailto:fastsales@gmail.com">{{ $setting->email }}</a></div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('/frontend/images/phone.png') }}" alt=""></div>{{ $site->phone_one }}</div>
+					<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('/frontend/images/mail.png') }}" alt=""></div><a href="mailto:{{ $site->email }}">{{ $site->email }}</a></div>
 						<div class="top_bar_content ml-auto">
 
 							<div class="top_bar_menu">
@@ -51,14 +51,10 @@
 								</ul>
 							</div>
 
-
 							<div class="top_bar_user">
 								@guest
-
 									<div><a href="{{ route('login') }}"><div class="user_icon"><img src="{{ asset('/frontend/images/user.svg') }}" alt=""></div> 新規登録/ログイン</a></div>
-
 								@else
-
 									<ul class="standard_dropdown top_bar_dropdown">
 										<li>
 										<a href="{{ route('home') }}"><div class="user_icon"><img src="{{ asset('/frontend/images/user.svg') }}" alt=""></div>プロフィール<i class="fas fa-chevron-down"></i></a>
@@ -70,9 +66,7 @@
 											</ul>
 										</li>
 									</ul>
-
 								@endguest
-
 							</div>
 						</div>
 					</div>
@@ -102,15 +96,16 @@
 										@csrf
 										<input type="search" required="required" class="header_search_input" placeholder="商品を検索" name="search">
 										<div class="custom_dropdown">
-											<div class="custom_dropdown_list">
-												<span class="custom_dropdown_placeholder clc">All Categories</span>
-												<i class="fas fa-chevron-down"></i>
-												<ul class="custom_list clc">
-													@foreach($categories as $category)
-												<li><a class="clc" href="#">{{ $category->category_name }}</a></li>
-													@endforeach
-												</ul>
+											<div class="custom_dropdown_list" style="display: none;">
+												<span class="custom_dropdown_placeholder clc"></span>
+												<ul class="custom_list clc"></ul>
 											</div>
+											<label for="search_product" style="margin-right: 5px;">
+												<input type="radio" name="mode" id="search_product" value="search_product" style="margin-right: 5px;" checked>商品名
+											</label>
+											<label for="search_article" style="margin-right: 5px;">
+												<input type="radio" name="mode" id="search_article" value="search_article" style="margin-right: 5px;">記事
+											</label>
 										</div>
 										<button type="submit" class="header_search_button trans_300" value=""><img src="{{ asset('/frontend/images/search.png') }}" alt=""></button>
 									</form>
@@ -163,64 +158,43 @@
 				<div class="col-lg-3 footer_col">
 					<div class="footer_column footer_contact">
 						<div class="logo_container">
-							<div class="logo"><a href="#">{{ $setting->company_name }}</a></div>
+							<div class="logo"><a href="#">{{ $site->company_name }}</a></div>
 						</div>
 						<div class="footer_title">日本の暮らしを伝えたい</div>
-						<div class="footer_phone">{{ $setting->phone_two }}</div>
+						<div class="footer_phone">{{ $site->phone_two }}</div>
 						<div class="footer_contact_text">
-							<p>{{ $setting->company_address }}</p>
+							<p>{{ $site->company_address }}</p>
 						</div>
 						<div class="footer_social">
 							<ul>
-								<li><a href="{{ $setting->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
-								<li><a href="{{ $setting->twitter }}"><i class="fab fa-twitter"></i></a></li>
-								<li><a href="{{ $setting->youtube }}"><i class="fab fa-youtube"></i></a></li>
-								<li><a href="{{ $setting->instagram }}"><i class="fab fa-google"></i></a></li>
+								<li><a href="{{ $site->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+								<li><a href="{{ $site->twitter }}"><i class="fab fa-twitter"></i></a></li>
+								<li><a href="{{ $site->youtube }}"><i class="fab fa-youtube"></i></a></li>
+								<li><a href="{{ $site->instagram }}"><i class="fab fa-google"></i></a></li>
 							</ul>
 						</div>
 					</div>
 				</div>
 
-				<div class="col-lg-2 offset-lg-2">
+				<div class="col-lg-2 offset-lg-4">
 					<div class="footer_column">
-						<div class="footer_title">Find it Fast</div>
+						<div class="footer_title">クラシテルについて</div>
 						<ul class="footer_list">
-							<li><a href="#">Computers & Laptops</a></li>
-							<li><a href="#">Cameras & Photos</a></li>
-							<li><a href="#">Hardware</a></li>
-							<li><a href="#">Smartphones & Tablets</a></li>
-							<li><a href="#">TV & Audio</a></li>
-						</ul>
-						<div class="footer_subtitle">Gadgets</div>
-						<ul class="footer_list">
-							<li><a href="#">Car Electronics</a></li>
+							<li><a href="#">ご利用ガイド</a></li>
+							<li><a href="#">お問い合わせ</a></li>
+							<li><a href="#">採用情報</a></li>
 						</ul>
 					</div>
 				</div>
 
 				<div class="col-lg-2">
 					<div class="footer_column">
-						<ul class="footer_list footer_list_2">
-							<li><a href="#">Video Games & Consoles</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li><a href="#">Cameras & Photos</a></li>
-							<li><a href="#">Hardware</a></li>
-							<li><a href="#">Computers & Laptops</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="col-lg-2">
-					<div class="footer_column">
-						<div class="footer_title">Customer Care</div>
+						<div class="footer_title">プライバシーと利用規約</div>
 						<ul class="footer_list">
-							<li><a href="#">My Account</a></li>
-							<li><a href="#">Order Tracking</a></li>
-							<li><a href="#">Wish List</a></li>
-							<li><a href="#">Customer Services</a></li>
-							<li><a href="#">Returns / Exchange</a></li>
-							<li><a href="#">FAQs</a></li>
-							<li><a href="#">Product Support</a></li>
+							<li><a href="#">広告掲載について</a></li>
+							<li><a href="#">運営会社</a></li>
+							<li><a href="#">特定商取引法に基づく表記</a></li>
+							<li><a href="#">ご利用規約</a></li>
 						</ul>
 					</div>
 				</div>
@@ -237,9 +211,8 @@
 				<div class="col">
 
 					<div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
-						<div class="copyright_content"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						<div class="copyright_content">
+							Copyright &copy;<script>document.write(new Date().getFullYear());</script> Kurashiteru All rights reserved.
 						</div>
 						<div class="logos ml-sm-auto">
 							<ul class="logos_list">
@@ -311,7 +284,7 @@
 			})
 			.then((willDelete) => {
 				if (willDelete) {
-							window.location.href = link;
+					window.location.href = link;
 				} else {
 					swal("キャンセルしました。");
 				}

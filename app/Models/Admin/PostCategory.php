@@ -10,4 +10,9 @@ class PostCategory extends Model
         'category_name_en',
         'category_name_ja',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany('App\Models\Admin\Post');
+    }
 }

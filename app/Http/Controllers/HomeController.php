@@ -4,25 +4,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Admin\Post;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
+    protected $post;
+
+    public function __construct(Post $post) {
+        $this->post = $post;
     }
 
     /**
-     * Show the application dashboard.
+     * Show main page
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return void
      */
     public function index()
+    {
+        $articles = $this->post->with('post_category')->get();
+
+        return view('main.index', compact('articles'));
+    }
+
+    /**
+     * Show user home page
+     *
+     * @return void
+     */
+    public function home()
     {
         return view('home');
     }

@@ -9,37 +9,18 @@
 <div class="contact_form">
   <div class="container">
     <div class="row">
-
       <div class="col-lg-7 login_form mx-auto">
         <div class="contact_form_container">
-          <div class="contact_form_title">お支払い方法</div>
+          <div class="contact_form_title">お支払い</div>
 
           <form action="{{ route('payment.stripe') }}" method="post" id="payment-form">
             @csrf
-
-            <div class="form-group">
-              <ul class="logos_list">
-                <li>
-                  <input type="radio" name="payment_type" value="stripe">
-                  <img src="{{ asset('/frontend/images/mastercard.png') }}" alt="" width="100px;" height="60px;">
-                </li>
-
-                <li>
-                  <input type="radio" name="payment_type" value="paypal"><img src="{{ asset('/frontend/images/paypal.png') }}" alt="" width="100px;" height="60px;">
-                </li>
-
-                <li>
-                  <input type="radio" name="payment_type" value="ideal"><img src="{{ asset('/frontend/images/mollie.png') }}" alt="" width="100px;" height="60px;">
-                </li>
-
-              </ul>
-            </div>
 
             <div class="form-row">
               <label for="card-element">
                 クレジットもしくはデビットカード
               </label>
-              <div id="card-element">
+              <div id="card-element" style="margin-bottom: 0.5rem;">
                 <!-- A Stripe Element will be inserted here. -->
               </div>
 

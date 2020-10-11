@@ -11,9 +11,9 @@
     <div class="sl-pagebody">
       <div class="card pd-20 pd-sm-40">
         <h6 class="card-body-title">新規追加
-        <a href="{{ route('index.blog.category') }}" class="btn btn-success btn-sm pull-right">投稿一覧</a>
+        <a href="{{ route('index.blog.post') }}" class="btn btn-success btn-sm pull-right">投稿一覧</a>
         </h6>
-        <form action="{{ route('store.blog.post') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('store.article.post') }}" method="POST" enctype="multipart/form-data">
           @csrf
 
           <div class="form-layout">
@@ -34,13 +34,11 @@
 
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">ブログ カテゴリー: <span class="tx-danger">*</span></label>
-                  <select class="form-control select2" name="category_id">
+                  <label class="form-control-label">記事 カテゴリー: <span class="tx-danger">*</span></label>
+                  <select class="form-control select2" name="post_category_id">
                     <option value="">選択してください</option>
-                    @foreach($blog_categories as $blog_category)
-
-                      <option value="{{ $blog_category->id }}">{{ $blog_category->category_name_en }}</option>
-
+                    @foreach($article_categories as $category)
+                      <option value="{{ $category->id }}">{{ $category->category_name_en }}</option>
                     @endforeach
                   </select>
                 </div>

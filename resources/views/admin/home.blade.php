@@ -5,8 +5,8 @@
   <!-- ########## START: MAIN PANEL ########## -->
   <div class="sl-mainpanel">
     <nav class="breadcrumb sl-breadcrumb">
-      <a class="breadcrumb-item" href="index.html">Starlight</a>
-      <span class="breadcrumb-item active">Dashboard</span>
+      <a class="breadcrumb-item" href="#">管理画面</a>
+      <span class="breadcrumb-item active">ダッシュボード</span>
     </nav>
 
     <div class="sl-pagebody">
