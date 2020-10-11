@@ -27,7 +27,7 @@ class PaymentController extends Controller
         $prefs = config('pref');
         $user = Auth::user();
 
-        return view('main.payment.stripe', compact('prefs', 'user'));
+        return view('main.payment', compact('prefs', 'user'));
     }
 
     public function payByStripe(Request $request) {
@@ -69,7 +69,6 @@ class PaymentController extends Controller
             'coupon_id' => $coupon_id,
             'discount' => $discount,
             'shipping_fee' => $request->shipping_fee,
-            'payment_type' => $request->payment_type,
             'status_code' => mt_rand(100000, 999999),
             'order_date' => date('Y/m/d'),
             'subtotal' => Cart::subtotal(),

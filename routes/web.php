@@ -13,16 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function() {
-    return view('main.index');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::middleware('auth')->group(function() {
+    Route::get('home', 'HomeController@home')->name('home');
+    Route::get('user/logout', 'HomeController@logout')->name('user.logout');
 });
 
 Auth::routes(['verify' => true]);
-Route::get('home', 'HomeController@index')->name('home');
+
 Route::get('password/change', 'Auth\ChangePasswordController@index')->name('password.change');
 Route::post('password/change', 'Auth\ChangePasswordController@changePassword')->name('password.change');
-
-Route::get('user/logout', 'HomeController@logout')->name('user.logout');
 
 // Admin Route
 Route::get('admin', 'Admin\LoginController@showLoginForm')->name('admin.login');
@@ -79,7 +80,7 @@ Route::post('update/blog/category/{id}', 'Admin\PostController@updateBlogCategor
 
 Route::get('index/blog/post', 'Admin\PostController@indexPost')->name('index.blog.post');
 Route::get('create/blog/post', 'Admin\PostController@createPost')->name('create.blog.post');
-Route::post('store/blog/post', 'Admin\PostController@storeBlogPost')->name('store.blog.post');
+Route::post('store/article/post', 'Admin\PostController@storeArticlePost')->name('store.article.post');
 Route::get('delete/post/{id}', 'Admin\PostController@deletePost')->name('delete.post');
 Route::get('edit/post/{id}', 'Admin\PostController@editPost')->name('edit.post');
 Route::post('update/post/{id}', 'Admin\PostController@updatePost')->name('update.post');
@@ -117,15 +118,10 @@ Route::get('language/english', 'ArticleController@changeEnglishNotation')->name(
 
 // Payment Products
 Route::get('payment/page', 'PaymentController@showPaymentPage')->name('payment.page');
-Route::post('process/payment', 'PaymentController@processPayment')->name('process.payment');
 Route::post('payment/stripe', 'PaymentController@payByStripe')->name('payment.stripe');
 
 Route::post('update/shipping/address', 'AddressController@updateShippingAddress')->name('update.shipping.address');
 Route::get('show/address/page', 'AddressController@showAddressPage')->name('show.address.page');
-
-// SEO Setting Route
-Route::get('admin/seo', 'Admin\Others\SEOController@seo')->name('admin.seo');
-Route::post('admin/update/seo', 'Admin\Others\SEOController@updateSEO')->name('update.seo');
 
 // Track Order Route
 Route::get('order_history/lists', 'ProfileController@showOrderHistoryLists')->name('order_history.lists');

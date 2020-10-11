@@ -25,11 +25,11 @@ class AppComposer
     public function compose(View $view)
     {
         $language = Session()->get('lang');
-        $setting = $this->site_set->first();
+        $site = $this->site_set->first();
 
         $view->with(compact([
             'language',
-            'setting',
+            'site',
         ]));
     }
 }

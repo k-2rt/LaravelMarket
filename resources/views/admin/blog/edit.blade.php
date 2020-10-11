@@ -75,7 +75,7 @@
                 <div class="form-group">
                   <label class="form-control-label">現在の画像: <span class="tx-danger">*</span></label><br />
                   <label class="custom-file">
-                    <img src="{{ URL::to($post->post_image) }}" alt="" height="80px" width="130px">
+                    <img src="{{ asset($post->post_image) }}" alt="" height="80px" width="130px">
                     <input type="hidden" name="old_image" value="{{ $post->post_image }}">
                   </label>
                 </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\PostCategory;
 use App\Models\Admin\Post;
 use Image;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -101,18 +102,18 @@ class PostController extends Controller
      * @return void
      */
     public function createPost() {
-        $blog_categories = PostCategory::all();
+        $article_categories = PostCategory::all();
 
-        return view('admin.blog.create', compact('blog_categories'));
+        return view('admin.blog.create', compact('article_categories'));
     }
 
     /**
-     * Store blog post
+     * Store article post
      *
      * @param Request $request
      * @return void
      */
-    public function storeBlogPost(Request $request) {
+    public function storeArticlePost(Request $request) {
         $post = new Post();
         $post->fill($request->all());
         $post_image = $request->file('post_image');
@@ -139,8 +140,8 @@ class PostController extends Controller
      * @return void
      */
     public function indexPost() {
-        $posts = Post::select('posts.*', 'posts.category_id', 'post_categories.category_name_en')
-                    ->join('post_categories', 'posts.category_id', '=', 'post_categories.id')
+        $posts = Post::select('posts.*', 'posts.post_category_id', 'post_categories.category_name_en')
+                    ->join('post_categories', 'posts.post_category_id', '=', 'post_categories.id')
                     ->orderBy('id')
                     ->get();
 
@@ -179,6 +180,7 @@ class PostController extends Controller
     public function editPost($id) {
         $post = Post::find($id);
         $blog_categories = PostCategory::all();
+
 
         return view('admin.blog.edit', compact('post', 'blog_categories'));
     }

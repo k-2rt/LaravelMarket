@@ -29,9 +29,9 @@ class ViewComposerServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\Layouts\AppComposer' => 'layouts.app',
             'App\Http\ViewComposers\Layouts\SliderComposer' => 'layouts.slider',
             'App\Http\ViewComposers\Main\MainComposer' => 'main.index',
-            'App\Http\ViewComposers\Main\CheckoutComposer' => ['main.checkout', 'main.payment.stripe'],
+            'App\Http\ViewComposers\Main\CheckoutComposer' => ['main.checkout', 'main.payment'],
             'App\Http\ViewComposers\Main\ProductListComposer' => ['main.product_list', 'main.category_list'],
-            'App\Http\ViewComposers\Main\StripeComposer' => 'main.payment.stripe',
+            'App\Http\ViewComposers\Main\StripeComposer' => 'main.payment',
             'App\Http\ViewComposers\Auth\LoginComposer' => 'auth.login',
             'App\Http\ViewComposers\HomeComposer' => 'home',
         ]);
