@@ -23,6 +23,8 @@ class UsersTableSeeder extends Seeder
             'prefectures' => '13',
             'address1' => '品川駅1-1-1',
             'address2' => '東京タワー',
+            'provider' => '東京タワー',
+            'address2' => '東京タワー',
         ]);
     }
 }

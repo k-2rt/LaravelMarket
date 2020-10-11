@@ -7,6 +7,8 @@ use App\Models\Order;
 use Auth;
 use Cart;
 use Session;
+use Mail;
+use App\Mail\InvoiceMail;
 
 class PaymentController extends Controller
 {
@@ -28,22 +30,10 @@ class PaymentController extends Controller
         return view('main.payment.stripe', compact('prefs', 'user'));
     }
 
-    public function processPayment(Request $request) {
-
-        if ($request->payment === 'stripe') {
-            return view('main.payment.stripe');
-        } else if ($request->payment === 'paypal') {
-            return view('main.payment.stripe');
-        } else if ($request->payment === 'ideal') {
-            return view('main.payment.stripe');
-        } else {
-
-        }
-    }
-
     public function payByStripe(Request $request) {
         $discount = "";
         $coupon_id = NULL;
+        $user = Auth::user();
 
         if (Session::has('coupon')) {
             $discount = Session::get('coupon')['discount'];
@@ -71,7 +61,7 @@ class PaymentController extends Controller
         ]);
 
         $order = $this->order->create([
-            'user_id' => Auth::id(),
+            'user_id' => $user->id,
             'payment_id' => $charge->payment_method,
             'balance_transaction' => $charge->balance_transaction,
             'stripe_order_id' => $charge->metadata->order_id,
@@ -85,8 +75,6 @@ class PaymentController extends Controller
             'subtotal' => Cart::subtotal(),
         ]);
 
-        $user = Auth::user();
-
         $order->shipping()->create([
             'ship_name' => $user->name,
             'ship_phone' => $user->phone,
@@ -99,8 +87,9 @@ class PaymentController extends Controller
 
         $content = Cart::content();
 
+        $data = [];
         foreach ($content as $item) {
-            $order->order_details()->create([
+            $data = $order->order_details()->create([
                 'product_id' => $item->id,
                 'product_name' => $item->name,
                 'color' => $item->options->color,
@@ -110,6 +99,19 @@ class PaymentController extends Controller
                 'total_price' => $item->qty * $item->price,
             ]);
         }
+
+        // Mail send to user for Invoice
+        Mail::to($user->email)->send(new InvoiceMail([
+            'user_name' => $user->name,
+            'ship_zip_code' => $user->zip_code,
+            'ship_address' => config('pref.' . $user->prefectures) . ' ' . $user->address1 . ' ' . $user->address2,
+            'payment_id' => $charge->payment_method,
+            'total' => $charge->amount,
+            'discount' => $discount ? number_format($discount) : 0,
+            'shipping_fee' => $request->shipping_fee,
+            'order_date' => date('Y/m/d'),
+            'subtotal' => Cart::subtotal(),
+        ]));
 
         Cart::destroy();
         if (Session::has('coupon')) {
