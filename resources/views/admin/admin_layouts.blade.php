@@ -106,9 +106,9 @@
               </div>
             </a>
             <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{ route('index.blog.category') }}" class="nav-link">カテゴリー</a></li>
-            <li class="nav-item"><a href="{{ route('create.blog.post') }}" class="nav-link">投稿</a></li>
-              <li class="nav-item"><a href="{{ route('index.blog.post') }}" class="nav-link">投稿一覧</a></li>
+            <li class="nav-item"><a href="{{ route('index.article.category') }}" class="nav-link">カテゴリー</a></li>
+            <li class="nav-item"><a href="{{ route('create.article.post') }}" class="nav-link">投稿</a></li>
+              <li class="nav-item"><a href="{{ route('index.article.post') }}" class="nav-link">投稿一覧</a></li>
             </ul>
           @endif
 

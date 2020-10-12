@@ -168,7 +168,7 @@ class ProductController extends Controller
             'product_color' => 'required',
             'selling_price' => 'required',
             'product_details' => 'required',
-            'old_one' => 'required',
+            'product_details' => 'required',
         ]);
 
         $this->product_repo->updateProductInfo($request, $id);

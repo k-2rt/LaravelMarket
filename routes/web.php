@@ -71,15 +71,15 @@ Route::get('admin/newsletter', 'Admin\Others\NewsletterController@newsletter')->
 Route::post('admin/store/newsletter', 'Admin\Others\NewsletterController@storeNewsletter')->name('store.newsletter');
 Route::get('delete/newsletter/{id}', 'Admin\Others\NewsletterController@deleteNewsletter')->name('delete.newsletter');
 
-// Admin blog route
-Route::get('blog/category/list', 'Admin\PostController@blogCategoryList')->name('index.blog.category');
-Route::post('blog/category/blog', 'Admin\PostController@storeBlogCategory')->name('store.blog.category');
-Route::get('delete/blog/category/{id}', 'Admin\PostController@deleteBlogCategory')->name('delete.blog.category');
-Route::get('edit/blog/category/{id}', 'Admin\PostController@editBlogCategory')->name('edit.blog.category');
-Route::post('update/blog/category/{id}', 'Admin\PostController@updateBlogCategory')->name('update.blog.category');
+// Admin article route
+Route::get('article/category/list', 'Admin\PostController@articleCategoryList')->name('index.article.category');
+Route::post('article/category/list', 'Admin\PostController@storeArticleCategory')->name('store.article.category');
+Route::get('delete/article/category/{id}', 'Admin\PostController@deleteArticleCategory')->name('delete.article.category');
+Route::get('edit/article/category/{id}', 'Admin\PostController@editArticleCategory')->name('edit.article.category');
+Route::post('update/article/category/{id}', 'Admin\PostController@updateArticleCategory')->name('update.article.category');
 
-Route::get('index/blog/post', 'Admin\PostController@indexPost')->name('index.blog.post');
-Route::get('create/blog/post', 'Admin\PostController@createPost')->name('create.blog.post');
+Route::get('index/article/post', 'Admin\PostController@indexPost')->name('index.article.post');
+Route::get('create/article/post', 'Admin\PostController@createPost')->name('create.article.post');
 Route::post('store/article/post', 'Admin\PostController@storeArticlePost')->name('store.article.post');
 Route::get('delete/post/{id}', 'Admin\PostController@deletePost')->name('delete.post');
 Route::get('edit/post/{id}', 'Admin\PostController@editPost')->name('edit.post');

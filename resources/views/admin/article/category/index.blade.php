@@ -5,34 +5,45 @@
 <div class="sl-mainpanel">
   <nav class="breadcrumb sl-breadcrumb">
     <a class="breadcrumb-item" href="#">ブログ</a>
-    <span class="breadcrumb-item active">投稿 一覧</span>
+    <span class="breadcrumb-item active">カテゴリー 一覧</span>
   </nav>
 
   <div class="sl-pagebody">
     <div class="card pd-20 pd-sm-40">
+
+      @if ($errors->any())
+        <div class="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+      @endif
+
       <h6 class="card-body-title">
-      <a href="{{ route('create.blog.post') }}" class="btn btn-sm btn-warning" style="float: right;">新規作成</a>
+        <a href="#" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">新規作成</a>
       </h6>
 
       <div class="table-wrapper">
         <table id="datatable1" class="table display responsive nowrap">
           <thead>
             <tr>
-              <th class="wd-15p">タイトル</th>
-              <th class="wd-15p">カテゴリー</th>
-              <th class="wd-15p">画像</th>
+              <th class="wd-15p">ID</th>
+              <th class="wd-15p">カテゴリー名 英語</th>
+              <th class="wd-15p">カテゴリー名 日本語</th>
               <th class="wd-20p">アクション</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($posts as $key => $post)
+            @foreach($article_categories as $key => $article_category)
               <tr>
-                <td>{{ $post->post_title_en }}</td>
-                <td>{{ $post->category_name_en }}</td>
-                <td><img src="{{ URL::to($post->post_image) }}" alt="" height="50px;" width="50px;"></td>
+                <td>{{ $article_category->id }}</td>
+                <td>{{ $article_category->category_name_en }}</td>
+                <td>{{ $article_category->category_name_ja }}</td>
                 <td>
-                  <a href="{{ route('edit.post', ['id' => $post->id]) }}" class="btn btn-sm btn-info">編集</a>
-                  <a href="{{ route('delete.post', ['id' => $post->id]) }}" class="btn btn-sm btn-danger" id="delete">削除</a>
+                  <a href="{{ route('edit.article.category', ['id' => $article_category->id]) }}" class="btn btn-sm btn-info">編集</a>
+                  <a href="{{ route('delete.article.category', ['id' => $article_category->id]) }}" class="btn btn-sm btn-danger" id="delete">削除</a>
                 </td>
               </tr>
             @endforeach
@@ -53,17 +64,7 @@
           </button>
         </div>
 
-        @if ($errors->any())
-          <div class="alert alert-danger">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
-          </div>
-        @endif
-
-        <form action="{{ route('store.blog.category') }}" method="POST">
+        <form action="{{ route('store.article.category') }}" method="POST">
           @csrf
 
           <div class="modal-body pd-20">
@@ -86,5 +87,6 @@
     </div>
   </div>
 </div>
+
 
 @endsection

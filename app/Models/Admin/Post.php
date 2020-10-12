@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -25,9 +26,20 @@ class Post extends Model
      *
      * @return Object
      */
-    public function getPostsWithPostCategories() {
+    public function getPostsWithPostCategories()
+    {
         return $this->select('posts.*', 'post_categories.category_name_en', 'post_categories.category_name_ja')
                     ->join('post_categories', 'posts.category_id', 'post_categories.id')
                     ->get();
+    }
+
+    public function getStorageArticleImageAttribute()
+    {
+        $old_img = str_replace('storage/', 'public/', $this->post_image);
+        if (Storage::exists($old_img)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
