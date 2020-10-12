@@ -11,18 +11,16 @@
 
   <div class="sl-pagebody">
     <div class="card pd-20 pd-sm-40">
-      <h6 class="card-body-title"></h6>
+      @if ($errors->any())
+        <div class="alert">
+          <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
       <div class="table-wrapper">
-
-        @if ($errors->any())
-          <div class="alert alert-danger">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
-          </div>
-        @endif
 
         <form action="{{ route('update.brand', ['id' => $brand->id]) }}" method="POST" enctype="multipart/form-data">
           @csrf
@@ -30,17 +28,22 @@
           <div class="modal-body pd-20">
             <div class="form-group">
               <label for="brand_name">ブランド名</label>
-              <input type="text" class="form-control" id="brand_name" aria-describedby="emailHelp" value="{{ $brand->brand_name }}" name="brand_name">
+              <input type="text" class="form-control" id="brand_name" value="{{ old('brand_name', $brand->brand_name) }}" name="brand_name">
             </div>
 
             <div class="form-group">
               <label for="brand_logo">ブランドロゴ</label>
-              <input type="file" class="form-control" id="brand_logo" aria-describedby="emailHelp"  name="brand_logo">
+              <input type="file" class="form-control" id="brand_logo" name="brand_logo">
             </div>
 
             <div class="form-group">
               <label>現在のブランドロゴ</label>
-              <img src="{{ URL::to($brand->brand_logo) }}" alt="" height="70px" width="80px">
+              @if ($brand->brand_logo)
+                <img src="{{ asset($brand->brand_logo) }}" alt="" height="70px" width="80px">
+              @else
+                <img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="70px" width="80px">
+              @endif
+
               <input type="hidden" name="old_logo" value="{{ $brand->brand_logo }}">
             </div>
 

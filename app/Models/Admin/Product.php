@@ -24,7 +24,6 @@ class Product extends Model
         'image_three',
         'main_slider',
         'hot_deal',
-        'buyone_getone',
         'best_rated',
         'trend',
         'mid_slider',

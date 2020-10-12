@@ -9,6 +9,7 @@ use App\Models\Admin\Brand;
 use App\Models\Admin\Subcategory;
 use App\Models\Admin\Product;
 use App\Repositories\Product\ProductRepositoryInterface as ProductRepo;
+use App\Http\Requests\ProdcutRequest;
 
 class ProductController extends Controller
 {
@@ -57,7 +58,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return void
      */
-    public function store(Request $request) {
+    public function store(ProdcutRequest $request) {
         $this->product_repo->createNewProduct($request);
 
         $notification = array(
@@ -108,17 +109,10 @@ class ProductController extends Controller
      * @param String $id
      * @return void
      */
-    public function deleteProduct($id) {
-        $product = $this->product_repo->findProduct($id);
-        $image_one = $product->image_one;
-        $image_two = $product->image_two;
-        $image_three = $product->image_three;
+    public function deleteProduct($id)
+    {
 
-        unlink($image_one);
-        unlink($image_two);
-        unlink($image_three);
-
-        $product->delete();
+        $product = $this->product_repo->deleteProduct($id);
 
         $notification = array(
             'message' => '商品を削除しました',
@@ -163,70 +157,21 @@ class ProductController extends Controller
      * @return void
      */
     public function updateProduct(Request $request, $id) {
-        Product::find($id)->update($request->all());
+        $request->validate([
+            'product_name' => 'required',
+            'product_code' => 'required',
+            'product_quantity' => 'required',
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'brand_id' => 'required',
+            'product_size' => 'required',
+            'product_color' => 'required',
+            'selling_price' => 'required',
+            'product_details' => 'required',
+            'old_one' => 'required',
+        ]);
 
-        $notification = array(
-            'message' => '商品を更新しました',
-            'alert-type' => 'success'
-        );
-
-        return redirect()->route('index.product')->with($notification);
-    }
-
-    /**
-     * Update product images
-     *
-     * @param Request $request
-     * @param String $id
-     * @return void
-     */
-    public function updateProductImage(Request $request, $id) {
-        $product = $this->product_repo->findProduct($id);
-
-        $old_one = $request->old_one;
-        $old_two = $request->old_two;
-        $old_three = $request->old_three;
-        $image_one = $request->file('image_one');
-        $image_two = $request->file('image_two');
-        $image_three = $request->file('image_three');
-
-        if ($image_one) {
-            if ($old_one) {
-                unlink($old_one);
-            }
-
-            $create_date = date('Ymd');
-            $image_full_name = $create_date . '_' . strtolower($image_one->getClientOriginalName());
-            $upload_path = 'public/product/';
-            $image_one->move($upload_path, $image_full_name);
-            $product->image_one = $upload_path . $image_full_name;
-        }
-
-        if ($image_two) {
-            if ($old_two) {
-                unlink($old_two);
-            }
-
-            $create_date = date('Ymd');
-            $image_full_name = $create_date . '_' . strtolower($image_two->getClientOriginalName());
-            $upload_path = 'public/product/';
-            $image_two->move($upload_path, $image_full_name);
-            $product->image_two = $upload_path . $image_full_name;
-        }
-
-        if ($image_three) {
-            if ($old_three) {
-                unlink($old_three);
-            }
-
-            $create_date = date('Ymd');
-            $image_full_name = $create_date . '_' . strtolower($image_three->getClientOriginalName());
-            $upload_path = 'public/product/';
-            $image_three->move($upload_path, $image_full_name);
-            $product->image_three = $upload_path . $image_full_name;
-        }
-
-        $product->update();
+        $this->product_repo->updateProductInfo($request, $id);
 
         $notification = array(
             'message' => '商品を更新しました',

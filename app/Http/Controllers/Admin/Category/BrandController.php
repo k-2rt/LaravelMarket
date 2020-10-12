@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Brand;
+use Illuminate\Support\Facades\Storage;
+use Image;
 
 class BrandController extends Controller
 {
@@ -42,9 +44,10 @@ class BrandController extends Controller
         $brand_image = $request->file('brand_logo');
 
         if ($brand_image) {
-            $temp_path = $brand_image->store('public/brand');
-            $read_temp_path = str_replace('public/', 'storage/', $temp_path);
-            $brand->brand_logo = $read_temp_path;
+            $brand_image_name = uniqid() . '_' . $brand_image->getClientOriginalName();
+            $img = Image::make($brand_image)->resize(300, 300)->encode('jpg');
+            Storage::put('public/brand/' . $brand_image_name, $img);
+            $brand->brand_logo = 'storage/brand/' . $brand_image_name;
         }
 
         $brand->save();
@@ -103,11 +106,10 @@ class BrandController extends Controller
                 unlink($old_logo);
             }
 
-            $create_date = date('Ymd');
-            $image_full_name = $create_date . '_' . strtolower($brand_image->getClientOriginalName());
-            $upload_path = 'public/brand/';
-            $brand_image->move($upload_path, $image_full_name);
-            $brand->brand_logo = $upload_path . $image_full_name;
+            $brand_image_name = uniqid() . '_' . $brand_image->getClientOriginalName();
+            $img = Image::make($brand_image)->resize(300, 300)->encode('jpg');
+            Storage::put('public/brand/' . $brand_image_name, $img);
+            $brand->brand_logo = 'storage/brand/' . $brand_image_name;
         } else {
             $brand->brand_logo = $old_logo;
         }

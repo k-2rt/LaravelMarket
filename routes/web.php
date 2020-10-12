@@ -138,7 +138,7 @@ Route::post('contact/form', 'ContactController@sendContactMessage')->name('conta
 Route::post('search/product', 'ProductController@searchProduct')->name('search.product');
 
 Route::middleware('auth:admin')->group(function() {
-    Route::get('admin/home', 'AdminController@index');
+    Route::get('admin/home', 'AdminController@index')->name('admin.home');
     Route::get('admin/logout', 'AdminController@logout')->name('admin.logout');
     // Password Reset Routes
     Route::get('admin/password/change','AdminController@showChangePasswordForm')->name('admin.password.change');
@@ -154,7 +154,6 @@ Route::middleware('auth:admin')->group(function() {
     Route::get('show/product/{id}', 'Admin\ProductController@showProduct')->name('show.product');
     Route::get('edit/product/{id}', 'Admin\ProductController@editProduct')->name('edit.product');
     Route::post('update/product/{id}', 'Admin\ProductController@updateProduct')->name('update.product');
-    Route::post('update/product/image/{id}', 'Admin\ProductController@updateProductImage')->name('update.product_images');
     // For show sub categories with Ajax
     Route::get('get/subcategory/{category_id}', 'Admin\ProductController@getSubcategories');
 

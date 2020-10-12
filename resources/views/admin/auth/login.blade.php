@@ -12,6 +12,7 @@
         @csrf
 
         <div class="form-group">
+          <label for="email">メールアドレス</label>
           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
           @error('email')
@@ -22,7 +23,7 @@
         </div>
 
         <div class="form-group">
-
+          <label for="password">パスワード</label>
           <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
           @error('password')
@@ -31,12 +32,8 @@
               </span>
           @enderror
 
-
-          <a href="{{ route('admin.password.change') }}" class="tx-info tx-12 d-block mg-t-10">パスワードを忘れた方へ</a>
         </div><!-- form-group -->
-        <button type="submit" class="btn btn-info btn-block">Sign In</button>
-
-        <div class="mg-t-60 tx-center">新規会員登録がまだの方は <a href="{{ route('register') }}" class="tx-info">こちらへ</a></div>
+        <button type="submit" class="btn btn-info btn-block">ログイン</button>
 
       </form>
 
