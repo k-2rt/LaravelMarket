@@ -203,41 +203,69 @@
 		</div>
 	</div>
 
-	<!-- Popular Categories -->
+	<!-- Trends -->
 
-	<div class="popular_categories">
+	<div class="trends">
+		<div class="trends_background"></div>
+		<div class="trends_overlay"></div>
 		<div class="container">
 			<div class="row">
+
+				<!-- Trends Content -->
 				<div class="col-lg-3">
-					<div class="popular_categories_content">
-						<div class="popular_categories_title">Popular Categories</div>
-						<div class="popular_categories_slider_nav">
-							<div class="popular_categories_prev popular_categories_nav"><i class="fas fa-angle-left ml-auto"></i></div>
-							<div class="popular_categories_next popular_categories_nav"><i class="fas fa-angle-right ml-auto"></i></div>
+					<div class="trends_container">
+						<h2 class="trends_title">Buy One Get One</h2>
+						<div class="trends_text"><p></p></div>
+						<div class="trends_slider_nav">
+							<div class="trends_prev trends_nav"><i class="fas fa-angle-left ml-auto"></i></div>
+							<div class="trends_next trends_nav"><i class="fas fa-angle-right ml-auto"></i></div>
 						</div>
-						<div class="popular_categories_link"><a href="#">full catalog</a></div>
 					</div>
 				</div>
 
-				<!-- Popular Categories Slider -->
-
+				<!-- Trends Slider -->
 				<div class="col-lg-9">
-					<div class="popular_categories_slider_container">
-						<div class="owl-carousel owl-theme popular_categories_slider">
+					<div class="trends_slider_container">
 
-							<!-- Popular Categories Item -->
-							@foreach ($categories as $category)
+						<!-- Trends Slider -->
+
+						<div class="owl-carousel owl-theme trends_slider">
+
+							<!-- Trends Slider Item -->
+							@foreach ($buyone_getone_products as $product)
 								<div class="owl-item">
-									<div class="popular_category d-flex flex-column align-items-center justify-content-center">
-										<div class="popular_category_image"><img src="{{ asset('/frontend/images/popular_1.png') }}" alt=""></div>
-									<div class="popular_category_text">{{ $category->category_name }}</div>
+									<div class="trends_item is_new product_item">
+										<div class="trends_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset( $product->image_one ) }}" alt="" height="200px"></div>
+										<div class="trends_content">
+										<div class="trends_category"><a href="#">{{ $product->brand_name }}</a></div>
+											<div class="trends_info clearfix">
+												<div class="trends_name"><a href="product.html">{{ $product->product_name }}</a></div>
+
+												@if($product->discount_price === NULL)
+													<div class="product_price discount">{{ number_format($product->selling_price) }}円</div>
+												@else
+													<div class="product_price discount">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
+												@endif
+
+												<a href="" class="btn btn-primary btn-sm font-weight-bold" style="margin-top: 5px;">カートに入れる</a>
+
+											</div>
+										</div>
+										<ul class="trends_marks">
+											<li class="trends_mark trends_discount">SALE</li>
+										</ul>
+										@auth
+											<div class="trends_fav addWishList" data-id="{{ $product->id }}"><i class="fas fa-heart"></i></div>
+										@endauth
 									</div>
 								</div>
+
 							@endforeach
 
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
@@ -398,224 +426,11 @@
 						<div class=""><a href="{{ route('show.article', ['id' => $article->id]) }}"><img src="{{ $article->post_image }}" alt="" class="article_image"></a></div>
 						<div class="advert flex-row align-items-center justify-content-start">
 							<div class="advert_content">
-
 								<div class="advert_text">{!! $article->details_ja !!}</div>
 							</div>
 						</div>
 					</div>
-					{{-- <div class="col-lg-4 advert_col">
-						<div class="advert d-flex flex-row align-items-center justify-content-start">
-							<div class="advert_content">
-								<div class="advert_title"><a href="#">{{ $article->post_title_ja }}</a></div>
-								<div class="advert_text">{!! $article->details_ja !!}</div>
-							</div>
-							<div class="ml-auto"><div class="advert_image"><img src="{{ $article->post_image }}" alt=""></div></div>
-						</div>
-					</div> --}}
-
-					{{-- <div class="blog_post">
-						<div class="blog_image" style="background-image:url({{ asset($article->post_image) }})"></div>
-						<div class="blog_text">
-							@if (Session()->get('lang') === 'japanese')
-								{{ $article->post_title_ja }}
-							@else
-								{{ $article->post_title_en }}
-							@endif
-						</div>
-						<div class="blog_button">
-						<a href="{{ route('show.article', ['id' => $article->id]) }}">
-								@if (Session()->get('lang') === 'japanese')
-									続きを読む
-								@else
-									Continue Reading
-								@endif
-							</a>
-						</div>
-					</div> --}}
-
 				@endforeach
-			</div>
-		</div>
-	</div>
-
-	<!-- Trends -->
-
-	<div class="trends">
-		<div class="trends_background"></div>
-		<div class="trends_overlay"></div>
-		<div class="container">
-			<div class="row">
-
-				<!-- Trends Content -->
-				<div class="col-lg-3">
-					<div class="trends_container">
-						<h2 class="trends_title">Buy One Get One</h2>
-						<div class="trends_text"><p></p></div>
-						<div class="trends_slider_nav">
-							<div class="trends_prev trends_nav"><i class="fas fa-angle-left ml-auto"></i></div>
-							<div class="trends_next trends_nav"><i class="fas fa-angle-right ml-auto"></i></div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Trends Slider -->
-				<div class="col-lg-9">
-					<div class="trends_slider_container">
-
-						<!-- Trends Slider -->
-
-						<div class="owl-carousel owl-theme trends_slider">
-
-							<!-- Trends Slider Item -->
-							@foreach ($buyone_getone_products as $product)
-								<div class="owl-item">
-									<div class="trends_item is_new product_item">
-										<div class="trends_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset( $product->image_one ) }}" alt="" height="200px"></div>
-										<div class="trends_content">
-										<div class="trends_category"><a href="#">{{ $product->brand_name }}</a></div>
-											<div class="trends_info clearfix">
-												<div class="trends_name"><a href="product.html">{{ $product->product_name }}</a></div>
-
-												@if($product->discount_price === NULL)
-													<div class="product_price discount">{{ number_format($product->selling_price) }}円</div>
-												@else
-													<div class="product_price discount">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
-												@endif
-
-												<a href="" class="btn btn-primary btn-sm font-weight-bold" style="margin-top: 5px;">カートに入れる</a>
-
-											</div>
-										</div>
-										<ul class="trends_marks">
-											<li class="trends_mark trends_discount">SALE</li>
-										</ul>
-										@auth
-											<div class="trends_fav addWishList" data-id="{{ $product->id }}"><i class="fas fa-heart"></i></div>
-										@endauth
-									</div>
-								</div>
-
-							@endforeach
-
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-	<!-- Reviews -->
-
-	<div class="reviews">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-
-					<div class="reviews_title_container">
-						<h3 class="reviews_title">Latest Reviews</h3>
-						<div class="reviews_all ml-auto"><a href="#">view all <span>reviews</span></a></div>
-					</div>
-
-					<div class="reviews_slider_container">
-
-						<!-- Reviews Slider -->
-						<div class="owl-carousel owl-theme reviews_slider">
-
-							<!-- Reviews Slider Item -->
-							<div class="owl-item">
-								<div class="review d-flex flex-row align-items-start justify-content-start">
-									<div><div class="review_image"><img src="{{ asset('/frontend/images/review_1.jpg') }}" alt=""></div></div>
-									<div class="review_content">
-										<div class="review_name">Roberto Sanchez</div>
-										<div class="review_rating_container">
-											<div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div>
-											<div class="review_time">2 day ago</div>
-										</div>
-										<div class="review_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum laoreet.</p></div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Reviews Slider Item -->
-							<div class="owl-item">
-								<div class="review d-flex flex-row align-items-start justify-content-start">
-									<div><div class="review_image"><img src="{{ asset('/frontend/images/review_2.jpg') }}" alt=""></div></div>
-									<div class="review_content">
-										<div class="review_name">Brandon Flowers</div>
-										<div class="review_rating_container">
-											<div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div>
-											<div class="review_time">2 day ago</div>
-										</div>
-										<div class="review_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum laoreet.</p></div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Reviews Slider Item -->
-							<div class="owl-item">
-								<div class="review d-flex flex-row align-items-start justify-content-start">
-									<div><div class="review_image"><img src="{{ asset('/frontend/images/review_3.jpg') }}" alt=""></div></div>
-									<div class="review_content">
-										<div class="review_name">Emilia Clarke</div>
-										<div class="review_rating_container">
-											<div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div>
-											<div class="review_time">2 day ago</div>
-										</div>
-										<div class="review_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum laoreet.</p></div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Reviews Slider Item -->
-							<div class="owl-item">
-								<div class="review d-flex flex-row align-items-start justify-content-start">
-									<div><div class="review_image"><img src="{{ asset('/frontend/images/review_1.jpg') }}" alt=""></div></div>
-									<div class="review_content">
-										<div class="review_name">Roberto Sanchez</div>
-										<div class="review_rating_container">
-											<div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div>
-											<div class="review_time">2 day ago</div>
-										</div>
-										<div class="review_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum laoreet.</p></div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Reviews Slider Item -->
-							<div class="owl-item">
-								<div class="review d-flex flex-row align-items-start justify-content-start">
-									<div><div class="review_image"><img src="{{ asset('/frontend/images/review_2.jpg') }}" alt=""></div></div>
-									<div class="review_content">
-										<div class="review_name">Brandon Flowers</div>
-										<div class="review_rating_container">
-											<div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div>
-											<div class="review_time">2 day ago</div>
-										</div>
-										<div class="review_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum laoreet.</p></div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Reviews Slider Item -->
-							<div class="owl-item">
-								<div class="review d-flex flex-row align-items-start justify-content-start">
-									<div><div class="review_image"><img src="{{ asset('/frontend/images/review_3.jpg') }}" alt=""></div></div>
-									<div class="review_content">
-										<div class="review_name">Emilia Clarke</div>
-										<div class="review_rating_container">
-											<div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div>
-											<div class="review_time">2 day ago</div>
-										</div>
-										<div class="review_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum laoreet.</p></div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-						<div class="reviews_dots"></div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>

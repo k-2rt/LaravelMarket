@@ -8,7 +8,6 @@ use App\Models\Admin\Category;
 use App\Models\Admin\Brand;
 use App\Models\Admin\Subcategory;
 use App\Models\Admin\Product;
-use Image;
 use App\Repositories\Product\ProductRepositoryInterface as ProductRepo;
 
 class ProductController extends Controller
@@ -59,40 +58,7 @@ class ProductController extends Controller
      * @return void
      */
     public function store(Request $request) {
-        $product = new Product();
-        $product->fill($request->all());
-
-        $request->main_slider = $request->main_slider ?? "0";
-        $request->hot_deal = $request->hot_deal ?? "0";
-        $request->buyone_getone = $request->buyone_getone ?? "0";
-        $request->best_rated = $request->best_rated ?? "0";
-        $request->trend = $request->trend ?? "0";
-        $request->mid_slider = $request->mid_slider ?? "0";
-        $request->hot_new = $request->hot_new ?? "0";
-        $product->status = '1';
-        $image_one = $request->image_one;
-        $image_two = $request->image_two;
-        $image_three = $request->image_three;
-
-        if ($image_one) {
-            $image_one_name = uniqid() . '_' . $image_one->getClientOriginalName();
-            Image::make($image_one)->resize(300, 300)->save('public/product/' . $image_one_name);
-            $product->image_one = 'public/product/' . $image_one_name;
-        }
-
-        if ($image_two) {
-            $image_two_name = uniqid() . '_' . $image_two->getClientOriginalName();
-            Image::make($image_two)->resize(300, 300)->save('public/product/' . $image_two_name);
-            $product->image_two = 'public/product/' . $image_two_name;
-        }
-
-        if ($image_three) {
-            $image_three_name = uniqid() . '_' . $image_three->getClientOriginalName();
-            Image::make($image_three)->resize(300, 300)->save('public/product/' . $image_three_name);
-            $product->image_three = 'public/product/' . $image_three_name;
-        }
-
-        $product->save();
+        $this->product_repo->createNewProduct($request);
 
         $notification = array(
             'message' => '商品を追加しました',
@@ -143,7 +109,7 @@ class ProductController extends Controller
      * @return void
      */
     public function deleteProduct($id) {
-        $product = Product::find($id);
+        $product = $this->product_repo->findProduct($id);
         $image_one = $product->image_one;
         $image_two = $product->image_two;
         $image_three = $product->image_three;
@@ -169,12 +135,7 @@ class ProductController extends Controller
      * @return void
      */
     public function showProduct($id) {
-        $product = Product::select('products.*', 'categories.category_name', 'brands.brand_name', 'subcategories.subcategory_name')
-                        ->where('products.id', $id)
-                        ->join('categories', 'products.category_id', '=', 'categories.id')
-                        ->join('subcategories', 'products.subcategory_id', '=', 'subcategories.id')
-                        ->join('brands', 'products.brand_id', '=', 'brands.id')
-                        ->first();
+        $product = $this->product_repo->findProductInfo($id);
 
         return view('admin.product.show', compact('product'));
     }
@@ -186,7 +147,7 @@ class ProductController extends Controller
      * @return void
      */
     public function editProduct($id) {
-        $product = Product::find($id);
+        $product = $this->product_repo->findProduct($id);
         $categories = Category::all();
         $subcategories = Subcategory::where('category_id', $product->category_id)->get();
         $brands = Brand::all();
@@ -220,7 +181,7 @@ class ProductController extends Controller
      * @return void
      */
     public function updateProductImage(Request $request, $id) {
-        $product = Product::find($id);
+        $product = $this->product_repo->findProduct($id);
 
         $old_one = $request->old_one;
         $old_two = $request->old_two;

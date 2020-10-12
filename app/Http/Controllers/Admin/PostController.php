@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Admin\PostCategory;
 use App\Models\Admin\Post;
 use Image;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {

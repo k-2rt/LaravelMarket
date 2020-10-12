@@ -48,6 +48,11 @@ class Product extends Model
         return $this->belongsTo('App\Models\Admin\Brand');
     }
 
+    public function subcategory()
+    {
+        return $this->belongsTo('App\Models\Admin\SubCategory');
+    }
+
     /**
      * Get a latest product that main slider status is 1
      *
