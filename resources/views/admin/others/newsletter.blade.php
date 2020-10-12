@@ -25,9 +25,9 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($newsletters as $key => $newsletter)
+            @foreach($newsletters as $newsletter)
               <tr>
-                <td><input type="checkbox"> {{ $key + 1 }}</td>
+                <td><input type="checkbox"> {{ $newsletter->id }}</td>
                 <td>{{ $newsletter->email }}</td>
                 <td>{{ \Carbon\Carbon::parse($newsletter->created_at)->diffForhumans() }}</td>
                 <td>

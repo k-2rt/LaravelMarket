@@ -35,9 +35,9 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($brands as $key => $brand)
+            @foreach($brands as $brand)
               <tr>
-                <td>{{ $key + 1 }}</td>
+                <td>{{ $brand->id }}</td>
                 <td>{{ $brand->brand_name }}</td>
                 <td>
                   @if ($brand->brand_logo)
