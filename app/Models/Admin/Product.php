@@ -4,6 +4,7 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Admin\Brand;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -276,4 +277,48 @@ class Product extends Model
         return $this->all()->count();
     }
 
+    /**
+     * Check exists product image one in storage
+     *
+     * @return void
+     */
+    public function getStorageProductImageOneAttribute()
+    {
+        $image_path = str_replace('storage/', 'public/', $this->image_one);
+        if (Storage::exists($image_path)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Check exists product image two in storage
+     *
+     * @return void
+     */
+    public function getStorageProductImageTwoAttribute()
+    {
+        $image_path = str_replace('storage/', 'public/', $this->image_two);
+        if (Storage::exists($image_path)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Check exists product image three in storage
+     *
+     * @return void
+     */
+    public function getStorageProductImageThreeAttribute()
+    {
+        $image_path = str_replace('storage/', 'public/', $this->image_three);
+        if (Storage::exists($image_path)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

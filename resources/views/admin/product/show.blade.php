@@ -5,13 +5,15 @@
   <div class="sl-mainpanel">
     <nav class="breadcrumb sl-breadcrumb">
       <a class="breadcrumb-item" href="#">商品</a>
-    <a class="breadcrumb-item" href="{{ route('index.product') }}">商品一覧</a>
+      <a class="breadcrumb-item" href="{{ route('index.product') }}">商品一覧</a>
       <span class="breadcrumb-item active">商品詳細</span>
     </nav>
 
     <div class="sl-pagebody">
       <div class="card pd-20 pd-sm-40">
-        <h6 class="card-body-title">商品詳細</h6><br />
+        <h6 class="card-body-title">商品詳細
+          <a href="{{ route('index.product') }}" class="btn btn-success btn-sm pull-right">商品一覧</a>
+        </h6><br />
 
         <div class="form-layout">
           <div class="row mg-b-25">
@@ -94,22 +96,34 @@
 
             <div class="col-lg-4">
               <div class="form-group">
-                <label class="form-control-label">画像１(サムネイル): <span class="tx-danger">*</span></label><br />
-                <img src="{{ URL::to( $product->image_one) }}" height="80px;" width="80px;" alt="">
+                <label class="form-control-label">画像１(メイン): <span class="tx-danger">*</span></label><br />
+                @if ($product->storage_product_image_one)
+                  <img src="{{ asset($product->image_one) }}" alt="" height="80px" width="80px">
+                @else
+                  <img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="80px" width="80px">
+                @endif
               </div>
             </div>
 
             <div class="col-lg-4">
               <div class="form-group">
                 <label class="form-control-label">画像２:</label><br/>
-                <img src="{{ URL::to( $product->image_two) }}" height="80px;" width="80px;" alt="">
+                @if ($product->storage_product_image_two)
+                  <img src="{{ asset($product->image_one) }}" alt="" height="80px" width="80px">
+                @else
+                  <img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="80px" width="80px">
+                @endif
               </div>
             </div>
 
             <div class="col-lg-4">
               <div class="form-group">
                 <label class="form-control-label">画像３:</label><br/>
-                <img src="{{ URL::to( $product->image_three) }}" height="80px;" width="80px;" alt="">
+                @if ($product->storage_product_image_three)
+                  <img src="{{ asset($product->image_three) }}" alt="" height="80px" width="80px">
+                @else
+                  <img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="80px" width="80px">
+                @endif
               </div>
             </div>
           </div>

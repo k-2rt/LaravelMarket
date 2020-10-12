@@ -68,7 +68,15 @@ class BrandController extends Controller
      */
     public function deleteBrand($id) {
         $brand = Brand::find($id);
-        unlink($brand->brand_logo);
+        $logo = $brand->brand_logo;
+
+        if ($logo) {
+            $image_path = str_replace('storage/', 'public/', $logo);
+            if (Storage::exists($image_path)) {
+                Storage::delete($image_path);
+            }
+        }
+
         $brand->delete();
 
         $notification = array(
@@ -100,10 +108,15 @@ class BrandController extends Controller
         $brand->brand_name = $request->brand_name;
         $brand_image = $request->file('brand_logo');
         $old_logo = $request->old_logo;
+        $image_path = '';
+
+        if ($old_logo) {
+            $image_path = str_replace('storage/', 'public/', $old_logo);
+        }
 
         if ($brand_image) {
-            if ($old_logo) {
-                unlink($old_logo);
+            if (Storage::exists($image_path)) {
+                Storage::delete($image_path);
             }
 
             $brand_image_name = uniqid() . '_' . $brand_image->getClientOriginalName();

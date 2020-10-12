@@ -174,9 +174,9 @@ class PostController extends Controller
         $post_image = $post->post_image;
 
         if ($post_image) {
-            $old_img = str_replace('storage/', 'public/', $post_image);
-            if (Storage::exists($old_img)) {
-                Storage::delete($old_img);
+            $image_path = str_replace('storage/', 'public/', $post_image);
+            if (Storage::exists($image_path)) {
+                Storage::delete($image_path);
             }
         }
 
@@ -216,14 +216,15 @@ class PostController extends Controller
         $post->fill($request->all());
         $old_image = $request->old_image;
         $post_image = $request->file('post_image');
+        $image_path = '';
 
         if ($old_image) {
-            $old_img = str_replace('storage/', 'public/', $old_image);
+            $image_path = str_replace('storage/', 'public/', $old_image);
         }
 
         if ($post_image) {
-            if (Storage::exists($old_img)) {
-                Storage::delete($old_img);
+            if (Storage::exists($image_path)) {
+                Storage::delete($image_path);
             }
 
             $post_image_name = uniqid() . "_" . $post_image->getClientOriginalName();

@@ -109,15 +109,24 @@ class ProductRepository implements ProductRepositoryInterface
         $image_three = $product->image_three;
 
         if ($image_one) {
-            unlink($image_one);
+            $image_path = str_replace('storage/', 'public/', $image_one);
+            if (Storage::exists($image_path)) {
+                Storage::delete($image_path);
+            }
         }
 
         if ($image_two) {
-            unlink($image_two);
+            $image_path = str_replace('storage/', 'public/', $image_two);
+            if (Storage::exists($image_path)) {
+                Storage::delete($image_path);
+            }
         }
 
         if ($image_three) {
-            unlink($image_three);
+            $image_path = str_replace('storage/', 'public/', $image_three);
+            if (Storage::exists($image_path)) {
+                Storage::delete($image_path);
+            }
         }
 
         $product->delete();
@@ -205,7 +214,10 @@ class ProductRepository implements ProductRepositoryInterface
 
         if ($image_one) {
             if ($old_one) {
-                unlink($old_one);
+                $image_path = str_replace('storage/', 'public/', $old_one);
+                if (Storage::exists($image_path)) {
+                    Storage::delete($image_path);
+                }
             }
 
             $image_one_name = uniqid() . '_' . $image_one->getClientOriginalName();
@@ -216,7 +228,10 @@ class ProductRepository implements ProductRepositoryInterface
 
         if ($image_two) {
             if ($old_two) {
-                unlink($old_two);
+                $image_path = str_replace('storage/', 'public/', $old_two);
+                if (Storage::exists($image_path)) {
+                    Storage::delete($image_path);
+                }
             }
 
             $image_two_name = uniqid() . '_' . $image_two->getClientOriginalName();
@@ -227,7 +242,10 @@ class ProductRepository implements ProductRepositoryInterface
 
         if ($image_three) {
             if ($old_three) {
-                unlink($old_three);
+                $image_path = str_replace('storage/', 'public/', $old_three);
+                if (Storage::exists($image_path)) {
+                    Storage::delete($image_path);
+                }
             }
 
             $image_three_name = uniqid() . '_' . $image_three->getClientOriginalName();

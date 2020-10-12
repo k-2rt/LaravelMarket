@@ -20,9 +20,9 @@ class CouponController extends Controller
      */
     public function coupon() {
         $coupons = Coupon::all();
-        $discount_percent = config('coupon');
+        $discount_price = config('coupon');
 
-        return view('admin.coupon.coupon', compact('coupons', 'discount_percent'));
+        return view('admin.coupon.coupon', compact('coupons', 'discount_price'));
     }
 
     /**
@@ -72,9 +72,9 @@ class CouponController extends Controller
      */
     public function editCoupon($id) {
         $coupon = Coupon::find($id);
-        $discount_percent = config('coupon');
+        $discount_price = config('coupon');
 
-        return view('admin.coupon.edit_coupon', compact('coupon', 'discount_percent'));
+        return view('admin.coupon.edit_coupon', compact('coupon', 'discount_price'));
     }
 
     /**

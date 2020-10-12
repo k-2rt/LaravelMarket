@@ -9,6 +9,16 @@
   </nav>
   <div class="sl-pagebody">
     <div class="card pd-20 pd-sm-40">
+      @if ($errors->any())
+        <div class="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+      @endif
+
       <h6 class="card-body-title">
         <a href="#" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">新規作成</a>
       </h6>
@@ -19,7 +29,7 @@
             <tr>
               <th class="wd-15p">ID</th>
               <th class="wd-15p">コード</th>
-              <th class="wd-20p">割引率</th>
+              <th class="wd-20p">値引き額</th>
               <th class="wd-20p">アクション</th>
             </tr>
           </thead>
@@ -28,7 +38,7 @@
               <tr>
                 <td>{{ $coupon->id }}</td>
                 <td>{{ $coupon->coupon }}</td>
-                <td>{{ $coupon->discount }} %</td>
+                <td>{{ number_format($coupon->discount) }} 円</td>
                 <td>
                   <a href="{{ route('edit.coupon', ['id' => $coupon->id]) }}" class="btn btn-sm btn-info">編集</a>
                   <a href="{{ route('delete.coupon', ['id' => $coupon->id]) }}" class="btn btn-sm btn-danger" id="delete">削除</a>
@@ -52,16 +62,6 @@
           </button>
         </div>
 
-        @if ($errors->any())
-          <div class="alert alert-danger">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
-          </div>
-        @endif
-
         <form action="{{ route('store.coupon') }}" method="POST">
           @csrf
 
@@ -72,11 +72,11 @@
             </div>
 
             <div class="form-group">
-              <label for="discount">割引率（％）</label>
+              <label for="discount">値引額</label>
               <select class="form-control" name="discount">
                 <option value="">--</option>
-                @foreach($discount_percent as $percent)
-                  <option value="{{ $percent }}">{{ $percent }}</option>
+                @foreach($discount_price as $price)
+                  <option value="{{ $price }}">{{ number_format($price) }}円</option>
                 @endforeach
               </select>
             </div>

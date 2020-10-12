@@ -38,7 +38,7 @@
 
             <div class="form-group">
               <label>現在のブランドロゴ</label>
-              @if ($brand->brand_logo)
+              @if ($brand->storage_brand_image)
                 <img src="{{ asset($brand->brand_logo) }}" alt="" height="70px" width="80px">
               @else
                 <img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="70px" width="80px">
