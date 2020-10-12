@@ -10,6 +10,16 @@
 
   <div class="sl-pagebody">
     <div class="card pd-20 pd-sm-40">
+      @if ($errors->any())
+        <div class="alert">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+
       <h6 class="card-body-title">
         <a href="#" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">新規作成</a>
       </h6>
@@ -52,32 +62,21 @@
           </button>
         </div>
 
-        @if ($errors->any())
-          <div class="alert alert-danger">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
-          </div>
-        @endif
-
         <form action="{{ route('store.subcategory') }}" method="POST">
           @csrf
           <div class="modal-body pd-20">
             <div class="form-group">
-              <label for="subcategory_name">サブカテゴリー名</label>
-              <input type="text" class="form-control" id="subcategory_name" aria-describedby="emailHelp" placeholder="サブカテゴリー" name="subcategory_name">
-            </div>
-
-            <div class="form-group">
-              <label for="category_id">カテゴリー名</label>
+              <label for="category_id">カテゴリー</label>
               <select class="form-control" name="category_id">
                 <option value="">--</option>
                 @foreach($categories as $category)
                   <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                 @endforeach
               </select>
+            </div>
+            <div class="form-group">
+              <label for="subcategory_name">サブカテゴリー名</label>
+              <input type="text" class="form-control" id="subcategory_name" aria-describedby="emailHelp" placeholder="サブカテゴリー" name="subcategory_name">
             </div>
 
             <div class="modal-footer">

@@ -82,40 +82,10 @@
             </ul>
           @endif
 
-          @if (Auth::user()->coupon === '1')
-            <a href="#" class="sl-menu-link">
-              <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
-                <span class="menu-item-label">クーポン</span>
-                <i class="menu-item-arrow fa fa-angle-down"></i>
-              </div>
-            </a>
-            <ul class="sl-menu-sub nav flex-column">
-              <li class="nav-item"><a href="{{ route('admin.coupon') }}" class="nav-link">一覧</a></li>
-            </ul>
-          @endif
-
-          @if (Auth::user()->order === '1')
-            <a href="#" class="sl-menu-link">
-              <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
-                <span class="menu-item-label">注文</span>
-                <i class="menu-item-arrow fa fa-angle-down"></i>
-              </div>
-            </a>
-            <ul class="sl-menu-sub nav flex-column">
-              <li class="nav-item"><a href="{{ route('admin.pending.order') }}" class="nav-link">承認待ち</a></li>
-              <li class="nav-item"><a href="{{ route('admin.accepted.payment') }}" class="nav-link">支払い完了</a></li>
-              <li class="nav-item"><a href="{{ route('admin.process.order') }}" class="nav-link">配達中</a></li>
-              <li class="nav-item"><a href="{{ route('admin.delivered.order') }}" class="nav-link">配達済み</a></li>
-              <li class="nav-item"><a href="{{ route('admin.cancel.order') }}" class="nav-link">キャンセル</a></li>
-            </ul>
-          @endif
-
           @if (Auth::user()->product === '1')
             <a href="#" class="sl-menu-link">
               <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
+                <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
                 <span class="menu-item-label">商品</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
               </div>
@@ -130,7 +100,7 @@
           @if (Auth::user()->article === '1')
             <a href="#" class="sl-menu-link">
               <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
+                <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
                 <span class="menu-item-label">記事</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
               </div>
@@ -142,19 +112,35 @@
             </ul>
           @endif
 
-          @if (Auth::user()->other === '1')
+          @if (Auth::user()->coupon === '1')
             <a href="#" class="sl-menu-link">
               <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-                <span class="menu-item-label">その他</span>
+                <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
+                <span class="menu-item-label">クーポン</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
               </div>
             </a>
             <ul class="sl-menu-sub nav flex-column">
-              <li class="nav-item"><a href="{{ route('admin.newsletter') }}" class="nav-link">ニュース</a></li>
+              <li class="nav-item"><a href="{{ route('admin.coupon') }}" class="nav-link">一覧</a></li>
             </ul>
           @endif
 
+          @if (Auth::user()->order === '1')
+            <a href="#" class="sl-menu-link">
+              <div class="sl-menu-item">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+                <span class="menu-item-label">注文</span>
+                <i class="menu-item-arrow fa fa-angle-down"></i>
+              </div>
+            </a>
+            <ul class="sl-menu-sub nav flex-column">
+              <li class="nav-item"><a href="{{ route('admin.pending.order') }}" class="nav-link">承認待ち</a></li>
+              <li class="nav-item"><a href="{{ route('admin.accepted.payment') }}" class="nav-link">支払い完了</a></li>
+              <li class="nav-item"><a href="{{ route('admin.process.order') }}" class="nav-link">配達中</a></li>
+              <li class="nav-item"><a href="{{ route('admin.delivered.order') }}" class="nav-link">配達済み</a></li>
+              <li class="nav-item"><a href="{{ route('admin.cancel.order') }}" class="nav-link">キャンセル</a></li>
+            </ul>
+          @endif
 
           @if (Auth::user()->report === '1')
             <a href="#" class="sl-menu-link">
@@ -175,7 +161,7 @@
           @if (Auth::user()->role === '1')
             <a href="#" class="sl-menu-link">
               <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+                <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
                 <span class="menu-item-label">ユーザー管理</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
               </div>
@@ -189,7 +175,7 @@
           @if (Auth::user()->return === '1')
             <a href="#" class="sl-menu-link">
               <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+                <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
                 <span class="menu-item-label">返品管理</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
               </div>
@@ -203,7 +189,7 @@
           @if (Auth::user()->contact === '1')
             <a href="#" class="sl-menu-link">
               <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+                <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
                 <span class="menu-item-label">メッセージ管理</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
               </div>
@@ -213,30 +199,17 @@
             </ul>
           @endif
 
-          @if (Auth::user()->comment === '1')
+          @if (Auth::user()->other === '1')
             <a href="#" class="sl-menu-link">
               <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-                <span class="menu-item-label">コメント管理</span>
+                <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
+                <span class="menu-item-label">その他</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
               </div>
             </a>
             <ul class="sl-menu-sub nav flex-column">
-              <li class="nav-item"><a href="" class="nav-link">New Comment</a></li>
-              <li class="nav-item"><a href="" class="nav-link">All Comment</a></li>
-            </ul>
-          @endif
-
-          @if (Auth::user()->setting === '1')
-            <a href="#" class="sl-menu-link">
-              <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-                <span class="menu-item-label">サイト管理</span>
-                <i class="menu-item-arrow fa fa-angle-down"></i>
-              </div>
-            </a>
-            <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{ route('admin.site.setting') }}" class="nav-link">サイト</a></li>
+              <li class="nav-item"><a href="{{ route('admin.newsletter') }}" class="nav-link">ニュース</a></li>
+              <li class="nav-item"><a href="{{ route('admin.site.setting') }}" class="nav-link">サイト情報</a></li>
             </ul>
           @endif
         </div>

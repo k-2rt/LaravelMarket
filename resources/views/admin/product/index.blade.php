@@ -33,7 +33,13 @@
               <tr>
                 <td>{{ $product->product_code }}</td>
                 <td>{{ $product->product_name }}</td>
-                <td><img src="{{ URL::to($product->image_one) }}" height="50px;" width="50px;"></td>
+
+                @if ($product->image_one)
+                  <td><img src="{{ asset($product->image_one) }}" height="50px;" width="50px;"></td>
+                @else
+                  <td><img src="{{ asset('/panel/assets/images/noimage.png') }}" height="50px;" width="50px;"></td>
+                @endif
+
                 <td>{{ $product->category->category_name }}</td>
                 <td>{{ $product->brand->brand_name }}</td>
                 <td>{{ $product->product_quantity }}</td>

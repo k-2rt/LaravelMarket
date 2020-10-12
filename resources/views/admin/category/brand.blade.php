@@ -10,6 +10,16 @@
 
   <div class="sl-pagebody">
     <div class="card pd-20 pd-sm-40">
+      @if ($errors->any())
+        <div class="alert">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+
       <h6 class="card-body-title">
         <a href="#" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">新規作成</a>
       </h6>
@@ -29,7 +39,13 @@
               <tr>
                 <td>{{ $key + 1 }}</td>
                 <td>{{ $brand->brand_name }}</td>
-                <td><img src="{{ URL::to($brand->brand_logo) }}" height="70px;" width="80px;"></td>
+                <td>
+                  @if ($brand->brand_logo)
+                    <img src="{{ asset($brand->brand_logo) }}" height="70px;" width="80px;">
+                  @else
+                    <img src="{{ asset('/panel/assets/images/noimage.png') }}" height="70px;" width="80px;">
+                  @endif
+                </td>
                 <td>
                   <a href="{{ route('edit.brand', ['id' => $brand->id]) }}" class="btn btn-sm btn-info">編集</a>
                   <a href="{{ route('delete.brand', ['id' => $brand->id]) }}" class="btn btn-sm btn-danger" id="delete">削除</a>
@@ -52,16 +68,6 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
         <form action="{{ route('store.brand') }}" method="POST" enctype="multipart/form-data">
           @csrf

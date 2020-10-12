@@ -10,6 +10,17 @@
 
   <div class="sl-pagebody">
     <div class="card pd-20 pd-sm-40">
+
+      @if ($errors->any())
+        <div class="alert">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+
       <h6 class="card-body-title">
         <a href="#" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">新規作成</a>
       </h6>
@@ -50,16 +61,6 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-
-        @if ($errors->any())
-          <div class="alert alert-danger">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
-          </div>
-        @endif
 
         <form action="{{ route('store.category') }}" method="POST">
           @csrf

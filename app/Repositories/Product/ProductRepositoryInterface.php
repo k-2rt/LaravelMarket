@@ -51,6 +51,15 @@ interface ProductRepositoryInterface
      */
     public function searchProdcutBrandsByKeyword($keyword);
 
+
+    /**
+     * Delete a product
+     *
+     * @param Stirng $id
+     * @return void
+     */
+    public function deleteProduct($id);
+
     /**
      * Create new product
      *
@@ -58,4 +67,13 @@ interface ProductRepositoryInterface
      * @return void
      */
     public function createNewProduct($request);
+
+    /**
+     * Update product
+     *
+     * @param Rrequest $request
+     * @param String $id
+     * @return void
+     */
+    public function updateProductInfo($request, $id);
 }

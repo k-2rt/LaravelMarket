@@ -11,7 +11,6 @@ use App\Models\Admin\Product;
 use App\Models\Admin\Brand;
 use App\User;
 
-
 class AdminController extends Controller
 {
     protected $product;
@@ -71,14 +70,13 @@ class AdminController extends Controller
                 $user = Admin::find(Auth::id());
                 $user->password = Hash::make($request->password);
                 $user->save();
-                Auth::logout();
 
                 $notification = array(
                     'message' => 'パスワードは変更されました。',
                     'alert-type' => 'success'
                 );
 
-                return redirect()->route('admin.login')->with($notification);
+                return redirect()->route('admin.home')->with($notification);
             } else {
                 $notification = array(
                     'message' => '新しいパスワードと確認用を合わせて下さい。',
