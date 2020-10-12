@@ -9,4 +9,9 @@ class Subcategory extends Model
     protected $fillable = [
         'category_id', 'subcategory_name'
     ];
+
+    public function products()
+    {
+        return $this->hasMany('App\Models\Admin\Product');
+    }
 }
