@@ -33,6 +33,11 @@ class Post extends Model
                     ->get();
     }
 
+    /**
+     * Check exists artiucle image in storage
+     *
+     * @return void
+     */
     public function getStorageArticleImageAttribute()
     {
         $old_img = str_replace('storage/', 'public/', $this->post_image);

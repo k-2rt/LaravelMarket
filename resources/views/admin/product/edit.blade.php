@@ -143,7 +143,7 @@
                 <div class="form-group">
                   <label class="form-control-label">現在の画像: <span class="tx-danger">*</span></label><br />
                   <label class="custom-file">
-                    @if ($product->image_one)
+                    @if ($product->storage_product_image_one)
                       <img src="{{ asset($product->image_one) }}" alt="" height="80px" width="130px">
                     @else
                       <img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="80px" width="130px">
@@ -168,7 +168,7 @@
                 <div class="form-group">
                   <label class="form-control-label">現在の画像:</label><br />
                   <label class="custom-file">
-                    @if ($product->image_two)
+                    @if ($product->storage_product_image_two)
                       <img src="{{ asset($product->image_two) }}" alt="" height="80px" width="130px">
                     @else
                       <img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="80px" width="130px">
@@ -193,7 +193,7 @@
                 <div class="form-group">
                   <label class="form-control-label">現在の画像:</label><br />
                   <label class="custom-file">
-                    @if ($product->image_three)
+                    @if ($product->storage_product_image_three)
                       <img src="{{ asset($product->image_three) }}" alt="" height="80px" width="130px">
                     @else
                       <img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="80px" width="130px">

@@ -40,7 +40,7 @@
                 <td>{{ $brand->id }}</td>
                 <td>{{ $brand->brand_name }}</td>
                 <td>
-                  @if ($brand->brand_logo)
+                  @if ($brand->storage_brand_image)
                     <img src="{{ asset($brand->brand_logo) }}" height="70px;" width="80px;">
                   @else
                     <img src="{{ asset('/panel/assets/images/noimage.png') }}" height="70px;" width="80px;">
