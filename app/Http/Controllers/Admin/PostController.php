@@ -8,6 +8,7 @@ use App\Models\Admin\PostCategory;
 use App\Models\Admin\Post;
 use Image;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 
 class PostController extends Controller
 {
@@ -35,7 +36,6 @@ class PostController extends Controller
      */
     public function storeArticleCategory(Request $request) {
         $request->validate([
-            'category_name_en' => 'required|max:255',
             'category_name_ja' => 'required|max:255',
         ]);
 
@@ -87,7 +87,6 @@ class PostController extends Controller
      */
     public function updateArticleCategory(Request $request, $id) {
         $request->validate([
-            'category_name_en' => 'required|max:255',
             'category_name_ja' => 'required|max:255',
         ]);
 
@@ -120,16 +119,15 @@ class PostController extends Controller
      */
     public function storeArticlePost(Request $request) {
         $request->validate([
-            'post_category_id' => 'required',
-            'post_title_en' => 'required|max:255',
             'post_title_ja' => 'required|max:255',
-            'details_en' => 'required|max:4000',
+            'post_category_id' => 'required',
             'details_ja' => 'required|max:4000',
             'post_image' => 'required',
         ]);
 
         $post = new Post();
         $post->fill($request->all());
+        $post->create_user = Auth::user()->name;
         $post_image = $request->file('post_image');
 
         if ($post_image) {
@@ -155,7 +153,7 @@ class PostController extends Controller
      * @return void
      */
     public function indexPost() {
-        $posts = Post::select('posts.*', 'posts.post_category_id', 'post_categories.category_name_en')
+        $posts = Post::select('posts.*', 'posts.post_category_id', 'post_categories.category_name_ja')
                     ->join('post_categories', 'posts.post_category_id', '=', 'post_categories.id')
                     ->orderBy('id')
                     ->get();
@@ -172,6 +170,7 @@ class PostController extends Controller
     public function deletePost($id) {
         $post = Post::find($id);
         $post_image = $post->post_image;
+        $post->update_user = Auth::user()->name;
 
         if ($post_image) {
             $image_path = str_replace('storage/', 'public/', $post_image);
@@ -205,15 +204,14 @@ class PostController extends Controller
 
     public function updatePost(Request $request, $id) {
         $request->validate([
-            'post_category_id' => 'required',
-            'post_title_en' => 'required|max:255',
             'post_title_ja' => 'required|max:255',
-            'details_en' => 'required|max:4000',
+            'post_category_id' => 'required',
             'details_ja' => 'required|max:4000',
         ]);
 
         $post = Post::find($id);
         $post->fill($request->all());
+        $post->update_user = Auth::user()->name;
         $old_image = $request->old_image;
         $post_image = $request->file('post_image');
         $image_path = '';

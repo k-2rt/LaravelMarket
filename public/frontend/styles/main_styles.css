@@ -1309,6 +1309,7 @@ select option
 .deals_featured
 {
 	width: 100%;
+	padding-bottom: 80px;
 }
 
 /*********************************
@@ -1333,7 +1334,7 @@ select option
 	left: 40px;
 	font-size: 18px;
 	font-weight: 500;
-	color: #000000;
+	color: rgba(0,0,0,0.8);
 }
 .deals_slider_container
 {
@@ -1371,13 +1372,18 @@ select option
 {
 	font-size: 24px;
 	font-weight: 400;
-	color: #000000;
+	color: rgba(0,0,0,0.8);
 }
 .deals_item_price
 {
 	font-size: 24px;
 	font-weight: 500;
-	color: #df3b3b;
+	color: rgba(0,0,0,0.8);
+}
+.deals_item_price span
+{
+	font-size: 12px;
+	font-weight: 400;
 }
 .available
 {
@@ -2098,7 +2104,7 @@ select option
 .banner_2_image
 {
 	min-width: 100%;
-	width: calc(44.8vw);
+	/* width: calc(44.8vw); */
 	position: absolute;
 	top: 50%;
 	-webkit-transform: translateY(-50%);
@@ -2110,7 +2116,9 @@ select option
 }
 .banner_2_image img
 {
-	width: 100%;
+	width: 250px;
+	height: 400px;
+	/* width: 100%; */
 }
 .banner_2_category
 {
@@ -2121,7 +2129,7 @@ select option
 {
 	font-size: 30px;
 	font-weight: 500;
-	color: #000000;
+	color: rgba(0,0,0,0.8);
 	margin-top: 11px;
 }
 .banner_2_text
@@ -3148,7 +3156,7 @@ select option
 {
 	padding-top: 51px;
 	padding-bottom: 60px;
-	background: #eff6fa;
+	background: #f7f7f7;
 }
 .viewed_title_container
 {
@@ -3730,4 +3738,10 @@ select option
 .article_image {
 	width: 100%;
 	height: 180px;
+}
+
+.hot_deal_button {
+	margin-top: 8px;
+	background-color: #0e8ce4;
+	padding: 8px;
 }

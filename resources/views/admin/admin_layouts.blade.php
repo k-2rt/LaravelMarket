@@ -327,7 +327,7 @@
 
         // Summernote editor
         $('#summernote').summernote({
-          height: 150,
+          height: 300,
           tooltip: false
         });
 

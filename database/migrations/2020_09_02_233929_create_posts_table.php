@@ -21,6 +21,8 @@ class CreatePostsTable extends Migration
             $table->string('post_image')->nullable();
             $table->text('details_en')->nullable();
             $table->text('details_ja')->nullable();
+            $table->string('create_user')->nullable();
+            $table->string('update_user')->nullable();
             $table->timestamps();
         });
     }

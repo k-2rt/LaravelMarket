@@ -59,6 +59,54 @@ class ProductRepository implements ProductRepositoryInterface
     }
 
     /**
+     * Get products that trend is 1
+     *
+     * @return Object
+     */
+    public function getTrendProducts(): Object
+    {
+        return $this->product->where('status', 1)
+                             ->where('trend', 1)
+                             ->orderBy('id', 'DESC')
+                             ->limit(24)
+                             ->get();
+    }
+
+    /**
+     * Get hot new products with brand name
+     *
+     * @return Object
+     */
+    public function getHotNewProducts(): Object
+    {
+        return $this->product->with('brand:id,brand_name')
+                             ->where('status', 1)
+                             ->where('hot_new', 1)
+                             ->where('discount_price', NULL)
+                             ->where('product_quantity', '<>', 0)
+                             ->limit(3)
+                             ->latest('updated_at')
+                             ->get();
+    }
+
+    /**
+     * Get hot deal products with brand name
+     *
+     * @return Object
+     */
+    public function getHotDealProducts(): Object
+    {
+        return $this->product->with('brand:id,brand_name')
+                             ->where('status', 1)
+                             ->where('hot_deal', 1)
+                             ->where('product_quantity', '<>', 0)
+                             ->where('discount_price', '<>', NULL)
+                             ->limit(8)
+                             ->orderBy('id', 'DESC')
+                             ->get();
+    }
+
+    /**
      * Decrement stock of product
      *
      * @param Object $item
@@ -196,6 +244,7 @@ class ProductRepository implements ProductRepositoryInterface
         $product->brand_id = $request->brand_id;
         $product->product_size = $request->product_size;
         $product->selling_price = $request->selling_price;
+        $product->discount_price = $request->discount_price;
         $product->product_details = $request->product_details;
         $product->video_link = $request->video_link;
         $product->main_slider = $request->main_slider ?? "0";

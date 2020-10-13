@@ -21,19 +21,23 @@
               <th class="wd-15p">タイトル</th>
               <th class="wd-15p">カテゴリー</th>
               <th class="wd-15p">画像</th>
-              <th class="wd-20p">アクション</th>
+              <th class="wd-15p">作成スタッフ</th>
+              <th class="wd-15p">更新スタッフ</th>
+              <th class="wd-10p"></th>
             </tr>
           </thead>
           <tbody>
             @foreach($posts as $post)
               <tr>
-                <td>{{ $post->post_title_en }}</td>
-                <td>{{ $post->category_name_en }}</td>
+                <td>{{ $post->post_title_ja }}</td>
+                <td>{{ $post->category_name_ja }}</td>
                 @if ($post->storage_article_image)
                   <td><img src="{{ asset($post->post_image) }}" alt="" height="50px;" width="50px;"></td>
                 @else
                   <td><img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="50px;" width="50px;"></td>
                 @endif
+                <td>{{ $post->create_user }}</td>
+                <td>{{ $post->update_user }}</td>
                 <td>
                   <a href="{{ route('edit.post', ['id' => $post->id]) }}" class="btn btn-sm btn-info">編集</a>
                   <a href="{{ route('delete.post', ['id' => $post->id]) }}" class="btn btn-sm btn-danger" id="delete">削除</a>

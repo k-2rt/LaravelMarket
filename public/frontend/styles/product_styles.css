@@ -105,6 +105,7 @@ p a:hover::after
 {
 	opacity: 0.2;
 }
+
 ::selection
 {
 
@@ -1610,7 +1611,7 @@ select option
 {
 	padding-top: 51px;
 	padding-bottom: 60px;
-	background: #eff6fa;
+	background: #f7f7f7;
 }
 .viewed_title_container
 {

@@ -21,7 +21,7 @@ class ArticleController extends Controller
     }
 
     public function showArticleDetail($id) {
-        $post = $this->post->find($id);
+        $post = $this->post->with('post_category')->find($id);
 
         return view('main.article_detail', compact('post'));
     }

@@ -183,6 +183,7 @@
 							<li><a href="#">ご利用ガイド</a></li>
 							<li><a href="#">お問い合わせ</a></li>
 							<li><a href="#">採用情報</a></li>
+							<li><a href="#">定期購読について</a></li>
 						</ul>
 					</div>
 				</div>

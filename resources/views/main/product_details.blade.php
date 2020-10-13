@@ -47,9 +47,23 @@
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label for="exampleFormControlSelect1">カラー</label>
-                    <select class="form-control input-lg" id="exampleFormControlSelect1" name="color">
+                    <select class="form-control" id="exampleFormControlSelect1" name="color">
                       @foreach ($colors as $color)
                         <option value="{{ $color }}">{{ $color }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+
+              <div class="">
+                <div class="">
+                  <div class="">
+                    <label for="">aaa</label>
+                    <select class="" id="" name="color">
+                      @foreach ($colors as $color)
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
                       @endforeach
                     </select>
                   </div>

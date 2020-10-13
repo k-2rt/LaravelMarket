@@ -28,6 +28,27 @@ interface ProductRepositoryInterface
     public function findProductInfo($id);
 
     /**
+     * Get products that trend is 1
+     *
+     * @return Object
+     */
+    public function getTrendProducts();
+
+    /**
+     * Get hot new products with brand name
+     *
+     * @return Object
+     */
+    public function getHotNewProducts();
+
+    /**
+     * Get hot deal products with brand name
+     *
+     * @return Object
+     */
+    public function getHotDealProducts();
+
+    /**
      * Decrement stock of product
      *
      * @param Object $item

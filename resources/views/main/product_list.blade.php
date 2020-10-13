@@ -25,15 +25,6 @@
 
             </ul>
           </div>
-          <div class="sidebar_section filter_by_section">
-            <div class="sidebar_title">Filter By</div>
-            <div class="sidebar_subtitle">Price</div>
-            <div class="filter_price">
-              <div id="slider-range" class="slider_range"></div>
-              <p>Range: </p>
-              <p><input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;"></p>
-            </div>
-          </div>
 
           <div class="sidebar_section">
             <div class="sidebar_subtitle brands_subtitle">ブランド</div>
@@ -41,12 +32,9 @@
               @foreach ($brands as $brand)
                 <li class="brand"><a href="#">{{ $brand->brand_name }}</a></li>
               @endforeach
-
-
             </ul>
           </div>
         </div>
-
       </div>
 
       <div class="col-lg-9">
@@ -60,9 +48,9 @@
                 <li>
                   <span class="sorting_text">highest rated<i class="fas fa-chevron-down"></span></i>
                   <ul>
-                    <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>highest rated</li>
-                    <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>name</li>
-                    <li class="shop_sorting_button"data-isotope-option='{ "sortBy": "price" }'>price</li>
+                    <li class="shop_sorting_button">高評価</li>
+                    <li class="shop_sorting_button">新作</li>
+                    <li class="shop_sorting_button">値段</li>
                   </ul>
                 </li>
               </ul>

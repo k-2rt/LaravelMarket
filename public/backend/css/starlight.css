@@ -56765,3 +56765,7 @@ a.hover-white-8:hover, a.hover-white-8:focus {
   margin-right: 10px;
   line-height: 18px;
 }
+
+.article_text {
+	height: 300px;
+}

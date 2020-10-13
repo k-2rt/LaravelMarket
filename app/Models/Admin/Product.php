@@ -67,18 +67,6 @@ class Product extends Model
     }
 
     /**
-     * Get products that status is 1
-     *
-     * @return Object
-     */
-    public function getActiveProducts() {
-        return $this->where('status', 1)
-                    ->orderBy('id', 'DESC')
-                    ->limit(8)
-                    ->get();
-    }
-
-    /**
      * Get products that trend is 1
      *
      * @return Object
@@ -115,20 +103,6 @@ class Product extends Model
     }
 
     /**
-     * Get hot deal products with brand name
-     *
-     * @return Object
-     */
-    public function getHotDealProducts() {
-        return $this->select('products.*', 'brands.brand_name')
-                    ->where('hot_deal', 1)
-                    ->join('brands', 'products.brand_id', 'brands.id')
-                    ->orderBy('id', 'DESC')
-                    ->limit(3)
-                    ->get();
-    }
-
-    /**
      * Get products to show at middle slider with category & brand name
      *
      * @return Object
@@ -155,15 +129,6 @@ class Product extends Model
                     ->limit(10)
                     ->orderBy('id', 'DESC')
                     ->get();
-    }
-
-    public function getBuyoneGetoneProducts() {
-        return  $this->select('products.*', 'brands.brand_name')
-                     ->join('brands', 'products.brand_id', 'brands.id')
-                     ->where('status', 1)->where('buyone_getone', 1)
-                     ->orderBy('id', 'DESC')
-                     ->limit(6)
-                     ->get();
     }
 
     /**
@@ -227,7 +192,7 @@ class Product extends Model
      * @return Object
      */
     public function getPaginateCategories($id) {
-        return $this->where('category_id', $id)->paginate(5);
+        return $this->where('category_id', $id)->paginate(10);
     }
 
     /**
@@ -237,7 +202,7 @@ class Product extends Model
      * @return Object
      */
     public function getPaginateProducts($id) {
-        return $this->where('subcategory_id', $id)->paginate(1);
+        return $this->where('subcategory_id', $id)->paginate(10);
     }
 
     /**
