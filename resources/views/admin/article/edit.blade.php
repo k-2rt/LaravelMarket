@@ -29,28 +29,22 @@
 
           <div class="form-layout">
             <div class="row mg-b-25">
-              <div class="col-lg-6">
+
+              <div class="col-lg-5 offset-lg-2">
                 <div class="form-group">
-                  <label class="form-control-label">タイトル(英語): <span class="tx-danger">*</span></label>
-                <input class="form-control" type="text" name="post_title_en"  value="{{ old('post_title_en', $post->post_title_en) }}">
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label class="form-control-label">タイトル(日本語): <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text"  name="post_title_ja" value="{{ old('post_title_ja', $post->post_title_ja) }}">
+                  <label class="form-control-label">タイトル: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text"  name="post_title_ja" value="{{ old('post_title_ja', $post->post_title_ja) }}" maxlength="50">
                 </div>
               </div>
 
-
-              <div class="col-lg-4">
+              <div class="col-lg-5">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">ブログ カテゴリー: <span class="tx-danger">*</span></label>
                   <select class="form-control select2" name="post_category_id">
                     <option value="">選択してください</option>
                     @foreach($article_categories as $article_category)
 
-                      <option value="{{ $article_category->id }}" {{ old('post_category_id', $post->post_category_id) == $article_category->id ? 'selected' : '' }}>{{ $article_category->category_name_en }}</option>
+                      <option value="{{ $article_category->id }}" {{ old('post_category_id', $post->post_category_id) == $article_category->id ? 'selected' : '' }}>{{ $article_category->category_name_ja }}</option>
 
                     @endforeach
                   </select>
@@ -59,15 +53,8 @@
 
               <div class="col-lg-12">
                 <div class="form-group">
-                  <label class="form-control-label">商品詳細(英語): <span class="tx-danger">*</span></label><br/>
-                <textarea class="form-control" id="summernote" name="details_en">{!! old('details_en', $post->details_en) !!}</textarea>
-                </div>
-              </div>
-
-              <div class="col-lg-12">
-                <div class="form-group">
-                  <label class="form-control-label">商品詳細(日本語): <span class="tx-danger">*</span></label><br/>
-                  <textarea class="form-control" id="summernote2" name="details_ja">{!! old('details_ja', $post->details_ja) !!}</textarea>
+                  <label class="form-control-label">商品詳細: <span class="tx-danger">*</span></label><br/>
+                  <textarea class="form-control article_text" id="" name="details_ja">{!! old('details_ja', $post->details_ja) !!}</textarea>
                 </div>
               </div>
 

@@ -13,22 +13,10 @@
 				<div class="col-lg-3 col-md-6 char_col">
 
 					<div class="char_item d-flex flex-row align-items-center justify-content-start">
-						<div class="char_icon"><img src="{{ asset('/frontend/images/char_1.png') }}" alt=""></div>
+						<div class="char_icon"><img src="{{ asset('/frontend/images/char_4.png') }}" alt=""></div>
 						<div class="char_content">
-							<div class="char_title">Free Delivery</div>
-							<div class="char_subtitle">from $50</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Char. Item -->
-				<div class="col-lg-3 col-md-6 char_col">
-
-					<div class="char_item d-flex flex-row align-items-center justify-content-start">
-						<div class="char_icon"><img src="{{ asset('/frontend/images/char_2.png') }}" alt=""></div>
-						<div class="char_content">
-							<div class="char_title">Free Delivery</div>
-							<div class="char_subtitle">from $50</div>
+							<div class="char_title">カンタン会員登録</div>
+							<div class="char_subtitle"></div>
 						</div>
 					</div>
 				</div>
@@ -39,8 +27,8 @@
 					<div class="char_item d-flex flex-row align-items-center justify-content-start">
 						<div class="char_icon"><img src="{{ asset('/frontend/images/char_3.png') }}" alt=""></div>
 						<div class="char_content">
-							<div class="char_title">Free Delivery</div>
-							<div class="char_subtitle">from $50</div>
+							<div class="char_title">定期購読</div>
+							<div class="char_subtitle">1ヶ月無料</div>
 						</div>
 					</div>
 				</div>
@@ -49,13 +37,26 @@
 				<div class="col-lg-3 col-md-6 char_col">
 
 					<div class="char_item d-flex flex-row align-items-center justify-content-start">
-						<div class="char_icon"><img src="{{ asset('/frontend/images/char_4.png') }}" alt=""></div>
+						<div class="char_icon"><img src="{{ asset('/frontend/images/char_1.png') }}" alt=""></div>
 						<div class="char_content">
-							<div class="char_title">Free Delivery</div>
-							<div class="char_subtitle">from $50</div>
+							<div class="char_title">送料</div>
+							<div class="char_subtitle">500円 (税込)</div>
 						</div>
 					</div>
 				</div>
+
+				<!-- Char. Item -->
+				<div class="col-lg-3 col-md-6 char_col">
+
+					<div class="char_item d-flex flex-row align-items-center justify-content-start">
+						<div class="char_icon"><img src="{{ asset('/frontend/images/char_2.png') }}" alt=""></div>
+						<div class="char_content">
+							<div class="char_title">返品対応可能</div>
+							<div class="char_subtitle"></div>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
@@ -70,43 +71,32 @@
 					<!-- Deals -->
 
 					<div class="deals">
-						<div class="deals_title">Deals of the Week</div>
+						<div class="deals_title">新作</div>
 						<div class="deals_slider_container">
 
 							<!-- Deals Slider -->
 							<div class="owl-carousel owl-theme deals_slider">
 
 								<!-- Deals Item -->
-								@foreach($hot_deal_products as $hot_deal)
+								@foreach($hot_new_products as $hot_new)
 									<div class="owl-item deals_item">
-										<div class="deals_image"><img src="{{ asset( $hot_deal->image_one ) }}" alt=""></div>
+										<div class="deals_image">
+											<a href="{{ route('product.detail', ['id' => $hot_new->id, 'product_name' => $hot_new->product_name]) }}">
+												<img src="{{ asset( $hot_new->image_one ) }}" alt="">
+											</a>
+										</div>
 										<div class="deals_content">
 											<div class="deals_info_line d-flex flex-row justify-content-start">
-											<div class="deals_item_category"><a href="#">{{ $hot_deal->brand_name }}</a></div>
-
-												@if($hot_deal->discount_price !== NULL)
-													<div class="deals_item_price_a ml-auto">{{ number_format($hot_deal->selling_price) }}円</div>
+												<div class="deals_item_category"><a href="#">{{ $hot_new->brand->brand_name }}</a></div>
+												@if($hot_new->discount_price !== NULL)
+													<div class="deals_item_price_a ml-auto">{{ number_format($hot_new->selling_price) }}円</div>
 												@endif
-
 											</div>
 											<div class="deals_info_line d-flex flex-row justify-content-start">
-											<div class="deals_item_name">{{ $hot_deal->product_name }}</div>
-
-											@if($hot_deal->discount_price === NULL)
-												<div class="deals_item_price ml-auto">{{ number_format($hot_deal->selling_price) }}円</div>
-											@else
-												<div class="deals_item_price ml-auto">{{ number_format($hot_deal->discount_price) }}円</div>
-											@endif
-
+												<div class="deals_item_name">{{ $hot_new->product_name }}</div>
+												<div class="deals_item_price ml-auto">{{ number_format($hot_new->selling_price) }}<span> 円 (税込)</span></div>
 											</div>
-											<div class="available">
-												<div class="available_line d-flex flex-row justify-content-start">
-												<div class="available_title">数量: <span>{{ $hot_deal->product_quantity }}</span></div>
-													<div class="sold_title ml-auto">Already sold: <span>28</span></div>
-												</div>
-												<div class="available_bar"><span style="width:17%"></span></div>
-											</div>
-											<div class="deals_timer d-flex flex-row align-items-center justify-content-start">
+											{{-- <div class="deals_timer d-flex flex-row align-items-center justify-content-start">
 												<div class="deals_timer_title_container">
 													<div class="deals_timer_title">Hurry Up</div>
 													<div class="deals_timer_subtitle">Offer ends in:</div>
@@ -127,7 +117,7 @@
 														</div>
 													</div>
 												</div>
-											</div>
+											</div> --}}
 										</div>
 									</div>
 								@endforeach
@@ -156,7 +146,7 @@
 								<div class="featured_slider slider">
 
 									<!-- Slider Item -->
-									@foreach($active_products as $product)
+									@foreach($trend_products as $product)
 										<div class="featured_slider_item">
 											<div class="border_active"></div>
 											<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
@@ -167,7 +157,9 @@
 													@else
 														<div class="product_price">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
 													@endif
-													<div class="product_name"><div><a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}">{{ $product->product_name }}</a></div></div>
+													<div class="product_name">
+														<div><a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}">{{ $product->product_name }}</a></div>
+													</div>
 
 													<div class="product_extras">
 														<a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}">
@@ -192,7 +184,6 @@
 											</div>
 										</div>
 									@endforeach
-
 								</div>
 								<div class="featured_slider_dots_cover"></div>
 							</div>
@@ -214,7 +205,7 @@
 				<!-- Trends Content -->
 				<div class="col-lg-3">
 					<div class="trends_container">
-						<h2 class="trends_title">Buy One Get One</h2>
+						<h2 class="trends_title">お買い得商品</h2>
 						<div class="trends_text"><p></p></div>
 						<div class="trends_slider_nav">
 							<div class="trends_prev trends_nav"><i class="fas fa-angle-left ml-auto"></i></div>
@@ -232,22 +223,18 @@
 						<div class="owl-carousel owl-theme trends_slider">
 
 							<!-- Trends Slider Item -->
-							@foreach ($buyone_getone_products as $product)
+							@foreach ($hot_deal_products as $product)
 								<div class="owl-item">
 									<div class="trends_item is_new product_item">
 										<div class="trends_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset( $product->image_one ) }}" alt="" height="200px"></div>
 										<div class="trends_content">
-										<div class="trends_category"><a href="#">{{ $product->brand_name }}</a></div>
+											<div class="trends_category"><a href="#">{{ $product->brand->brand_name }}</a></div>
 											<div class="trends_info clearfix">
-												<div class="trends_name"><a href="product.html">{{ $product->product_name }}</a></div>
+												<div class="trends_name"><a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}">{{ $product->product_name }}</a></div>
 
-												@if($product->discount_price === NULL)
-													<div class="product_price discount">{{ number_format($product->selling_price) }}円</div>
-												@else
-													<div class="product_price discount">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
-												@endif
+												<div class="product_price">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
 
-												<a href="" class="btn btn-primary btn-sm font-weight-bold" style="margin-top: 5px;">カートに入れる</a>
+												<a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}" class="btn btn-primary btn-sm font-weight-bold hot_deal_button">商品詳細へ</a>
 
 											</div>
 										</div>
@@ -293,15 +280,15 @@
 									<div class="arrivals_slider slider">
 
 										@foreach($new_arraival_products as $product)
-											<div class="featured_slider_item">
+											<div class="arrivals_slider_item">
 												<div class="border_active"></div>
 												<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 													<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" height="120px" width="100px"></div>
 													<div class="product_content">
 														@if($product->discount_price === NULL)
-															<div class="product_price discount">{{ number_format($product->selling_price) }}円</div>
+															<div class="product_price">{{ number_format($product->selling_price) }}円</div>
 														@else
-															<div class="product_price discount">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
+															<div class="product_price">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
 														@endif
 														<div class="product_name"><div><a href="product.html">{{ $product->product_name }}</a></div></div>
 														<div class="product_extras">
@@ -365,7 +352,7 @@
 									<div class="arrivals_slider slider">
 
 										@foreach($second_arraival_products as $product)
-											<div class="featured_slider_item">
+											<div class="arrivals_slider_item">
 												<div class="border_active"></div>
 												<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 													<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" height="120px" width="100px"></div>
@@ -423,10 +410,18 @@
 			<div class="row">
 				@foreach ($articles as $article)
 					<div class="col-lg-4 advert_col">
-						<div class=""><a href="{{ route('show.article', ['id' => $article->id]) }}"><img src="{{ $article->post_image }}" alt="" class="article_image"></a></div>
+						<div class="">
+							<a href="{{ route('show.article', ['id' => $article->id]) }}">
+								@if ($article->post_image)
+									<img src="{{ asset($article->post_image) }}" alt="" class="article_image">
+								@else
+									<img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" class="article_image">
+								@endif
+							</a>
+						</div>
 						<div class="advert flex-row align-items-center justify-content-start">
 							<div class="advert_content">
-								<div class="advert_text">{!! $article->details_ja !!}</div>
+								<div class="advert_text">{!! $article->post_title_ja !!}</div>
 							</div>
 						</div>
 					</div>
@@ -444,89 +439,20 @@
 					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
 						<div class="newsletter_title_container">
 							<div class="newsletter_icon"><img src="{{ asset('/frontend/images/send.png') }}" alt=""></div>
-							<div class="newsletter_title">Sign up for Newsletter</div>
-							<div class="newsletter_text"><p>...and receive %20 coupon for first shopping.</p></div>
+							<div class="newsletter_title">定期購読</div>
+							<div class="newsletter_text"><p>初めての方には、1,000円分のクーポンが送られます。</p></div>
 						</div>
 						<div class="newsletter_content clearfix">
 						<form action="{{ route('store.newsletter') }}" method="POST" class="newsletter_form">
 							@csrf
-							<input type="email" class="newsletter_input" required="required" placeholder="Enter your email address" name="email">
-							<button class="newsletter_button" type="submit">Subscribe</button>
+							<input type="email" class="newsletter_input" required="required" placeholder="メールアドレスをご入力ください" name="email">
+							<button class="newsletter_button" type="submit">申し込み</button>
 							</form>
-							<div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
+							<div class="newsletter_unsubscribe_link"><a href="#"></a></div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-
-
-	<!-- Modal -->
-	<div class="modal fade" id="cart_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<form action="{{ route('insert.into.cart') }}" method="POST">
-				@csrf
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="staticBackdropLabel">商品プレビュー</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-
-					<div class="modal-body">
-						<div class="row">
-							<div class="col-md-4">
-								<div class="card">
-									<img src="" alt="" id="view_product_image"  height="200px">
-									<div class="card-body">
-										<h5 class="card-title text-center" id="view_product_name">商品名</h5>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-md-4">
-								<ul class="list-group">
-									<li class="list-group-item">商品コード：<span id="view_product_code"></span></li>
-									<li class="list-group-item">カテゴリー：<span id="view_product_category"></span></li>
-									<li class="list-group-item">サブカテゴリー：<span id="view_product_subcategory"></span></li>
-									<li class="list-group-item">ブランド：<span id="view_product_brand"></span></li>
-									<li class="list-group-item">在庫：<span class="badge view-stock" id="view_product_stock">あり</span></li>
-								</ul>
-							</div>
-
-							<div class="col-md-4">
-								<input type="hidden" name="product_id" id="product_id" value="">
-
-								<div class="form-group">
-									<label for="">カラー</label>
-									<select name="color" id="color" class="form-control">
-
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label for="">サイズ</label>
-									<select name="size" id="size" class="form-control">
-
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label for="">数量</label>
-									<input type="number" class="form-control" name="qty" value="1">
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-						<button type="submit" class="btn btn-primary">カートに入れる</button>
-					</div>
-				</div>
-			</form>
 		</div>
 	</div>
 

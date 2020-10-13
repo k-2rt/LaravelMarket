@@ -14,6 +14,8 @@ class Post extends Model
         'details_en',
         'details_ja',
         'post_image',
+        'create_user',
+        'update_user',
     ];
 
     public function post_category()
@@ -28,8 +30,7 @@ class Post extends Model
      */
     public function getPostsWithPostCategories()
     {
-        return $this->select('posts.*', 'post_categories.category_name_en', 'post_categories.category_name_ja')
-                    ->join('post_categories', 'posts.category_id', 'post_categories.id')
+        return $this->with('post_category')
                     ->get();
     }
 

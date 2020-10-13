@@ -20,19 +20,11 @@
             <div class="blog_post">
               <div class="blog_image" style="background-image:url({{ asset($post->post_image) }})"></div>
               <div class="blog_text">
-                @if (Session()->get('lang') === 'japanese')
-                  {{ $post->post_title_ja }}
-                @else
-                  {{ $post->post_title_en }}
-                @endif
+                {{ $post->post_title_ja }}
               </div>
               <div class="blog_button">
               <a href="{{ route('show.article', ['id' => $post->id]) }}">
-                  @if (Session()->get('lang') === 'japanese')
-                    続きを読む
-                  @else
-                    Continue Reading
-                  @endif
+                  続きを読む
                 </a>
               </div>
             </div>

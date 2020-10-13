@@ -117,7 +117,7 @@
               <div class="col-lg-12">
                 <div class="form-group">
                   <label class="form-control-label">商品詳細: <span class="tx-danger">*</span></label><br/>
-                  <textarea class="form-control" id="summernote" name="product_details">{{ old('product_details', $product->product_details) }}</textarea>
+                  <textarea class="form-control" id="summernote" name="product_details">{!! old('product_details', $product->product_details) !!}</textarea>
                 </div>
               </div>
 

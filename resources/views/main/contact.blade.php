@@ -6,9 +6,6 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('/frontend/styles/contact_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/frontend/styles/contact_responsive.css')}}">
 
-	<!-- Contact Info -->
-
-
 	<!-- Contact Form -->
 
 	<div class="contact_form">
