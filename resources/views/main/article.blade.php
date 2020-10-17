@@ -13,7 +13,6 @@
     <div class="row">
       <div class="col">
         <div class="blog_posts d-flex flex-row align-items-start justify-content-between">
-
           @foreach ($posts as $post)
 
             <!-- Blog post -->
@@ -30,13 +29,10 @@
             </div>
 
           @endforeach
-
         </div>
       </div>
-
     </div>
   </div>
 </div>
-
 
 @endsection

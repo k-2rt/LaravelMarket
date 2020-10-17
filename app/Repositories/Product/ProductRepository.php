@@ -126,22 +126,10 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function searchProductsByKeyword($keyword): Object
     {
-        return $this->product->where('product_name', 'LIKE', '%' . $keyword . '%')->paginate(20);
-    }
-
-    /**
-     * Get Brands of search product
-     *
-     * @param String $keyword
-     * @return Object
-     */
-    public function searchProdcutBrandsByKeyword($keyword)
-    {
-        return $this->product->select('brand_id')
+        return $this->product->with('current_user_wish')
                              ->with('brand:id,brand_name')
                              ->where('product_name', 'LIKE', '%' . $keyword . '%')
-                             ->groupBy('brand_id')
-                             ->get();
+                             ->paginate(10);
     }
 
     /**
