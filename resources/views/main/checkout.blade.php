@@ -73,16 +73,16 @@
           <!-- Order Total -->
           @if ($cart->isNotEmpty())
             <div class="order_total_content" style="padding: 30px 0;">
-              <h5 style="margin-left: 15px;">クーポンの適用</h5>
-              <form action="{{ route('apply.coupon') }}" method="POST">
+              <h5>クーポンコード</h5>
+              <form action="{{ route('apply.coupon') }}" method="POST" style="display: inline-block;">
               @csrf
-                <div class="form-group col-lg-4">
+                <div class="form-group">
                   <input type="text" name="coupon" class="coupon-form" required="" placeholder="">
                   <button type="submit" class="btn btn-danger ml-2">適用</button>
                 </div>
               </form>
 
-              <ul class="list-group col-lg-4" style="float: right;">
+              <ul class="list-group col-lg-4" style="float: right; padding-right: 0px;">
                 <li class="list-group-item">商品合計<span style="float: right;">{{ number_format(Cart::Subtotal()) }}円</span></li>
 
                 @if (Session::has('coupon'))
@@ -115,7 +115,7 @@
     @if ($cart->isNotEmpty())
       <div class="cart_buttons">
         <button type="button" class="button cart_button_clear">キャンセル</button>
-        <a href="{{ route('payment.page') }}" class="button cart_button_checkout">ご購入手続きへ</a>
+        <a href="{{ route('payment.page') }}" class="button cart_button_checkout">お支払い手続き</a>
       </div>
     @endif
   </div>

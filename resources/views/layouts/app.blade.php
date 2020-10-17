@@ -244,32 +244,32 @@
 <script src="{{ asset('/frontend/js/custom.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js') }}"></script>
-{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-<script src="{{ asset('/frontend/js/product_custom.js') }}"></script>
+{{-- <script src="{{ asset('/frontend/js/product_custom.js') }}"></script> --}}
 
 <script>
 	@if (Session::has('message'))
-    var type = "{{ Session::get('alert-type', 'info') }}"
-    switch(type) {
-      case 'info':
-      toastr.info(" {{ Session::get('message') }} ");
-      break;
+		var type = "{{ Session::get('alert-type', 'info') }}"
+			switch(type) {
+				case 'info':
+				toastr.info(" {{ Session::get('message') }} ");
+				break;
 
-      case 'success':
-      toastr.success(" {{ Session::get('message') }} ");
-      break;
+				case 'success':
+				toastr.success(" {{ Session::get('message') }} ");
+				break;
 
-      case 'warning':
-      toastr.warning(" {{ Session::get('message') }} ");
-      break;
+				case 'warning':
+				toastr.warning(" {{ Session::get('message') }} ");
+				break;
 
-      case 'error':
-      toastr.error(" {{ Session::get('message') }} ");
-      break;
-    }
+				case 'error':
+				toastr.error(" {{ Session::get('message') }} ");
+				break;
+			}
 	@endif
 </script>
 
@@ -291,6 +291,42 @@
 				}
 			});
 		});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.addWishList').on('click', function() {
+			var id = $(this).data('id');
+			if (id) {
+				$.ajax({
+					url: " {{ url('add/wishlist') }}/" + id,
+					type: "GET",
+					dataType: "JSON",
+					success: function(data) {
+						const Toast = Swal.mixin({
+							toast: true,
+							position: 'top-end',
+							showConfirmButton: false,
+							timer: 3000,
+							timerProgressBar: true,
+							onOpen: (toast) => {
+								toast.addEventListener('mouseenter', Swal.stopTimer)
+								toast.addEventListener('mouseleave', Swal.resumeTimer)
+							}
+						});
+
+						Toast.fire({
+							icon: data.type,
+							title: data.message
+						});
+					},
+				});
+			} else {
+				$(".product_fav").removeClass("active");
+				alert('追加できませんでした');
+			}
+		});
+	});
 </script>
 
 </body>

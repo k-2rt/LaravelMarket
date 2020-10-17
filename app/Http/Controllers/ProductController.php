@@ -8,17 +8,20 @@ use App\Repositories\Product\ProductRepositoryInterface as ProductRepo;
 use Cart;
 use Auth;
 use App\Models\Admin\Category;
+use App\Models\Admin\Subcategory;
 
 class ProductController extends Controller
 {
     protected $product;
     protected $product_repo;
     protected $category;
+    protected $sub_category;
 
-    public function __construct(Product $product, ProductRepo $product_repo, Category $category) {
+    public function __construct(Product $product, ProductRepo $product_repo, Category $category, Subcategory $sub_category) {
         $this->product = $product;
         $this->product_repo = $product_repo;
         $this->category = $category;
+        $this->sub_category = $sub_category;
     }
 
     /**
@@ -66,19 +69,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Show product lists
-     *
-     * @param String $id
-     * @return void
-     */
-    public function showProductList($id) {
-        $products = $this->product->getPaginateProducts($id);
-        $brands = $this->product->getBrandsBySubCategoryId($id);
-
-        return view('main.product_list', compact('products', 'brands'));
-    }
-
-    /**
      * Show category lists
      *
      * @param String $id
@@ -86,9 +76,26 @@ class ProductController extends Controller
      */
     public function showCategoryList($id) {
         $products = $this->product->getPaginateCategories($id);
+        $categories = $this->category->getAllCategories();
+        $product_category = $this->category->findCategory($id);
         $brands = $this->product->getBrandsByCategoryId($id);
 
-        return view('main.category_list', compact('products', 'brands'));
+        return view('main.category_list', compact('products', 'categories', 'product_category', 'brands'));
+    }
+
+    /**
+     * Show sub category lists
+     *
+     * @param String $id
+     * @return void
+     */
+    public function showSubCategoryList($id) {
+        $products = $this->product->getPaginateProducts($id);
+        $categories = $this->category->getAllCategories();
+        $product_subcategory = $this->sub_category->findSubCategory($id);
+        $brands = $this->product->getBrandsBySubCategoryId($id);
+
+        return view('main.sub_category_list', compact('products', 'categories', 'product_subcategory', 'brands'));
     }
 
     public function searchProduct(Request $request)

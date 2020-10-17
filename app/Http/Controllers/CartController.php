@@ -149,17 +149,6 @@ class CartController extends Controller
     }
 
     /**
-     * Show wish lists
-     *
-     * @return void
-     */
-    public function showWishlists() {
-        $products = $this->product->getProductsWithWishLists(Auth::id());
-
-        return view('main.wishlist', compact('products'));
-    }
-
-    /**
      * Apply coupon
      *
      * @param Request $request

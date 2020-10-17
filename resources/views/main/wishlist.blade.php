@@ -16,51 +16,40 @@
           <div class="cart_title">ほしい物リスト</div>
           <div class="cart_items">
             <ul class="cart_list">
-
-              @foreach ($products as $product)
+              @foreach ($wish_products as $wish)
                 <li class="cart_item clearfix">
-                <div class="cart_item_image text-center"><img src="{{ asset( $product->image_one  ) }}" alt="" height="115px" width="115px"></div>
+                <div class="cart_item_image text-center"><a href="{{ route('product.detail', ['id' => $wish->product->id, 'product_name' => $wish->product->product_name ]) }}"><img src="{{ asset( $wish->product->image_one  ) }}" alt="" height="115px" width="115px"></a></div>
                   <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                    <div class="cart_item_name cart_info_col">
+                    <div class="cart_item_name cart_info_col wd-30p">
                       <div class="cart_item_title">商品名</div>
-                      <div class="cart_item_text">{{ $product->product_name }}</div>
+                      <div class="cart_item_text">{{ $wish->product->product_name }}</div>
                     </div>
 
-                    <div class="cart_item_color cart_info_col">
+                    <div class="cart_item_color cart_info_col wd-30p">
                       <div class="cart_item_title">カラー</div>
-                      <div class="cart_item_text">{{ $product->productcolor }}</div>
+                      <div class="cart_item_text">{{ $wish->product->product_color }}</div>
                     </div>
 
-                    <div class="cart_item_color cart_info_col">
+                    <div class="cart_item_color cart_info_col wd-25p">
                       <div class="cart_item_title">サイズ</div>
-                      <div class="cart_item_text">{{ $product->product_size }}</div>
+                      <div class="cart_item_text">{{ $wish->product->product_size }}</div>
                     </div>
 
                     <div class="cart_item_color cart_info_col">
-                      <div class="cart_item_title">アクション</div>
+                      <div class="cart_item_title">削除</div>
                       <div class="cart_item_text">
-                        <a href="" class="btn btn-sm btn-primary">カートに入れる</a>
+                        <a href="{{ route('delete.wish.list', ['id' => $wish->id]) }}" class="btn btn-sm btn-secondary button-circle">X</a>
                       </div>
                     </div>
-
                   </div>
                 </li>
-
               @endforeach
             </ul>
           </div>
-
-          {{-- <div class="cart_buttons">
-            <button type="button" class="button cart_button_clear">キャンセル</button>
-            <a href="{{ route('checkout.product') }}" class="button cart_button_checkout">購入する</a>
-          </div> --}}
-
         </div>
       </div>
     </div>
   </div>
 </div>
-
-{{-- <script src="{{ asset('/frontend/js/cart_custom.js') }}"></script> --}}
 
 @endsection

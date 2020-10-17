@@ -33,7 +33,8 @@
       <!-- Description -->
       <div class="col-lg-5 order-3">
         <div class="product_description">
-          <div class="product_category">{{ $product->category_name }} > {{ $product->subcategory_name }}</div>
+          <div class="product_category"> <a href="{{ route('show.category.list', ['id' => $product->category->id]) }}">{{ $product->category->category_name }}</a>  >  <a href="{{ route('show.subcategory.list', ['id' => $product->subcategory->id]) }}">{{ $product->subcategory->subcategory_name }}</a></div>
+          <div class="product_brand">{{ $product->brand->brand_name }}</div>
           <div class="product_name">{{ $product->product_name }}</div>
           <div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
           <div class="product_text">
@@ -44,10 +45,10 @@
             @csrf
 
               <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                   <div class="form-group">
-                    <label for="exampleFormControlSelect1">カラー</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="color">
+                    <label for="exampleFormControlSelect1" class="product_label">カラー</label>
+                    <select class="product_form_control" id="exampleFormControlSelect1" name="color">
                       @foreach ($colors as $color)
                         <option value="{{ $color }}">{{ $color }}</option>
                       @endforeach
@@ -55,25 +56,11 @@
                   </div>
                 </div>
 
-              <div class="">
-                <div class="">
-                  <div class="">
-                    <label for="">aaa</label>
-                    <select class="" id="" name="color">
-                      @foreach ($colors as $color)
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
-
                 @if (!empty($product->product_size))
-                  <div class="col-lg-4">
+                  <div class="col-lg-12">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect2">サイズ</label>
-                      <select class="form-control input-lg" id="exampleFormControlSelect2" name="size">
+                      <label for="exampleFormControlSelect2" class="product_label">サイズ</label>
+                      <select class="product_form_control input-lg" id="exampleFormControlSelect2" name="size">
                         @foreach ($sizes as $size)
                           <option value="{{ $size }}">{{ $size }}</option>
                         @endforeach
@@ -83,25 +70,35 @@
                 @endif
 
 
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                   <div class="form-group">
-                    <label for="exampleFormControlSelect">数量</label>
-                    <input type="number" class="form-control" name="qty" value="1" pattern="[0-9]">
+                    <label for="exampleFormControlSelect3" class="product_label">数量</label>
+                    <input type="number" class="product_form_control product_number" id="exampleFormControlSelect3" name="qty" value="1" pattern="[0-9]" min="1" max="10">
                   </div>
                 </div>
               </div>
 
-              @if($product->discount_price === NULL)
-                <div class="product_price">{{ number_format($product->selling_price) }}円</div>
-              @else
-                <div class="product_price">{{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span></div>
-              @endif
+              <div class="product_wish">
+                @if ($product->current_user_wish->count() > 0)
 
-              <div class="button_container">
+                  <button type="button" class="button wish_button addWishList" data-id="{{ $product->id }}" style="background: #c3c3c3;">ほしい物リストから削除</button>
+                @else
+                <button type="button" class="button wish_button addWishList" data-id="{{ $product->id }}">ほしい物リストに追加</button>
+                @endif
+
+              </div>
+
+              <div class="product_price">
+                @if($product->discount_price === NULL)
+                  {{ number_format($product->selling_price) }}円
+                @else
+                  {{ number_format($product->discount_price) }}円<span>{{ number_format($product->selling_price) }}円</span>
+                @endif
                 <button type="submit" class="button cart_button">カートに入れる</button>
-                <div class="product_fav"><i class="fas fa-heart"></i></div>
-              </div><br /><br />
+              </div>
 
+              <br />
+              <br />
               <!-- Go to www.addthis.com/dashboard to customize your tools -->
               <div class="addthis_inline_share_toolbox"></div>
 
@@ -126,7 +123,6 @@
             <div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
           </div>
         </div>
-
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
