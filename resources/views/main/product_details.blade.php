@@ -69,7 +69,6 @@
                   </div>
                 @endif
 
-
                 <div class="col-lg-12">
                   <div class="form-group">
                     <label for="exampleFormControlSelect3" class="product_label">数量</label>
@@ -79,13 +78,13 @@
               </div>
 
               <div class="product_wish">
-                @if ($product->current_user_wish->count() > 0)
-
-                  <button type="button" class="button wish_button addWishList" data-id="{{ $product->id }}" style="background: #c3c3c3;">ほしい物リストから削除</button>
-                @else
-                <button type="button" class="button wish_button addWishList" data-id="{{ $product->id }}">ほしい物リストに追加</button>
-                @endif
-
+                @auth
+                  @if ($product->current_user_wish->count() > 0)
+                    <button type="button" class="button wish_button addWishList" data-id="{{ $product->id }}" style="background: #c3c3c3;">ほしい物リストから削除</button>
+                  @else
+                    <button type="button" class="button wish_button addWishList" data-id="{{ $product->id }}">ほしい物リストに追加</button>
+                  @endif
+                @endauth
               </div>
 
               <div class="product_price">

@@ -9,6 +9,7 @@ use Cart;
 use Auth;
 use App\Models\Admin\Category;
 use App\Models\Admin\Subcategory;
+use App\Models\Admin\Post;
 
 class ProductController extends Controller
 {
@@ -16,12 +17,14 @@ class ProductController extends Controller
     protected $product_repo;
     protected $category;
     protected $sub_category;
+    protected $post;
 
-    public function __construct(Product $product, ProductRepo $product_repo, Category $category, Subcategory $sub_category) {
+    public function __construct(Product $product, ProductRepo $product_repo, Category $category, Subcategory $sub_category, Post $post) {
         $this->product = $product;
         $this->product_repo = $product_repo;
         $this->category = $category;
         $this->sub_category = $sub_category;
+        $this->post = $post;
     }
 
     /**
@@ -98,12 +101,20 @@ class ProductController extends Controller
         return view('main.sub_category_list', compact('products', 'categories', 'product_subcategory', 'brands'));
     }
 
-    public function searchProduct(Request $request)
+    public function searchItem(Request $request)
     {
-        $products = $this->product_repo->searchProductsByKeyword($request->search);
-        $items = $this->product_repo->searchProdcutBrandsByKeyword($request->search);
-        $categories = $this->category->getAllCategories();
+        $keyword = $request->keyword;
+        $mode = $request->mode;
 
-        return view('main.search', compact('products', 'categories', 'items'));
+        if ($mode === 'article') {
+            $posts = $this->post->searchArticlesByKeyword($keyword);
+            $search_article = 'checked';
+
+            return view('main.search_article', compact('posts', 'keyword', 'search_article'));
+        } else {
+            $products = $this->product_repo->searchProductsByKeyword($keyword);
+            $categories = $this->category->getAllCategories();
+            return view('main.search_product', compact('products', 'categories', 'keyword'));
+        }
     }
 }

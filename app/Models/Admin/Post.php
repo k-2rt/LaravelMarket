@@ -48,4 +48,16 @@ class Post extends Model
             return false;
         }
     }
+
+    /**
+     * Search articles by keyword
+     *
+     * @param String $keyword
+     * @return Object
+     */
+    public function searchArticlesByKeyword($keyword): Object
+    {
+        return $this->where('post_title_ja', 'LIKE', '%' . $keyword . '%')
+                    ->paginate(9);
+    }
 }

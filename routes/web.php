@@ -135,7 +135,7 @@ Route::get('request/return/order/{id}', 'ProfileController@requestReturnOrder')-
 Route::get('contact/page', 'ContactController@showContactPage')->name('contact.page');
 Route::post('contact/form', 'ContactController@sendContactMessage')->name('contact.form');
 
-Route::post('search/product', 'ProductController@searchProduct')->name('search.product');
+Route::post('search/item', 'ProductController@searchItem')->name('search.item');
 
 Route::middleware('auth:admin')->group(function() {
     Route::get('admin/home', 'AdminController@index')->name('admin.home');

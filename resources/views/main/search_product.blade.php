@@ -12,55 +12,43 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
-
         <!-- Shop Sidebar -->
         <div class="shop_sidebar">
           <div class="sidebar_section">
-            <div class="sidebar_title">該当する商品一覧</div>
+            <div class="sidebar_title">カテゴリー</div>
             <ul class="sidebar_categories">
-
               @foreach ($categories as $category)
                 <li><a href="{{ route('show.category.list', ['id' => $category->id]) }}">{{ $category->category_name }}</a></li>
               @endforeach
-
             </ul>
           </div>
-          <div class="sidebar_section filter_by_section">
-            <div class="sidebar_title">Filter By</div>
-            <div class="sidebar_subtitle">Price</div>
-            <div class="filter_price">
-              <div id="slider-range" class="slider_range"></div>
-              <p>Range: </p>
-              <p><input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;"></p>
-            </div>
-          </div>
-
           <div class="sidebar_section">
             <div class="sidebar_subtitle brands_subtitle">ブランド</div>
             <ul class="brands_list">
-              @foreach ($items as $item)
-                <li class="brand"><a href="#">{{ $item->brand->brand_name }}</a></li>
+              @foreach ($products as $product)
+                <li class="brand"><a href="#">{{ $product->brand->brand_name }}</a></li>
               @endforeach
             </ul>
           </div>
         </div>
-
       </div>
 
       <div class="col-lg-9">
         <!-- Shop Content -->
         <div class="shop_content">
           <div class="shop_bar clearfix">
-          <div class="shop_product_count"><span>{{ $products->count() }}</span> 件 該当する商品</div>
+          <div class="shop_product_count">該当する商品<span style="color: #0e8ce4;"> {{ $products->count() }}</span> 件 </div>
             <div class="shop_sorting">
               <span>並び替え：</span>
               <ul>
                 <li>
-                  <span class="sorting_text">highest rated<i class="fas fa-chevron-down"></span></i>
+                  <span class="sorting_text">高評価<i class="fas fa-chevron-down"></span></i>
                   <ul>
-                    <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>highest rated</li>
-                    <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>name</li>
-                    <li class="shop_sorting_button"data-isotope-option='{ "sortBy": "price" }'>price</li>
+                    <li class="shop_sorting_button">高評価</li>
+                    <li class="shop_sorting_button">低評価</li>
+                    <li class="shop_sorting_button">入荷順</li>
+                    <li class="shop_sorting_button">値段高</li>
+                    <li class="shop_sorting_button">値段低</li>
                   </ul>
                 </li>
               </ul>
@@ -74,7 +62,9 @@
               <!-- Product Item -->
               <div class="product_item is_new">
                 <div class="product_border"></div>
-                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" width="100px" height="100px"></div>
+                <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                  <a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}" tabindex="0"><img src="{{ asset($product->image_one) }}" alt="" width="100px" height="100px"></a>
+                </div>
                 <div class="product_content">
 
                   @if($product->discount_price === NULL)
@@ -89,12 +79,14 @@
                 </div>
 
                 @auth
-                  <div class="product_fav"><i class="fas fa-heart"></i></div>
+                  <div class="product_fav addWishList {{ $product->current_user_wish->count() ? 'active' : '' }}" data-id="{{ $product->id }}"><i class="fas fa-heart"></i></div>
                 @endauth
 
                 <ul class="product_marks">
                   @if($product->discount_price === NULL)
-                    <li class="product_mark product_new">NEW</li>
+                    @if ($product->compare_date === true)
+                      <li class="product_mark product_new">NEW</li>
+                    @endif
                   @else
                     <li class="product_mark product_discount">
                       {{ $product->caluculateDiscountPercent() }}%

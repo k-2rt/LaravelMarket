@@ -1249,8 +1249,7 @@ select option
 
 .blog
 {
-	padding-top: 80px;
-	padding-bottom: 100px;
+	padding: 80px 0;
 	background: #FFFFFF;
 }
 .blog_posts
@@ -1360,11 +1359,15 @@ select option
 	margin-bottom: 10px;
 	font-weight: bold;;
 }
-
 .article_content p {
 	margin-top: 40px;
 }
-
+.no_article {
+	padding-top: 52px;
+	margin: 0 auto;
+	font-size: 20px;
+	font-weight: 400;
+}
 
 /*********************************
 6. Newsletter

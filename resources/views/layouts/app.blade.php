@@ -92,19 +92,19 @@
 						<div class="header_search">
 							<div class="header_search_content">
 								<div class="header_search_form_container">
-								<form action="{{ route('search.product') }}" class="header_search_form clearfix" method="POST">
+								<form action="{{ route('search.item') }}" class="header_search_form clearfix" method="POST">
 										@csrf
-										<input type="search" required="required" class="header_search_input" placeholder="商品を検索" name="search">
+										<input type="search" class="header_search_input" placeholder="商品・記事を検索" name="keyword" value="{{ $keyword ?? '' }}">
 										<div class="custom_dropdown">
 											<div class="custom_dropdown_list" style="display: none;">
 												<span class="custom_dropdown_placeholder clc"></span>
 												<ul class="custom_list clc"></ul>
 											</div>
 											<label for="search_product" style="margin-right: 5px;">
-												<input type="radio" name="mode" id="search_product" value="search_product" style="margin-right: 5px;" checked>商品名
+												<input type="radio" name="mode" id="search_product" value="product_name" style="margin-right: 5px;" checked>商品名
 											</label>
 											<label for="search_article" style="margin-right: 5px;">
-												<input type="radio" name="mode" id="search_article" value="search_article" style="margin-right: 5px;">記事
+												<input type="radio" name="mode" id="search_article" value="article" style="margin-right: 5px;" {{ $search_article ?? '' }}>記事
 											</label>
 										</div>
 										<button type="submit" class="header_search_button trans_300" value=""><img src="{{ asset('/frontend/images/search.png') }}" alt=""></button>

@@ -35,7 +35,8 @@
 
           <div class="main_nav_menu ml-auto">
             <ul class="standard_dropdown main_nav_dropdown">
-              <li><a href="{{ route('index.article') }}">記事<i class="fas fa-chevron-down"></i></a></li>
+              <li><a href="{{ url('/') }}">HOME<i class="fas fa-chevron-down"></i></a></li>
+              <li><a href="{{ route('index.article') }}">記事一覧<i class="fas fa-chevron-down"></i></a></li>
               <li><a href="{{ route('contact.page') }}">お問い合わせ<i class="fas fa-chevron-down"></i></a></li>
             </ul>
           </div>

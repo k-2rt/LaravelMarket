@@ -65,15 +65,6 @@ interface ProductRepositoryInterface
     public function searchProductsByKeyword($keyword);
 
     /**
-     * Get Brands of search product
-     *
-     * @param String $keyword
-     * @return Object
-     */
-    public function searchProdcutBrandsByKeyword($keyword);
-
-
-    /**
      * Delete a product
      *
      * @param Stirng $id
