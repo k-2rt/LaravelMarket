@@ -39,7 +39,7 @@
         <!-- Shop Content -->
         <div class="shop_content">
           <div class="shop_bar clearfix">
-          <div class="shop_product_count"><span>{{ $products->count() }}</span> 件 該当する商品</div>
+          <div class="shop_product_count">{{ $product_category->category_name }} <span style="margin-left: 10px;">該当する商品</span> <span style="color: #0e8ce4;"> {{ $products->count() }}</span> 件</div>
             <div class="shop_sorting">
               <span>並び替え：</span>
               <ul>
@@ -47,8 +47,10 @@
                   <span class="sorting_text">高評価<i class="fas fa-chevron-down"></span></i>
                   <ul>
                     <li class="shop_sorting_button">高評価</li>
-                    <li class="shop_sorting_button">新作</li>
-                    <li class="shop_sorting_button">値段</li>
+                    <li class="shop_sorting_button">低評価</li>
+                    <li class="shop_sorting_button">入荷順</li>
+                    <li class="shop_sorting_button">値段高</li>
+                    <li class="shop_sorting_button">値段低</li>
                   </ul>
                 </li>
               </ul>
@@ -62,9 +64,9 @@
               <!-- Product Item -->
               <div class="product_item is_new">
                 <div class="product_border"></div>
-                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" width="100px" height="100px"></div>
+                <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                  <a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}" tabindex="0"><img src="{{ asset($product->image_one) }}" alt="" width="100px" height="100px"></a></div>
                 <div class="product_content">
-
                   @if($product->discount_price === NULL)
                     <div class="product_price">{{ number_format($product->selling_price) }}円</div>
                   @else
@@ -77,12 +79,14 @@
                 </div>
 
                 @auth
-                  <div class="product_fav"><i class="fas fa-heart"></i></div>
+              <div class="product_fav addWishList {{ $product->current_user_wish->count() ? 'active' : '' }}" data-id="{{ $product->id }}"><i class="fas fa-heart"></i></div>
                 @endauth
 
                 <ul class="product_marks">
                   @if($product->discount_price === NULL)
-                    <li class="product_mark product_new">NEW</li>
+                    @if ($product->compare_date === true)
+                      <li class="product_mark product_new">NEW</li>
+                    @endif
                   @else
                     <li class="product_mark product_discount">
                       {{ $product->caluculateDiscountPercent() }}%

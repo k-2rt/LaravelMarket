@@ -10,7 +10,26 @@ class WishList extends Model
         'user_id', 'product_id'
     ];
 
-    public function getWishListsByUserId($userId) {
+    public function product()
+    {
+        return $this->belongsTo('App\Models\Admin\Product');
+    }
+
+    public function getWishListsByUserId($userId)
+    {
         return $this->where('user_id', $userId)->get();
+    }
+
+    /**
+     * Get products of wish lists
+     *
+     * @param String $userId
+     * @return Object
+     */
+    public function getWishListsWithProduct($userId)
+    {
+        return $this->with('product')->where('user_id', $userId)
+                                     ->orderBy('id', 'DESC')
+                                     ->get();
     }
 }

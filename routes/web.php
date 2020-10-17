@@ -87,6 +87,8 @@ Route::post('update/post/{id}', 'Admin\PostController@updatePost')->name('update
 
 // Wish List Route
 Route::get('add/wishlist/{id}', 'WishListController@addWishList');
+Route::get('delete/wish/list/{id}', 'WishListController@deleteWishlist')->name('delete.wish.list');
+Route::get('user/wishlist', 'WishListController@showWishlists')->name('user.wishlist');
 
 // Cart Route
 Route::get('add/cart/{id}', 'CartController@addProductToCart');
@@ -96,17 +98,15 @@ Route::get('remove/cart/item/{rowId}', 'CartController@removeCartItem')->name('r
 Route::post('update/cart/item', 'CartController@updateCartItem')->name('update.cart.item');
 Route::post('insert/into/cart', 'CartController@addCartFromModal')->name('insert.into.cart');
 Route::get('product/checkout', 'CartController@checkoutProduct')->name('checkout.product');
-Route::get('user/wishlist', 'CartController@showWishlists')->name('user.wishlist');
 
 Route::post('apply/coupon', 'CartController@applyCoupon')->name('apply.coupon');
 Route::get('remove/coupon', 'CartController@removeCoupon')->name('remove.coupon');
 
+// Products Details Page
 Route::get('product/details/{id}/{product_name}', 'ProductController@showProductDetails')->name('product.detail');
 Route::post('add/product/cart/{id}', 'ProductController@addProductToCart')->name('add.product.cart');
-// Products Details Page
-Route::get('show/product/list/{id}', 'ProductController@showProductList')->name('show.product.list');
-
 Route::get('show/category/list/{id}', 'ProductController@showCategoryList')->name('show.category.list');
+Route::get('show/subcategory/list/{id}', 'ProductController@showSubCategoryList')->name('show.subcategory.list');
 
 // Blog Post Route
 Route::get('index/article', 'ArticleController@showArticles')->name('index.article');

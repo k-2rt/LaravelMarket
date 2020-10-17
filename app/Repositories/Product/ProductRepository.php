@@ -65,7 +65,8 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function getTrendProducts(): Object
     {
-        return $this->product->where('status', 1)
+        return $this->product->with('current_user_wish')
+                             ->where('status', 1)
                              ->where('trend', 1)
                              ->orderBy('id', 'DESC')
                              ->limit(24)

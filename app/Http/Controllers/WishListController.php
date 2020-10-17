@@ -15,7 +15,14 @@ class WishListController extends Controller
         $this->wish_list = $wish_list;
     }
 
-    public function addWishList($product_id) {
+    /**
+     * Add a wish list
+     *
+     * @param String $product_id
+     * @return void
+     */
+    public function addWishList($product_id)
+    {
         $user_id = Auth::id();
         $wish_product = $this->wish_list->where('user_id', '=', $user_id)->where('product_id', '=', $product_id)->first();
 
@@ -39,5 +46,36 @@ class WishListController extends Controller
         }
 
         return response()->json($notification);
+    }
+
+    /**
+     * Show wish lists
+     *
+     * @return void
+     */
+    public function showWishlists()
+    {
+        $wish_products = $this->wish_list->getWishListsWithProduct(Auth::id());
+
+        return view('main.wishlist', compact('wish_products'));
+    }
+
+    /**
+     * Delete wish list
+     *
+     * @param String $id
+     * @return void
+     */
+    public function deleteWishlist($id)
+    {
+        $this->wish_list->find($id)->delete();
+
+        $notification = array(
+            'type' => 'info',
+            'is_completed' => '1',
+            'message' => 'ほしいものリストから削除しました',
+        );
+
+        return redirect()->back()->with($notification);
     }
 }

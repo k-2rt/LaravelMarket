@@ -5,6 +5,8 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Admin\Brand;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+use Auth;
 
 class Product extends Model
 {
@@ -38,6 +40,16 @@ class Product extends Model
         return $this->hasMany('App\Models\OrderDetail');
     }
 
+    public function wish_lists()
+    {
+        return $this->hasMany('App\Models\WishList');
+    }
+
+    public function current_user_wish()
+    {
+        return $this->wish_lists()->where('user_id', Auth::id());
+    }
+
     public function category()
     {
         return $this->belongsTo('App\Models\Admin\Category');
@@ -54,6 +66,22 @@ class Product extends Model
     }
 
     /**
+     * Check created_at of product in a month
+     *
+     * @return void
+     */
+    public function getCompareDateAttribute()
+    {
+        $now = Carbon::now();
+        $create_date = new Carbon($this->created_at);
+
+        if ($create_date->addMonth()->gt($now)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Get a latest product that main slider status is 1
      *
      * @return Object
@@ -64,19 +92,6 @@ class Product extends Model
                     ->where('main_slider', 1)
                     ->orderBy('id',  'DESC')
                     ->first();
-    }
-
-    /**
-     * Get products that trend is 1
-     *
-     * @return Object
-     */
-    public function getTrendProducts() {
-        return $this->where('status', 1)
-                    ->where('trend', 1)
-                    ->orderBy('id', 'DESC')
-                    ->limit(8)
-                    ->get();
     }
 
     /**
@@ -132,18 +147,14 @@ class Product extends Model
     }
 
     /**
-     * Get info of a product to show modal view
+     * Get info of a product with relations
      *
      * @param String $id
      * @return Object
      */
     public function getProductToDisplayInfo($id) {
-        return $this->select('products.*', 'categories.category_name', 'subcategories.subcategory_name', 'brands.brand_name')
-                    ->join('categories', 'products.category_id', 'categories.id')
-                    ->join('subcategories', 'products.subcategory_id', 'subcategories.id')
-                    ->join('brands', 'products.brand_id', 'brands.id')
-                    ->where('products.id', $id)
-                    ->first();
+        return $this->with(['category:id,category_name', 'subcategory:id,subcategory_name', 'brand:id,brand_name', 'current_user_wish'])
+                    ->find($id);
     }
 
     /**
@@ -174,25 +185,13 @@ class Product extends Model
     }
 
     /**
-     * Get products with wish lists
-     *
-     * @return Object
-     */
-    public function getProductsWithWishLists($user_id) {
-        return $this->select('products.*', 'wish_lists.user_id')
-                    ->join('wish_lists', 'products.id', 'wish_lists.product_id')
-                    ->where('wish_lists.user_id', $user_id)
-                    ->get();
-    }
-
-    /**
      * Get paginate categories
      *
      * @param String $id
      * @return Object
      */
     public function getPaginateCategories($id) {
-        return $this->where('category_id', $id)->paginate(10);
+        return $this->with('current_user_wish')->where('category_id', $id)->paginate(10);
     }
 
     /**
@@ -202,7 +201,7 @@ class Product extends Model
      * @return Object
      */
     public function getPaginateProducts($id) {
-        return $this->where('subcategory_id', $id)->paginate(10);
+        return $this->with('current_user_wish')->where('subcategory_id', $id)->paginate(10);
     }
 
     /**
@@ -252,9 +251,8 @@ class Product extends Model
         $image_path = str_replace('storage/', 'public/', $this->image_one);
         if (Storage::exists($image_path)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -267,9 +265,8 @@ class Product extends Model
         $image_path = str_replace('storage/', 'public/', $this->image_two);
         if (Storage::exists($image_path)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -282,8 +279,7 @@ class Product extends Model
         $image_path = str_replace('storage/', 'public/', $this->image_three);
         if (Storage::exists($image_path)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 }

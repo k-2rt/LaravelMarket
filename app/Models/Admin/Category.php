@@ -15,12 +15,18 @@ class Category extends Model
         return $this->hasMany('App\Models\Admin\Product');
     }
 
+    public function sub_categories()
+    {
+        return $this->hasMany('App\Models\Admin\Subcategory');
+    }
+
     /**
      * Get all products
      *
      * @return Object
      */
-    public function getAllCategories() {
+    public function getAllCategories()
+    {
         return $this->all();
     }
 
@@ -29,7 +35,8 @@ class Category extends Model
      *
      * @return Object
      */
-    public function getFirstCategory() {
+    public function getFirstCategory()
+    {
         return $this->first();
     }
 
@@ -38,7 +45,18 @@ class Category extends Model
      *
      * @return void
      */
-    public function getSecondCategory() {
+    public function getSecondCategory()
+    {
         return $this->skip(1)->first();
+    }
+
+    /**
+     * Find a category
+     *
+     * @return void
+     */
+    public function findCategory($id)
+    {
+        return $this->find($id);
     }
 }

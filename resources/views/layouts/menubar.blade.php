@@ -21,7 +21,7 @@
                     @foreach($sub_categories as $sub_category)
                       @if($category->id === $sub_category->category_id)
                         <li class="hassubs">
-                        <a href="{{ route('show.product.list', ['id' => $sub_category->id]) }}">{{ $sub_category->subcategory_name }}<i class="fas fa-chevron-right"></i></a>
+                        <a href="{{ route('show.subcategory.list', ['id' => $sub_category->id]) }}">{{ $sub_category->subcategory_name }}<i class="fas fa-chevron-right"></i></a>
                         </li>
                       @endif
                     @endforeach

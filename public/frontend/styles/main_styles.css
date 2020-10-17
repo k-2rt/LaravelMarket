@@ -3745,3 +3745,19 @@ select option
 	background-color: #0e8ce4;
 	padding: 8px;
 }
+
+.wd-10p {
+  width: 10%;
+}
+.wd-15p {
+  width: 15%;
+}
+.wd-20p {
+  width: 20%;
+}
+.wd-25p {
+  width: 25%;
+}
+.wd-30p {
+  width: 30%;
+}

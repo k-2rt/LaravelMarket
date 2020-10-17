@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -11,6 +12,8 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
+        $now = Carbon::now();
+
         DB::table('products')->insert([
             [
                 'product_name' => 'ペティーナイフ',
@@ -33,6 +36,8 @@ class ProductsTableSeeder extends Seeder
                 'main_slider' => '1',
                 'mid_slider' => '1',
                 'buyone_getone' => '1',
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
                 'product_name' => 'V60レンジサーバー',
@@ -55,6 +60,8 @@ class ProductsTableSeeder extends Seeder
                 'main_slider' => '1',
                 'mid_slider' => NULL,
                 'buyone_getone' => '1',
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
                 'product_name' => 'オーブンポットラウンド',
@@ -77,6 +84,8 @@ class ProductsTableSeeder extends Seeder
                 'main_slider' => '1',
                 'mid_slider' => '1',
                 'buyone_getone' => '1',
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
                 'product_name' => 'ベルコード 二折札入れ',
@@ -99,6 +108,8 @@ class ProductsTableSeeder extends Seeder
                 'main_slider' => '1',
                 'mid_slider' => '1',
                 'buyone_getone' => '1',
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
                 'product_name' => 'ローチェア30',
@@ -121,6 +132,8 @@ class ProductsTableSeeder extends Seeder
                 'main_slider' => '1',
                 'mid_slider' => '1',
                 'buyone_getone' => '1',
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
                 'product_name' => 'LifE',
@@ -143,6 +156,8 @@ class ProductsTableSeeder extends Seeder
                 'main_slider' => '1',
                 'mid_slider' => '1',
                 'buyone_getone' => '1',
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
         ]);
     }

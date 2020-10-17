@@ -1272,7 +1272,7 @@ select option
 }
 .shop_product_count span
 {
-	color: #0e8ce4;
+	/* color: #0e8ce4; */
 }
 .shop_sorting
 {
@@ -2272,4 +2272,8 @@ select option
 .logos_list li:last-child
 {
 	margin-right: 0px;
+}
+
+a {
+	outline: none;
 }

@@ -51,22 +51,18 @@
                         <form action="{{ route('update.cart.item') }}" method="POST">
                           @csrf
                           <input type="hidden" name="product_id" value="{{ $item->rowId }}">
-                          <input type="number" name="qty" value="{{ $item->qty }}" style="width:50px;">
+                          <input type="number" name="qty" value="{{ $item->qty }}" style="width:50px;" min="1" max="10">
                           <button class="btn btn-success btn-sm" type="submit"><i class="fas fa-check-square"></i></button>
                         </form>
                       </div>
                     </div>
 
-
                     <div class="cart_item_quantity cart_info_col">
                       <div class="cart_item_title">削除</div>
                       <div class="cart_item_text"><a href="{{ route('remove.cart.item', ['rowId' => $item->rowId]) }}" class="btn btn-sm btn-secondary button-circle">X</a></div>
-
                     </div>
-
                   </div>
                 </li>
-
               @endforeach
             </ul>
           </div>
@@ -90,7 +86,5 @@
     </div>
   </div>
 </div>
-
-{{-- <script src="{{ asset('/frontend/js/cart_custom.js') }}"></script> --}}
 
 @endsection
