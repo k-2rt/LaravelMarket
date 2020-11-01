@@ -23,6 +23,8 @@ class CreateShippingTable extends Migration
             $table->string('ship_prefectures');
             $table->string('ship_address1');
             $table->string('ship_address2')->nullable();
+            $table->string('delivery_date')->nullable();
+            $table->string('delivery_time')->nullable();
             $table->timestamps();
         });
     }

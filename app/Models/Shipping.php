@@ -17,6 +17,8 @@ class Shipping extends Model
         'ship_prefectures',
         'ship_address1',
         'ship_address2',
+        'delivery_date',
+        'delivery_time',
     ];
 
     public function order()

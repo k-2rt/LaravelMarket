@@ -8,15 +8,18 @@ use App\Models\Admin\Coupon;
 use Cart;
 use Auth;
 use Session;
+use App\Models\OrderSetting;
 
 class CartController extends Controller
 {
     protected $product;
     protected $coupon;
+    protected $order_setting;
 
-    public function __construct(Product $product, Coupon $coupon) {
+    public function __construct(Product $product, Coupon $coupon, OrderSetting $order_setting) {
         $this->product = $product;
         $this->coupon = $coupon;
+        $this->order_setting = $order_setting;
     }
 
     /**
@@ -58,8 +61,9 @@ class CartController extends Controller
      */
     public function showCart() {
         $cart = Cart::content();
+        $shipping_fee = $this->order_setting->first()->shipping_fee;
 
-        return view('main.cart', compact('cart'));
+        return view('main.cart', compact('cart', 'shipping_fee'));
     }
 
     /**
@@ -136,8 +140,13 @@ class CartController extends Controller
     public function checkoutProduct() {
         if (Auth::check()) {
             $cart = Cart::content();
+            $user = Auth::user();
+            $prefs = config('pref');
+            $date = config('delivery');
+            $stripe = config('app.stripe_api');
+            $shipping_fee = $this->order_setting->first()->shipping_fee;
 
-            return view('main.checkout', compact('cart'));
+            return view('main.checkout', compact('cart', 'user', 'prefs', 'stripe', 'date', 'shipping_fee'));
         } else {
             $notification = array(
                 'message' => 'ログインをして下さい',

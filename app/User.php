@@ -40,12 +40,42 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function orders() {
+    public function orders()
+    {
         return $this->hasMany('App\Models\Order');
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany('App\Models\Address');
     }
 
     public function countAllUsers()
     {
         return $this->all()->count();
     }
+
+    public function getHyphenZipAttribute()
+    {
+        return substr($this->zip_code,0,3) . " - " . substr($this->zip_code,3);
+    }
+
+    public function getPrefNameAttribute()
+    {
+        $prefs = config('pref');
+
+        foreach ($prefs as $index => $pref) {
+            if ($index == $this->prefectures) {
+                return $pref;
+            }
+        }
+    }
+
+    public function checkUserAddress()
+    {
+        if ($this->zip_code || $this->prefectures || $this->address1) {
+
+        }
+    }
+
 }

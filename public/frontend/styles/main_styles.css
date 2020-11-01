@@ -1740,6 +1740,12 @@ select option
 	-o-transition: max-height 200ms ease;
 	transition: max-height 200ms ease;
 }
+.product_extras:focus {
+	outline: none;
+}
+.product_extras a:focus {
+	outline: none;
+}
 .slick-active .product_item:hover .product_extras
 {
 	max-height: 300px;
@@ -3666,6 +3672,7 @@ select option
 
 .flash-alert {
 	color: #f44336;
+	text-align: center;
 }
 
 .contact_form
@@ -3760,4 +3767,10 @@ select option
 }
 .wd-30p {
   width: 30%;
+}
+.profile-height {
+	height: 360px;
+}
+.overflow {
+	overflow-y: scroll;
 }

@@ -60,9 +60,11 @@
 										<a href="{{ route('home') }}"><div class="user_icon"><img src="{{ asset('/frontend/images/user.svg') }}" alt=""></div>プロフィール<i class="fas fa-chevron-down"></i></a>
 											<ul>
 												<li><a href="{{ route('user.wishlist') }}">ほしい物リスト</a></li>
-												<li><a href="{{ route('checkout.product') }}">購入する</a></li>
+												@if (Cart::content()->isNotEmpty())
+													<li><a href="{{ route('checkout.product') }}">購入する</a></li>
+												@endif
 												<li><a href="{{ route('order_history.lists') }}">注文履歴</a></li>
-												<li><a href="#">その他</a></li>
+												<li><a href="{{ route('user.logout') }}">ログアウト</a></li>
 											</ul>
 										</li>
 									</ul>
@@ -126,7 +128,7 @@
 							</div>
 							<!-- Cart -->
 							<div class="cart">
-								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
+								<div class="d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
 										<img src="{{ asset('/frontend/images/cart.png') }}" alt="">
 									<div class="cart_count"><span>{{  Cart::count() }}</span></div>

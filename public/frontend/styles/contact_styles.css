@@ -1239,18 +1239,17 @@ select option
 
 .contact_form
 {
-	padding-top: 85px;
 	background-color: #f7f7f7;
 }
 .contact_form_container
 {
-
+	margin-bottom: 50px;
 }
 .contact_form_title
 {
 	font-size: 1.5rem;
 	font-weight: 300;
-	margin-bottom: 30px;
+	margin-bottom: 25px;
 	padding: 10px 0;
 }
 .contact_form_title_next
@@ -1682,4 +1681,19 @@ select option
 	background-color: #fff;
 	padding: 25px 45px;
 	border-radius: 4px;
+}
+
+.login_feedback {
+	display: block;
+	margin-top: .25rem;
+	font-size: .875rem;
+	color: #dc3545;
+	text-align: center;
+}
+
+.register_feedback {
+	display: block;
+	margin-top: .5rem;
+	font-size: .875rem;
+	color: #dc3545;
 }

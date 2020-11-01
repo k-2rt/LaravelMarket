@@ -4,36 +4,75 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Address;
 use Auth;
 use Cart;
 use Session;
 use Mail;
 use App\Mail\InvoiceMail;
+use App\Models\OrderSetting;
 
 class PaymentController extends Controller
 {
     protected $order;
+    protected $address;
+    protected $order_setting;
 
-    public function __construct(Order $order) {
+    public function __construct(Order $order, Address $address, OrderSetting $order_setting)
+    {
         $this->order = $order;
+        $this->address = $address;
+        $this->order_setting = $order_setting;
     }
 
     /**
-     * Show payment page
+     * Show a confirm page
      *
      * @return void
      */
-    public function showPaymentPage() {
-        $prefs = config('pref');
+    public function showConfirmPage(Request $request)
+    {
         $user = Auth::user();
 
-        return view('main.payment', compact('prefs', 'user'));
+        if ($request->action === 'back') {
+            return redirect()->route('show.cart');
+        } else if ($user->checkAddress === false) {
+            $notification = array(
+                'message' => '送付先住所を入力してください',
+                'alert-type' => 'danger'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
+        $cart = Cart::content();
+        $date = config('delivery');
+        $stripe = config('app.stripe_api');
+        $delivery_date = $date['delivery_date'][$request->delivery_date];
+        $delivery_date_val = $request->delivery_date;
+
+        $delivery_time = $request->delivery_time;
+        $shipping_fee = $this->order_setting->first()->shipping_fee;
+
+        return view('main.confirm', compact('user', 'delivery_date', 'delivery_date_val', 'delivery_time', 'stripe', 'cart', 'shipping_fee'));
     }
 
-    public function payByStripe(Request $request) {
+    /**
+     * Pay by stripe & send a mail
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function payByStripe(Request $request)
+    {
         $discount = "";
         $coupon_id = NULL;
         $user = Auth::user();
+        $date = config('delivery');
+        $delivery_date = $request->delivery_date;
+        $delivery_time = $request->delivery_time;
+        $status_code = mt_rand(100000, 999999);
+
 
         if (Session::has('coupon')) {
             $discount = Session::get('coupon')['discount'];
@@ -69,9 +108,11 @@ class PaymentController extends Controller
             'coupon_id' => $coupon_id,
             'discount' => $discount,
             'shipping_fee' => $request->shipping_fee,
-            'status_code' => mt_rand(100000, 999999),
+            'status_code' => $status_code,
             'order_date' => date('Y/m/d'),
             'subtotal' => Cart::subtotal(),
+            'delivery_date' => $delivery_date,
+            'delivery_time' => $delivery_time,
         ]);
 
         $order->shipping()->create([
@@ -82,6 +123,8 @@ class PaymentController extends Controller
             'ship_prefectures' => $user->prefectures,
             'ship_address1' => $user->address1,
             'ship_address2' => $user->address2,
+            'delivery_date' => $delivery_date,
+            'delivery_time' => $delivery_time,
         ]);
 
         $content = Cart::content();
@@ -102,14 +145,16 @@ class PaymentController extends Controller
         // Mail send to user for Invoice
         Mail::to($user->email)->send(new InvoiceMail([
             'user_name' => $user->name,
-            'ship_zip_code' => $user->zip_code,
+            'ship_zip_code' => $user->hyphen_zip,
             'ship_address' => config('pref.' . $user->prefectures) . ' ' . $user->address1 . ' ' . $user->address2,
-            'payment_id' => $charge->payment_method,
             'total' => $charge->amount,
             'discount' => $discount ? number_format($discount) : 0,
             'shipping_fee' => $request->shipping_fee,
             'order_date' => date('Y/m/d'),
             'subtotal' => Cart::subtotal(),
+            'delivery_date' => $date['delivery_date'][$delivery_date],
+            'delivery_time' => $delivery_time,
+            'status_code' => $status_code,
         ]));
 
         Cart::destroy();

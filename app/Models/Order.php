@@ -20,6 +20,8 @@ class Order extends Model
         'status',
         'status_code',
         'order_date',
+        'delivery_date',
+        'delivery_time',
     ];
 
     public function order_details()

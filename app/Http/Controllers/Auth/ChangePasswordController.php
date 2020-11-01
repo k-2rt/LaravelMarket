@@ -26,31 +26,32 @@ class ChangePasswordController extends Controller
         $confirm_pass = $request->password_confirmation;
 
         if (Hash::check($old_pass, $password)) {
-            if ($new_pass === $confirm_pass) {
+            if ($new_pass === $confirm_pass && strlen($new_pass) >= 8) {
                 $user = User::find(Auth::id());
                 $user->password = Hash::make($request->password);
                 $user->save();
-                Auth::logout();
 
                 $notification = array(
-                    'message' => 'パスワードは変更されました',
+                    'message' => 'パスワードを変更しました',
                     'alert-type' => 'success'
                 );
 
-                return redirect()->route('login')->with($notification);
+                return redirect()->route('home')->with($notification);
+            } else if (strlen($new_pass) < 8) {
+                $notification = array(
+                    'errMessage' => '新しいパスワードは８桁以上で入力してください',
+                );
+            } else {
+                $notification = array(
+                    'errMessage' => '新しいパスワードと確認用を一致させて下さい',
+                );
             }
-
-            $notification = array(
-                'errMessage' => '新しいパスワードと確認用を一致させて下さい',
-            );
-
-            return redirect()->back()->with($notification);
         } else {
             $notification = array(
                 'errMessage' => '正しいパスワードを入力して下さい',
             );
-
-            return redirect()->back()->with($notification);
         }
+
+        return redirect()->back()->with($notification);
     }
 }
