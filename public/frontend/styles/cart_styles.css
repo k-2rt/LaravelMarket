@@ -1678,7 +1678,7 @@ select option
 	border: solid 1px #e8e8e8;
 	box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
 	padding: 5px;
-	font-size: 18px;
+	font-size: 17px;
 }
 .delivery_date {
 	width: 250px;
@@ -1711,4 +1711,14 @@ select option
 	padding-right: 35px;
 	outline: none;
 	cursor: pointer;
+}
+
+.address-section-link {
+	float: right;
+
+}
+
+.address-section-link a{
+	font-size: 15px;
+	color: #a19a9a;
 }

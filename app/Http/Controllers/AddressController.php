@@ -15,20 +15,30 @@ class AddressController extends Controller
         $this->address = $address;
     }
 
-    public function updateShippingAddress(AddressRequest $request) {
-        $data = $request->all();
+    /**
+     * Update user info
+     *
+     * @param AddressRequest $request
+     * @return void
+     */
+    public function updateUserInfo(AddressRequest $request) {
         $user = Auth::user();
-        $user->fill($data)->save();
+        $user->fill($request->all())->save();
 
         $notification = array(
-            'message' => '住所を更新しました',
+            'message' => 'ユーザー情報を更新しました',
             'alert-type' => 'success'
         );
 
         return redirect()->back()->with($notification);
     }
 
-    public function showAddressPage() {
+    /**
+     * Show user page
+     *
+     * @return void
+     */
+    public function showUserPage() {
         $prefs = config('pref');
         $user = Auth::user();
 

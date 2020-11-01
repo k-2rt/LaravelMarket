@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\Order\OrderRepositoryInterface as OrderRepo;
+use App\Http\Requests\ProfileRequest;
+use Auth;
 
 class ProfileController extends Controller
 {
@@ -31,7 +33,7 @@ class ProfileController extends Controller
         return view('main.profile.tracking', compact('order', 'delivery_date'));
     }
 
-    public function showSuccessLists()
+    public function showReturnLists()
     {
         $orders = $this->order_repo->getDeliveredOrdersOfAuth();
 
@@ -44,6 +46,37 @@ class ProfileController extends Controller
 
         $notification = array(
             'message' => '返品を申請しました',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    /**
+     * Show edit profile page
+     *
+     * @return void
+     */
+    public function showProfilePage()
+    {
+        $prefs = config('pref');
+        $user = Auth::user();
+
+        return view('main.profile', compact('prefs', 'user'));
+    }
+
+    /**
+     * Update profile info
+     *
+     * @param ProfileRequest $request
+     * @return void
+     */
+    public function updateProfileInfo(ProfileRequest $request) {
+        $user = Auth::user();
+        $user->fill($request->all())->save();
+
+        $notification = array(
+            'message' => 'ユーザー情報を更新しました',
             'alert-type' => 'success'
         );
 

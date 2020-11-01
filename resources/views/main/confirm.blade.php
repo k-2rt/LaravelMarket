@@ -78,6 +78,9 @@
                 <li class="ship_address clearfix">
                   {{ $user->address2 }}
                 </li>
+                <li class="ship_address clearfix">
+                  電話番号：{{ $user->phone }}
+                </li>
               </ul>
             </div>
           </div>

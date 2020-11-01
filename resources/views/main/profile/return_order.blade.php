@@ -71,9 +71,9 @@
                         <h5 class="text-center">{{ Auth::user()->name }}</h5>
                     </div>
                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="{{ route('show.profile.page') }}">ユーザー設定</a></li>
                         <li class="list-group-item"><a href="{{ route('password.change') }}">パスワードの変更</a></li>
-                        <li class="list-group-item"><a href="{{ route('show.address.page') }}">住所の設定</a></li>
-                        <li class="list-group-item"><a href="{{ route('success.order.lists') }}">商品返品</a></li>
+                        <li class="list-group-item"><a href="{{ route('return.order.lists') }}">商品返品</a></li>
                     </ul>
 
                     <div class="card-body">
