@@ -8,116 +8,63 @@
 
 <!-- Cart -->
 
-<div class="cart_section">
+<div class="contact_form">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
-        <div class="cart_container">
-          <div class="cart_title">カートに入っている商品 ({{ Cart::count() }}点)</div>
-          <div class="cart_items">
-            <ul class="cart_list">
+      <div class="col-lg-7 mx-auto checkout_container">
+        <div class="checkout_title">配送先・お届け日時のご指定をお願いいたします。</div>
+        <form action="{{ route('confirm.page') }}" method="GET">
+          @csrf
 
-              @foreach ($cart as $item)
-                <li class="cart_item clearfix">
-                  <div class="cart_item_image text-center"><img src="{{ asset( $item->options->image  ) }}" alt="" height="115px" width="115px"></div>
-                  <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                    <div class="cart_item_name cart_info_col">
-                      <div class="cart_item_title">商品名</div>
-                      <div class="cart_item_text">{{ $item->name }}</div>
-                    </div>
-
-                    @if ($item->options->color)
-                      <div class="cart_item_color cart_info_col">
-                        <div class="cart_item_title">カラー</div>
-                        <div class="cart_item_text">{{ $item->options->color }}</div>
-                      </div>
-                    @endif
-
-                    @if ($item->options->size)
-                      <div class="cart_item_color cart_info_col">
-                        <div class="cart_item_title">サイズ</div>
-                        <div class="cart_item_text">{{ $item->options->size }}</div>
-                      </div>
-                    @endif
-
-                    <div class="cart_item_price cart_info_col">
-                      <div class="cart_item_title">価格</div>
-                      <div class="cart_item_text">{{ number_format($item->price) }}円</div>
-                    </div>
-
-                    <div class="cart_item_quantity cart_info_col">
-                      <div class="cart_item_title">数量</div>
-                      <div class="cart_item_text">
-                        <form action="{{ route('update.cart.item') }}" method="POST">
-                          @csrf
-                          <input type="hidden" name="product_id" value="{{ $item->rowId }}">
-                          <input type="number" name="qty" value="{{ $item->qty }}" style="width:50px;">
-                          <button class="btn btn-success btn-sm" type="submit"><i class="fas fa-check-square"></i></button>
-                        </form>
-                      </div>
-                    </div>
-
-                    <div class="cart_item_quantity cart_info_col">
-                      <div class="cart_item_title">削除</div>
-                      <div class="cart_item_text">
-                        <a href="{{ route('remove.cart.item', ['rowId' => $item->rowId]) }}" class="btn btn-sm btn-secondary button-circle">X</a>
-                      </div>
-                    </div>
-                  </div>
+          <div class="checkout_form_container">
+            <div class="checkout_form_title">送付先住所</div>
+            <div>
+              <ul class="address_list">
+                <li class="ship_address clearfix">
+                  {{ $user->name }} 様
                 </li>
-
-              @endforeach
-            </ul>
-          </div>
-
-          <!-- Order Total -->
-          @if ($cart->isNotEmpty())
-            <div class="order_total_content" style="padding: 30px 0;">
-              <h5>クーポンコード</h5>
-              <form action="{{ route('apply.coupon') }}" method="POST" style="display: inline-block;">
-              @csrf
-                <div class="form-group">
-                  <input type="text" name="coupon" class="coupon-form" required="" placeholder="">
-                  <button type="submit" class="btn btn-danger ml-2">適用</button>
-                </div>
-              </form>
-
-              <ul class="list-group col-lg-4" style="float: right; padding-right: 0px;">
-                <li class="list-group-item">商品合計<span style="float: right;">{{ number_format(Cart::Subtotal()) }}円</span></li>
-
-                @if (Session::has('coupon'))
-                  <li class="list-group-item">クーポン ({{ Session::get('coupon')['name'] }})：
-                  <a href="{{ route('remove.coupon') }}" class="btn btn-secondary btn-sm button-circle">X</a>
-                    <span style="float: right;">- {{ number_format(Session::get('coupon')['discount']) }}円</span>
-                  </li>
-                @else
-                  <li class="list-group-item">クーポン：
-                    <span style="float: right;">なし</span>
-                  </li>
-                @endif
-
-                <li class="list-group-item">送料<span style="float: right;">{{ number_format($shipping_fee) }}円</span></li>
-
-                @if (Session::has('coupon'))
-                  <li class="list-group-item">注文合計<span style="float: right;">{{ number_format(Cart::Subtotal() - Session::get('coupon')['discount'] + $shipping_fee) }}円</span></li>
-                @else
-                  <li class="list-group-item">注文合計<span style="float: right;">{{ number_format(Cart::Subtotal() + $shipping_fee) }}円</span></li>
-                @endif
-
+                <li class="ship_address clearfix">
+                  〒 {{ $user->hyphen_zip }}
+                </li>
+                <li class="ship_address clearfix">
+                  {{ $user->pref_name }}　{{ $user->address1 }}
+                </li>
+                <li class="ship_address clearfix">
+                  {{ $user->address2 }}
+                </li>
               </ul>
             </div>
-          @endif
+          </div>
 
-        </div>
+          <div class="checkout_form_container">
+            <div class="checkout_form_title">お届け希望日・時間帯</div>
+            <div class="form-group d-flex justify-content-between">
+              <div>
+                <label for="delivery_date">希望日<span class="tx-danger">*</span></label>
+                <select name="delivery_date" id="" class="form-address delivery_date" >
+                  @foreach ($date['delivery_date'] as $key => $value)
+                    <option value="{{ $key }}" {{ $key == old('delivery_date') ? 'selected' : '' }}>{{ $value }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div>
+                <label for="delivery_time">時間帯<span class="tx-danger">*</span></label>
+                <select name="delivery_time" id="" class="form-address delivery_time" >
+                  @foreach ($date['delivery_time'] as $value)
+                    <option value="{{ $value }}" {{ $value == old('delivery_time') ? 'selected' : '' }}>{{ $value }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="cart_buttons">
+            <button class="button cart_button_clear" name="action" value="back">戻る</button>
+            <button class="button cart_button_checkout" name="action" value="submit">ご注文の確認へ</button>
+          </div>
+        </form>
       </div>
     </div>
-
-    @if ($cart->isNotEmpty())
-      <div class="cart_buttons">
-        <button type="button" class="button cart_button_clear">キャンセル</button>
-        <a href="{{ route('payment.page') }}" class="button cart_button_checkout">お支払い手続き</a>
-      </div>
-    @endif
   </div>
 </div>
 

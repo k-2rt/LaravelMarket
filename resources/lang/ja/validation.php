@@ -157,6 +157,7 @@ return [
     'attributes' => [
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'phone' => '電話番号',
         'category_id' => 'カテゴリー',
         'category_name' => 'カテゴリー名',
         'subcategory_name' => 'サブカテゴリー名',
@@ -185,6 +186,10 @@ return [
         'details_ja' => '商品詳細',
         'post_image' => '投稿画像',
         'old_image' => '投稿画像',
+        'zip_code' => '郵便番号',
+        'prefectures' => '都道府県',
+        'address1' => '住所１',
+        'address2' => '住所２',
     ],
 
 ];

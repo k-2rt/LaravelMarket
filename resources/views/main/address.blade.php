@@ -8,7 +8,6 @@
 <div class="contact_form">
   <div class="container">
     <div class="row">
-
       <div class="col-lg-7 login_form mx-auto">
         <div class="contact_form_container">
           <div class="contact_form_title">送付先住所</div>

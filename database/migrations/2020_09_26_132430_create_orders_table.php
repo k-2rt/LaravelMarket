@@ -29,6 +29,8 @@ class CreateOrdersTable extends Migration
             $table->string('status')->nullable()->default(0);
             $table->string('status_code')->nullable();
             $table->string('order_date')->nullable();
+            $table->string('delivery_date')->nullable();
+            $table->string('delivery_time')->nullable();
             $table->timestamps();
         });
     }

@@ -117,7 +117,7 @@ Route::get('language/japanese', 'ArticleController@changeJapaneseNotation')->nam
 Route::get('language/english', 'ArticleController@changeEnglishNotation')->name('language.english');
 
 // Payment Products
-Route::get('payment/page', 'PaymentController@showPaymentPage')->name('payment.page');
+Route::get('confirm/page', 'PaymentController@showConfirmPage')->name('confirm.page');
 Route::post('payment/stripe', 'PaymentController@payByStripe')->name('payment.stripe');
 
 Route::post('update/shipping/address', 'AddressController@updateShippingAddress')->name('update.shipping.address');
