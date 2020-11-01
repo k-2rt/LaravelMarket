@@ -40,7 +40,7 @@
                 <div class="contact_form_container login_form">
                     <div class="contact_form_title">新規会員登録</div>
                     <form action="{{ route('register') }}" id="contact_form" method="POST">
-                    @csrf
+                        @csrf
                         <div class="form-group">
                             <label for="name">お名前</label>
                             <input type="text" class="form-control" placeholder="例）山田太郎" name="name" required="" value="{{ old('name') }}">

@@ -120,15 +120,15 @@ Route::get('language/english', 'ArticleController@changeEnglishNotation')->name(
 Route::get('confirm/page', 'PaymentController@showConfirmPage')->name('confirm.page');
 Route::post('payment/stripe', 'PaymentController@payByStripe')->name('payment.stripe');
 
-Route::post('update/shipping/address', 'AddressController@updateShippingAddress')->name('update.shipping.address');
-Route::get('show/address/page', 'AddressController@showAddressPage')->name('show.address.page');
+Route::post('update/profile/info', 'ProfileController@updateProfileInfo')->name('update.profile.info');
+Route::get('show/profile/page', 'ProfileController@showProfilePage')->name('show.profile.page');
 
 // Track Order Route
 Route::get('order_history/lists', 'ProfileController@showOrderHistoryLists')->name('order_history.lists');
 Route::get('tracking/order/{id}', 'ProfileController@showTrackingOrder')->name('tracking.order');
 
 // Return Order Route
-Route::get('success/order/lists', 'ProfileController@showSuccessLists')->name('success.order.lists');
+Route::get('return/order/lists', 'ProfileController@showReturnLists')->name('return.order.lists');
 
 Route::get('request/return/order/{id}', 'ProfileController@requestReturnOrder')->name('request.return.order');
 

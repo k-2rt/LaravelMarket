@@ -17,7 +17,7 @@
           @csrf
 
           <div class="checkout_form_container">
-            <div class="checkout_form_title">送付先住所</div>
+            <div class="checkout_form_title">送付先住所 <span class="address-section-link"><a href="{{ route('show.profile.page') }}">ご登録住所の変更</a></span></div>
             <div>
               <ul class="address_list">
                 <li class="ship_address clearfix">
