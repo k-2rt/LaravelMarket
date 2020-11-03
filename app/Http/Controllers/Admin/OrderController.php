@@ -18,6 +18,7 @@ class OrderController extends Controller
 
     public function __construct(OrderRepo $order_repo, ShipRepo $ship_repo, OrderDetailRepo $order_detail_repo, ProductRepo $product_repo)
     {
+        $this->middleware('auth:admin');
         $this->order_repo = $order_repo;
         $this->ship_repo = $ship_repo;
         $this->order_detail_repo = $order_detail_repo;

@@ -13,6 +13,7 @@ class UserRoleController extends Controller
 
     public function __construct(Admin $admin)
     {
+        $this->middleware('auth:admin');
         $this->admin = $admin;
     }
 

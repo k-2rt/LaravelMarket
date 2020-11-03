@@ -12,6 +12,7 @@ class SiteSettingController extends Controller
 
     public function __construct(SiteSetting $site_set)
     {
+        $this->middleware('auth:admin');
         $this->site_set = $site_set;
     }
 

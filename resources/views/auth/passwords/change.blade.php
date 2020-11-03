@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-header">パスワード変更</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('password.change') }}">
+                        <form method="POST" action="{{ route('update.password') }}">
                             @csrf
 
                             <div class="form-group row">

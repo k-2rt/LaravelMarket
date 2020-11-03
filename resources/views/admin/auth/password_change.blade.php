@@ -15,7 +15,7 @@
                 <div class="card-header">管理者 パスワード変更</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.password.change') }}">
+                    <form method="POST" action="{{ route('admin.update.password') }}">
                         @csrf
 
                         <div class="form-group row">

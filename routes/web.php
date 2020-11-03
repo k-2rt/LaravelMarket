@@ -13,17 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-
-Route::middleware('auth')->group(function() {
-    Route::get('home', 'HomeController@home')->name('home');
-    Route::get('user/logout', 'HomeController@logout')->name('user.logout');
-});
+Route::get('/', 'HomeController@index');
+Route::get('home', 'HomeController@home')->name('home');
+Route::get('user/logout', 'HomeController@logout')->name('user.logout');
 
 Auth::routes(['verify' => true]);
 
 Route::get('password/change', 'Auth\ChangePasswordController@index')->name('password.change');
-Route::post('password/change', 'Auth\ChangePasswordController@changePassword')->name('password.change');
+Route::post('password/change', 'Auth\ChangePasswordController@changePassword')->name('update.password');
 
 // Admin Route
 Route::get('admin', 'Admin\LoginController@showLoginForm')->name('admin.login');
@@ -137,63 +134,60 @@ Route::post('contact/form', 'ContactController@sendContactMessage')->name('conta
 
 Route::post('search/item', 'ProductController@searchItem')->name('search.item');
 
-Route::middleware('auth:admin')->group(function() {
-    Route::get('admin/home', 'AdminController@index')->name('admin.home');
-    Route::get('admin/logout', 'AdminController@logout')->name('admin.logout');
-    // Password Reset Routes
-    Route::get('admin/password/change','AdminController@showChangePasswordForm')->name('admin.password.change');
-    Route::post('admin/password/change','AdminController@changePassword')->name('admin.password.change');
+Route::get('admin/home', 'AdminController@index')->name('admin.home');
+Route::get('admin/logout', 'AdminController@logout')->name('admin.logout');
+// Password Reset Routes
+Route::get('admin/password/change','AdminController@showChangePasswordForm')->name('admin.password.change');
+Route::post('admin/password/change','AdminController@changePassword')->name('admin.update.password');
 
-    // Admin Products
-    Route::get('admin/product/index', 'Admin\ProductController@index')->name('index.product');
-    Route::get('admin/product/create', 'Admin\ProductController@create')->name('create.product');
-    Route::post('admin/product/store', 'Admin\ProductController@store')->name('store.product');
-    Route::get('inactive/product/{id}', 'Admin\ProductController@inactive')->name('inactive.product');
-    Route::get('active/product/{id}', 'Admin\ProductController@active')->name('active.product');
-    Route::get('delete/product/{id}', 'Admin\ProductController@deleteProduct')->name('delete.product');
-    Route::get('show/product/{id}', 'Admin\ProductController@showProduct')->name('show.product');
-    Route::get('edit/product/{id}', 'Admin\ProductController@editProduct')->name('edit.product');
-    Route::post('update/product/{id}', 'Admin\ProductController@updateProduct')->name('update.product');
-    // For show sub categories with Ajax
-    Route::get('get/subcategory/{category_id}', 'Admin\ProductController@getSubcategories');
+// Admin Products
+Route::get('admin/product/index', 'Admin\ProductController@index')->name('index.product');
+Route::get('admin/product/create', 'Admin\ProductController@create')->name('create.product');
+Route::post('admin/product/store', 'Admin\ProductController@store')->name('store.product');
+Route::get('inactive/product/{id}', 'Admin\ProductController@inactive')->name('inactive.product');
+Route::get('active/product/{id}', 'Admin\ProductController@active')->name('active.product');
+Route::get('delete/product/{id}', 'Admin\ProductController@deleteProduct')->name('delete.product');
+Route::get('show/product/{id}', 'Admin\ProductController@showProduct')->name('show.product');
+Route::get('edit/product/{id}', 'Admin\ProductController@editProduct')->name('edit.product');
+Route::post('update/product/{id}', 'Admin\ProductController@updateProduct')->name('update.product');
+// For show sub categories with Ajax
+Route::get('get/subcategory/{category_id}', 'Admin\ProductController@getSubcategories');
 
-    Route::get('admin/product/stock', 'Admin\ProductController@showProductStock')->name('admin.product.stock');
+Route::get('admin/product/stock', 'Admin\ProductController@showProductStock')->name('admin.product.stock');
 
-    // Admin Order Route
-    Route::get('admin/pending/order', 'Admin\OrderController@showPendingOrderLists')->name('admin.pending.order');
-    Route::get('admin/accepted/payment', 'Admin\OrderController@showAcceptedOrderLists')->name('admin.accepted.payment');
-    Route::get('admin/cancel/order', 'Admin\OrderController@showCancelOrderLists')->name('admin.cancel.order');
-    Route::get('admin/process/order', 'Admin\OrderController@showProcessOrderLists')->name('admin.process.order');
-    Route::get('admin/delivered/order', 'Admin\OrderController@showDeliveredOrderLists')->name('admin.delivered.order');
-    Route::get('admin/order/details/{id}', 'Admin\OrderController@showOrderDetails')->name('admin.order.details');
-    Route::get('admin/accept/payment/{id}', 'Admin\OrderController@acceptPayment')->name('admin.accept.payment');
-    Route::get('admin/cancel/payment/{id}', 'Admin\OrderController@cancelPayment')->name('admin.cancel.payment');
-    Route::get('admin/update/process/order/{id}', 'Admin\OrderController@updateProcessOrder')->name('admin.update.process.order');
-    Route::get('admin/delivery/done/{id}', 'Admin\OrderController@updateDeliveryOrder')->name('admin.delivery.done');
+// Admin Order Route
+Route::get('admin/pending/order', 'Admin\OrderController@showPendingOrderLists')->name('admin.pending.order');
+Route::get('admin/accepted/payment', 'Admin\OrderController@showAcceptedOrderLists')->name('admin.accepted.payment');
+Route::get('admin/cancel/order', 'Admin\OrderController@showCancelOrderLists')->name('admin.cancel.order');
+Route::get('admin/process/order', 'Admin\OrderController@showProcessOrderLists')->name('admin.process.order');
+Route::get('admin/delivered/order', 'Admin\OrderController@showDeliveredOrderLists')->name('admin.delivered.order');
+Route::get('admin/order/details/{id}', 'Admin\OrderController@showOrderDetails')->name('admin.order.details');
+Route::get('admin/accept/payment/{id}', 'Admin\OrderController@acceptPayment')->name('admin.accept.payment');
+Route::get('admin/cancel/payment/{id}', 'Admin\OrderController@cancelPayment')->name('admin.cancel.payment');
+Route::get('admin/update/process/order/{id}', 'Admin\OrderController@updateProcessOrder')->name('admin.update.process.order');
+Route::get('admin/delivery/done/{id}', 'Admin\OrderController@updateDeliveryOrder')->name('admin.delivery.done');
 
-    // Order Report Route
-    Route::get('admin/report/today/order', 'Admin\ReportController@showTodayOrder')->name('report.today.order');
-    Route::get('admin/report/delivered/order', 'Admin\ReportController@showTodaysDeliveredOrder')->name('report.delivered.order');
-    Route::get('admin/report/month/order', 'Admin\ReportController@showOrdersOfThisMonth')->name('report.month.order');
-    Route::get('admin/search/orders', 'Admin\ReportController@searchOrders')->name('search.report');
+// Order Report Route
+Route::get('admin/report/today/order', 'Admin\ReportController@showTodayOrder')->name('report.today.order');
+Route::get('admin/report/delivered/order', 'Admin\ReportController@showTodaysDeliveredOrder')->name('report.delivered.order');
+Route::get('admin/report/month/order', 'Admin\ReportController@showOrdersOfThisMonth')->name('report.month.order');
+Route::get('admin/search/orders', 'Admin\ReportController@searchOrders')->name('search.report');
 
-    // Admin User Route
-    Route::get('admin/user/lists', 'Admin\UserRoleController@showUserRoleLists')->name('admin.user.lists');
-    Route::get('admin/delete/{id}', 'Admin\UserRoleController@deleteAdminUser')->name('delete.admin');
-    Route::get('admin/edit/{id}', 'Admin\UserRoleController@editAdminUser')->name('edit.admin');
-    Route::get('admin/create', 'Admin\UserRoleController@createAdminUser')->name('admin.create.user');
-    Route::post('admin/store', 'Admin\UserRoleController@storeAdminUser')->name('store.admin.user');
-    Route::post('admin/update/{id}', 'Admin\UserRoleController@updateAdminUser')->name('update.admin.user');
+// Admin User Route
+Route::get('admin/user/lists', 'Admin\UserRoleController@showUserRoleLists')->name('admin.user.lists');
+Route::get('admin/delete/{id}', 'Admin\UserRoleController@deleteAdminUser')->name('delete.admin');
+Route::get('admin/edit/{id}', 'Admin\UserRoleController@editAdminUser')->name('edit.admin');
+Route::get('admin/create', 'Admin\UserRoleController@createAdminUser')->name('admin.create.user');
+Route::post('admin/store', 'Admin\UserRoleController@storeAdminUser')->name('store.admin.user');
+Route::post('admin/update/{id}', 'Admin\UserRoleController@updateAdminUser')->name('update.admin.user');
 
-    // Admin Site Route
-    Route::get('admin/site/setting', 'Admin\SiteSettingController@showSiteSetting')->name('admin.site.setting');
-    Route::post('admin/site/setting/{id}', 'Admin\SiteSettingController@updateSiteSetting')->name('update.site.setting');
+// Admin Site Route
+Route::get('admin/site/setting', 'Admin\SiteSettingController@showSiteSetting')->name('admin.site.setting');
+Route::post('admin/site/setting/{id}', 'Admin\SiteSettingController@updateSiteSetting')->name('update.site.setting');
 
-    Route::get('admin/request/return', 'Admin\ReturnController@showReturnRequest')->name('admin.request.return');
+Route::get('admin/request/return', 'Admin\ReturnController@showReturnRequest')->name('admin.request.return');
 
-    Route::get('admin/approve/request/{id}', 'Admin\ReturnController@approveRequest')->name('admin.approve.request');
-    Route::get('admin/return/lists', 'Admin\ReturnController@showReturnedLists')->name('admin.returned.lists');
+Route::get('admin/approve/request/{id}', 'Admin\ReturnController@approveRequest')->name('admin.approve.request');
+Route::get('admin/return/lists', 'Admin\ReturnController@showReturnedLists')->name('admin.returned.lists');
 
-    Route::get('admin/message/lists', 'ContactController@showMessageLists')->name('admin.message.lists');
-
-});
+Route::get('admin/message/lists', 'ContactController@showMessageLists')->name('admin.message.lists');
