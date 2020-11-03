@@ -13,6 +13,7 @@ class ContactController extends Controller
 
     public function __construct(SiteSetting $site_set, Contact $contact)
     {
+        $this->middleware('auth:admin');
         $this->site_set = $site_set;
         $this->contact = $contact;
     }

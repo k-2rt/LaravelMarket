@@ -39,16 +39,35 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return view('home');
+        if (Auth::check()) {
+            return view('home');
+        } else {
+            $notification = array(
+                'type' => 'warning',
+                'message' => 'ログインをして下さい',
+            );
+
+            return redirect()->route('login')->with($notification);
+        }
     }
 
-    public function logout() {
-        Auth::logout();
-        $notification = array(
-            'message' => 'ログアウトしました',
-            'alert-type' => 'success'
-        );
+    public function logout()
+    {
+        if (Auth::check()) {
+            Auth::logout();
+            $notification = array(
+                'message' => 'ログアウトしました',
+                'alert-type' => 'success'
+            );
 
-        return Redirect()->route('login')->with($notification);
+            return Redirect()->route('login')->with($notification);
+        } else {
+            $notification = array(
+                'type' => 'warning',
+                'message' => 'ログインをして下さい',
+            );
+
+            return redirect()->route('login')->with($notification);
+        }
     }
 }

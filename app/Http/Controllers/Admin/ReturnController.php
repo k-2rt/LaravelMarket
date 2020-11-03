@@ -12,6 +12,7 @@ class ReturnController extends Controller
 
     public function __construct(OrderRepo $order_repo)
     {
+        $this->middleware('auth:admin');
         $this->order_repo = $order_repo;
     }
 

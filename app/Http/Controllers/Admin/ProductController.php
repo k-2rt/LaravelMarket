@@ -17,6 +17,7 @@ class ProductController extends Controller
 
     public function __construct(ProductRepo $product_repo)
     {
+        $this->middleware('auth:admin');
         $this->product_repo = $product_repo;
     }
 

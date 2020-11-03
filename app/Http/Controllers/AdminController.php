@@ -20,6 +20,7 @@ class AdminController extends Controller
 
     public function __construct(OrderRepo $order_repo, Product $product, Brand $brand, User $user)
     {
+        $this->middleware('auth:admin');
         $this->product = $product;
         $this->brand = $brand;
         $this->user = $user;
