@@ -107,7 +107,7 @@
 
                         <div class="form-group">
                             <label for="prefectures">都道府県<span class="tx-danger">*</span></label>
-                            <select name="prefectures" id="" class="form-address @error('prefectures') is-invalid @enderror" >
+                            <select name="prefectures" class="form-address @error('prefectures') is-invalid @enderror" >
                                 @foreach ($prefs as $index => $name)
                                     <option value="{{ $index }}" {{ old('prefectures') == $index ? 'selected' : '' }}>{{ $name }}</option>
                                 @endforeach
