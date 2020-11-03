@@ -32,11 +32,31 @@ class PaymentController extends Controller
      */
     public function showConfirmPage(Request $request)
     {
-        $user = Auth::user();
+        if (Auth::check()) {
+            $user = Auth::user();
 
-        if ($request->action === 'back') {
-            return redirect()->route('show.cart');
-        } else if ($user->checkAddress === false) {
+            if ($request->action === 'back') {
+                return redirect()->route('show.cart');
+            } else if ($user->checkAddress === false) {
+                $notification = array(
+                    'message' => '送付先住所を入力してください',
+                    'alert-type' => 'danger'
+                );
+
+                return redirect()->back()->with($notification);
+            }
+
+            $cart = Cart::content();
+            $date = config('delivery');
+            $stripe = config('app.stripe_api');
+            $delivery_date = $date['delivery_date'][$request->delivery_date];
+            $delivery_date_val = $request->delivery_date;
+
+            $delivery_time = $request->delivery_time;
+            $shipping_fee = $this->order_setting->first()->shipping_fee;
+
+            return view('main.confirm', compact('user', 'delivery_date', 'delivery_date_val', 'delivery_time', 'stripe', 'cart', 'shipping_fee'));
+        } else {
             $notification = array(
                 'message' => '送付先住所を入力してください',
                 'alert-type' => 'danger'
@@ -44,17 +64,6 @@ class PaymentController extends Controller
 
             return redirect()->back()->with($notification);
         }
-
-        $cart = Cart::content();
-        $date = config('delivery');
-        $stripe = config('app.stripe_api');
-        $delivery_date = $date['delivery_date'][$request->delivery_date];
-        $delivery_date_val = $request->delivery_date;
-
-        $delivery_time = $request->delivery_time;
-        $shipping_fee = $this->order_setting->first()->shipping_fee;
-
-        return view('main.confirm', compact('user', 'delivery_date', 'delivery_date_val', 'delivery_time', 'stripe', 'cart', 'shipping_fee'));
     }
 
     /**
