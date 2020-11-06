@@ -62,7 +62,7 @@ class Product extends Model
 
     public function subcategory()
     {
-        return $this->belongsTo('App\Models\Admin\SubCategory');
+        return $this->belongsTo('App\Models\Admin\Subcategory');
     }
 
     /**

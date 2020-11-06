@@ -4,7 +4,7 @@ namespace App\Http\ViewComposers\Layouts;
 
 use Illuminate\View\View;
 use App\Models\Admin\Category;
-use App\Models\Admin\SubCategory;
+use App\Models\Admin\Subcategory;
 use App\Models\Admin\Product;
 use App\Models\WishList;
 use Auth;
@@ -20,7 +20,7 @@ class LayoutComposer
     protected $product;
     protected $wish_list;
 
-    public function __construct(Category $category, SubCategory $sub_category, Product $product, WishList $wish_list)
+    public function __construct(Category $category, Subcategory $sub_category, Product $product, WishList $wish_list)
     {
         $this->category = $category;
         $this->sub_category = $sub_category;
