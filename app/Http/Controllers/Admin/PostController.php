@@ -133,8 +133,8 @@ class PostController extends Controller
         if ($post_image) {
             $post_image_name = uniqid() . "_" . $post_image->getClientOriginalName();
             $img = Image::make($post_image)->resize(400, 200)->encode('jpg');
-            Storage::put('public/post/' . $post_image_name, $img);
-            $post->post_image = 'storage/post/' . $post_image_name;
+            Storage::disk('s3')->put('public/post/' . $post_image_name, $img, 'public');
+            $post->post_image = 'public/post/' . $post_image_name;
         }
 
         $post->save();
@@ -173,9 +173,8 @@ class PostController extends Controller
         $post->update_user = Auth::user()->name;
 
         if ($post_image) {
-            $image_path = str_replace('storage/', 'public/', $post_image);
-            if (Storage::exists($image_path)) {
-                Storage::delete($image_path);
+            if (Storage::disk('s3')->exists($post_image)) {
+                Storage::disk('s3')->delete($post_image);
             }
         }
 
@@ -214,21 +213,16 @@ class PostController extends Controller
         $post->update_user = Auth::user()->name;
         $old_image = $request->old_image;
         $post_image = $request->file('post_image');
-        $image_path = '';
-
-        if ($old_image) {
-            $image_path = str_replace('storage/', 'public/', $old_image);
-        }
 
         if ($post_image) {
-            if (Storage::exists($image_path)) {
-                Storage::delete($image_path);
+            if (Storage::disk('s3')->exists($old_image)) {
+                Storage::disk('s3')->delete($old_image);
             }
 
             $post_image_name = uniqid() . "_" . $post_image->getClientOriginalName();
             $img = Image::make($post_image)->resize(400, 200)->encode('jpg');
-            Storage::put('public/post/' . $post_image_name, $img);
-            $post->post_image = 'storage/post/' . $post_image_name;
+            Storage::disk('s3')->put('public/post/' . $post_image_name, $img, 'public');
+            $post->post_image = 'public/post/' . $post_image_name;
         } else {
             $post->post_image = $old_image;
         }

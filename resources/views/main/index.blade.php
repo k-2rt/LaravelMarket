@@ -82,7 +82,7 @@
 									<div class="owl-item deals_item">
 										<div class="deals_image">
 											<a href="{{ route('product.detail', ['id' => $hot_new->id, 'product_name' => $hot_new->product_name]) }}">
-												<img src="{{ asset( $hot_new->image_one ) }}" alt="">
+												<img src="{{ Storage::disk('s3')->url( $hot_new->image_one ) }}" alt="">
 											</a>
 										</div>
 										<div class="deals_content">
@@ -150,7 +150,7 @@
 										<div class="featured_slider_item">
 											<div class="border_active"></div>
 											<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-												<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" height="120px" width="100px"></div>
+												<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ Storage::disk('s3')->url($product->image_one) }}" alt="" height="120px" width="100px"></div>
 												<div class="product_content">
 													@if($product->discount_price === NULL)
 														<div class="product_price">{{ number_format($product->selling_price) }}円</div>
@@ -224,7 +224,7 @@
 							@foreach ($hot_deal_products as $product)
 								<div class="owl-item">
 									<div class="trends_item is_new product_item">
-										<div class="trends_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset( $product->image_one ) }}" alt="" height="200px"></div>
+										<div class="trends_image d-flex flex-column align-items-center justify-content-center"><img src="{{ Storage::disk('s3')->url( $product->image_one ) }}" alt="" height="200px"></div>
 										<div class="trends_content">
 											<div class="trends_category"><a href="#">{{ $product->brand->brand_name }}</a></div>
 											<div class="trends_info clearfix">
@@ -278,7 +278,7 @@
 											<div class="arrivals_slider_item">
 												<div class="border_active"></div>
 												<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-													<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" height="120px" width="100px"></div>
+													<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ Storage::disk('s3')->url($product->image_one) }}" alt="" height="120px" width="100px"></div>
 													<div class="product_content">
 														@if($product->discount_price === NULL)
 															<div class="product_price">{{ number_format($product->selling_price) }}円</div>
@@ -348,7 +348,7 @@
 											<div class="arrivals_slider_item">
 												<div class="border_active"></div>
 												<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-													<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image_one) }}" alt="" height="120px" width="100px"></div>
+													<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ Storage::disk('s3')->url($product->image_one) }}" alt="" height="120px" width="100px"></div>
 													<div class="product_content">
 														@if($product->discount_price === NULL)
 															<div class="product_price discount">{{ number_format($product->selling_price) }}円</div>

@@ -270,7 +270,8 @@
     @yield('admin_content')
 
     <script src="{{ asset('/backend/lib/jquery/jquery.js') }}"></script>
-    <script src="{{ asset('/backend/lib/popper.js/popper.js') }}"></script>
+    {{-- <script src="{{ asset('/backend/lib/popper.js/popper.js') }}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="{{ asset('/backend/lib/bootstrap/bootstrap.js') }}"></script>
     <script src="{{ asset('/backend/lib/jquery-ui/jquery-ui.js') }}"></script>
     <script src="{{ asset('/backend/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js') }}"></script>

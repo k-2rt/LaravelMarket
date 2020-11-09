@@ -14,20 +14,20 @@
       <!-- Images -->
       <div class="col-lg-2 order-lg-1 order-2">
         <ul class="image_list">
-            <li data-image="{{ asset( $product->image_one ) }}"><img src="{{ asset( $product->image_one ) }}" alt=""></li>
+            <li data-image="{{ Storage::disk('s3')->url( $product->image_one ) }}"><img src="{{ Storage::disk('s3')->url( $product->image_one ) }}" alt=""></li>
             @if ($product->image_two)
-              <li data-image="{{ asset( $product->image_two ) }}"><img src="{{ asset( $product->image_two ) }}" alt=""></li>
+              <li data-image="{{ Storage::disk('s3')->url( $product->image_two ) }}"><img src="{{ Storage::disk('s3')->url( $product->image_two ) }}" alt=""></li>
             @endif
 
             @if ($product->image_three)
-              <li data-image="{{ asset( $product->image_three ) }}"><img src="{{ asset( $product->image_three ) }}" alt=""></li>
+              <li data-image="{{ Storage::disk('s3')->url( $product->image_three ) }}"><img src="{{ Storage::disk('s3')->url( $product->image_three ) }}" alt=""></li>
             @endif
         </ul>
       </div>
 
       <!-- Selected Image -->
       <div class="col-lg-5 order-lg-2 order-1">
-        <div class="image_selected"><img src="{{ asset( $product->image_one ) }}" alt=""></div>
+        <div class="image_selected"><img src="{{ Storage::disk('s3')->url( $product->image_one ) }}" alt=""></div>
       </div>
 
       <!-- Description -->

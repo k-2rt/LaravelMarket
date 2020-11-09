@@ -98,7 +98,7 @@
               <div class="form-group">
                 <label class="form-control-label">画像１(メイン): <span class="tx-danger">*</span></label><br />
                 @if ($product->storage_product_image_one)
-                  <img src="{{ asset($product->image_one) }}" alt="" height="80px" width="80px">
+                  <img src="{{ Storage::disk('s3')->url($product->image_one) }}" alt="" height="80px" width="80px">
                 @else
                   <img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="80px" width="80px">
                 @endif
@@ -109,7 +109,7 @@
               <div class="form-group">
                 <label class="form-control-label">画像２:</label><br/>
                 @if ($product->storage_product_image_two)
-                  <img src="{{ asset($product->image_one) }}" alt="" height="80px" width="80px">
+                  <img src="{{ Storage::disk('s3')->url($product->image_one) }}" alt="" height="80px" width="80px">
                 @else
                   <img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="80px" width="80px">
                 @endif
@@ -120,7 +120,7 @@
               <div class="form-group">
                 <label class="form-control-label">画像３:</label><br/>
                 @if ($product->storage_product_image_three)
-                  <img src="{{ asset($product->image_three) }}" alt="" height="80px" width="80px">
+                  <img src="{{ Storage::disk('s3')->url($product->image_three) }}" alt="" height="80px" width="80px">
                 @else
                   <img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="80px" width="80px">
                 @endif

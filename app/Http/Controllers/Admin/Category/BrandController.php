@@ -46,8 +46,8 @@ class BrandController extends Controller
         if ($brand_image) {
             $brand_image_name = uniqid() . '_' . $brand_image->getClientOriginalName();
             $img = Image::make($brand_image)->resize(300, 300)->encode('jpg');
-            Storage::put('public/brand/' . $brand_image_name, $img);
-            $brand->brand_logo = 'storage/brand/' . $brand_image_name;
+            Storage::disk('s3')->put('public/brand/' . $brand_image_name, $img, 'public');
+            $brand->brand_logo = 'public/brand/' . $brand_image_name;
         }
 
         $brand->save();
@@ -70,11 +70,8 @@ class BrandController extends Controller
         $brand = Brand::find($id);
         $logo = $brand->brand_logo;
 
-        if ($logo) {
-            $image_path = str_replace('storage/', 'public/', $logo);
-            if (Storage::exists($image_path)) {
-                Storage::delete($image_path);
-            }
+        if (Storage::disk('s3')->exists($logo)) {
+            Storage::disk('s3')->delete($logo);
         }
 
         $brand->delete();
@@ -108,21 +105,16 @@ class BrandController extends Controller
         $brand->brand_name = $request->brand_name;
         $brand_image = $request->file('brand_logo');
         $old_logo = $request->old_logo;
-        $image_path = '';
-
-        if ($old_logo) {
-            $image_path = str_replace('storage/', 'public/', $old_logo);
-        }
 
         if ($brand_image) {
-            if (Storage::exists($image_path)) {
-                Storage::delete($image_path);
+            if (Storage::disk('s3')->exists($old_logo)) {
+                Storage::disk('s3')->delete($old_logo);
             }
 
             $brand_image_name = uniqid() . '_' . $brand_image->getClientOriginalName();
             $img = Image::make($brand_image)->resize(300, 300)->encode('jpg');
-            Storage::put('public/brand/' . $brand_image_name, $img);
-            $brand->brand_logo = 'storage/brand/' . $brand_image_name;
+            Storage::disk('s3')->put('public/brand/' . $brand_image_name, $img, 'public');
+            $brand->brand_logo = 'public/brand/' . $brand_image_name;
         } else {
             $brand->brand_logo = $old_logo;
         }
