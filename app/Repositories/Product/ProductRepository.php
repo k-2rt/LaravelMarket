@@ -145,25 +145,16 @@ class ProductRepository implements ProductRepositoryInterface
         $image_two = $product->image_two;
         $image_three = $product->image_three;
 
-        if ($image_one) {
-            $image_path = str_replace('storage/', 'public/', $image_one);
-            if (Storage::exists($image_path)) {
-                Storage::delete($image_path);
-            }
+        if (Storage::disk('s3')->exists($image_one)) {
+            Storage::disk('s3')->delete($image_one);
         }
 
-        if ($image_two) {
-            $image_path = str_replace('storage/', 'public/', $image_two);
-            if (Storage::exists($image_path)) {
-                Storage::delete($image_path);
-            }
+        if (Storage::disk('s3')->exists($image_two)) {
+            Storage::disk('s3')->delete($image_two);
         }
 
-        if ($image_three) {
-            $image_path = str_replace('storage/', 'public/', $image_three);
-            if (Storage::exists($image_path)) {
-                Storage::delete($image_path);
-            }
+        if (Storage::disk('s3')->exists($image_two)) {
+            Storage::disk('s3')->delete($image_two);
         }
 
         $product->delete();
@@ -193,22 +184,22 @@ class ProductRepository implements ProductRepositoryInterface
         if ($image_one) {
             $image_one_name = uniqid() . '_' . $image_one->getClientOriginalName();
             $img = Image::make($image_one)->resize(300, 300)->encode('jpg');
-            Storage::put('public/product/' . $image_one_name, $img);
-            $this->product->image_one = 'storage/product/' . $image_one_name;
+            Storage::disk('s3')->put('public/product/' . $image_one_name, $img, 'public');
+            $this->product->image_one = 'public/product/' . $image_one_name;
         }
 
         if ($image_two) {
             $image_two_name = uniqid() . '_' . $image_two->getClientOriginalName();
             $img = Image::make($image_two)->resize(300, 300)->encode('jpg');
-            Storage::put('public/product/' . $image_two_name, $img);
-            $this->product->image_two = 'storage/product/' . $image_two_name;
+            Storage::disk('s3')->put('public/product/' . $image_two_name, $img, 'public');
+            $this->product->image_two = 'public/product/' . $image_two_name;
         }
 
         if ($image_three) {
             $image_three_name = uniqid() . '_' . $image_three->getClientOriginalName();
             $img = Image::make($image_three)->resize(300, 300)->encode('jpg');
-            Storage::put('public/product/' . $image_three_name, $img);
-            $this->product->image_three = 'storage/product/' . $image_three_name;
+            Storage::disk('s3')->put('public/product/' . $image_three_name, $img, 'public');
+            $this->product->image_three = 'public/product/' . $image_three_name;
         }
 
         $this->product->save();
@@ -252,44 +243,41 @@ class ProductRepository implements ProductRepositoryInterface
 
         if ($image_one) {
             if ($old_one) {
-                $image_path = str_replace('storage/', 'public/', $old_one);
-                if (Storage::exists($image_path)) {
-                    Storage::delete($image_path);
+                if (Storage::disk('s3')->exists($old_one)) {
+                    Storage::disk('s3')->delete($old_one);
                 }
             }
 
             $image_one_name = uniqid() . '_' . $image_one->getClientOriginalName();
             $img = Image::make($image_one)->resize(300, 300)->encode('jpg');
-            Storage::put('public/product/' . $image_one_name, $img);
-            $product->image_one = 'storage/product/' . $image_one_name;
+            Storage::disk('s3')->put('public/product/' . $image_one_name, $img, 'public');
+            $product->image_one = 'public/product/' . $image_one_name;
         }
 
         if ($image_two) {
             if ($old_two) {
-                $image_path = str_replace('storage/', 'public/', $old_two);
-                if (Storage::exists($image_path)) {
-                    Storage::delete($image_path);
+                if (Storage::disk('s3')->exists($old_two)) {
+                    Storage::disk('s3')->delete($old_two);
                 }
             }
 
             $image_two_name = uniqid() . '_' . $image_two->getClientOriginalName();
             $img = Image::make($image_two)->resize(300, 300)->encode('jpg');
-            Storage::put('public/product/' . $image_two_name, $img);
-            $product->image_two = 'storage/product/' . $image_two_name;
+            Storage::disk('s3')->put('public/product/' . $image_two_name, $img, 'public');
+            $product->image_two = 'public/product/' . $image_two_name;
         }
 
         if ($image_three) {
             if ($old_three) {
-                $image_path = str_replace('storage/', 'public/', $old_three);
-                if (Storage::exists($image_path)) {
-                    Storage::delete($image_path);
+                if (Storage::disk('s3')->exists($old_three)) {
+                    Storage::disk('s3')->delete($old_three);
                 }
             }
 
             $image_three_name = uniqid() . '_' . $image_three->getClientOriginalName();
             $img = Image::make($image_three)->resize(300, 300)->encode('jpg');
-            Storage::put('public/product/' . $image_three_name, $img);
-            $product->image_three = 'storage/product/' . $image_three_name;
+            Storage::disk('s3')->put('public/product/' . $image_three_name, $img, 'public');
+            $product->image_three = 'public/product/' . $image_three_name;
         }
 
         $product->save();

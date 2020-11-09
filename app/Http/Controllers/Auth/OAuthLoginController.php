@@ -39,7 +39,7 @@ class OAuthLoginController extends Controller
             $file_name = '';
             if ($img !== false) {
                 $file_name = $getInfo->id . '_' . uniqid() . '.jpg';
-                Storage::put('public/profile_images/' . $file_name, $img);
+                Storage::disk('s3')->put('public/profile_images/' . $file_name, $img, 'public');
             }
 
             $user = User::create([

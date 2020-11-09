@@ -21,7 +21,7 @@
 
               @foreach ($cart as $item)
                 <li class="cart_item clearfix">
-                  <div class="cart_checkout_image text-center"><img src="{{ asset( $item->options->image  ) }}" alt="" height="115px" width="115px"></div>
+                  <div class="cart_checkout_image text-center"><img src="{{ Storage::disk('s3')->url( $item->options->image  ) }}" alt="" height="115px" width="115px"></div>
 
                   <div class="d-flex flex-column justify-content-between" style="height: 115px;">
                     <div class="cart_checkout_name cart_info_col">

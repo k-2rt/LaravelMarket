@@ -41,12 +41,10 @@ class Post extends Model
      */
     public function getStorageArticleImageAttribute()
     {
-        $old_img = str_replace('storage/', 'public/', $this->post_image);
-        if (Storage::exists($old_img)) {
+        if (Storage::disk('s3')->exists($this->post_image)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**

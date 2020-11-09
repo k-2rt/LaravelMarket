@@ -16,7 +16,7 @@
                         </span>
                     @enderror
                     <div class="contact_form_title">会員ログイン</div>
-                    <form action="{{ route('login') }}" id="contact_form" method="POST">
+                    <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputEmail1">メールアドレス</label>
@@ -39,7 +39,7 @@
 
                 <div class="contact_form_container login_form">
                     <div class="contact_form_title">新規会員登録</div>
-                    <form action="{{ route('register') }}" id="contact_form" method="POST">
+                    <form action="{{ route('register') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="name">お名前</label>

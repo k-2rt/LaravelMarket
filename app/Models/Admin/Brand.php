@@ -28,11 +28,9 @@ class Brand extends Model
      */
     public function getStorageBrandImageAttribute()
     {
-        $image_path = str_replace('storage/', 'public/', $this->brand_logo);
-        if (Storage::exists($image_path)) {
+        if (Storage::disk('s3')->exists($this->brand_logo)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 }

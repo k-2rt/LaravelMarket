@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-lg-8 col-md-6 fill_height">
                   <div class="banner_2_image_container">
-                    <div class="banner_2_image"><img src="{{ asset($mid_slider->image_one) }}" alt=""></div>
+                    <div class="banner_2_image"><img src="{{ Storage::disk('s3')->url($mid_slider->image_one) }}" alt=""></div>
                   </div>
                 </div>
               </div>

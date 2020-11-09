@@ -65,7 +65,7 @@
               <div class="product_item is_new">
                 <div class="product_border"></div>
                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                  <a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}" tabindex="0"><img src="{{ asset($product->image_one) }}" alt="" width="100px" height="100px"></a></div>
+                  <a href="{{ route('product.detail', ['id' => $product->id, 'product_name' => $product->product_name]) }}" tabindex="0"><img src="{{ Storage::disk('s3')->url($product->image_one) }}" alt="" width="100px" height="100px"></a></div>
                 <div class="product_content">
                   @if($product->discount_price === NULL)
                     <div class="product_price">{{ number_format($product->selling_price) }}円</div>

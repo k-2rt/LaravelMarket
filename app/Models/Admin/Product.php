@@ -248,8 +248,7 @@ class Product extends Model
      */
     public function getStorageProductImageOneAttribute()
     {
-        $image_path = str_replace('storage/', 'public/', $this->image_one);
-        if (Storage::exists($image_path)) {
+        if (Storage::disk('s3')->exists($this->image_one)) {
             return true;
         }
         return false;
@@ -262,8 +261,7 @@ class Product extends Model
      */
     public function getStorageProductImageTwoAttribute()
     {
-        $image_path = str_replace('storage/', 'public/', $this->image_two);
-        if (Storage::exists($image_path)) {
+        if (Storage::disk('s3')->exists($this->image_two)) {
             return true;
         }
         return false;
@@ -276,8 +274,7 @@ class Product extends Model
      */
     public function getStorageProductImageThreeAttribute()
     {
-        $image_path = str_replace('storage/', 'public/', $this->image_three);
-        if (Storage::exists($image_path)) {
+        if (Storage::disk('s3')->exists($this->image_three)) {
             return true;
         }
         return false;

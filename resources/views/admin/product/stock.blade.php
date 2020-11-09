@@ -30,7 +30,7 @@
                 <td>{{ $product->product_code }}</td>
                 <td>{{ $product->product_name }}</td>
                 @if ($product->image_one)
-                  <td><img src="{{ asset($product->image_one) }}" alt="" height="50px;" width="50px;"></td>
+                  <td><img src="{{ Storage::disk('s3')->url($product->image_one) }}" alt="" height="50px;" width="50px;"></td>
                 @else
                   <td><img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="50px;" width="50px;"></td>
                 @endif

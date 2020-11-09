@@ -127,7 +127,7 @@
                     <tr>
                       <td>{{ $detail->product->product_code }}</td>
                       <td>{{ $detail->product_name }}</td>
-                      <td><img src="{{ URL::to($detail->product->image_one) }}" height="50px;" width="50px;"></td>
+                      <td><img src="{{ Storage::disk('s3')->url($detail->product->image_one) }}" height="50px;" width="50px;"></td>
                       <td>{{ $detail->color }}</td>
                       <td>{{ $detail->size }}</td>
                       <td>{{ $detail->quantity }}</td>

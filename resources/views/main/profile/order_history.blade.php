@@ -38,7 +38,7 @@
                                 <tbody>
                                     @foreach ($order->order_details as $detail)
                                         <tr>
-                                            <td scope="col"><img src="{{ URL::to($detail->product->image_one) }}" height="50px;" width="50px;" style="margin-right: 10px;"> {{ $detail->product_name }}</td>
+                                            <td scope="col"><img src="{{ Storage::disk('s3')->url($detail->product->image_one) }}" height="50px;" width="50px;" style="margin-right: 10px;"> {{ $detail->product_name }}</td>
                                             <td scope="col">{{ $detail->color }}</td>
                                             <td scope="col">{{ $detail->size }}</td>
                                             <td scope="col">{{ $detail->quantity }}</td>
