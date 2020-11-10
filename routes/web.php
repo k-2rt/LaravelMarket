@@ -50,11 +50,11 @@ Route::get('edit/brand/{id}', 'Admin\Category\BrandController@editBrand')->name(
 Route::post('update/brand/{id}', 'Admin\Category\BrandController@updateBrand')->name('update.brand');
 
 // Admin sub categories
-Route::get('admin/subcategories', 'Admin\Category\SubCategoryController@subcategory')->name('subcategories');
-Route::post('admin/store/subcategory', 'Admin\Category\SubCategoryController@storeSubcategory')->name('store.subcategory');
-Route::get('delete/subcategory/{id}', 'Admin\Category\SubCategoryController@deleteSubcategory')->name('delete.subcategory');
-Route::get('edit/subcategory/{id}', 'Admin\Category\SubCategoryController@editSubcategory')->name('edit.subcategory');
-Route::post('update/subcategory/{id}', 'Admin\Category\SubCategoryController@updateSubcategory')->name('update.subcategory');
+Route::get('admin/subcategories', 'Admin\Category\SubcategoryController@subcategory')->name('subcategories');
+Route::post('admin/store/subcategory', 'Admin\Category\SubcategoryController@storeSubcategory')->name('store.subcategory');
+Route::get('delete/subcategory/{id}', 'Admin\Category\SubcategoryController@deleteSubcategory')->name('delete.subcategory');
+Route::get('edit/subcategory/{id}', 'Admin\Category\SubcategoryController@editSubcategory')->name('edit.subcategory');
+Route::post('update/subcategory/{id}', 'Admin\Category\SubcategoryController@updateSubcategory')->name('update.subcategory');
 
 // Admin  Coupons
 Route::get('admin/coupon', 'Admin\Coupon\CouponController@coupon')->name('admin.coupon');
