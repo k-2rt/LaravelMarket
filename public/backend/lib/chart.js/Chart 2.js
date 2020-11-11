@@ -1,6 +1,6 @@
 /*!
  * Chart.js
- * http://chartjs.org/
+ * //chartjs.org/
  * Version: 2.7.1
  *
  * Copyright 2017 Nick Downie
@@ -415,7 +415,7 @@ Color.prototype = {
 	},
 
 	luminosity: function () {
-		// http://www.w3.org/TR/WCAG20/#relativeluminancedef
+		// //www.w3.org/TR/WCAG20/#relativeluminancedef
 		var rgb = this.values.rgb;
 		var lum = [];
 		for (var i = 0; i < rgb.length; i++) {
@@ -426,7 +426,7 @@ Color.prototype = {
 	},
 
 	contrast: function (color2) {
-		// http://www.w3.org/TR/WCAG20/#contrast-ratiodef
+		// //www.w3.org/TR/WCAG20/#contrast-ratiodef
 		var lum1 = this.luminosity();
 		var lum2 = color2.luminosity();
 		if (lum1 > lum2) {
@@ -445,7 +445,7 @@ Color.prototype = {
 	},
 
 	dark: function () {
-		// YIQ equation from http://24ways.org/2010/calculating-color-contrast
+		// YIQ equation from //24ways.org/2010/calculating-color-contrast
 		var rgb = this.values.rgb;
 		var yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
 		return yiq < 128;
@@ -508,7 +508,7 @@ Color.prototype = {
 
 	greyscale: function () {
 		var rgb = this.values.rgb;
-		// http://en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale
+		// //en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale
 		var val = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;
 		this.setValues('rgb', [val, val, val]);
 		return this;
@@ -1041,7 +1041,7 @@ function hsv2keyword(args) {
   return rgb2keyword(hsv2rgb(args));
 }
 
-// http://dev.w3.org/csswg/css-color/#hwb-to-rgb
+// //dev.w3.org/csswg/css-color/#hwb-to-rgb
 function hwb2rgb(hwb) {
   var h = hwb[0] / 360,
       wh = hwb[1] / 100,
@@ -1444,11 +1444,11 @@ for (var func in conversions) {
   // export rgb2hsl and ["rgb"]["hsl"]
   convert[from] = convert[from] || {};
 
-  convert[from][to] = convert[func] = (function(func) { 
+  convert[from][to] = convert[func] = (function(func) {
     return function(arg) {
       if (typeof arg == "number")
         arg = Array.prototype.slice.call(arguments);
-      
+
       var val = conversions[func](arg);
       if (typeof val == "string" || val === undefined)
         return val; // keyword
@@ -1476,12 +1476,12 @@ Converter.prototype.routeSpace = function(space, args) {
    }
    // color.rgb(10, 10, 10)
    if (typeof values == "number") {
-      values = Array.prototype.slice.call(args);        
+      values = Array.prototype.slice.call(args);
    }
 
    return this.setValues(space, values);
 };
-  
+
 /* Set the values for a space, invalidating cache */
 Converter.prototype.setValues = function(space, values) {
    this.space = space;
@@ -5250,7 +5250,7 @@ module.exports = function(Chart) {
 	};
 	helpers.splineCurve = function(firstPoint, middlePoint, afterPoint, t) {
 		// Props to Rob Spencer at scaled innovation for his post on splining between points
-		// http://scaledinnovation.com/analytics/splines/aboutSplines.html
+		// //scaledinnovation.com/analytics/splines/aboutSplines.html
 
 		// This function must also respect "skipped" points
 
@@ -5414,7 +5414,7 @@ module.exports = function(Chart) {
 
 		return niceFraction * Math.pow(10, exponent);
 	};
-	// Request animation polyfill - http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+	// Request animation polyfill - //www.paulirish.com/2011/requestanimationframe-for-smart-animating/
 	helpers.requestAnimFrame = (function() {
 		if (typeof window === 'undefined') {
 			return function(callback) {
@@ -5449,7 +5449,7 @@ module.exports = function(Chart) {
 
 		// Scale mouse coordinates into canvas coordinates
 		// by following the pattern laid out by 'jerryj' in the comments of
-		// http://www.html5canvastutorials.com/advanced/html5-canvas-mouse-coordinates/
+		// //www.html5canvastutorials.com/advanced/html5-canvas-mouse-coordinates/
 		var paddingLeft = parseFloat(helpers.getStyle(canvas, 'padding-left'));
 		var paddingTop = parseFloat(helpers.getStyle(canvas, 'padding-top'));
 		var paddingRight = parseFloat(helpers.getStyle(canvas, 'padding-right'));
@@ -5498,7 +5498,7 @@ module.exports = function(Chart) {
 	// @param domNode : the node to check the constraint on
 	// @param maxStyle : the style that defines the maximum for the direction we are using (maxWidth / maxHeight)
 	// @param percentageProperty : property of parent to use when calculating width as a percentage
-	// @see http://www.nathanaeljones.com/blog/2013/reading-max-width-cross-browser
+	// @see //www.nathanaeljones.com/blog/2013/reading-max-width-cross-browser
 	function getConstraintDimension(domNode, maxStyle, percentageProperty) {
 		var view = document.defaultView;
 		var parentNode = domNode.parentNode;
@@ -7897,7 +7897,7 @@ module.exports = {
 		linear: function(generationOptions, dataRange) {
 			var ticks = [];
 			// To get a "nice" value for the tick spacing, we will use the appropriately named
-			// "nice number" algorithm. See http://stackoverflow.com/questions/8506881/nice-label-algorithm-for-charts-with-minimum-ticks
+			// "nice number" algorithm. See //stackoverflow.com/questions/8506881/nice-label-algorithm-for-charts-with-minimum-ticks
 			// for details.
 
 			var spacing;
@@ -9876,7 +9876,7 @@ var helpers = {
 
 	/**
 	 * Returns true if the `a0` and `a1` arrays have the same content, else returns false.
-	 * @see http://stackoverflow.com/a/14853974
+	 * @see //stackoverflow.com/a/14853974
 	 * @param {Array} a0 - The array to compare
 	 * @param {Array} a1 - The array to compare
 	 * @returns {Boolean}
@@ -10103,7 +10103,7 @@ var helpers = require(42);
 /**
  * Easing functions adapted from Robert Penner's easing equations.
  * @namespace Chart.helpers.easingEffects
- * @see http://www.robertpenner.com/easing/
+ * @see //www.robertpenner.com/easing/
  */
 var effects = {
 	linear: function(t) {
@@ -10772,7 +10772,7 @@ function removeResizeListener(node) {
 }
 
 function injectCSS(platform, css) {
-	// http://stackoverflow.com/q/3922139
+	// //stackoverflow.com/q/3922139
 	var style = platform._style || document.createElement('style');
 	if (!platform._style) {
 		platform._style = style;
@@ -13516,7 +13516,7 @@ function buildLookupTable(timestamps, min, max, distribution) {
 	return table;
 }
 
-// @see adapted from http://www.anujgakhar.com/2014/03/01/binary-search-in-javascript/
+// @see adapted from //www.anujgakhar.com/2014/03/01/binary-search-in-javascript/
 function lookup(table, key, value) {
 	var lo = 0;
 	var hi = table.length - 1;
@@ -13565,7 +13565,7 @@ function interpolate(table, skey, sval, tkey) {
 
 /**
  * Convert the given value to a moment object using the given time options.
- * @see http://momentjs.com/docs/#/parsing/
+ * @see //momentjs.com/docs/#/parsing/
  */
 function momentify(value, options) {
 	var parser = options.parser;
@@ -13813,15 +13813,15 @@ module.exports = function(Chart) {
 		bounds: 'data',
 
 		time: {
-			parser: false, // false == a pattern string from http://momentjs.com/docs/#/parsing/string-format/ or a custom callback that converts its argument to a moment
-			format: false, // DEPRECATED false == date objects, moment object, callback or a pattern string from http://momentjs.com/docs/#/parsing/string-format/
+			parser: false, // false == a pattern string from //momentjs.com/docs/#/parsing/string-format/ or a custom callback that converts its argument to a moment
+			format: false, // DEPRECATED false == date objects, moment object, callback or a pattern string from //momentjs.com/docs/#/parsing/string-format/
 			unit: false, // false == automatic or override with week, month, year, etc.
 			round: false, // none, or override with week, month, year, etc.
 			displayFormat: false, // DEPRECATED
-			isoWeekday: false, // override week start day - see http://momentjs.com/docs/#/get-set/iso-weekday/
+			isoWeekday: false, // override week start day - see //momentjs.com/docs/#/get-set/iso-weekday/
 			minUnit: 'millisecond',
 
-			// defaults to unit's corresponding unitFormat below or override using pattern string from http://momentjs.com/docs/#/displaying/format/
+			// defaults to unit's corresponding unitFormat below or override using pattern string from //momentjs.com/docs/#/displaying/format/
 			displayFormats: {
 				millisecond: 'h:mm:ss.SSS a', // 11:20:01.123 AM,
 				second: 'h:mm:ss a', // 11:20:01 AM
