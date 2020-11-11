@@ -14,20 +14,20 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-                \App\Repositories\Order\OrderRepositoryInterface::class,
-                \App\Repositories\Order\OrderRepository::class
+            \App\Repositories\Order\OrderRepositoryInterface::class,
+            \App\Repositories\Order\OrderRepository::class
         );
         $this->app->bind(
-                \App\Repositories\Shipping\ShippingRepositoryInterface::class,
-                \App\Repositories\Shipping\ShippingRepository::class
+            \App\Repositories\Shipping\ShippingRepositoryInterface::class,
+            \App\Repositories\Shipping\ShippingRepository::class
         );
         $this->app->bind(
-                \App\Repositories\OrderDetail\OrderDetailRepositoryInterface::class,
-                \App\Repositories\OrderDetail\OrderDetailRepository::class
+            \App\Repositories\OrderDetail\OrderDetailRepositoryInterface::class,
+            \App\Repositories\OrderDetail\OrderDetailRepository::class
         );
         $this->app->bind(
-                \App\Repositories\Product\ProductRepositoryInterface::class,
-                \App\Repositories\Product\ProductRepository::class
+            \App\Repositories\Product\ProductRepositoryInterface::class,
+            \App\Repositories\Product\ProductRepository::class
         );
     }
 
@@ -38,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if (request()->isSecure()) {
+            \URL::forceScheme('https');
+        }
     }
 }
