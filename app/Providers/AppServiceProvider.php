@@ -38,8 +38,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (request()->isSecure()) {
-            \URL::forceScheme('https');
+        if ($this->app->environment() == 'production') {
+            URL::forceSchema('https');
         }
     }
 }
