@@ -33,7 +33,8 @@ class CouponController extends Controller
      */
     public function storeCoupon(Request $request) {
         $request->validate([
-            'coupon' => 'required',
+            'coupon_name' => 'required',
+            'coupon_cd' => 'required',
             'discount'  => 'required',
         ]);
 
@@ -86,7 +87,8 @@ class CouponController extends Controller
      */
     public function updateCoupon(Request $request, $id) {
         $request->validate([
-            'coupon' => 'required',
+            'coupon_name' => 'required',
+            'coupon_cd' => 'required',
             'discount'  => 'required',
         ]);
 

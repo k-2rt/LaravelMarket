@@ -434,10 +434,14 @@
 							<div class="newsletter_text"><p>初めての方には、1,000円分のクーポンが送られます。</p></div>
 						</div>
 						<div class="newsletter_content clearfix">
-						<form action="{{ route('store.newsletter') }}" method="POST" class="newsletter_form">
+							<form action="{{ route('store.newsletter') }}" method="GET" class="newsletter_form">
 							@csrf
-							<input type="email" class="newsletter_input" required="required" placeholder="メールアドレスをご入力ください" name="email">
-							<button class="newsletter_button" type="submit">申し込み</button>
+								{{-- <input type="email" class="newsletter_input" required="required" placeholder="メールアドレスをご入力ください" name="email"> --}}
+								@if ($check_newsletter)
+									<button class="newsletter_withdraw_button" type="submit">利用を停止する</button>
+								@else
+									<button class="newsletter_button" type="submit">お申し込み</button>
+								@endif
 							</form>
 							<div class="newsletter_unsubscribe_link"><a href="#"></a></div>
 						</div>

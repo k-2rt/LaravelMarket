@@ -65,7 +65,7 @@ Route::post('update/coupon/{id}', 'Admin\Coupon\CouponController@updateCoupon')-
 
 // Newsletters
 Route::get('admin/newsletter', 'Admin\Others\NewsletterController@newsletter')->name('admin.newsletter');
-Route::post('admin/store/newsletter', 'Admin\Others\NewsletterController@storeNewsletter')->name('store.newsletter');
+Route::get('admin/store/newsletter', 'Admin\Others\NewsletterController@storeNewsletter')->name('store.newsletter');
 Route::get('delete/newsletter/{id}', 'Admin\Others\NewsletterController@deleteNewsletter')->name('delete.newsletter');
 
 // Admin article route

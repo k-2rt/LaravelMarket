@@ -23,10 +23,10 @@ class SliderComposer
      */
     public function compose(View $view)
     {
-        $main_slider = $this->product->getFirstMainSliderProduct();
+        $main_sliders = $this->product->getMainSliderProduct();
 
         $view->with([
-            'main_slider' => $main_slider,
+            'main_sliders' => $main_sliders,
         ]);
     }
 }

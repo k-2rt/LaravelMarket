@@ -28,7 +28,8 @@
           <thead>
             <tr>
               <th class="wd-15p">ID</th>
-              <th class="wd-15p">コード</th>
+              <th class="wd-15p">クーポン名</th>
+              <th class="wd-15p">クーポンコード</th>
               <th class="wd-20p">値引き額</th>
               <th class="wd-20p">アクション</th>
             </tr>
@@ -37,7 +38,8 @@
             @foreach($coupons as $coupon)
               <tr>
                 <td>{{ $coupon->id }}</td>
-                <td>{{ $coupon->coupon }}</td>
+                <td>{{ $coupon->coupon_name }}</td>
+                <td>{{ $coupon->coupon_cd }}</td>
                 <td>{{ number_format($coupon->discount) }} 円</td>
                 <td>
                   <a href="{{ route('edit.coupon', ['id' => $coupon->id]) }}" class="btn btn-sm btn-info">編集</a>
@@ -67,8 +69,13 @@
 
           <div class="modal-body pd-20">
             <div class="form-group">
-              <label for="coupon">コード</label>
-              <input type="text" class="form-control" id="coupon" aria-describedby="emailHelp" placeholder="クーポン" name="coupon">
+              <label for="coupon_name">コード名</label>
+              <input type="text" class="form-control" id="coupon_name" placeholder="クーポン名" name="coupon_name">
+            </div>
+
+            <div class="form-group">
+              <label for="coupon_cd">コードコード</label>
+              <input type="text" class="form-control" id="coupon_cd" placeholder="クーポンコード" name="coupon_cd">
             </div>
 
             <div class="form-group">

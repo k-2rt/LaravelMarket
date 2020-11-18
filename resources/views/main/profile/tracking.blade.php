@@ -58,7 +58,7 @@
           <li class="list-group-item"><b>商品合計（税込）</b>：<span style="float: right;"> {{ $order->sub_total_delimiter }}円</span></li>
           <li class="list-group-item"><b>送料</b>：<span style="float: right;"> {{ $order->shipping_fee }}円</span></li>
           @if ($order->coupon)
-            <li class="list-group-item"><b>クーポン（{{ $order->coupon->coupon }}）</b>：<span style="float: right;">- {{ $order->discount_delimiter }}円</span></li>
+            <li class="list-group-item"><b>クーポン（{{ $order->coupon->coupon_name }}）</b>：<span style="float: right;">- {{ $order->discount_delimiter }}円</span></li>
           @endif
           <li class="list-group-item"><b>注文合計（税込）</b>：<span style="float: right;"> {{ $order->total_delimiter }}円</span></li>
         </ul>

@@ -50,6 +50,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Models\Address');
     }
 
+    public function newsletters()
+    {
+        return $this->hasMany('App\Models\Admin\Newsletter');
+    }
+
     public function countAllUsers()
     {
         return $this->all()->count();
