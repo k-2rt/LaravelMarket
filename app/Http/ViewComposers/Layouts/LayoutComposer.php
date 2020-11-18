@@ -33,13 +33,11 @@ class LayoutComposer
      */
     public function compose(View $view)
     {
-        $main_slider = $this->product->getFirstMainSliderProduct();
         $wish_lists = $this->wish_list->getWishListsByUserId(Auth::id());
 
         $view->with([
             'categories' => $this->category->all(),
             'sub_categories' => $this->sub_category->all(),
-            'main_slider' => $main_slider,
             'wish_lists' => $wish_lists,
         ]);
     }

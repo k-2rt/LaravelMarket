@@ -27,8 +27,13 @@
           @csrf
           <div class="modal-body pd-20">
             <div class="form-group">
-              <label for="coupon">コード</label>
-              <input type="text" class="form-control" id="coupon" value="{{ old('coupon', $coupon->coupon) }}" name="coupon">
+              <label for="coupon_name">クーポン名</label>
+              <input type="text" class="form-control" id="coupon_name" value="{{ old('coupon_name', $coupon->coupon_name) }}" name="coupon_name">
+            </div>
+
+            <div class="form-group">
+              <label for="coupon_cd">クーポンコード</label>
+              <input type="text" class="form-control" id="coupon_cd" value="{{ old('coupon_cd', $coupon->coupon_cd) }}" name="coupon_cd">
             </div>
 
             <div class="form-group">

@@ -80,6 +80,10 @@ class CartController extends Controller
             'alert-type' => 'warning'
         );
 
+        if (Cart::content()->isEmpty()) {
+            Session::forget('coupon');
+        }
+
         return redirect()->back()->with($notification);
     }
 
@@ -164,12 +168,12 @@ class CartController extends Controller
      * @return void
      */
     public function applyCoupon(Request $request) {
-        $coupon = $this->coupon->where('coupon', $request->coupon)->first();
+        $coupon = $this->coupon->where('coupon_cd', $request->coupon_cd)->first();
 
         if ($coupon) {
             Session::put('coupon', [
                 'id' => $coupon->id,
-                'name' => $coupon->coupon,
+                'name' => $coupon->coupon_name,
                 'discount' => $coupon->discount,
             ]);
 
@@ -179,8 +183,8 @@ class CartController extends Controller
             );
         } else {
             $notification = array(
-                'message' => 'クーポンは見つかりません',
-                'alert-type' => 'error'
+                'message' => '該当するクーポンは見つかりません',
+                'alert-type' => 'warning'
             );
         }
 

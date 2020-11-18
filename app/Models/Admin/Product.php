@@ -82,16 +82,17 @@ class Product extends Model
     }
 
     /**
-     * Get a latest product that main slider status is 1
+     * Get latest three products that main slider status is 1
      *
      * @return Object
      */
-    public function getFirstMainSliderProduct() {
+    public function getMainSliderProduct() {
         return $this->select('products.*', 'brands.brand_name')
                     ->join('brands', 'products.brand_id', '=', 'brands.id')
                     ->where('main_slider', 1)
-                    ->orderBy('id',  'DESC')
-                    ->first();
+                    ->orderBy('id', 'DESC')
+                    ->limit(3)
+                    ->get();
     }
 
     /**

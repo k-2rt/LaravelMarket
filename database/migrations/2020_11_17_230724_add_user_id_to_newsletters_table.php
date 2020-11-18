@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCouponsTable extends Migration
+class AddUserIdToNewslettersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateCouponsTable extends Migration
      */
     public function up()
     {
-        Schema::create('coupons', function (Blueprint $table) {
-            $table->id();
-            $table->string('coupon_name');
-            $table->string('coupon_cd');
-            $table->string('discount');
-            $table->timestamps();
+        Schema::table('newsletters', function (Blueprint $table) {
+            $table->string('user_id')->after('id');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateCouponsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('coupons');
+        Schema::table('newsletters', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
     }
 }

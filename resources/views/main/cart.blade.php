@@ -74,7 +74,7 @@
               <form action="{{ route('apply.coupon') }}" method="POST" style="display: inline-block;">
               @csrf
                 <div class="form-group">
-                  <input type="text" name="coupon" class="coupon-form" required="" placeholder="">
+                  <input type="text" name="coupon_cd" class="coupon-form" required="" placeholder="">
                   <button type="submit" class="btn btn-danger ml-2">適用</button>
                 </div>
               </form>
