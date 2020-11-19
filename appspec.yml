@@ -10,14 +10,15 @@ files:
 #     mode: 777
 #     pattern: "**"
 hooks:
-  AfterInstall:
-    - location: scripts/cache.sh
-      timeout: 300
-      runas: root
+  BeforeInstall:
     - location: scripts/nginx-restart.sh
       timeout: 300
       runas: root
     - location: scripts/php-fpm-restart.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/cache.sh
       timeout: 300
       runas: root
 # hooks:
