@@ -1,0 +1,34 @@
+version: 0.0
+os: linux
+files:
+    - source: /
+      destination: /var/www/LaravelMarket
+# permissions:
+#   - object: /
+#     owner: ec2-user
+#     group: ec2-user
+#     mode: 777
+#     pattern: "**"
+hooks:
+  AfterInstall:
+    - location: scripts/cache.sh
+      timeout: 300
+      runas: root
+    - location: scripts/nginx-restart.sh
+      timeout: 300
+      runas: root
+    - location: scripts/php-fpm-restart.sh
+      timeout: 300
+      runas: root
+# hooks:
+#   BeforeInstall:
+#     - location: scripts/install_dependencies
+#       timeout: 300
+#       runas: root
+#     - location: scripts/start_server
+#       timeout: 300
+#       runas: root
+#   ApplicationStop:
+#     - location: scripts/stop_server
+#       timeout: 300
+#       runas: root
