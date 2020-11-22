@@ -23,8 +23,9 @@ This is Online Shop Application.
 - laradock
 - bumbummen99
 - stripe
-- SweatAlert
 - socialite
+- SweatAlert
+- slick
 
 # Functions
 - Login
@@ -34,3 +35,5 @@ This is Online Shop Application.
 - Email notification
 - Wish lists
 - Add item to Cart
+- Discount by coupon
+- Slider
