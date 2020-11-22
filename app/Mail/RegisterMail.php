@@ -7,11 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class InvoiceMail extends Mailable
+class RegisterMail extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $data;
 
     /**
      * Create a new message instance.
@@ -32,6 +30,6 @@ class InvoiceMail extends Mailable
     {
         $info = $this->data;
 
-        return $this->from('nippon.kurashi@gmail.com')->view('mail.invoice', compact('info'))->subject('【日本、暮らしの道具店】商品購入のお知らせ');
+        return $this->from('nippon.kurashi@gmail.com')->view('mail.register', compact('info'))->subject('【日本、暮らしの道具店】会員登録完了のお知らせ');
     }
 }

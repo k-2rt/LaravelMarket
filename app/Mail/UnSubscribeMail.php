@@ -32,6 +32,6 @@ class UnSubscribeMail extends Mailable
     {
         $info = $this->data;
 
-        return $this->from('info@nipponkurashi.com')->view('mail.unsubscribe', compact('info'))->subject('【日本、暮らしの道具店】定期購読停止のお知らせ');
+        return $this->from('nippon.kurashi@gmail.com')->view('mail.unsubscribe', compact('info'))->subject('【日本、暮らしの道具店】定期購読停止のお知らせ');
     }
 }

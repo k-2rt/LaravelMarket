@@ -32,6 +32,6 @@ class SubscribeMail extends Mailable
     {
         $info = $this->data;
 
-        return $this->from('info@nipponkurashi.com')->view('mail.subscribe', compact('info'))->subject('【日本、暮らしの道具店】定期購読登録のお知らせ');
+        return $this->from('nippon.kurashi@gmail.com')->view('mail.subscribe', compact('info'))->subject('【日本、暮らしの道具店】定期購読登録のお知らせ');
     }
 }
