@@ -3788,5 +3788,5 @@ select option
 	height: 360px;
 }
 .overflow {
-	overflow-y: scroll;
+	overflow-y: auto;
 }

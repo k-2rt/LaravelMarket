@@ -45,6 +45,11 @@ class Product extends Model
         return $this->hasMany('App\Models\WishList');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
     public function current_user_wish()
     {
         return $this->wish_lists()->where('user_id', Auth::id());
@@ -154,7 +159,12 @@ class Product extends Model
      * @return Object
      */
     public function getProductToDisplayInfo($id) {
-        return $this->with(['category:id,category_name', 'subcategory:id,subcategory_name', 'brand:id,brand_name', 'current_user_wish'])
+        return $this->with([
+                        'category:id,category_name',
+                        'subcategory:id,subcategory_name',
+                        'brand:id,brand_name',
+                        'current_user_wish',
+                    ])
                     ->find($id);
     }
 

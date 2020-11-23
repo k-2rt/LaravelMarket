@@ -27,8 +27,7 @@ class ProfileController extends Controller
     public function showTrackingOrder($id)
     {
         $order = $this->order_repo->findOrderWithCoupon($id);
-        $date = config('delivery');
-        $delivery_date = $date['delivery_date'][$order->delivery_date];
+        $delivery_date = $order->day_of_week;
 
         return view('main.profile.tracking', compact('order', 'delivery_date'));
     }

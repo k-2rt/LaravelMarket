@@ -248,7 +248,7 @@
 <script src="{{ asset('/frontend/plugins/easing/easing.js') }}"></script>
 <script src="{{ asset('/frontend/js/custom.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js') }}"></script>
+{{-- <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js') }}"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
@@ -279,23 +279,66 @@
 </script>
 
 <script>
-	$(document).on("click", "#return", function(e){
-			e.preventDefault();
-			var link = $(this).attr("href");
-			swal({
-				title: "本当に返品しますか？",
-				icon: "warning",
-				buttons: ["いいえ", 'はい'],
-				dangerMode: true,
-			})
-			.then((willDelete) => {
-				if (willDelete) {
-					window.location.href = link;
-				} else {
-					swal("キャンセルしました。");
-				}
-			});
+	// $(document).on("click", "#return", function(e){
+	// 		e.preventDefault();
+	// 		var link = $(this).attr("href");
+	// 		swal({
+	// 			title: "本当に返品しますか？",
+	// 			icon: "warning",
+	// 			buttons: ["いいえ", 'はい'],
+	// 			dangerMode: true,
+	// 		})
+	// 		.then((willDelete) => {
+	// 			if (willDelete) {
+	// 				window.location.href = link;
+	// 			} else {
+	// 				swal("キャンセルしました。");
+	// 			}
+	// 		});
+	// 	});
+
+	$("#return").on("click", function(e){
+		e.preventDefault();
+		var link = $(this).attr("href");
+		Swal.fire({
+			title: '本当に返品しますか？',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'はい',
+			cancelButtonText: 'いいえ'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				window.location.href = link;
+			} else {
+				Swal.fire(
+					'キャンセルしました。'
+				)
+			}
 		});
+	});
+	$("#delete_comment").on("click", function(e){
+		e.preventDefault();
+		var link = $(this).attr("href");
+		Swal.fire({
+			title: '本当に削除しますか？',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'はい',
+			cancelButtonText: 'いいえ'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				window.location.href = link;
+			} else {
+				Swal.fire(
+					'キャンセルしました。'
+				)
+			}
+		});
+	});
 </script>
 
 <script type="text/javascript">

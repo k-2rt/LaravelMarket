@@ -73,4 +73,16 @@ class Order extends Model
     {
         return number_format($this->discount);
     }
+
+    /**
+     * Show delivery date with day of week
+     *
+     * @return String
+     */
+    public function getDayOfWeekAttribute(): String
+    {
+        $date = config('delivery');
+
+        return $this->delivery_date . ' (' . $date['week'][date("w", strtotime($this->delivery_date))] . ')';
+    }
 }
