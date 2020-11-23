@@ -135,10 +135,43 @@
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><br />{!! $product->product_details !!}</div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"><br />{{ $product->video_link }}</div>
+          <div class="tab-pane fade show active detail_container detail_text" id="home" role="tabpanel" aria-labelledby="home-tab"><br />{!! $product->product_details !!}</div>
+          <div class="tab-pane fade detail_container detail_text" id="profile" role="tabpanel" aria-labelledby="profile-tab"><br />{{ $product->video_link }}</div>
           <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"><br />
-          <div class="fb-comments" data-href="{{ Request::url() }}" data-numposts="5" data-width=""></div>
+            <div class="detail_container">
+              <div class="clearfix comment_form">
+                <form action="{{ route('comment.product', ['id' => $product->id]) }}" method="POST">
+                  @csrf
+                  <textarea class="form-control comment_text" name="comment_text" style="height: 100px;" placeholder="コメントを追加..." maxlength="400" required>{!! old('comment_text') !!}</textarea>
+                  <button type="submit" class="button comment_button">コメント</button>
+                </form>
+              </div>
+              <div class="comment_lists overflow">
+                @if ($comments->isNotEmpty())
+                  @foreach ($comments as $comment)
+                    <div class="comment_list_container d-flex">
+                      <div><img src="{{ asset('/panel/assets/images/user1.jpg') }}" alt="" height="90px" width="90px"></div>
+                      <div class="comment_list_content float_left comment_width">
+                        <div class="comment_list d-flex">
+                          <div>ユーザー名：{{ $comment->user->name }}</div>
+                          <div class="comment_date">投稿日時：{{ $comment->comment_created_at }}
+                            @if ($comment->user->id == Auth::id())
+                              <span style="margin-left: 25px;"><a href="{{ route('delete.comment', ['id' => $comment->id]) }}" id="delete_comment">削除</a></span>
+                            @endif
+                          </div>
+                        </div>
+                        <div class="comment_list comment_list_text clearfix">
+                          <div class="" width="150px">コメント：</div><div class=" break_word">{!! nl2br($comment->comment_text) !!}</div>
+                        </div>
+                      </div>
+                    </div>
+                  @endforeach
+                @else
+                  <div class="no_comment_list">コメントはありません。</div>
+                @endif
+              </div>
+            </div>
+            {{-- <div class="fb-comments" data-href="{{ Request::url() }}" data-numposts="5" data-width=""></div> --}}
           </div>
         </div>
       </div>
@@ -146,11 +179,10 @@
   </div>
 </div>
 
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v8.0" nonce="KTfXE5tJ"></script>
+{{-- <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v8.0" nonce="KTfXE5tJ"></script> --}}
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f7dde425645ff14"></script>
-
+{{-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f7dde425645ff14"></script> --}}
 
 @endsection

@@ -10,6 +10,7 @@ use Auth;
 use App\Models\Admin\Category;
 use App\Models\Admin\Subcategory;
 use App\Models\Admin\Post;
+use App\Models\Comment;
 
 class ProductController extends Controller
 {
@@ -18,13 +19,21 @@ class ProductController extends Controller
     protected $category;
     protected $sub_category;
     protected $post;
+    protected $comment;
 
-    public function __construct(Product $product, ProductRepo $product_repo, Category $category, Subcategory $sub_category, Post $post) {
+    public function __construct(Product $product,
+                                ProductRepo $product_repo,
+                                Category $category,
+                                Subcategory $sub_category,
+                                Post $post,
+                                Comment $comment)
+    {
         $this->product = $product;
         $this->product_repo = $product_repo;
         $this->category = $category;
         $this->sub_category = $sub_category;
         $this->post = $post;
+        $this->comment = $comment;
     }
 
     /**
@@ -36,10 +45,11 @@ class ProductController extends Controller
      */
     public function showProductDetails($id, $product_name) {
         $product = $this->product->getProductToDisplayInfo($id);
+        $comments = $this->comment->getProductCommentsById($id);
         $colors = explode(',', $product->product_color);
         $sizes = explode(',', $product->product_size);
 
-        return view('main.product_details', compact('product', 'colors', 'sizes'));
+        return view('main.product_details', compact('product', 'colors', 'sizes', 'comments'));
     }
 
     /**

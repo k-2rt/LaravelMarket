@@ -5,7 +5,7 @@
 <div class="contact_form">
     <div class="container">
         <div class="row">
-            <div class="col-8 card">
+            <div class="col-8 card overflow">
                 <table class="table table-response">
                     <thead>
                         <tr >

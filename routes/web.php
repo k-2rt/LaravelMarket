@@ -191,3 +191,7 @@ Route::get('admin/approve/request/{id}', 'Admin\ReturnController@approveRequest'
 Route::get('admin/return/lists', 'Admin\ReturnController@showReturnedLists')->name('admin.returned.lists');
 
 Route::get('admin/message/lists', 'ContactController@showMessageLists')->name('admin.message.lists');
+
+// Comment to products
+Route::post('comment/product/{id}', 'CommentController@commentProduct')->name('comment.product');
+Route::get('delete/comment/{id}', 'CommentController@deleteComment')->name('delete.comment');
