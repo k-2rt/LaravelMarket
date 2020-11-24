@@ -404,7 +404,7 @@
 						<div class="">
 							<a href="{{ route('show.article', ['id' => $article->id]) }}">
 								@if ($article->post_image)
-									<img src="{{ asset($article->post_image) }}" alt="" class="article_image">
+									<img src="{{ Storage::disk('s3')->url($article->post_image) }}" alt="" class="article_image">
 								@else
 									<img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" class="article_image">
 								@endif
