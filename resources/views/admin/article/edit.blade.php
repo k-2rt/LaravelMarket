@@ -73,7 +73,7 @@
                   <label class="form-control-label">現在の画像: <span class="tx-danger">*</span></label><br />
                   <label class="custom-file">
                     @if ($post->storage_article_image)
-                      <img src="{{ asset($post->post_image) }}" alt="" height="80px" width="130px">
+                      <img src="{{ Storage::disk('s3')->url($post->post_image) }}" alt="" height="80px" width="130px">
                     @else
                       <img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="80px" width="130px">
                     @endif

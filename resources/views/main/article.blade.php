@@ -17,7 +17,7 @@
 
             <!-- Blog post -->
             <div class="blog_post">
-              <div class="blog_image" style="background-image:url({{ asset($post->post_image) }})"></div>
+              <div class="blog_image" style="background-image:url({{ Storage::disk('s3')->url($post->post_image) }})"></div>
               <div class="blog_text">
                 {{ $post->post_title_ja }}
               </div>
