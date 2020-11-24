@@ -43,7 +43,8 @@ class ProductController extends Controller
      * @param String $product_name
      * @return void
      */
-    public function showProductDetails($id, $product_name) {
+    public function showProductDetails($id, $product_name)
+    {
         $product = $this->product->getProductToDisplayInfo($id);
         $comments = $this->comment->getProductCommentsById($id);
         $colors = explode(',', $product->product_color);
@@ -58,7 +59,8 @@ class ProductController extends Controller
      * @param String $id
      * @return void
      */
-    public function addProductToCart(Request $request, $id) {
+    public function addProductToCart(Request $request, $id)
+    {
         if (Auth::check()) {
             $data = $this->product->configureProductInfo($id);
             $data['qty'] = $request->qty;
@@ -87,7 +89,8 @@ class ProductController extends Controller
      * @param String $id
      * @return void
      */
-    public function showCategoryList($id) {
+    public function showCategoryList($id)
+    {
         $products = $this->product->getPaginateCategories($id);
         $categories = $this->category->getAllCategories();
         $product_category = $this->category->findCategory($id);
@@ -102,7 +105,8 @@ class ProductController extends Controller
      * @param String $id
      * @return void
      */
-    public function showSubCategoryList($id) {
+    public function showSubCategoryList($id)
+    {
         $products = $this->product->getPaginateProducts($id);
         $categories = $this->category->getAllCategories();
         $product_subcategory = $this->sub_category->findSubCategory($id);
@@ -111,6 +115,12 @@ class ProductController extends Controller
         return view('main.sub_category_list', compact('products', 'categories', 'product_subcategory', 'brands'));
     }
 
+    /**
+     * Search item by keyword
+     *
+     * @param Request $request
+     * @return void
+     */
     public function searchItem(Request $request)
     {
         $keyword = $request->keyword;
@@ -124,6 +134,7 @@ class ProductController extends Controller
         } else {
             $products = $this->product_repo->searchProductsByKeyword($keyword);
             $categories = $this->category->getAllCategories();
+
             return view('main.search_product', compact('products', 'categories', 'keyword'));
         }
     }
