@@ -32,7 +32,7 @@
                 <td>{{ $post->post_title_ja }}</td>
                 <td>{{ $post->category_name_ja }}</td>
                 @if ($post->storage_article_image)
-                  <td><img src="{{ asset($post->post_image) }}" alt="" height="50px;" width="50px;"></td>
+                  <td><img src="{{ Storage::disk('s3')->url($post->post_image) }}" alt="" height="50px;" width="50px;"></td>
                 @else
                   <td><img src="{{ asset('/panel/assets/images/noimage.png') }}" alt="" height="50px;" width="50px;"></td>
                 @endif

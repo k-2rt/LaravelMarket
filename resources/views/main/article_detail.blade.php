@@ -12,7 +12,7 @@
     <h3 class="article_title">{{ $post->post_title_ja }}</h3>
     <p>編集スタッフ<span style="margin-left: 10px;">{{ $post->create_user }}</span></p>
     <div class="article_content">
-      <p><img src="{{ asset($post->post_image) }}" alt="" class="article_detail_image"></p>
+      <p><img src="{{ Storage::disk('s3')->url($post->post_image) }}" alt="" class="article_detail_image"></p>
       <p>{!! nl2br($post->details_ja) !!}</p>
     </div>
   </div>
